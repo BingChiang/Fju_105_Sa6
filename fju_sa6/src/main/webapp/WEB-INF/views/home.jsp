@@ -7,8 +7,9 @@
 <body>
 <h1>
 	Hello world!  
-	!!!!iuygtttt 1234
-</h1>ssss
+	
+	
+</h1>
 
 <P>  The time on the server is ${serverTime}. </P>
 </body>
