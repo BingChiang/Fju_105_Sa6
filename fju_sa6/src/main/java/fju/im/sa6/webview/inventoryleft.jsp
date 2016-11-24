@@ -64,10 +64,10 @@
                         </li>
 
                         <li>
-                            <a href="productorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
+                            <a href="inventoryorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
                         </li>
                         <li>
-                            <a href="inventory.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
+                            <a href="inventoryleft.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
                         </li>
                         <li>
                             <a href="worktime.jsp"><i class="fa fa-edit fa-fw"></i> 打卡</a>
@@ -79,7 +79,7 @@
                             <a href="Memployeemanage.jsp"><i class="fa fa-edit fa-fw"></i> 員工管理</a>
                         </li>
                         <li>
-                            <a href="login2.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
+                            <a href="index.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
                         </li>
                         
                             </ul>
@@ -105,7 +105,7 @@
         <div class="row">
             <br>
             <div class="col-md-12">
-                <a class="btn btn-primary" href="inventoryadd.jsp">新增</a>
+                <a class="btn btn-primary" href="inventoryleftadd.jsp">新增</a>
                 <table class="table">
                     <tr>
                         <th>編號</th>
@@ -113,15 +113,15 @@
                         <th>庫存量</th>
                         
                     </tr>
-                    <c:forEach items="${productList}" var="product">
+                    <c:forEach items="${inventoryList}" var="inventory">
                         <tr>
-                            <td>${product.id}</td>
-                            <td>${product.category}</td>
-                            <td>${product.inventory}</td>
+                            <td>${inventory.id}</td>
+                            <td>${inventory.name}</td>
+                            <td>${inventory.number}</td>
                             
                             <td>
-                                <a class="btn btn-default" href="updateProduct?id=${product.id}">修改</a>
-                                <a class="btn btn-sm btn-danger deleteBtn" href="#" data-toggle="modal" data-target="#deleteModal" data-id="${product.id}">刪除</a>
+                                <a class="btn btn-default" href="updateProduct?id=${inventory.id}">修改</a>
+                                <a class="btn btn-sm btn-danger deleteBtn" href="#" data-toggle="modal" data-target="#deleteModal" data-id="${inventory.id}">刪除</a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -45,9 +45,7 @@
                     <div class="panel-body">
                         <form role="form">
                             <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Account" name="account" type="account" autofocus>
-                                </div>
+                               
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
