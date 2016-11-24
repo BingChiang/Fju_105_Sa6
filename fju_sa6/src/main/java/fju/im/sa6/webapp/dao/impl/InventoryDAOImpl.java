@@ -10,7 +10,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 	@Override
 	public void add(Inventory addInv) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

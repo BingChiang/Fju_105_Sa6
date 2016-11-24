@@ -3,19 +3,20 @@ package fju.im.sa6.webapp.dao.impl;
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
 import fju.im.sa6.webapp.dao.ProductListDAO;
+import java.sql.*;
 
-public class ProductListDAOImpl implements ProductListDAO{
+public class ProductListDAOImpl implements ProductListDAO {
 
 	@Override
 	public void set(ProductList setPurlist) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void remove(ProductList removePurlist) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -29,5 +30,5 @@ public class ProductListDAOImpl implements ProductListDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 }

@@ -2,8 +2,9 @@ package fju.im.sa6.webapp.dao.impl;
 
 import fju.im.sa6.entity.Type;
 import fju.im.sa6.webapp.dao.TypeDAO;
+import java.sql.Connection;
 
-public class TypeDAOImpl implements TypeDAO{
+public class TypeDAOImpl implements TypeDAO {
 
 	@Override
 	public String getname(Type getname) {
