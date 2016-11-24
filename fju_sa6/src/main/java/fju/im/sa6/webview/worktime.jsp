@@ -64,10 +64,10 @@
                         </li>
 
                         <li>
-                            <a href="productorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
+                            <a href="inventoryorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
                         </li>
                         <li>
-                            <a href="inventory.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
+                            <a href="inventoryleft.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
                         </li>
                         <li>
                             <a href="worktime.jsp"><i class="fa fa-edit fa-fw"></i> 打卡</a>
@@ -79,7 +79,7 @@
                             <a href="Memployeemanage.jsp"><i class="fa fa-edit fa-fw"></i> 員工管理</a>
                         </li>
                         <li>
-                            <a href="login2.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
+                            <a href="index.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
                         </li>
                         
                             </ul>
@@ -170,11 +170,11 @@ function ShowTime(){
                         <th>類型</th>
                         
                     </tr>
-                    <c:forEach items="${productList}" var="product">
+                    <c:forEach items="${employeeList}" var="employee">
                         <tr>
-                            <td>${product.id}</td>
-                            <td>${product.category}</td>
-                            <td>${product.inventory}</td>
+                            <td>${employee.name}</td>
+                            <td>${employee.time}</td>
+                            <td>${employee.onoffwork}</td>
                             
                             
                         </tr>

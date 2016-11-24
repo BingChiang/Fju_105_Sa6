@@ -64,22 +64,25 @@
                         </li>
 
                         <li>
-                            <a href="productorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
+                            <a href="inventoryorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
                         </li>
                         <li>
-                            <a href="inventory.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
+                            <a href="inventoryleft.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
                         </li>
                         <li>
                             <a href="worktime.jsp"><i class="fa fa-edit fa-fw"></i> 打卡</a>
                         </li>
+
                         <li>
                             <a href="Mproductmanage.jsp"><i class="fa fa-edit fa-fw"></i> 產品管理</a>
                         </li>
                         <li>
                             <a href="Memployeemanage.jsp"><i class="fa fa-edit fa-fw"></i> 員工管理</a>
                         </li>
+                        
+
                         <li>
-                            <a href="login2.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
+                            <a href="index.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
                         </li>
                         
                             </ul>
@@ -277,9 +280,9 @@
                     </tr>
                     <c:forEach items="${productList}" var="product">
                         <tr>
-                            <td>${product.id}</td>
-                            <td>${product.id}</td>
-                            <td>${product.id}</td>
+                            <td>${product.name}</td>
+                            <td>${product.num}</td>
+                            <td>${product.price}</td>
                             
                             <td>
                                 <a class="btn btn-default" href="#">清除</a>
