@@ -4,8 +4,8 @@
 	<pluginVersion><![CDATA[3.8.2.201610040608-RELEASE]]></pluginVersion>
 	<configs>
 		<config>
-			<file>src/main/java/fju/im/sa6/webapp/dao/ProductDAO.xml</file>
-			<name><![CDATA[ProductDAO]]></name>
+			<file>src/main/resources/spring-module.xml</file>
+			<name><![CDATA[spring-module]]></name>
 		</config>
 	</configs>
 </webflow-project-description>
