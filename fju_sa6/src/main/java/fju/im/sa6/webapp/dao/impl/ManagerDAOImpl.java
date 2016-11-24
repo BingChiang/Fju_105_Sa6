@@ -9,7 +9,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void addStaff(Manager addstaff) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -28,6 +28,12 @@ public class ManagerDAOImpl implements ManagerDAO {
 	public void inquireAllWorktime(Manager inquireAWKT) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void setlevel(int staffNum) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

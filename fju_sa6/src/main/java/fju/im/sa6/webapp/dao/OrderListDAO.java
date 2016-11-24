@@ -1,5 +1,6 @@
 package fju.im.sa6.webapp.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fju.im.sa6.entity.OrderList;
@@ -12,7 +13,7 @@ public interface OrderListDAO {
 
 	public void remove(OrderList removeODP);
 
-	public List<OrderList> getList();
+	public ArrayList<OrderList> getList();
 
 	public Product getODP(OrderList getODP);
 
