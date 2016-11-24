@@ -9,7 +9,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void addStaff(Manager addstaff) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
