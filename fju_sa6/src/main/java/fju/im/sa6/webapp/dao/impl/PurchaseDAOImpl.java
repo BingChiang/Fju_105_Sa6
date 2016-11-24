@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fju.im.sa6.entity.Purchase;
 import fju.im.sa6.webapp.dao.PurchaseDAO;
-
+import java.sql.Connection;
 public class PurchaseDAOImpl implements PurchaseDAO{
 
 	@Override
