@@ -92,10 +92,10 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-                <div id="page-wrapper">
+        <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">新增員工介面</h1>
+                    <h1 class="page-header">新增庫存介面</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -104,21 +104,21 @@
             <br>
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form method="post" action="Memployeemanage.jsp" id="insertForm">
+                <form method="post" action="inventoryleft.jsp" id="insertForm">
                     <div class="form-group">
-                    <label>員工編號:</label>
-                        <input type="text" name="desc" placeholder="員工編號" required>
+                    <label>庫存編號:</label>
+                        <input type="text" name="desc" placeholder="輸入產品編號" required>
                         </div>
                         <div class="form-group">
-                        <label>員工名稱:</label>
-                        <input type="text" name="desc" placeholder="員工名稱" required>
+                        <label>庫存物品:</label>
+                        <input type="text" name="desc" placeholder="輸入產品敘述" required>
                         
                     </div>
                     <div class="form-group">
-                    <label>員工性別:</label>
-                        <input type="text" name="desc" placeholder="員工性別" required>
-                        </div>
+                    <label>庫存數量:</label>
+                        <input type="text" name="desc" placeholder="輸入目前庫存量" required>
                         
+                        </div>
                     
                     <button type="submit" class="btn btn-default">新增</button>
                 </form>
@@ -127,6 +127,7 @@
         </div>
     </div>
     </div><!-- /.container -->
+
             
 
             <script src="../vendor/jquery/jquery.min.js"></script>

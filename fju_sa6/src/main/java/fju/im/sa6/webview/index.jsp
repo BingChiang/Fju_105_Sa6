@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="mainpage.jsp">說說茶飲</a>
+                <a class="navbar-brand" >說說茶飲</a>
             </div>
             
                     
@@ -59,28 +59,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         
-                        <li>
-                            <a href="mainpage.jsp"><i class="fa fa-dashboard fa-fw"></i> 點餐介面</a>
-                        </li>
-
-                        <li>
-                            <a href="productorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
-                        </li>
-                        <li>
-                            <a href="inventory.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
-                        </li>
-                        <li>
-                            <a href="worktime.jsp"><i class="fa fa-edit fa-fw"></i> 打卡</a>
-                        </li>
-                        <li>
-                            <a href="Mproductmanage.jsp"><i class="fa fa-edit fa-fw"></i> 產品管理</a>
-                        </li>
-                        <li>
-                            <a href="Memployeemanage.jsp"><i class="fa fa-edit fa-fw"></i> 員工管理</a>
-                        </li>
-                        <li>
-                            <a href="login2.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
-                        </li>
+                        
                         
                             </ul>
                             <!-- /.nav-second-level -->
@@ -95,7 +74,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">進貨單頁面</h1>
+                    <h1 class="page-header">登入頁面</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -105,29 +84,27 @@
         <div class="row">
             <br>
             <div class="col-md-12">
-                <a class="btn btn-primary" href="productorderadd.jsp">新增</a>
                 <table class="table">
                     <tr>
-                        <th>項目</th>
-                        <th>數量</th>                       
-                        <th>訂貨時間</th>
-                        <th>訂貨人員</th>
+                        <th>員工</th>
+                        
                         
                     </tr>
-                    <c:forEach items="${productList}" var="product">
+                    <c:forEach items="${employeeList}" var="employee">
                         <tr>
-                            <td>${product.id}</td>
-                            <td>${product.number}</td>
-                            <td>${product.ordertime}</td>
-                            <td>${product.orderpeople}</td>
+                            <td>${employee.name}</td>
                             
-                            <td>
-                                <a class="btn btn-default" href="updateProduct?id=${product.id}">修改</a>
-                                <a class="btn btn-sm btn-danger deleteBtn" href="#" data-toggle="modal" data-target="#deleteModal" data-id="${product.id}">刪除</a>
-                            </td>
+                            
+                            
                         </tr>
                     </c:forEach>
                 </table>
+
+                <li>
+                            <a href="login2.jsp"></i> 管理者</a>
+                        </li>
+
+                
             </div>
         </div>
     </div>
