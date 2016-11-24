@@ -30,4 +30,10 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	}
 
+	@Override
+	public void setlevel(int staffNum) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
