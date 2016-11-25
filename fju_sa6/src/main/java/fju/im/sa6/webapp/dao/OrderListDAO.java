@@ -15,7 +15,7 @@ public interface OrderListDAO {
 
 	public ArrayList<OrderList> getList();
 
-	public Product getODP(OrderList getODP);
+	public Product getODP(int serachNum);
 
 	public Product gettotalprice(OrderList gettotalprice);
 }

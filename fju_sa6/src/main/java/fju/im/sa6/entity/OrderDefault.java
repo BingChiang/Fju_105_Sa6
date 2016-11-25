@@ -53,8 +53,8 @@ public class OrderDefault {
 		this.orderTotal = orderTotal;
 	}
 
-	public Date getOrderDate() {
-		return orderDate;
+	public java.sql.Date getOrderDate() {
+		return (java.sql.Date) orderDate;
 	}
 
 	public void setOrderDate(Date orderDate) {
