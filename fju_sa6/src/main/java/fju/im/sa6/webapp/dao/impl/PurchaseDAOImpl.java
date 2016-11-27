@@ -25,29 +25,7 @@ public class PurchaseDAOImpl implements PurchaseDAO{
 	@Override
 	public void add(Purchase addPur) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO purchase (inventory_num, purchase_num, inventory_amount, supplier_num, inventory_name, purchase_name, ) VALUES(?, ?, ? ,? ,?)";	
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addInv.getInventoryNum());
-			smt.setInt(2, addInv.getPurchaseNum());
-			smt.setInt(3, addInv.getSupplierNum());
-			smt.setInt(4, addInv.getInventoryAmount());
-			smt.setString(5, addInv.getInventoryName());
-			smt.executeUpdate();			
-			smt.close();
- 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
- 
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {}
-			}
-		}
-
+		
 		
 	}
 
