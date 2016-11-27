@@ -10,4 +10,6 @@ public interface ProductDAO {
 	public void remove(Product removePro);
 
 	public Product get(Product getPro);
+
+	Product getProduct(int searchNum);
 }

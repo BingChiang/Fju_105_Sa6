@@ -12,9 +12,9 @@ public class Purchase extends Inventory {
 
 	private Date purchaseDate;
 
-	public Purchase(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum, String purchaseName,
+	public Purchase(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum,String inventoryName, String purchaseName,
 			int purchaseNum2, double purchasePrice, Date purchaseDate) {
-		super(inventoryNum, purchaseNum, inventoryAmount, supplierNum);
+		super(inventoryNum, purchaseNum, inventoryAmount, supplierNum, inventoryName);
 		this.purchaseName = purchaseName;
 		purchaseNum = purchaseNum2;
 		this.purchasePrice = purchasePrice;
