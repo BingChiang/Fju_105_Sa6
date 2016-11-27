@@ -95,7 +95,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void inquireAllWorktime(Manager inquireAWKT) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
