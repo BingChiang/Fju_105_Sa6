@@ -5,7 +5,7 @@ import java.util.Date;
 
 public abstract class StaffDefault {
 
-	private int staffNum;
+	private int staffNum, staffLv;
 
 	private String staffName;
 
@@ -19,13 +19,14 @@ public abstract class StaffDefault {
 	private double worktimeTotal;
 
 	public StaffDefault(int staffNum, String staffName, boolean isManager, Date onworkTime, Date offworkTime,
-			Date workMonth, double worktimeTotal) {
+			Date workMonth, double worktimeTotal, int staffLv) {
 		this.staffNum = staffNum;
 		this.staffName = staffName;
 		this.isManager = isManager;
 		this.workRecord = workRecord;
 		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
+		this.staffLv = staffLv;
 	}
 
 	public String getStaffName() {
@@ -65,7 +66,13 @@ public abstract class StaffDefault {
 	public int getStaffNum() {
 		return staffNum;
 	}
-	
+	public int getStaffLv(){
+		return staffLv;
+		
+	}
+	public void setstaffLv(int staffLv){
+		this.staffLv = staffLv;
+	}
 	
 	
 	

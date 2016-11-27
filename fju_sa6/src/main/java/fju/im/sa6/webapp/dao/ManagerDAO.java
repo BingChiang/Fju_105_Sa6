@@ -9,7 +9,9 @@ public interface ManagerDAO {
 
 	public void remove(Manager removestaff);
 
-	public void inquireAllWorktime(Manager inquireAWKT);
+	public Manager inquireAllWorktime(int inquireAWKT);
 
-	public void setlevel(int staffNum);
+	public void setlevel(int staffNumlogin, int setstaffLv);
+	
+
 }
