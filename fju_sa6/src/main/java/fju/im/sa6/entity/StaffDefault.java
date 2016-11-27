@@ -1,5 +1,6 @@
 package fju.im.sa6.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class StaffDefault {
@@ -10,10 +11,8 @@ public abstract class StaffDefault {
 
 	private boolean isManager;
 	
-	public Date onworkTime;
-
-	public Date offworkTime;
-
+	private ArrayList<workRecord> workRecord;
+	
 	//record the month of working day 
 	private Date workMonth;
 
@@ -24,8 +23,7 @@ public abstract class StaffDefault {
 		this.staffNum = staffNum;
 		this.staffName = staffName;
 		this.isManager = isManager;
-		this.onworkTime = onworkTime;
-		this.offworkTime = offworkTime;
+		this.workRecord = workRecord;
 		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
 	}
@@ -46,21 +44,7 @@ public abstract class StaffDefault {
 		this.isManager = isManager;
 	}
 
-	public Date getOnworkTime() {
-		return onworkTime;
-	}
 
-	public void setOnworkTime(Date onworkTime) {
-		this.onworkTime = onworkTime;
-	}
-
-	public Date getOffworkTime() {
-		return offworkTime;
-	}
-
-	public void setOffworkTime(Date offworkTime) {
-		this.offworkTime = offworkTime;
-	}
 
 	public Date getWorkMonth() {
 		return workMonth;
