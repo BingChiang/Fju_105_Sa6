@@ -17,7 +17,7 @@ public class ProductDAOImpl implements ProductDAO{
 	@Override
 	public void add(Product addPro) {
 		// TODO Auto-generated method stub
-		 String sql = "INSERT INTO product (prduct_name,product_price,product_sell_month) VALUES(?, ?, ?, ?)";	
+		 String sql = "INSERT INTO product (prduct_name,product_price,product_sell_month) VALUES(?, ?, ?)";	
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
@@ -43,7 +43,7 @@ public class ProductDAOImpl implements ProductDAO{
 	@Override
 	public void set(Product setPro) {
 		// TODO Auto-generated method stub
-		 String sql = "UPDATE product (prduct_name,product_price,product_sell_month) VALUES(?, ?, ?, ?)";	
+		 String sql = "UPDATE product (prduct_name,product_price,product_sell_month) VALUES(?, ?, ?)";	
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
