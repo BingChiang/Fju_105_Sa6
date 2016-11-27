@@ -9,5 +9,5 @@ public interface ProductDAO {
 
 	public void remove(Product removePro);
 
-	public Product get(Product getPro);
+	public Product getProduct(int searchNum);
 }
