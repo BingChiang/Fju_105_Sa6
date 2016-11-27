@@ -72,7 +72,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void remove(Manager removestaff) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM product WHERE staff_num = ?";
+		String sql = "DELETE FROM manager WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -101,6 +101,15 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void setlevel(int staffNum) {
 		// TODO Auto-generated method stub
+		
+		String sql = "UPDATE manager (staff_num, staff_lv) VALUES(?, ?)";
+		try{
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, staffNum.getStaffLV());
+			
+		}
+	
 		
 		
 	}

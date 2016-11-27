@@ -9,5 +9,5 @@ public interface OrderDefaultDAO {
 
 	public void remove(OrderDefault removeOrder);
 
-	public OrderDefault get(OrderDefault getOrder);
+	public OrderDefault get(int searchNum);
 }

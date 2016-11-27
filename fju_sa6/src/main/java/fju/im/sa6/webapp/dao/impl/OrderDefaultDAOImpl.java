@@ -3,6 +3,7 @@ package fju.im.sa6.webapp.dao.impl;
 import fju.im.sa6.entity.OrderDefault;
 import fju.im.sa6.webapp.dao.OrderDefaultDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 			smt.setInt(1,addOrder.getOrderPrice());
 			smt.setInt(2,addOrder.getOrderAmount());
 			smt.setInt(3,addOrder.getOrderTotal());
-			smt.setDate(4,addOrder.getOrderDate());
+			smt.setDate(4,(Date) addOrder.getOrderDate());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -55,7 +56,7 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 			smt.setInt(1,setOrder.getOrderPrice());
 			smt.setInt(2,setOrder.getOrderAmount());
 			smt.setInt(3,setOrder.getOrderTotal());
-			smt.setInt(4,setOrder.getOrderDate());
+			smt.setDate(4,(Date) setOrder.getOrderDate());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -94,9 +95,8 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		}
 	}
 
-	@Override
-	public OrderDefault get(OrderDefault getOrder) {
-		// TODO Auto-generated method stub
+	
+	public OrderDefault get(int searchNum) {
 		OrderDefault order = null;
 		String sql = "SELECT * FROM orderdefault WHERE order_num = ?";
 				try {
@@ -106,12 +106,12 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 					rs = smt.executeQuery();
 					if(rs.next()){
 						int setOrder=(rs.getInt("order_Num"));
-						int setProduct=(rs.getInt("product_Num"))
+						int setProduct=(rs.getInt("product_Num"));
 						int setType_Num=(rs.getInt("type_Num"));
 						int setOrder_Price=(rs.getInt("order_Price"));
 						int setOrder_Amount=(rs.getInt("order_Amount"));
 						int setOrder_Total=(rs.getInt("order_Total"));
-					    int setOrder_Date=(rs.getInt(order_Date));
+					    int setOrder_Date=(rs.getInt("order_Date"));
 					}
 					rs.close();
 					smt.close();
