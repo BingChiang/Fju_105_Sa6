@@ -2,7 +2,7 @@ package fju.im.sa6.entity;
 
 import java.util.Date;
 
-public class Purchase extends Inventory {
+public class Purchase {
 
 	private String purchaseName;
 
@@ -12,11 +12,10 @@ public class Purchase extends Inventory {
 
 	private Date purchaseDate;
 
-	public Purchase(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum, String purchaseName,
-			int purchaseNum2, double purchasePrice, Date purchaseDate) {
-		super(inventoryNum, purchaseNum, inventoryAmount, supplierNum);
+	public Purchase(String purchaseName,
+			int purchaseNum, double purchasePrice, Date purchaseDate) {
 		this.purchaseName = purchaseName;
-		purchaseNum = purchaseNum2;
+		this.purchaseNum = purchaseNum;
 		this.purchasePrice = purchasePrice;
 		this.purchaseDate = purchaseDate;
 	}
