@@ -12,8 +12,11 @@ public class Purchase {
 
 	private Date purchaseDate;
 
-	public Purchase(String purchaseName,
-			int purchaseNum, double purchasePrice, Date purchaseDate) {
+
+	public Purchase(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum,String inventoryName, String purchaseName,
+			int purchaseNum2, double purchasePrice, Date purchaseDate) {
+		super(inventoryNum, purchaseNum, inventoryAmount, supplierNum, inventoryName);
+
 		this.purchaseName = purchaseName;
 		this.purchaseNum = purchaseNum;
 		this.purchasePrice = purchasePrice;

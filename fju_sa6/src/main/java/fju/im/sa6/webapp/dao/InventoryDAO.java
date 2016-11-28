@@ -10,4 +10,6 @@ public interface InventoryDAO {
 	public void remove(Inventory removeInv);
 
 	public Inventory get(Inventory getInv);
+
+	Inventory getInventory(int searchInv);
 }

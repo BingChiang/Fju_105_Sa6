@@ -10,11 +10,14 @@ public class Inventory {
 
 	private int supplierNum;
 
-	public Inventory(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum) {
+	private String inventoryName;
+
+	public Inventory(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum, String inventoryName) {
 		this.inventoryNum = inventoryNum;
 		this.purchaseNum = purchaseNum;
 		this.inventoryAmount = inventoryAmount;
 		this.supplierNum = supplierNum;
+		this.inventoryName = inventoryName;
 	}
 
 	public int getInventoryNum() {
@@ -23,6 +26,14 @@ public class Inventory {
 
 	public void setInventoryNum(int inventoryNum) {
 		this.inventoryNum = inventoryNum;
+	}
+
+	public String getInventoryName() {
+		return inventoryName;
+	}
+
+	public void setInventoryName(String inventoryName) {
+		this.inventoryName = inventoryName;
 	}
 
 	public int getPurchaseNum() {

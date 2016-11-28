@@ -3,6 +3,7 @@ package fju.im.sa6.webapp.dao.impl;
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
 import fju.im.sa6.webapp.dao.ProductListDAO;
+
 import java.sql.*;
 
 import javax.sql.DataSource;
@@ -101,5 +102,6 @@ public abstract class ProductListDAOImpl implements ProductListDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }
