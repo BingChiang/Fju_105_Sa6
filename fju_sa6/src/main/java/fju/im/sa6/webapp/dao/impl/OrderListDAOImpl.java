@@ -105,7 +105,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 	@Override
 	public ArrayList<ProductList> getOrderList(Date searchDate) {
 		// TODO Auto-generated method stub
-		ArrayList<ProductList> productlist=new ArrayList<ProductList>() ;
+		ArrayList<ProductList> productlist = new ArrayList<ProductList>();
 		String sql = "SELECT * FROM OrderList WHERE order_Date = ?";
 		try {
 			conn = dataSource.getConnection();
@@ -136,11 +136,10 @@ public class OrderListDAOImpl implements OrderListDAO {
 				}
 			}
 		}
-		
+
 		return productlist;
 
 	}
-
 
 	@Override
 	public Product gettotalprice(Product gettotalprice) {
@@ -151,28 +150,30 @@ public class OrderListDAOImpl implements OrderListDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, gettotalprice.getProductNum());
 			rs = smt.executeQuery();
-			if(rs.next()){
-				int setOrder_Num=(rs.getInt("order_num"));
-				int setProduct=(rs.getInt("product_num"));
-				int setproduct_price=(rs.getInt("product_price"));
+			if (rs.next()) {
+				int setOrder_Num = (rs.getInt("order_num"));
+				int setProduct = (rs.getInt("product_num"));
+				int setproduct_price = (rs.getInt("product_price"));
 				int setorder_Amount = (rs.getInt("order_Amount"));
 				int setorder_Total = (rs.getInt("order_Price"));
 				Date setorder_Date = (rs.getDate("order_Date"));
 			}
 			rs.close();
 			smt.close();
- 
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
- 
+
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
-				} catch (SQLException e) {}
+				} catch (SQLException e) {
+				}
 			}
 		}
 		return gettotalprice;
+
 	}
 
 }

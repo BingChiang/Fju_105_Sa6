@@ -21,6 +21,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	@Override
 	public void addStaff(Manager addstaff) {
+
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO manager (staff_name, staff_lv)VALUE(?, ?)";
 		try {
@@ -43,6 +44,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 			}
 		}
+
 	}
 
 	@Override
@@ -176,7 +178,5 @@ public class ManagerDAOImpl implements ManagerDAO {
 		}
 
 	}
-
-
 
 }
