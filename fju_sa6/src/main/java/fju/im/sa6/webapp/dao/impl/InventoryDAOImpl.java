@@ -143,10 +143,4 @@ public class InventoryDAOImpl implements InventoryDAO {
 		return inv;
 	}
 
-	@Override
-	public Inventory get(Inventory getInv) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

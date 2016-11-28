@@ -81,6 +81,7 @@ public abstract class ProductListDAOImpl implements ProductListDAO {
 			if (rs.next()) {
 				int setProduct = (rs.getInt("product_Num"));
 				int setAmount = (rs.getInt("amount"));
+				productlist = new ProductList(setProduct, setAmount);
 			}
 			rs.close();
 			smt.close();

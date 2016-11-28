@@ -110,6 +110,9 @@ public class ManagerDAOImpl implements ManagerDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setStaff_Num = (rs.getInt("staff_num"));
+				int setStaff_worktime = (rs.getInt("worktime_total"));
+				int setStaff_Lv = (rs.getInt("staff_Lv"));
+				worktime = new Manager(setStaff_Num, null, false, null, null, null, setStaff_worktime, setStaff_Lv);
 			}
 			rs.close();
 			smt.close();
@@ -157,8 +160,8 @@ public class ManagerDAOImpl implements ManagerDAO {
 				if (rs.getInt("staff_lv") == 2) {
 					smt.close();
 				} else {
-					int changeback = rs.getInt(setstaffLv);
-					changeback = 2;
+					rs.getInt(setstaffLv = 2);
+
 					smt.close();
 				}
 			} catch (SQLException e) {

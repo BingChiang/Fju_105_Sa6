@@ -103,9 +103,11 @@ public class OrderListDAOImpl implements OrderListDAO {
 	}
 
 	@Override
-	public ArrayList<ProductList> getOrderList(Date searchDate) {
+	public ArrayList<ProductList> getOrderList(ProductList product) {
 		// TODO Auto-generated method stub
+		Date searchDate = null;
 		ArrayList<ProductList> productlist = new ArrayList<ProductList>();
+		;
 		String sql = "SELECT * FROM OrderList WHERE order_Date = ?";
 		try {
 			conn = dataSource.getConnection();
@@ -113,6 +115,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 			smt.setDate(1, searchDate);
 			rs = smt.executeQuery();
 			if (rs.next()) {
+
 				int setOrder_Num = (rs.getInt("order_num"));
 				int setProduct_Num = (rs.getInt("product_num"));
 				int setType_Num = (rs.getInt("type_num"));
