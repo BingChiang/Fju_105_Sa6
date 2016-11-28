@@ -1,8 +1,9 @@
 package fju.im.sa6.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-public class workRecord {
+public class WorkRecord {
 	
 	private Date date ;
 	
@@ -12,7 +13,7 @@ public class workRecord {
 
 	
 	//Constructor
-	public workRecord(Date date, Date workTime ,boolean onWork) {
+	public WorkRecord(Date date, Date workTime ,boolean onWork) {
 		if(onWork == true){
 			this.date = date;
 			this.onworkTime = workTime;
@@ -32,11 +33,14 @@ public class workRecord {
 	public void setOnworkTime(Date onworkTime) {
 		this.onworkTime = onworkTime;
 	}
+	
 
+	
 
 	public Date getOffworkTime() {
 		return offworkTime;
 	}
+
 
 
 	public void setOffworkTime(Date offworkTime) {
@@ -47,8 +51,11 @@ public class workRecord {
 	public Date getDate() {
 		return date;
 	}
-
 	
+	
+	public ArrayList<StaffDefault> getList(int i) {
+		return getList(i);
+	}
 	
 
 }
