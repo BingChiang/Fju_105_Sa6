@@ -7,9 +7,9 @@ public class OrderList extends OrderDefault {
 	
 	private ArrayList<ProductList> orderList;
 
-	public OrderList(int orderNum, int productNum, int typeNum, int orderPrice, int orderAmount, int orderTotal,
-			Date orderDate, ArrayList<ProductList> orderList) {
-		super(orderNum, productNum, typeNum, orderPrice, orderAmount, orderTotal, orderDate);
+	public OrderList(int order_Num, int product_Num, int type_Num, int order_Price, int order_Amount, int order_Total,
+			Date order_Date, ArrayList<ProductList> orderList) {
+		super(order_Num, product_Num, type_Num, order_Price, order_Amount, order_Total, order_Date);
 		this.orderList = orderList;
 	}
 
