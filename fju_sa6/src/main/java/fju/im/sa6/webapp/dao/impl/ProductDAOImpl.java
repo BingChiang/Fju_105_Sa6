@@ -99,9 +99,11 @@ public class ProductDAOImpl implements ProductDAO{
 			smt.setInt(1, searchNum);
 			rs = smt.executeQuery();
 			if(rs.next()){
+
 				int setProduct=(rs.getInt("product_num"));
 				int setType_Num=(rs.getInt("type_num"));
 				String setProduct_Name=(rs.getString("product_name"));
+
 				int setproduct_price=(rs.getInt("product_price"));
 				int setproduct_sell_month=(rs.getInt("product_sell_month"));
 			}

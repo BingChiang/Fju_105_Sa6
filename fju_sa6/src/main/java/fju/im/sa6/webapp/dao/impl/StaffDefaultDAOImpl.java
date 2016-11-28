@@ -47,5 +47,4 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 		}
 		return staffD;
 	}
-
 }

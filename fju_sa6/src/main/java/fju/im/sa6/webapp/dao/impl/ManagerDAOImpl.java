@@ -23,11 +23,9 @@ public class ManagerDAOImpl implements ManagerDAO {
 	public void addStaff(Manager addstaff) {
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO manager (staff_name, staff_lv)VALUE(?, ?)";
-		
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-
 			smt.setString(1, addstaff.getStaffName());
 			smt.setInt(1, addstaff.getStaffLv());
 			smt.executeUpdate();
@@ -42,6 +40,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 					conn.close();
 				} catch (SQLException e) {
 				}
+
 			}
 		}
 	}
@@ -92,6 +91,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 					conn.close();
 				} catch (SQLException e) {
 				}
+
 			}
 		}
 	}
@@ -174,6 +174,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 				}
 			}
 		}
+
 	}
 
 
