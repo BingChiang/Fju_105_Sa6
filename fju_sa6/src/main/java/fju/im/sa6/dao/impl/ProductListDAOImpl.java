@@ -1,15 +1,13 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
-import fju.im.sa6.entity.Manager;
-import fju.im.sa6.webapp.dao.ManagerDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import fju.im.sa6.entity.Product;
+import fju.im.sa6.entity.ProductList;
+import fju.im.sa6.webapp.dao.ProductListDAO;
+import java.sql.*;
 
 import javax.sql.DataSource;
 
-public class ManagerDAOImpl implements ManagerDAO {
+public abstract class ProductListDAOImpl implements ProductListDAO {
 	private DataSource dataSource;
 	private Connection conn = null ;
 	private ResultSet rs = null ;
@@ -19,39 +17,14 @@ public class ManagerDAOImpl implements ManagerDAO {
 		this.dataSource = dataSource;
 	}
 	@Override
-	public void addStaff(Manager addstaff) {
+	public void set(ProductList setPurlist) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO manager (staff_name, staff_lv)VALUE(?, ?)";
+		String sql = "UPDATE productlist(product_num, amount)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-
-			smt.setString(1,addstaff.getStaffName());
-			smt.setString(1,addstaff.getStaffLv());
-			smt.executeUpdate();			
-			smt.close();
- 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
- 
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {}
-			}
-		}
-	}
-
-	@Override
-	public void set(Manager setstaff) {
-		// TODO Auto-generated method stub
-		String sql = "UPDATE manager (staff_name,staff_Lv) VALUES(?, ?)";	
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setString(1,setstaff.getStaffName());
-			smt.setInt(2,setstaff.getStaffLv());
+			smt.setInt(1,setPurlist.getProductNum());
+			smt.setInt(2,setPurlist.getAmount());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -70,13 +43,13 @@ public class ManagerDAOImpl implements ManagerDAO {
 	}
 
 	@Override
-	public void remove(Manager removestaff) {
+	public void remove(ProductList removePurlist) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM manager WHERE staff_num = ?";
+		String sql = "DELETE FROM product WHERE product_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1,removestaff.getStaffNum());
+			smt.setInt(1,removePurlist.getProductNum());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -90,28 +63,43 @@ public class ManagerDAOImpl implements ManagerDAO {
 				} catch (SQLException e) {}
 			}
 		}
-	}
-
-	@Override
-	public void inquireAllWorktime(Manager inquireAWKT) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void setlevel(int staffNum) {
+	public ProductList get(int searchNum) {
 		// TODO Auto-generated method stub
-		
-		String sql = "UPDATE manager (staff_num, staff_lv) VALUES(?, ?)";
-		try{
+		ProductList productlist=null;
+		String sql = "SELECT * FROM productlist WHERE product_num = ?";
+		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, staffNum.getStaffLV());
-			
+			smt.setInt(1, searchNum);
+			rs = smt.executeQuery();
+			if(rs.next()){
+				int setProduct=(rs.getInt("product_Num"));
+				int setAmount=(rs.getInt("amount"));
 		}
+			rs.close();
+			smt.close();
+ 
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+ 
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return productlist;
+	}
 	
-		
-		
+
+	@Override
+	public double getSingleTotal(ProductList gettotal) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

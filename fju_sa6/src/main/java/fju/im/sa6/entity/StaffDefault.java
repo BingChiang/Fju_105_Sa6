@@ -9,20 +9,20 @@ public abstract class StaffDefault {
 
 	private String staffName;
 
-	private boolean isManager;
+	private int  staffLevel;
 	
-	private ArrayList<workRecord> workRecord;
+	private ArrayList<WorkRecord> workRecord;
 	
 	//record the month of working day 
 	private Date workMonth;
 
 	private double worktimeTotal;
 
-	public StaffDefault(int staffNum, String staffName, boolean isManager, Date onworkTime, Date offworkTime,
+	public StaffDefault(int staffNum, String staffName, int staffLevel, Date onworkTime, Date offworkTime,
 			Date workMonth, double worktimeTotal) {
 		this.staffNum = staffNum;
 		this.staffName = staffName;
-		this.isManager = isManager;
+		this.staffLevel = staffLevel;
 		this.workRecord = workRecord;
 		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
@@ -36,12 +36,12 @@ public abstract class StaffDefault {
 		this.staffName = staffName;
 	}
 
-	public boolean isManager() {
-		return isManager;
+	public int getStaffLevel() {
+		return this.staffLevel;
 	}
 
-	public void setManager(boolean isManager) {
-		this.isManager = isManager;
+	public void setManager(int staffLevel) {
+		this.staffLevel = staffLevel;
 	}
 
 

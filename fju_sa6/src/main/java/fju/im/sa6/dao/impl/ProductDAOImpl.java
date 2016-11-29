@@ -1,4 +1,4 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.webapp.dao.ProductDAO;
