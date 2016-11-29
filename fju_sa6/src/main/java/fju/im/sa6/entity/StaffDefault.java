@@ -12,10 +12,14 @@ public abstract class StaffDefault {
 	private int  staffLevel;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private ArrayList<WorkRecord> workRecord;
 =======
 	private ArrayList<workRecord> workRecord;
 >>>>>>> refs/remotes/origin/Cheyu
+=======
+	private ArrayList<WorkRecord> workRecord;
+>>>>>>> origin/Bing
 	
 	//record the month of working day 
 	private Date workMonth;

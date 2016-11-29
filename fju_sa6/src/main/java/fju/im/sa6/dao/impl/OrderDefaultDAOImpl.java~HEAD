@@ -1,4 +1,4 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import fju.im.sa6.entity.OrderDefault;
 import fju.im.sa6.webapp.dao.OrderDefaultDAO;
@@ -12,14 +12,13 @@ import javax.sql.DataSource;
 
 public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 	private DataSource dataSource;
-	private Connection conn = null;
-	private ResultSet rs = null;
-	private PreparedStatement smt = null;
+	private Connection conn = null ;
+	private ResultSet rs = null ;
+	private PreparedStatement smt = null ;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
-
 	@Override
 	public void add(OrderDefault addOrder) {
 		// TODO Auto-generated method stub
@@ -27,23 +26,22 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addOrder.getOrderPrice());
-			smt.setInt(2, addOrder.getOrderAmount());
-			smt.setInt(3, addOrder.getOrderTotal());
-			smt.setDate(4, (Date) addOrder.getOrderDate());
-			smt.executeUpdate();
-			smt.close();
 
+			smt.setInt(1,addOrder.getOrderPrice());
+			smt.setInt(2,addOrder.getOrderAmount());
+			smt.setInt(3,addOrder.getOrderTotal());
+			smt.setDate(4,(Date) addOrder.getOrderDate());
+			smt.executeUpdate();			
+			smt.close();
+ 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-
+ 
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
-				} catch (SQLException e) {
-				}
-
+				} catch (SQLException e) {}
 			}
 		}
 	}
@@ -55,22 +53,21 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, setOrder.getOrderPrice());
-			smt.setInt(2, setOrder.getOrderAmount());
-			smt.setInt(3, setOrder.getOrderTotal());
-			smt.setDate(4, (Date) setOrder.getOrderDate());
-			smt.executeUpdate();
+			smt.setInt(1,setOrder.getOrderPrice());
+			smt.setInt(2,setOrder.getOrderAmount());
+			smt.setInt(3,setOrder.getOrderTotal());
+			smt.setDate(4,(Date) setOrder.getOrderDate());
+			smt.executeUpdate();			
 			smt.close();
-
+ 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-
+ 
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
-				} catch (SQLException e) {
-				}
+				} catch (SQLException e) {}
 			}
 		}
 	}
@@ -82,57 +79,54 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removeOrder.getOrderNum());
-			smt.executeUpdate();
+			smt.setInt(1,removeOrder.getOrderNum());
+			smt.executeUpdate();			
 			smt.close();
-
+ 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-
+ 
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
-				} catch (SQLException e) {
-				}
+				} catch (SQLException e) {}
 			}
 		}
 	}
 
+	
 	public OrderDefault get(int searchNum) {
 		OrderDefault order = null;
 		String sql = "SELECT * FROM orderdefault WHERE order_num = ?";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setInt(1, searchNum);
-			rs = smt.executeQuery();
-			if (rs.next()) {
-				int setOrder = (rs.getInt("order_Num"));
-				int setProduct = (rs.getInt("product_Num"));
-				int setType_Num = (rs.getInt("type_Num"));
-				int setOrder_Price = (rs.getInt("order_Price"));
-				int setOrder_Amount = (rs.getInt("order_Amount"));
-				int setOrder_Total = (rs.getInt("order_Total"));
-				Date setOrder_Date = (rs.getDate("order_Date"));
-				order = new OrderDefault(setOrder, setProduct, setType_Num, setOrder_Price, setOrder_Amount,
-						setOrder_Total, setOrder_Date);
-			}
-			rs.close();
-			smt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
 				try {
-					conn.close();
+					conn = dataSource.getConnection();
+					smt = conn.prepareStatement(sql);
+					smt.setInt(1, searchNum);
+					rs = smt.executeQuery();
+					if(rs.next()){
+						int setOrder=(rs.getInt("order_Num"));
+						int setProduct=(rs.getInt("product_Num"));
+						int setType_Num=(rs.getInt("type_Num"));
+						int setOrder_Price=(rs.getInt("order_Price"));
+						int setOrder_Amount=(rs.getInt("order_Amount"));
+						int setOrder_Total=(rs.getInt("order_Total"));
+					    int setOrder_Date=(rs.getInt("order_Date"));
+					}
+					rs.close();
+					smt.close();
+		 
 				} catch (SQLException e) {
+					throw new RuntimeException(e);
+		 
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {}
+					}
 				}
+				return order;
 			}
-		}
-		return order;
-	}
 
 }

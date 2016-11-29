@@ -1,17 +1,18 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
+import fju.im.sa6.webapp.dao.OrderListDAO;
 import fju.im.sa6.webapp.dao.ProductDAO;
 
-public class ProductDAOImpl implements ProductDAO {
+import java.sql.*;
+
+public class OrderListDAOImpl implements OrderListDAO {
+
 	private DataSource dataSource;
 	private Connection conn = null;
 	private ResultSet rs = null;
@@ -22,41 +23,17 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public void add(Product addPro) {
-		String sql = "INSERT INTO product (product_num, type_num,product_name, product_price, product_sell_month) VALUES(?, ?, ?, ?, ?, ?)";
+	public void add(OrderList addODP) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO orderlist (order_price, order_amount, order_total, order_date) VALUES(?, ?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addPro.getProductNum());
-			smt.setInt(2, addPro.getTypeNum());
-			smt.setString(3, addPro.getProductName());
-			smt.setInt(4, addPro.getProductPrice());
-			smt.setInt(5, addPro.getProductSellMonth());
-			smt.executeUpdate();
-			smt.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
 
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-	}
-
-	@Override
-	public void set(Product setPro) {
-		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=? "
-				+ "WHERE productID = ?";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setString(3, setPro.getProductName());
-			smt.setInt(4, setPro.getProductPrice());
-			smt.setInt(5, setPro.getProductSellMonth());
+			smt.setInt(1, addODP.getOrderPrice());
+			smt.setInt(2, addODP.getOrderAmount());
+			smt.setInt(3, addODP.getOrderTotal());
+			smt.setDate(4, addODP.getOrderDate());
 			smt.executeUpdate();
 			smt.close();
 
@@ -71,16 +48,20 @@ public class ProductDAOImpl implements ProductDAO {
 				}
 			}
 		}
-
 	}
 
 	@Override
-	public void remove(Product removePro) {
-		String sql = "DELETE FROM product WHERE product_num = ?";
+	public void set(OrderList setODP) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO orderlist (order_price, order_amount, order_total, order_date) VALUES(?, ?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removePro.getProductNum());
+
+			smt.setInt(1, setODP.getOrderPrice());
+			smt.setInt(2, setODP.getOrderAmount());
+			smt.setInt(3, setODP.getOrderTotal());
+			smt.setDate(4, setODP.getOrderDate());
 			smt.executeUpdate();
 			smt.close();
 
@@ -95,27 +76,57 @@ public class ProductDAOImpl implements ProductDAO {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void remove(OrderList removeODP) {
+		// TODO Auto-generated method stub
+		String sql = "DELETE FROM orderlist WHERE orderlist_num = ?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, removeODP.getOrderNum());
+			smt.executeUpdate();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
+	@Override
+	public ArrayList<OrderList> getList() {
+		// TODO Auto-generated method stub
+		return null;
 
 	}
 
 	@Override
-	public Product getProduct(int searchNum) {
-		Product pro = null;
+	public Product getODP(int searchNum) {
+		// TODO Auto-generated method stub
+		Product prod = null;
 		String sql = "SELECT * FROM product WHERE product_num = ?";
 		try {
-
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, searchNum);
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setproduct_Num = (rs.getInt("product_Num"));
-				int settype_Num = (rs.getInt("type_Num"));
-				String setproduct_Name = (rs.getString("product_Name"));
-				int setproduct_price = (rs.getInt("product_price"));
-				int setproduct_sell_month = (rs.getInt("product_sell_month"));
-				pro = new Product(setproduct_Num, settype_Num, setproduct_Name, setproduct_price, setproduct_sell_month,
-						setproduct_sell_month);
+				int setOrder_Num = (rs.getInt("order_num"));
+				int setProduct_Num = (rs.getInt("product_num"));
+				int setType_Num = (rs.getInt("type_Num"));
+				int setorder_price = (rs.getInt("order_price"));
+				int setorder_amount = (rs.getInt("order_amount"));
+				int setorder_total = (rs.getInt("order_total"));
+				Date setorderdate = (rs.getDate("order_date"));
 			}
 			rs.close();
 			smt.close();
@@ -131,11 +142,11 @@ public class ProductDAOImpl implements ProductDAO {
 				}
 			}
 		}
-		return pro;
+		return prod;
 	}
 
 	@Override
-	public Product get(Product getPro) {
+	public Product gettotalprice(OrderList gettotalprice) {
 		// TODO Auto-generated method stub
 		return null;
 	}

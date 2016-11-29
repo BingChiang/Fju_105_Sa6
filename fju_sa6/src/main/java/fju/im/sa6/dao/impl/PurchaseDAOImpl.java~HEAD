@@ -1,39 +1,38 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import java.util.ArrayList;
 
-import fju.im.sa6.entity.Supplier;
-import fju.im.sa6.webapp.dao.SupplierDAO;
+import fju.im.sa6.entity.Purchase;
+import fju.im.sa6.webapp.dao.PurchaseDAO;
 import java.sql.Connection;
-
-public class SupplierDAOImpl implements SupplierDAO {
+public class PurchaseDAOImpl implements PurchaseDAO{
 
 	@Override
-	public void add(Supplier addSup) {
+	public void add(Purchase addPur) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void set(Supplier setSup) {
+	public void set(Purchase setPur) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void remove(Supplier removeSup) {
+	public void remove(Purchase removePur) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public ArrayList<Supplier> getList() {
+	public ArrayList<Purchase> getList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Supplier get(Supplier getSup) {
+	public Purchase get(Purchase getPur) {
 		// TODO Auto-generated method stub
 		return null;
 	}

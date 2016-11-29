@@ -13,6 +13,6 @@ public interface SupplierDAO {
 	public void remove(Supplier removeSup);
 
 	public ArrayList<Supplier> getList();
-
+ 
 	public Supplier get(Supplier getSup);
 }
