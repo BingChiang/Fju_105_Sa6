@@ -2,8 +2,8 @@ package fju.im.sa6.webapp.dao.impl;
 
 import java.sql.Connection;
 
+import fju.im.sa6.dao.InventoryDAO;
 import fju.im.sa6.entity.Inventory;
-import fju.im.sa6.webapp.dao.InventoryDAO;
 
 public class InventoryDAOImpl implements InventoryDAO {
 

@@ -11,7 +11,7 @@ public abstract class StaffDefault {
 
 	private boolean isManager;
 	
-	private ArrayList<workRecord> workRecord;
+	private ArrayList<WorkRecord> workRecord;
 	
 	//record the month of working day 
 	private Date workMonth;

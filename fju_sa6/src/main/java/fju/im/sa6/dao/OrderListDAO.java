@@ -1,4 +1,4 @@
-package fju.im.sa6.webapp.dao;
+package fju.im.sa6.dao;
 
 import java.util.ArrayList;
 import java.util.List;
