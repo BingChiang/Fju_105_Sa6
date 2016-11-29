@@ -17,4 +17,5 @@ public interface OrderListDAO {
 	public Product gettotalprice(Product gettotalprice);
 
 	public ArrayList<ProductList> getOrderList(ProductList product);
+
 }

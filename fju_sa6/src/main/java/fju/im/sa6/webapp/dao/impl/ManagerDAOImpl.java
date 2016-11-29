@@ -27,6 +27,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
+
 			smt.setString(1, addstaff.getStaffName());
 			smt.setInt(1, addstaff.getStaffLv());
 			smt.executeUpdate();
@@ -44,9 +45,9 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 			}
 		}
-
 	}
-
+	
+		
 	@Override
 	public void set(Manager setstaff) {
 		// TODO Auto-generated method stub
@@ -93,6 +94,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 					conn.close();
 				} catch (SQLException e) {
 				}
+
 
 			}
 		}

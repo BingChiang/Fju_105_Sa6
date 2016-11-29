@@ -12,9 +12,8 @@ public class Purchase {
 
 	private Date purchaseDate;
 
-
-	public Purchase(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum,String inventoryName, String purchaseName,
-			int purchaseNum2, double purchasePrice, Date purchaseDate) {
+	public Purchase(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum, String inventoryName,
+			String purchaseName, int purchaseNum2, double purchasePrice, Date purchaseDate) {
 		super(inventoryNum, purchaseNum, inventoryAmount, supplierNum, inventoryName);
 
 		this.purchaseName = purchaseName;
@@ -50,9 +49,5 @@ public class Purchase {
 	public int getPurchaseNum() {
 		return purchaseNum;
 	}
-	
-	
-
-
 
 }

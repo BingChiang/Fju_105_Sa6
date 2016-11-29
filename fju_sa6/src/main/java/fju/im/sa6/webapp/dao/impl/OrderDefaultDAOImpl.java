@@ -27,7 +27,6 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-
 			smt.setInt(1, addOrder.getOrderPrice());
 			smt.setInt(2, addOrder.getOrderAmount());
 			smt.setInt(3, addOrder.getOrderTotal());
@@ -44,6 +43,7 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 					conn.close();
 				} catch (SQLException e) {
 				}
+
 			}
 		}
 	}

@@ -12,6 +12,7 @@ public class PurchaseList extends Purchase {
 			ArrayList<Inventory> purchaseList) {
 		super(inventoryNum, purchaseNum, inventoryAmount, supplierNum, inventoryName, purchaseName, purchaseNum2,
 				purchasePrice, purchaseDate);
+
 		this.purchaseList = purchaseList;
 	}
 
