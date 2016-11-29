@@ -5,17 +5,19 @@ import java.util.List;
 
 import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
+import fju.im.sa6.entity.ProductList;
 
 public interface OrderListDAO {
-	public void add(OrderList addODP);
+	public void add(OrderList orderList);
 
-	public void set(OrderList setODP);
+	public void set(OrderList orderList);
 
-	public void remove(OrderList removeODP);
+	public void remove(OrderList orderList);
 
 	public ArrayList<OrderList> getList();
 
-	public Product getODP(int serachNum);
+	public OrderList getODP(OrderList orderList);
 
-	public Product gettotalprice(OrderList gettotalprice);
+	//for checking method , not for object type!!
+	public double gettotalprice(OrderList orderList);
 }

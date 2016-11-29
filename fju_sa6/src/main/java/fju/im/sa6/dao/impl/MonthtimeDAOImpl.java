@@ -7,30 +7,29 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import fju.im.sa6.webapp.dao.MonthtimeDAO;
+import fju.im.sa6.dao.MonthtimeDAO;
+import fju.im.sa6.entity.StaffDefault;
 
-public class MonthtimeDAOImpl implements MonthtimeDAO{
+
+//rebuild by bing 2016.11.30
+public class MonthtimeDAOImpl implements MonthtimeDAO {
 	private DataSource dataSource;
-	private Connection conn = null ;
-	private ResultSet rs = null ;
-	private PreparedStatement smt = null ;
+	private Connection conn = null;
+	private ResultSet rs = null;
+	private PreparedStatement smt = null;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 
+	}
 
-}
-	@Override
-	public double totalMonthWorktime() {
+	public double totalMonthWorktime(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		
 		return 0;
 	}
 
-	@Override
-	public double getMonthSalary() {
+	public double getMonthSalary(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		
 		return 0;
 	}
 

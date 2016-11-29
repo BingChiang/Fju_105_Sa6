@@ -7,12 +7,13 @@ public class TypeList {
 	private static ArrayList<Type> typeList;
 
 	private int typeAmount;
-
+  
 
 	public TypeList() {
 		TypeList.typeList = new ArrayList<Type>();
 	}
 
+	
 	public static ArrayList<Type> getTypeList() {
 		return typeList;
 	}

@@ -1,4 +1,4 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import fju.im.sa6.entity.Purchase;
-import fju.im.sa6.webapp.dao.PurchaseDAO;
+import fju.im.sa6.dao.PurchaseDAO;
 
 public class PurchaseDAOImpl implements PurchaseDAO {
 
@@ -23,19 +23,19 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public void add(Purchase addPur) {
+	public void add(Purchase purchase) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void set(Purchase setPur) {
+	public void set(Purchase purchase) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void remove(Purchase removePur) {
+	public void remove(Purchase purchase) {
 		// TODO Auto-generated method stub
 
 	}
@@ -47,7 +47,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public Purchase get(Purchase getPur) {
+	public Purchase get(Purchase purchase) {
 		// TODO Auto-generated method stub
 		return null;
 	}

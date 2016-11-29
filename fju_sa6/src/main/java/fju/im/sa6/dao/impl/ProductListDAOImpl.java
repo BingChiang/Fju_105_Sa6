@@ -1,13 +1,15 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
-import fju.im.sa6.webapp.dao.ProductListDAO;
+import fju.im.sa6.dao.ProductListDAO;
 
 import java.sql.*;
 
 import javax.sql.DataSource;
 
+
+//rebuild by bing 2016.11.30
 public abstract class ProductListDAOImpl implements ProductListDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
@@ -19,14 +21,14 @@ public abstract class ProductListDAOImpl implements ProductListDAO {
 	}
 
 	@Override
-	public void set(ProductList setPurlist) {
+	public void set(ProductList productList) {
 		// TODO Auto-generated method stub
 		String sql = "UPDATE productlist(product_num, amount)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, setPurlist.getProductNum());
-			smt.setInt(2, setPurlist.getAmount());
+			smt.setInt(1, productList.getProductNum());
+			smt.setInt(2, productList.getAmount());
 			smt.executeUpdate();
 			smt.close();
 
@@ -45,13 +47,13 @@ public abstract class ProductListDAOImpl implements ProductListDAO {
 	}
 
 	@Override
-	public void remove(ProductList removePurlist) {
+	public void remove(ProductList productList) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM product WHERE product_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removePurlist.getProductNum());
+			smt.setInt(1, productList.getProductNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -69,14 +71,14 @@ public abstract class ProductListDAOImpl implements ProductListDAO {
 
 	}
 
-	public ProductList get(int searchNum) {
+	public ProductList get(ProductList productList) {
 		// TODO Auto-generated method stub
 		ProductList productlist = null;
 		String sql = "SELECT * FROM productlist WHERE product_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, searchNum);
+			smt.setInt(1, productList.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setProduct = (rs.getInt("product_Num"));
@@ -101,7 +103,7 @@ public abstract class ProductListDAOImpl implements ProductListDAO {
 	}
 
 	@Override
-	public double getSingleTotal(ProductList gettotal) {
+	public double getSingleTotal(ProductList productList) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

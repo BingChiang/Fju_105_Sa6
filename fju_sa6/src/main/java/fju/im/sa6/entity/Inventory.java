@@ -12,6 +12,8 @@ public class Inventory {
 
 	private String inventoryName;
 
+	
+	//2016.11.30 by bing.... add init value
 	public Inventory(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum, String inventoryName) {
 		this.inventoryNum = inventoryNum;
 		this.purchaseNum = purchaseNum;
@@ -20,6 +22,14 @@ public class Inventory {
 		this.inventoryName = inventoryName;
 	}
 
+	public Inventory(){
+		this.inventoryNum = 0;
+		this.purchaseNum = 0;
+		this.inventoryAmount = 0;
+		this.supplierNum = 0;
+		this.inventoryName = null;
+	}
+	
 	public int getInventoryNum() {
 		return inventoryNum;
 	}

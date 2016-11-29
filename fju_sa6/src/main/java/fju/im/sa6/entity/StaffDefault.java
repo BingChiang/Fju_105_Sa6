@@ -5,47 +5,40 @@ import java.util.Date;
 
 public abstract class StaffDefault {
 
-	private int staffNum, staffLv;
+	private int staffNum;
 
 	private String staffName;
 
-	private int  staffLevel;
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
+	private int staffLevel;
+
 	private ArrayList<WorkRecord> workRecord;
-=======
-	private ArrayList<workRecord> workRecord;
->>>>>>> refs/remotes/origin/Cheyu
-=======
-	private ArrayList<WorkRecord> workRecord;
->>>>>>> origin/Bing
-	
-	//record the month of working day 
+
+	// record the month of working day
 	private Date workMonth;
 
 	private double worktimeTotal;
 
-<<<<<<< HEAD
-	public StaffDefault(int staffNum, String staffName, int staffLevel, Date onworkTime, Date offworkTime,
+	// rebuild by bing 2016.11.30 and add init value
+	public StaffDefault(int staffNum, String staffName, int staffLevel,
 			Date workMonth, double worktimeTotal) {
-=======
-	public StaffDefault(int staffNum, String staffName, boolean isManager, Date onworkTime, Date offworkTime,
-			Date workMonth, double worktimeTotal, int staffLv) {
->>>>>>> refs/remotes/origin/Cheyu
+
 		this.staffNum = staffNum;
 		this.staffName = staffName;
-<<<<<<< HEAD
 		this.staffLevel = staffLevel;
-=======
-		this.isManager = isManager;
->>>>>>> refs/remotes/origin/Cheyu
 		this.workRecord = workRecord;
 		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
-		this.staffLv = staffLv;
 	}
-
+	
+	public StaffDefault(){
+		this.staffNum = 0;
+		this.staffName = null;
+		this.staffLevel = 1;
+		this.workRecord = null;
+		this.workMonth = null;
+		this.worktimeTotal = 0;
+	}
+	
 	public String getStaffName() {
 		return staffName;
 	}
@@ -58,11 +51,9 @@ public abstract class StaffDefault {
 		return this.staffLevel;
 	}
 
-	public void setManager(int staffLevel) {
+	public void setStaffLevel(int staffLevel) {
 		this.staffLevel = staffLevel;
 	}
-
-
 
 	public Date getWorkMonth() {
 		return workMonth;
@@ -83,15 +74,5 @@ public abstract class StaffDefault {
 	public int getStaffNum() {
 		return staffNum;
 	}
-	public int getStaffLv(){
-		return staffLv;
-		
-	}
-	public void setstaffLv(int staffLv){
-		this.staffLv = staffLv;
-	}
-	
-	
-	
 
 }

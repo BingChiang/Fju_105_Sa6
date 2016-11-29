@@ -12,19 +12,18 @@ public class Purchase {
 
 	private Date purchaseDate;
 
-<<<<<<< HEAD
-	public Purchase(String purchaseName,
-			int purchaseNum, double purchasePrice, Date purchaseDate) {
-=======
-	public Purchase(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum, String inventoryName,
-			String purchaseName, int purchaseNum2, double purchasePrice, Date purchaseDate) {
-		super(inventoryNum, purchaseNum, inventoryAmount, supplierNum, inventoryName);
-
->>>>>>> refs/remotes/origin/Cheyu
+	public Purchase(String purchaseName,int purchaseNum, double purchasePrice, Date purchaseDate) {
 		this.purchaseName = purchaseName;
 		this.purchaseNum = purchaseNum;
 		this.purchasePrice = purchasePrice;
 		this.purchaseDate = purchaseDate;
+	}
+	public Purchase(){
+		this.purchaseName = null;
+		this.purchaseNum = 0;
+		this.purchasePrice = 0;
+		this.purchaseDate = null;
+		
 	}
 
 	public String getPurchaseName() {

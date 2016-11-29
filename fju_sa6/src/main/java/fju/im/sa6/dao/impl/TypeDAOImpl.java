@@ -1,4 +1,4 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +9,10 @@ import javax.sql.DataSource;
 
 import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.Type;
-import fju.im.sa6.webapp.dao.TypeDAO;
+import fju.im.sa6.dao.TypeDAO;
 
+
+//using by typeList to do something , notice!!
 public class TypeDAOImpl implements TypeDAO {
 
 	private DataSource dataSource;
@@ -22,14 +24,13 @@ public class TypeDAOImpl implements TypeDAO {
 		this.dataSource = dataSource;
 	}
 
-	@Override
-	public String getname(Type getname) {
+
+	public String getname(Type type) {
 
 		return null;
 	}
 
-	@Override
-	public int getnum(Type getnumber) {
+	public int getnum(Type type) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
