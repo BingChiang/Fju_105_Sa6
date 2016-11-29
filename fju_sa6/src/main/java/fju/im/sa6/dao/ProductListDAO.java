@@ -4,11 +4,11 @@ import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
 
 public interface ProductListDAO {
-	public void set(ProductList setPurlist);
+	public void set(ProductList productList);
 
-	public void remove(ProductList removePurlist);
+	public void remove(ProductList productList);
 
-	public Product get(ProductList getPurlist);
+	public Product get(ProductList productList);
 
-	public double getSingleTotal(ProductList gettotal);
+	public double getSingleTotal(ProductList productList);
 }

@@ -7,15 +7,15 @@ import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
 
 public interface OrderListDAO {
-	public void add(OrderList addODP);
+	public void add(OrderList orderList);
 
-	public void set(OrderList setODP);
+	public void set(OrderList orderList);
 
-	public void remove(OrderList removeODP);
+	public void remove(OrderList orderList);
 
 	public ArrayList<OrderList> getList();
 
-	public Product getODP(int serachNum);
+	public Product getODP(Product product);
 
-	public Product gettotalprice(OrderList gettotalprice);
+	public Product gettotalprice(OrderList orderList);
 }
