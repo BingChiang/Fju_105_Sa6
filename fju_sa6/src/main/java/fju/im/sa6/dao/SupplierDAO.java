@@ -6,13 +6,13 @@ import java.util.List;
 import fju.im.sa6.entity.Supplier;
 
 public interface SupplierDAO {
-	public void add(Supplier supplier);
+	public void add(Supplier addSup);
 
-	public void set(Supplier supplier);
+	public void set(Supplier setSup);
 
-	public void remove(Supplier supplier);
+	public void remove(Supplier removeSup);
 
 	public ArrayList<Supplier> getList();
 
-	public Supplier get(Supplier supplier);
+	public Supplier get(Supplier getSup);
 }

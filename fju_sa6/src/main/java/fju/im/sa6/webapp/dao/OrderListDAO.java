@@ -1,10 +1,11 @@
-package fju.im.sa6.dao;
+package fju.im.sa6.webapp.dao;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
+import fju.im.sa6.entity.ProductList;
 
 public interface OrderListDAO {
 	public void add(OrderList addODP);
@@ -13,9 +14,8 @@ public interface OrderListDAO {
 
 	public void remove(OrderList removeODP);
 
-	public ArrayList<OrderList> getList();
+	public Product gettotalprice(Product gettotalprice);
 
-	public Product getODP(int serachNum);
+	public ArrayList<ProductList> getOrderList(ProductList product);
 
-	public Product gettotalprice(OrderList gettotalprice);
 }

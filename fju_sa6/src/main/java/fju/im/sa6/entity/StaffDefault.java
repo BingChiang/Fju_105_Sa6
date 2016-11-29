@@ -5,27 +5,41 @@ import java.util.Date;
 
 public abstract class StaffDefault {
 
-	private int staffNum;
+	private int staffNum, staffLv;
 
 	private String staffName;
 
 	private int  staffLevel;
 	
+<<<<<<< HEAD
 	private ArrayList<WorkRecord> workRecord;
+=======
+	private ArrayList<workRecord> workRecord;
+>>>>>>> refs/remotes/origin/Cheyu
 	
 	//record the month of working day 
 	private Date workMonth;
 
 	private double worktimeTotal;
 
+<<<<<<< HEAD
 	public StaffDefault(int staffNum, String staffName, int staffLevel, Date onworkTime, Date offworkTime,
 			Date workMonth, double worktimeTotal) {
+=======
+	public StaffDefault(int staffNum, String staffName, boolean isManager, Date onworkTime, Date offworkTime,
+			Date workMonth, double worktimeTotal, int staffLv) {
+>>>>>>> refs/remotes/origin/Cheyu
 		this.staffNum = staffNum;
 		this.staffName = staffName;
+<<<<<<< HEAD
 		this.staffLevel = staffLevel;
+=======
+		this.isManager = isManager;
+>>>>>>> refs/remotes/origin/Cheyu
 		this.workRecord = workRecord;
 		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
+		this.staffLv = staffLv;
 	}
 
 	public String getStaffName() {
@@ -65,7 +79,13 @@ public abstract class StaffDefault {
 	public int getStaffNum() {
 		return staffNum;
 	}
-	
+	public int getStaffLv(){
+		return staffLv;
+		
+	}
+	public void setstaffLv(int staffLv){
+		this.staffLv = staffLv;
+	}
 	
 	
 	

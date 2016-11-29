@@ -1,4 +1,4 @@
-package fju.im.sa6.dao;
+package fju.im.sa6.webapp.dao;
 
 import fju.im.sa6.entity.StaffDefault;
 

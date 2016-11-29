@@ -1,4 +1,4 @@
-package fju.im.sa6.dao;
+package fju.im.sa6.webapp.dao;
 
 import fju.im.sa6.entity.Manager;
 
@@ -9,7 +9,9 @@ public interface ManagerDAO {
 
 	public void remove(Manager removestaff);
 
-	public void inquireAllWorktime(Manager inquireAWKT);
+	public Manager inquireAllWorktime(int inquireAWKT);
 
-	public void setlevel(int staffNum);
+	public void setlevel(int staffNumlogin, int setstaffLv);
+	
+
 }
