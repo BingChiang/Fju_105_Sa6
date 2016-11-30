@@ -97,8 +97,9 @@ public class ManagerDAOImpl implements ManagerDAO {
 		}
 	}
 
-	public void inquireAllWorktime(StaffDefault staffDefault) {
-		// TODO Auto-generated method stub
+	public double inquireAllWorktime(StaffDefault staffDefault) {
+		
+		return 0;
 
 	}
 

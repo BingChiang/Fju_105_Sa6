@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import fju.im.sa6.entity.Product;
+import fju.im.sa6.entity.Type;
 import fju.im.sa6.dao.ProductDAO;
-
 
 //rebuild by bing 2016.11.30
 public class ProductDAOImpl implements ProductDAO {
@@ -135,5 +135,44 @@ public class ProductDAOImpl implements ProductDAO {
 		return pro;
 	}
 
+	public ArrayList<Product> getTypeList(Type type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<Product> getList() {
+		// TODO Auto-generated method stub
+		ArrayList<Product> proarr = new ArrayList<Product>();
+		Product temp;
+
+		String sql = "SELECT * FROM product ";
+		try {
+
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				temp = new Product(rs.getInt("product_Num"), rs.getInt("type_Num"), rs.getString("product_Name"),
+						rs.getInt("product_price"), (rs.getInt("product_sell_month")),
+						(rs.getInt("product_sell_month")));
+				proarr.add(temp);
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return proarr;
+	}
 
 }
