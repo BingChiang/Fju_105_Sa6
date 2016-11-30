@@ -18,6 +18,7 @@ public class OrderDefault {
 
 	private Date orderDate;
 
+	//2016.11.30 by bing ...and add init value
 	public OrderDefault(int orderNum, int productNum, int typeNum, int orderPrice, int orderAmount, int orderTotal,
 			Date orderDate) {
 		this.orderNum = orderNum;
@@ -27,6 +28,16 @@ public class OrderDefault {
 		this.orderAmount = orderAmount;
 		this.orderTotal = orderTotal;
 		this.orderDate = orderDate;
+	}
+
+	public OrderDefault() {
+		this.orderNum = 0;
+		this.productNum = 0;
+		this.typeNum = 0;
+		this.orderPrice = 0;
+		this.orderAmount = 0;
+		this.orderTotal = 0;
+		this.orderDate = null;
 	}
 
 	public int getOrderPrice() {
@@ -73,7 +84,4 @@ public class OrderDefault {
 		return typeNum;
 	}
 
-	
-	
-	
 }

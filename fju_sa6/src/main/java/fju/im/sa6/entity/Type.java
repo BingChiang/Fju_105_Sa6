@@ -11,6 +11,12 @@ public class Type {
 		this.typeNum = typeNum;
 	}
 
+	public Type() {
+		this.typeName = null;
+		this.typeNum = 0;
+
+	}
+
 	public String getTypeName() {
 		return typeName;
 	}
@@ -22,8 +28,5 @@ public class Type {
 	public int getTypeNum() {
 		return typeNum;
 	}
-
-	
-	
 
 }

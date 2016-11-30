@@ -23,6 +23,13 @@ public class WorkRecord {
 			this.offworkTime = workTime;
 		}
 	}
+	
+	public WorkRecord(){
+		this.date = null;
+		this.onworkTime = null;
+		this.offworkTime = null;
+		
+	}
 
 
 	public Date getOnworkTime() {
