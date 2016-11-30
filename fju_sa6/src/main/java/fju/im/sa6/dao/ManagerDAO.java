@@ -10,7 +10,7 @@ public interface ManagerDAO {
 
 	public void remove(StaffDefault staffDefault);
 
-	public void inquireAllWorktime(StaffDefault staffDefault);
+	public StaffDefault inquireAllWorktime(StaffDefault staffDefault);
 
 	public void setLevel(StaffDefault manager, StaffDefault staffStaffDefault);
 }

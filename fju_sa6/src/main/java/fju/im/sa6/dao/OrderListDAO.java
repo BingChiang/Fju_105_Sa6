@@ -14,10 +14,6 @@ public interface OrderListDAO {
 
 	public void remove(OrderList orderList);
 
-	public ArrayList<OrderList> getList();
-
-	public OrderList getODP(OrderList orderList);
-
 	//for checking method , not for object type!!
 	public double gettotalprice(OrderList orderList);
 }

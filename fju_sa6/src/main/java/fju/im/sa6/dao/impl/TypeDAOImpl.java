@@ -11,7 +11,6 @@ import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.Type;
 import fju.im.sa6.dao.TypeDAO;
 
-
 //using by typeList to do something , notice!!
 public class TypeDAOImpl implements TypeDAO {
 
@@ -24,41 +23,39 @@ public class TypeDAOImpl implements TypeDAO {
 		this.dataSource = dataSource;
 	}
 
-
 	public String getname(Type type) {
 
 		return null;
 	}
 
-	public int getnum(Type type) {
-		Type typ = null ;
+	public Type getnum(Type searchType) {
+		Type typ = null;
 		String sql = "SELECT * FROM type WHERE type_num = ?";
 		try {
-			
+
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, searchTyp);
+			smt.setInt(1, searchType.getTypeNum());
 			rs = smt.executeQuery();
-			if(rs.next()){
-				int settypeNum=(rs.getInt("type_num"));
-				String settypeName=(rs.getString("type_name"));
+			if (rs.next()) {
+				int settypeNum = (rs.getInt("type_num"));
+				String settypeName = (rs.getString("type_name"));
 				typ = new Type(settypeName, settypeNum);
 			}
 			rs.close();
 			smt.close();
- 
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
- 
+
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
-				} catch (SQLException e) {}
+				} catch (SQLException e) {
+				}
 			}
 		}
 		return typ;
 	}
-	}
-
 }

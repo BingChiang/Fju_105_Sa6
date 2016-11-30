@@ -3,7 +3,7 @@ package fju.im.sa6.entity;
 import java.util.Date;
 
 
-//2016.11.30 by bing  .... and add init value
+//2016.11.30 by bing  .... and add int value
 public class Manager extends StaffDefault {
 
 	public Manager(int staffNum, String staffName, int staffLevel, Date onworkTime, Date offworkTime, Date workMonth,

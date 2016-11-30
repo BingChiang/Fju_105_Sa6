@@ -4,7 +4,8 @@ import fju.im.sa6.dao.WorktimeDAO;
 import fju.im.sa6.entity.StaffDefault;
 
 import java.sql.*;
-
+import java.util.ArrayList;
+import java.util.Date;
 import javax.sql.DataSource;
 
 
@@ -25,6 +26,9 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 		return 0;
 	}
+	public ArrayList<WorktimeDAO> getList(){
+		return getList();
+	}
 
 	@Override
 	public void amendOnWork(StaffDefault staffDefault) {
@@ -33,7 +37,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setDate(1, (Date) getDate());
+			smt.setDate(1, staffDefault.);
 			smt.setInt(2, staffDefault.getOnWork());
 			smt.executeUpdate();
 			smt.close();

@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.sql.DataSource;
 
@@ -24,7 +24,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public void add(Purchase purchase) {
+	public void add(Purchase addPur) {
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO purchase (purchase_name, purchase_num, purchase_price, purchaseDate) VALUES(?, ?, ?, ?)";
 		try {
@@ -33,7 +33,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			smt.setString(1, addPur.getPurchaseName());
 			smt.setInt(2, addPur.getPurchaseNum());
 			smt.setDouble(3, addPur.getPurchasePrice());
-			smt.setDate(4, (Date) addPur.getPurchaseDate());
+			smt.setDate(4, (java.sql.Date) addPur.getPurchaseDate());
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {
@@ -51,7 +51,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public void set(Purchase purchase) {
+	public void set(Purchase setPur) {
 		// TODO Auto-generated method stub
 		String sql = "UPDATE purchase SET purchase_name=?, purchase_num=?, purchase_price=? "
 				+ "WHERE purchase_num = ?";
@@ -107,12 +107,48 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	public ArrayList<Purchase> getList() {
 		// TODO Auto-generated method stub
 		Purchase pur = null;
+
 		String sql = "SELECT * FROM purchase WHERE purchase_num = ?";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, searchPur);
+			smt.setInt(1, pur.getPurchaseNum());
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				String setpurchase_Name = (rs.getString("purchase_Name"));
+				int setpurchase_Num = (rs.getInt("purchase_Num"));
+				Double setpurchase_price = (rs.getDouble("purchase_price"));
+				Date setpurchase_Date = (rs.getDate("purchase_date"));
+				pur = new Purchase(setpurchase_Name, setpurchase_Num, setpurchase_price, setpurchase_Date);
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return getList();
+	}
+
+	@Override
+	public Purchase get(Purchase searchPur) {
+		// TODO Auto-generated method stub
+		Purchase pur = null;
+		String sql = "SELECT * FROM purchase WHERE purchase_num = ?";
+		try {
+
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, searchPur.getPurchaseNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				String setpurchase_Name = (rs.getString("purchase_Name"));
@@ -137,11 +173,4 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		}
 		return pur;
 	}
-
-	@Override
-	public Purchase get(Purchase purchase) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

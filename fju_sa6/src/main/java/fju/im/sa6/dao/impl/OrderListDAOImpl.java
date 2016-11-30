@@ -179,16 +179,6 @@ public class OrderListDAOImpl implements OrderListDAO {
 
 	}
 
-	public ArrayList<OrderList> getList() {
-		
-		return null;
-	}
-
-	@Override
-	public OrderList getODP(OrderList orderList) {
-		
-		return null;
-	}
 
 	
 

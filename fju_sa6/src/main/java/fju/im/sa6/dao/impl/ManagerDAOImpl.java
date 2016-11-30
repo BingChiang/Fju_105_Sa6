@@ -1,5 +1,6 @@
 package fju.im.sa6.dao.impl;
 
+import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.Manager;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.dao.ManagerDAO;
@@ -97,9 +98,36 @@ public class ManagerDAOImpl implements ManagerDAO {
 		}
 	}
 
-	public void inquireAllWorktime(StaffDefault staffDefault) {
-		// TODO Auto-generated method stub
+	public StaffDefault inquireAllWorktime(StaffDefault staffDefault) {
+		StaffDefault inquire = null;
+		String sql = "SELECT worktimeTotal FROM manager WHERE staffNum = ?";
+		try {
 
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, staffDefault.getStaffNum());
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				int setworktimeTotal = (rs.getInt("worktimeTotal"));
+				int setstaffNum = (rs.getInt("staffNum"));
+				int setstaffLv = (rs.getInt("staffLv"));
+				inquire = new StaffDefault(setstaffNum, setworktimeTotal,setstaffLv);
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return  inquire;
 	}
 
 	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {

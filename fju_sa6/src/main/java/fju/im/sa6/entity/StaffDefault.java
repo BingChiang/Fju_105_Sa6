@@ -74,5 +74,8 @@ public abstract class StaffDefault {
 	public int getStaffNum() {
 		return staffNum;
 	}
+	public void setStaffNum(int staffNum){
+		this.staffNum = staffNum;
+	}
 
 }
