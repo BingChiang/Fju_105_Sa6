@@ -31,8 +31,34 @@ public class TypeDAOImpl implements TypeDAO {
 	}
 
 	public int getnum(Type type) {
-		// TODO Auto-generated method stub
-		return 0;
+		Type typ = null ;
+		String sql = "SELECT * FROM type WHERE type_num = ?";
+		try {
+			
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, searchTyp);
+			rs = smt.executeQuery();
+			if(rs.next()){
+				int settypeNum=(rs.getInt("type_num"));
+				String settypeName=(rs.getString("type_name"));
+				typ = new Type(settypeName, settypeNum);
+			}
+			rs.close();
+			smt.close();
+ 
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+ 
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return typ;
+	}
 	}
 
 }
