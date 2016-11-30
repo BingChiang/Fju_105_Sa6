@@ -9,6 +9,7 @@ public class TypeDAOImpl implements TypeDAO {
 	@Override
 	public String getname(Type getname) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

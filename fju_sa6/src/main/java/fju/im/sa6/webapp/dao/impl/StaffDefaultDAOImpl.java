@@ -1,11 +1,13 @@
 package fju.im.sa6.webapp.dao.impl;
 
+import fju.im.sa6.entity.Purchase;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.webapp.dao.StaffDefaultDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 public class StaffDefaultDAOImpl implements StaffDefaultDAO {
@@ -46,6 +48,12 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 			}
 		}
 		return staffD;
+	}
+	public ArrayList<StaffDefault> getList(){
+		String sql = "SELECT * FROM StaffDefalut";
+		
+		return getList();
+		
 	}
 
 }
