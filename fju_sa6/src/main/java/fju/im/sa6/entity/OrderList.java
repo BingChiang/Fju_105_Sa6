@@ -13,6 +13,12 @@ public class OrderList extends OrderDefault {
 		this.orderList = orderList;
 	}
 
+	public OrderList(){
+		super();
+		this.orderList = orderList;
+	}
+	
+	
 	public ArrayList<ProductList> getOrderList() {
 		return orderList;
 	}

@@ -10,11 +10,11 @@ public class Supplier {
 
 	private String supplierName;
 
-	private int supplierPhone;
+	private String supplierPhone;
 
 	private String supplierAddress;
-
-	public Supplier(int supplierNum, int inventoryNum, int purchaseNum, String supplierName, int supplierPhone,
+	//rebuild by bing 2016.11.30 ...and add init value
+	public Supplier(int supplierNum, int inventoryNum, int purchaseNum, String supplierName, String supplierPhone,
 			String supplierAddress) {
 		this.supplierNum = supplierNum;
 		this.inventoryNum = inventoryNum;
@@ -22,6 +22,15 @@ public class Supplier {
 		this.supplierName = supplierName;
 		this.supplierPhone = supplierPhone;
 		this.supplierAddress = supplierAddress;
+	}
+	
+	public Supplier(){
+		this.supplierNum = 0;
+		this.inventoryNum = 0;
+		this.purchaseNum = 0;
+		this.supplierName = null;
+		this.supplierPhone = null;
+		this.supplierAddress = null;
 	}
 
 	public String getSupplierName() {
@@ -32,11 +41,11 @@ public class Supplier {
 		this.supplierName = supplierName;
 	}
 
-	public int getSupplierPhone() {
+	public String getSupplierPhone() {
 		return supplierPhone;
 	}
 
-	public void setSupplierPhone(int supplierPhone) {
+	public void setSupplierPhone(String supplierPhone) {
 		this.supplierPhone = supplierPhone;
 	}
 
