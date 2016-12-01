@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.sql.DataSource;
-
-import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.Type;
 import fju.im.sa6.dao.TypeDAO;
 

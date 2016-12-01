@@ -1,6 +1,5 @@
 package fju.im.sa6.dao;
 
-import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
 
 public interface ProductListDAO {

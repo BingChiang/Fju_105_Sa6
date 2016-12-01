@@ -1,16 +1,15 @@
 package fju.im.sa6.dao.impl;
 
-import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.Manager;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.dao.ManagerDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
-
 
 //rebuild by bing 2016.11.30
 public class ManagerDAOImpl implements ManagerDAO {
@@ -100,7 +99,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	public StaffDefault inquireAllWorktime(StaffDefault staffDefault) {
 		StaffDefault inquire = null;
-		String sql = "SELECT worktimeTotal FROM manager WHERE staffNum = ?";
+		String sql = "SELECT * FROM manager WHERE staffNum = ?";
 		try {
 
 			conn = dataSource.getConnection();
@@ -108,10 +107,16 @@ public class ManagerDAOImpl implements ManagerDAO {
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setworktimeTotal = (rs.getInt("worktimeTotal"));
+				double setworktimeTotal = (rs.getInt("worktimeTotal"));
 				int setstaffNum = (rs.getInt("staffNum"));
 				int setstaffLv = (rs.getInt("staffLv"));
-				inquire = new StaffDefault(setstaffNum, setworktimeTotal,setstaffLv);
+				Date setonworktime = (rs.getDate("onworktime"));
+				Date setoffworktime = (rs.getDate("offworktime"));
+				Date setworkmonth = (rs.getDate("workmonth"));
+				String setStaffName = (rs.getString("staffName"));
+				inquire = new Manager(setstaffNum, setStaffName, setstaffLv, setonworktime, setoffworktime,
+						setworkmonth, setworktimeTotal);
+
 			}
 			rs.close();
 			smt.close();
@@ -127,7 +132,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 				}
 			}
 		}
-		return  inquire;
+		return inquire;
 	}
 
 	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {

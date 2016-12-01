@@ -7,7 +7,7 @@ public class PurchaseList extends Purchase {
 
 	private ArrayList<Inventory> purchaseList;
 
-	public PurchaseList(String purchaseName, int purchaseNum, double purchasePrice, Date purchaseDate) {
+	public PurchaseList(String purchaseName, int purchaseNum, double purchasePrice, Date purchaseDate, ArrayList<Inventory> purchaseList) {
 		super(purchaseName, purchaseNum, purchasePrice, purchaseDate);
 		this.purchaseList = purchaseList;
 	}

@@ -104,7 +104,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public ArrayList<Purchase> getList() {
+	public ArrayList<Purchase> getList(Purchase purchase) {
 		// TODO Auto-generated method stub
 		Purchase pur = null;
 
@@ -113,7 +113,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, pur.getPurchaseNum());
+			smt.setInt(1, purchase.getPurchaseNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				String setpurchase_Name = (rs.getString("purchase_Name"));
@@ -136,7 +136,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 				}
 			}
 		}
-		return getList();
+		return getList(pur);
 	}
 
 	@Override

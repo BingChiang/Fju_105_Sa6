@@ -2,15 +2,11 @@ package fju.im.sa6.dao.impl;
 
 import java.util.ArrayList;
 import javax.sql.DataSource;
-
 import fju.im.sa6.entity.OrderList;
-import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
 import fju.im.sa6.dao.OrderListDAO;
-import fju.im.sa6.dao.ProductDAO;
 
 import java.sql.*;
-
 
 //rebuild by bing 2016.11.30
 public class OrderListDAOImpl implements OrderListDAO {
@@ -103,11 +99,9 @@ public class OrderListDAOImpl implements OrderListDAO {
 		}
 	}
 
-	public ArrayList<ProductList> getOrderList(ProductList product) {
+	public ArrayList<ProductList> getOrderList(OrderList orderlist) {
 		// TODO Auto-generated method stub
 		Date searchDate = null;
-		ArrayList<ProductList> productlist = new ArrayList<ProductList>();
-		;
 		String sql = "SELECT * FROM OrderList WHERE order_Date = ?";
 		try {
 			conn = dataSource.getConnection();
@@ -123,7 +117,8 @@ public class OrderListDAOImpl implements OrderListDAO {
 				int setorder_amount = (rs.getInt("order_amount"));
 				int setorder_total = (rs.getInt("order_total"));
 				Date setorder_date = (rs.getDate("order_date"));
-				productlist.add((ProductList) rs);
+				orderlist = new OrderList(setOrder_Num, setProduct_Num, setType_Num, setorder_price, setorder_amount,
+						setorder_total, setorder_date, null);
 			}
 			rs.close();
 			smt.close();
@@ -140,7 +135,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 			}
 		}
 
-		return productlist;
+		return getOrderList(orderlist);
 
 	}
 
@@ -178,8 +173,5 @@ public class OrderListDAOImpl implements OrderListDAO {
 		return gettotalprice(null);
 
 	}
-
-
-	
 
 }
