@@ -12,13 +12,13 @@ public class SupplierList extends Supplier {
 	public SupplierList(int supplierNum, int inventoryNum, int purchaseNum, String supplierName, String supplierPhone,
 			String supplierAddress) {
 		super(supplierNum, inventoryNum, purchaseNum, supplierName, supplierPhone, supplierAddress);
-		this.supplierList = new ArrayList<Inventory>();
+		SupplierList.supplierList = new ArrayList<Inventory>();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public SupplierList(){
 		super();
-		this.supplierList = null;
+		SupplierList.supplierList = null;
 
 	}
 

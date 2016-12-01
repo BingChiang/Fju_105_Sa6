@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
-
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.Type;
 import fju.im.sa6.dao.ProductDAO;
-
 
 //rebuild by bing 2016.11.30
 public class ProductDAOImpl implements ProductDAO {
@@ -136,17 +134,14 @@ public class ProductDAOImpl implements ProductDAO {
 		return pro;
 	}
 
-	
 	public ArrayList<Product> getTypeList(Type type) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
 	public ArrayList<Product> getList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }

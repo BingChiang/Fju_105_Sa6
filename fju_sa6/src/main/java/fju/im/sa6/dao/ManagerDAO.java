@@ -1,6 +1,5 @@
 package fju.im.sa6.dao;
 
-import fju.im.sa6.entity.Manager;
 import fju.im.sa6.entity.StaffDefault;
 
 public interface ManagerDAO {
@@ -10,7 +9,7 @@ public interface ManagerDAO {
 
 	public void remove(StaffDefault staffDefault);
 
-	public double inquireAllWorktime(StaffDefault staffDefault);
+	public StaffDefault inquireAllWorktime(StaffDefault staffDefault);
 
 	public void setLevel(StaffDefault manager, StaffDefault staffStaffDefault);
 }

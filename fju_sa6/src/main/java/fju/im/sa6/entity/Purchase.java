@@ -12,18 +12,20 @@ public class Purchase {
 
 	private Date purchaseDate;
 
-	public Purchase(String purchaseName,int purchaseNum, double purchasePrice, Date purchaseDate) {
+	public Purchase(String purchaseName, int purchaseNum, double purchasePrice, Date purchaseDate) {
+
 		this.purchaseName = purchaseName;
 		this.purchaseNum = purchaseNum;
 		this.purchasePrice = purchasePrice;
 		this.purchaseDate = purchaseDate;
 	}
-	public Purchase(){
+
+	public Purchase() {
 		this.purchaseName = null;
 		this.purchaseNum = 0;
 		this.purchasePrice = 0;
 		this.purchaseDate = null;
-		
+
 	}
 
 	public String getPurchaseName() {
