@@ -9,5 +9,5 @@ public interface ProductListDAO {
 
 	public ProductList get(ProductList productList);
 
-	public double getSingleTotal(ProductList productList);
+	public ProductList getSingleTotal(ProductList productList);
 }
