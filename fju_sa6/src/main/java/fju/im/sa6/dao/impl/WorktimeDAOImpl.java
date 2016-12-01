@@ -2,6 +2,7 @@ package fju.im.sa6.dao.impl;
 
 import fju.im.sa6.dao.WorktimeDAO;
 import fju.im.sa6.entity.StaffDefault;
+import fju.im.sa6.entity.WorkRecord;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -53,16 +54,16 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	public ArrayList<WorktimeDAO> getList() {
 		return getList();
 	}
+	
 
-	@Override
-	public void amendOnWork(StaffDefault staffDefault) {
+	public void amendOnWork(WorkRecord workrecord) {
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO worktime (work_date, on_work) VALUES(select TO_CHAR(ADD_MONTHS(sysdate,-1),'mmdd') from worktime), Now())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setDate(1, staffDefault.);
-			smt.setInt(2, staffDefault.getOnWork());
+			smt.setDate(1, (java.sql.Date) workrecord.getDate());
+			smt.setDate(2, (java.sql.Date) workrecord.getOnworkTime());
 			smt.executeUpdate();
 			smt.close();
 
@@ -79,16 +80,15 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		}
 	}
 
-	@Override
-	public void amendOffWork(StaffDefault staffDefault) {
+	public void amendOffWork(WorkRecord workrecord) {
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO worktime (work_date, off_work) VALUES(select TO_CHAR(ADD_MONTHS(sysdate,-1),'mmdd') from worktime), Now())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 
-			smt.setDate(1, (Date) staffDefault.getWorkDate());
-			smt.setInt(2, staffDefault.getOffWork());
+			smt.setDate(1, (java.sql.Date) workrecord.getDate());
+			smt.setDate(2, (java.sql.Date) workrecord.getOffworkTime());
 			smt.executeUpdate();
 			smt.close();
 
@@ -104,5 +104,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			}
 		}
 	}
+
 
 }
