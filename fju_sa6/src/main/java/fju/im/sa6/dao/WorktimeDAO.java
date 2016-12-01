@@ -1,12 +1,19 @@
 package fju.im.sa6.dao;
 
+import java.sql.Date;
+
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.WorkRecord;
 
 public interface WorktimeDAO {
 	public double getDayWorktime(StaffDefault staffDefault);
 
-	public void amendOnWork(WorkRecord workrecord);
+	public void statffOnWork(StaffDefault staffDefault);
 
-	public void amendOffWork(WorkRecord workrecord);
+	public void staffOffWork(StaffDefault staffDefault);
+
+	public void amendOnWork(StaffDefault staffDefault, Date date);
+
+	public void amendOffWork(StaffDefault staffDefault, Date date);
+
 }

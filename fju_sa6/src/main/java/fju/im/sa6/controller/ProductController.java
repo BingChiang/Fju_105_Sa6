@@ -1,13 +1,13 @@
 package fju.im.sa6.controller;
 
 
-//import java.io.IOException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import fju.im.sa6.entity.Product;
-import fju.im.sa6.webapp.dao.ProductDAO;
-import fju.im.sa6.webapp.dao.impl.ProductDAOImpl;
+import fju.im.sa6.entity.Type;
+import fju.im.sa6.dao.ProductDAO;
+import fju.im.sa6.dao.impl.ProductDAOImpl;
 
 
 /**
@@ -41,17 +42,20 @@ public class ProductController {
 		//logger.info("controller");
 		ProductDAOImpl productDAO = (ProductDAOImpl)context.getBean("productDAO");
 		ArrayList<Product> productList = new ArrayList<Product>();
-		productList = productDAO.getProduct(0);
+		productList = productDAO.getList();
 		//logger.info(""+productList.size());
 		model.addObject("productList", productList);
 		
 		return model;
+		
 	}
 	
 	
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.GET)
 	public ModelAndView insertProductPage(){
 		ModelAndView model = new ModelAndView("insertProduct");
+		
+		
 		//need the following part for product category
 		/*
 		ArticleCategoryDAO articleCategoryDAO = (ArticleCategoryDAO)context.getBean("articleCategoryDAO");
@@ -94,7 +98,7 @@ public class ProductController {
 	public ModelAndView updateProduct(@ModelAttribute Product product){
 		ModelAndView model = new ModelAndView("redirect:/product");
 		ProductDAO productDAO = (ProductDAO)context.getBean("productDAO");
-		productDAO.update(product);	
+		productDAO.set(product);	
 		return model;
 	}
 
@@ -102,20 +106,20 @@ public class ProductController {
 	public ModelAndView deleteProduct(@ModelAttribute Product product){
 		ModelAndView model = new ModelAndView("redirect:/product");
 		ProductDAO productDAO = (ProductDAO)context.getBean("productDAO");
-		productDAO.delete(product);
+		productDAO.remove(product);
 		return model;
 	}
 
 
 
-	@RequestMapping(value = "/availableProduct", method = RequestMethod.GET)
-	public ModelAndView listAvailableProduct(){
+	@RequestMapping(value = "/typeProduct", method = RequestMethod.GET)
+	public ModelAndView listAvailableProduct(Type type){
 	
 		ModelAndView model = new ModelAndView("availableProduct");
-		//logger.info("controller");
+		//logger.info("controller");S
 		ProductDAO productDAO = (ProductDAO)context.getBean("productDAO");
 		List<Product> productList = new ArrayList<Product>();
-		productList = productDAO.getAvailableList();
+		productList = productDAO.getTypeList(type);
 		//logger.info(""+productList.size());
 		model.addObject("productList", productList);
 		
