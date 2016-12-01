@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.sql.DataSource;
 
-
-
 public class WorktimeDAOImpl implements WorktimeDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
@@ -23,10 +21,36 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	@Override
 	public double getDayWorktime(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
+		StaffDefault staffnum = null;
+		String sql = "SELECT * FROM StaffDefault WHERE staffNum = ?";
+		try{
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, staffDefault.getStaffNum());
+			rs = smt.executeQuery();
+			if(rs.next()){
+				int setStaffNum = (rs.getInt("staff_Num"));
+				String setstaffName = (rs.getString("staff_Name"));
+				
+			}
+			rs.close();
+			smt.close();
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
 
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 		return 0;
 	}
-	public ArrayList<WorktimeDAO> getList(){
+
+	public ArrayList<WorktimeDAO> getList() {
 		return getList();
 	}
 
@@ -81,5 +105,4 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		}
 	}
 
-	
 }

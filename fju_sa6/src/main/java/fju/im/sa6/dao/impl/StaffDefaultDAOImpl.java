@@ -33,10 +33,10 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setStaffNum = (rs.getInt("staff_num"));
-				String setStaffName = (rs.getString("staff_name"));
-				int setStaffLv = (rs.getInt("staff_lv"));
-				Date setworkmonth = (rs.getDate("workmonth"));
+				int setStaffNum = (rs.getInt("staff_Num"));
+				String setStaffName = (rs.getString("staff_Name"));
+				int setStaffLv = (rs.getInt("staff_Lv"));
+				Date setworkmonth = (rs.getDate("workMonth"));
 				double setworktimeTotal = (rs.getDouble("worktimeTotal"));
 				staffD.setStaffNum(setStaffNum);
 				staffD.setStaffName(setStaffName);
