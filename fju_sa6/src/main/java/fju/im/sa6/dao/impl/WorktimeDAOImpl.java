@@ -3,10 +3,8 @@ package fju.im.sa6.dao.impl;
 import fju.im.sa6.dao.WorktimeDAO;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.WorkRecord;
-
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.sql.DataSource;
 
 public class WorktimeDAOImpl implements WorktimeDAO {
@@ -24,20 +22,19 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		// TODO Auto-generated method stub
 		StaffDefault staffnum = null;
 		String sql = "SELECT * FROM StaffDefault WHERE staffNum = ?";
-		try{
+		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				int setStaffNum = (rs.getInt("staff_Num"));
 				String setstaffName = (rs.getString("staff_Name"));
-				
+
 			}
 			rs.close();
 			smt.close();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
@@ -54,7 +51,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	public ArrayList<WorktimeDAO> getList() {
 		return getList();
 	}
-	
 
 	public void amendOnWork(WorkRecord workrecord) {
 		// TODO Auto-generated method stub
@@ -104,6 +100,5 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			}
 		}
 	}
-
 
 }

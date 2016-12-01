@@ -8,7 +8,7 @@ import java.sql.*;
 import javax.sql.DataSource;
 
 //rebuild by bing 2016.11.30
-public abstract class ProductListDAOImpl implements ProductListDAO {
+public class ProductListDAOImpl implements ProductListDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
 	private ResultSet rs = null;
