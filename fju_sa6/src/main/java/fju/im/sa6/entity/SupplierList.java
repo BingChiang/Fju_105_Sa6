@@ -7,11 +7,19 @@ public class SupplierList extends Supplier {
 	private static ArrayList<Inventory> supplierList;
 
 
-	public SupplierList(int supplierNum, int inventoryNum, int purchaseNum, String supplierName, int supplierPhone,
+	
+	//rebuild by bing 2016.11.30 ...and add init value
+	public SupplierList(int supplierNum, int inventoryNum, int purchaseNum, String supplierName, String supplierPhone,
 			String supplierAddress) {
 		super(supplierNum, inventoryNum, purchaseNum, supplierName, supplierPhone, supplierAddress);
 		this.supplierList = new ArrayList<Inventory>();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public SupplierList(){
+		super();
+		this.supplierList = null;
+
 	}
 
 

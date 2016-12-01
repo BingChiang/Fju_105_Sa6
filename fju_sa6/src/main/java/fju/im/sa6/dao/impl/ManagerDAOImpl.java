@@ -1,7 +1,8 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import fju.im.sa6.entity.Manager;
-import fju.im.sa6.webapp.dao.ManagerDAO;
+import fju.im.sa6.entity.StaffDefault;
+import fju.im.sa6.dao.ManagerDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+
+//rebuild by bing 2016.11.30
 public class ManagerDAOImpl implements ManagerDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
@@ -20,15 +23,15 @@ public class ManagerDAOImpl implements ManagerDAO {
 	}
 
 	@Override
-	public void addStaff(Manager addstaff) {
-
+	public void add(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
 		String sql = "INSERT INTO manager (staff_name, staff_lv)VALUE(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, addstaff.getStaffName());
-			smt.setInt(1, addstaff.getStaffLv());
+
+			smt.setString(1, staffDefault.getStaffName());
+			smt.setInt(1, staffDefault.getStaffLevel());
 			smt.executeUpdate();
 			smt.close();
 
@@ -41,21 +44,19 @@ public class ManagerDAOImpl implements ManagerDAO {
 					conn.close();
 				} catch (SQLException e) {
 				}
-
 			}
 		}
-
 	}
 
 	@Override
-	public void set(Manager setstaff) {
+	public void set(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
 		String sql = "UPDATE manager (staff_name,staff_Lv) VALUES(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, setstaff.getStaffName());
-			smt.setInt(2, setstaff.getStaffLv());
+			smt.setString(1, staffDefault.getStaffName());
+			smt.setInt(2, staffDefault.getStaffLevel());
 			smt.executeUpdate();
 			smt.close();
 
@@ -73,14 +74,13 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	}
 
-	@Override
-	public void remove(Manager removestaff) {
+	public void remove(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM manager WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removestaff.getStaffNum());
+			smt.setInt(1, staffDefault.getStaffNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -93,93 +93,42 @@ public class ManagerDAOImpl implements ManagerDAO {
 					conn.close();
 				} catch (SQLException e) {
 				}
-
 			}
 		}
 	}
 
-	@Override
-	public Manager inquireAllWorktime(int inquireAWKT) {
+	public void inquireAllWorktime(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		Manager worktime = null;
-		String sql = "SELECT staff_num, worktime_total FROM monthtime WHERE staff_num = ?";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setInt(1, inquireAWKT);
-			rs = smt.executeQuery();
-			if (rs.next()) {
-				int setStaff_Num = (rs.getInt("staff_num"));
-				int setStaff_worktime = (rs.getInt("worktime_total"));
-				int setStaff_Lv = (rs.getInt("staff_Lv"));
-				worktime = new Manager(setStaff_Num, null, false, null, null, null, setStaff_worktime, setStaff_Lv);
-			}
-			rs.close();
-			smt.close();
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-		return worktime;
 	}
 
-	@Override
-	public void setlevel(int staffNumlogin, int setstaffLv) {
+	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
 
-		String sql1 = "SELECT staff_lv FROM staff WHERE staff_num = ?";
-
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql1);
-			smt.setInt(1, staffNumlogin);
-			smt.executeUpdate();
-			smt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		}
-		if (sql1 == "2") {
-
-			String sql = "UPDATE staff_lv FROM staff WHERE staff_num = ?";
+		if (manager.getStaffNum() == staffDefault.getStaffNum()) {
+			// no set because it will set itself
+		} else {
+			String sql = "UPDATE manager (staff_num, staff_lv) VALUES(?, ?)";
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
-				smt.setInt(1, setstaffLv);
-				smt.executeUpdate();
-
-				if (rs.getInt("staff_lv") == 2) {
-					smt.close();
+				if (staffDefault.getStaffLevel() == 0) {
+					smt.setInt(1, staffDefault.getStaffLevel());
 				} else {
-					rs.getInt(setstaffLv = 2);
-
-					smt.close();
+					smt.setInt(0, staffDefault.getStaffLevel());
 				}
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 
-			}
-
-			finally {
+			} finally {
 				if (conn != null) {
 					try {
 						conn.close();
-
 					} catch (SQLException e) {
 					}
 				}
 			}
+
 		}
-
 	}
-
 }

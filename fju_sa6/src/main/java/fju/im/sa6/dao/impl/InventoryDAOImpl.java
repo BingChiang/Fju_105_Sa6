@@ -1,15 +1,13 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
+import javax.sql.*;
+import java.sql.*;
+import fju.im.sa6.dao.InventoryDAO;
 import fju.im.sa6.entity.Inventory;
-import fju.im.sa6.entity.Product;
-import fju.im.sa6.webapp.dao.InventoryDAO;
+
+//rebuild by bing 2016.11.30
 
 public class InventoryDAOImpl implements InventoryDAO {
 
@@ -23,18 +21,18 @@ public class InventoryDAOImpl implements InventoryDAO {
 	}
 
 	@Override
-	public void add(Inventory addInv) {
+	public void add(Inventory inventory) {
 		// TODO Auto-generated method stub
 
 		String sql = "INSERT INTO inventory (inventory_num, purchase_num, supplier_num, inventory_amount ,inventory_name) VALUES(?, ?, ? ,? ,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addInv.getInventoryNum());
-			smt.setInt(2, addInv.getPurchaseNum());
-			smt.setInt(3, addInv.getSupplierNum());
-			smt.setInt(4, addInv.getInventoryAmount());
-			smt.setString(5, addInv.getInventoryName());
+			smt.setInt(1, inventory.getInventoryNum());
+			smt.setInt(2, inventory.getPurchaseNum());
+			smt.setInt(3, inventory.getSupplierNum());
+			smt.setInt(4, inventory.getInventoryAmount());
+			smt.setString(5, inventory.getInventoryName());
 			smt.executeUpdate();
 			smt.close();
 
@@ -84,13 +82,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 	}
 
 	@Override
-	public void remove(Inventory removeInv) {
+	public void remove(Inventory inventory) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM inventory WHERE inventory_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removeInv.getInventoryNum());
+			smt.setInt(1, inventory.getInventoryNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -108,14 +106,14 @@ public class InventoryDAOImpl implements InventoryDAO {
 
 	}
 
-	public Inventory getInventory(int searchInv) {
+	public Inventory get(Inventory inventory) {
 		Inventory inv = null;
 		String sql = "SELECT * FROM inventory WHERE inventory_num = ?";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, searchInv);
+			smt.setInt(1, inventory.getInventoryNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setinventoryNum = (rs.getInt("inventory_num"));
@@ -142,5 +140,6 @@ public class InventoryDAOImpl implements InventoryDAO {
 		}
 		return inv;
 	}
+
 
 }

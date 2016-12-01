@@ -1,4 +1,4 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import fju.im.sa6.entity.Product;
-import fju.im.sa6.webapp.dao.ProductDAO;
+import fju.im.sa6.entity.Type;
+import fju.im.sa6.dao.ProductDAO;
 
+
+//rebuild by bing 2016.11.30
 public class ProductDAOImpl implements ProductDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
@@ -98,15 +101,14 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
-	@Override
-	public Product getProduct(int searchNum) {
+	public Product get(Product product) {
 		Product pro = null;
 		String sql = "SELECT * FROM product WHERE product_num = ?";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, searchNum);
+			smt.setInt(1, product.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setproduct_Num = (rs.getInt("product_Num"));
@@ -134,10 +136,17 @@ public class ProductDAOImpl implements ProductDAO {
 		return pro;
 	}
 
-	@Override
-	public Product get(Product getPro) {
+	
+	public ArrayList<Product> getTypeList(Type type) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+	public ArrayList<Product> getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

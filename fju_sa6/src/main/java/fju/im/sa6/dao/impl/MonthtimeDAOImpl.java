@@ -1,4 +1,4 @@
-package fju.im.sa6.webapp.dao.impl;
+package fju.im.sa6.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,12 +7,12 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import fju.im.sa6.entity.Inventory;
-import fju.im.sa6.entity.Type;
-import fju.im.sa6.webapp.dao.TypeDAO;
+import fju.im.sa6.dao.MonthtimeDAO;
+import fju.im.sa6.entity.StaffDefault;
 
-public class TypeDAOImpl implements TypeDAO {
 
+//rebuild by bing 2016.11.30
+public class MonthtimeDAOImpl implements MonthtimeDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
 	private ResultSet rs = null;
@@ -20,16 +20,15 @@ public class TypeDAOImpl implements TypeDAO {
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
+
 	}
 
-	@Override
-	public String getname(Type getname) {
-
-		return null;
+	public double totalMonthWorktime(StaffDefault staffDefault) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	@Override
-	public int getnum(Type getnumber) {
+	public double getMonthSalary(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
