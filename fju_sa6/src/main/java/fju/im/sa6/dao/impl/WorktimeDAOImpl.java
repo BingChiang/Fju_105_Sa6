@@ -101,4 +101,28 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		}
 	}
 
+	@Override
+	public void statffOnWork(StaffDefault staffDefault) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void staffOffWork(StaffDefault staffDefault) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void amendOnWork(StaffDefault staffDefault, Date date) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void amendOffWork(StaffDefault staffDefault, Date date) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

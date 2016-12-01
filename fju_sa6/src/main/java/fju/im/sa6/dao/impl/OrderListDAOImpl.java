@@ -140,21 +140,19 @@ public class OrderListDAOImpl implements OrderListDAO {
 	}
 
 	@Override
-	public double gettotalprice(OrderList orderList) {
+	public OrderList gettotalprice(OrderList orderList, OrderList order) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM OrderList WHERE product_Num = ?";
+		String sql = "SELECT Order_Price FROM OrderList WHERE product_Num = ?";
+
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, orderList.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setOrder_Num = (rs.getInt("order_num"));
-				int setProduct = (rs.getInt("product_num"));
-				int setproduct_price = (rs.getInt("product_price"));
-				int setorder_Amount = (rs.getInt("order_Amount"));
 				int setorder_Total = (rs.getInt("order_Price"));
-				Date setorder_Date = (rs.getDate("order_Date"));
+				order.setOrderTotal(setorder_Total);
+
 			}
 			rs.close();
 			smt.close();
@@ -170,7 +168,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 				}
 			}
 		}
-		return gettotalprice(null);
+		return order;
 
 	}
 
