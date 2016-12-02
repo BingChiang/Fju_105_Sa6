@@ -24,12 +24,10 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void add(Product addPro) {
-		String sql = "INSERT INTO product (product_num, type_num,product_name, product_price, product_sell_month) VALUES(?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO product (product_name, product_price, product_sell_month) VALUES(?, ?, ?, ?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addPro.getProductNum());
-			smt.setInt(2, addPro.getTypeNum());
 			smt.setString(3, addPro.getProductName());
 			smt.setInt(4, addPro.getProductPrice());
 			smt.setInt(5, addPro.getProductSellMonth());

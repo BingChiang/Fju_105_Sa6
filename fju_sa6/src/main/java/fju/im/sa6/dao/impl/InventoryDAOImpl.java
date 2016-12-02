@@ -141,5 +141,4 @@ public class InventoryDAOImpl implements InventoryDAO {
 		return inv;
 	}
 
-
 }
