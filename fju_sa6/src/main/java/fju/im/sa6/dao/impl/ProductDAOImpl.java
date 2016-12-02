@@ -135,6 +135,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return pro;
 	}
 
+<<<<<<< HEAD
 	public ArrayList<Product> getTypeList(Type type) {
 		// TODO Auto-generated method stub
 		return null;
@@ -174,5 +175,19 @@ public class ProductDAOImpl implements ProductDAO {
 
 		return proarr;
 	}
+=======
+	
+	public ArrayList<Product> getTypeList(Type type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public ArrayList<Product> getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+>>>>>>> branch 'Bing' of https://github.com/BingChiang/Fju_105_Sa6.git
 
 }
