@@ -4,12 +4,12 @@ import fju.im.sa6.entity.Manager;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.dao.ManagerDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
-
 
 //rebuild by bing 2016.11.30
 public class ManagerDAOImpl implements ManagerDAO {
@@ -97,10 +97,35 @@ public class ManagerDAOImpl implements ManagerDAO {
 		}
 	}
 
-	public double inquireAllWorktime(StaffDefault staffDefault) {
-		
-		return 0;
 
+	public double inquireAllWorktime(StaffDefault staffDefault) {
+		double setworktimeTotal = 0;
+		String sql = "SELECT * FROM monthTime WHERE staffNum = ?";
+		try {
+
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, staffDefault.getStaffNum());
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				
+				
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return setworktimeTotal;
 	}
 
 	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {

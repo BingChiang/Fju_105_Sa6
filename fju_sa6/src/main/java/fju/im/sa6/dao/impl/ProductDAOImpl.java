@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
-
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.Type;
 import fju.im.sa6.dao.ProductDAO;
@@ -135,28 +134,23 @@ public class ProductDAOImpl implements ProductDAO {
 		return pro;
 	}
 
-<<<<<<< HEAD
-	public ArrayList<Product> getTypeList(Type type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public ArrayList<Product> getList() {
-		// TODO Auto-generated method stub
-		ArrayList<Product> proarr = new ArrayList<Product>();
+	public ArrayList<Product> getTypeList(Type type) {
+		ArrayList<Product> productArr = new ArrayList<Product>();
 		Product temp;
 
-		String sql = "SELECT * FROM product ";
+		String sql = "SELECT * FROM product Where type_Num = ?";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
+			smt.setInt(1, type.getTypeNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				temp = new Product(rs.getInt("product_Num"), rs.getInt("type_Num"), rs.getString("product_Name"),
 						rs.getInt("product_price"), (rs.getInt("product_sell_month")),
 						(rs.getInt("product_sell_month")));
-				proarr.add(temp);
+				productArr.add(temp);
 			}
 			rs.close();
 			smt.close();
@@ -173,21 +167,43 @@ public class ProductDAOImpl implements ProductDAO {
 			}
 		}
 
-		return proarr;
-	}
-=======
-	
-	public ArrayList<Product> getTypeList(Type type) {
-		// TODO Auto-generated method stub
-		return null;
+		return productArr;
 	}
 
-	
 	public ArrayList<Product> getList() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Product> productArr = new ArrayList<Product>();
+		Product temp;
+
+		String sql = "SELECT * FROM product ";
+		try {
+
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				temp = new Product(rs.getInt("product_Num"), rs.getInt("type_Num"), rs.getString("product_Name"),
+						rs.getInt("product_price"), (rs.getInt("product_sell_month")),
+						(rs.getInt("product_sell_month")));
+				productArr.add(temp);
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return productArr;
 	}
-	
->>>>>>> branch 'Bing' of https://github.com/BingChiang/Fju_105_Sa6.git
+
 
 }

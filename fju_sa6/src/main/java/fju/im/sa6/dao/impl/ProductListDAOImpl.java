@@ -1,6 +1,5 @@
 package fju.im.sa6.dao.impl;
 
-import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
 import fju.im.sa6.dao.ProductListDAO;
 
@@ -8,9 +7,8 @@ import java.sql.*;
 
 import javax.sql.DataSource;
 
-
 //rebuild by bing 2016.11.30
-public abstract class ProductListDAOImpl implements ProductListDAO {
+public class ProductListDAOImpl implements ProductListDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
 	private ResultSet rs = null;
@@ -103,9 +101,35 @@ public abstract class ProductListDAOImpl implements ProductListDAO {
 	}
 
 	@Override
-	public double getSingleTotal(ProductList productList) {
+	public ProductList getSingleTotal(ProductList productList) {
 		// TODO Auto-generated method stub
-		return 0;
+		ProductList productlist = null;
+		String sql = "SELECT * FROM productlist WHERE product_num = ?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, productList.getProductNum());
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				int setProduct = (rs.getInt("product_Num"));
+				int setAmount = (rs.getInt("amount"));
+				productlist = new ProductList(setProduct, setAmount);
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return productlist;
 	}
 
 }

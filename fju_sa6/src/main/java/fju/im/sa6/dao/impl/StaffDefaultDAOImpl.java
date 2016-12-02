@@ -3,6 +3,7 @@ package fju.im.sa6.dao.impl;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.dao.StaffDefaultDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,19 +21,29 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 		this.dataSource = dataSource;
 	}
 
-	public StaffDefault get(StaffDefault staffDefault) {
+	@Override
+	public StaffDefault get(StaffDefault staffDefault, StaffDefault staffD) {
 		// TODO Auto-generated method stub
-		StaffDefault staffD = null;
+
 		String sql = "Select * FROM staff WHERE staff_num = ?";
 		try {
+
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setStaffDefault = (rs.getInt("staff_num"));
-				String setStaff_Name = (rs.getString("staff_name"));
-				int setStaff_Lv = (rs.getInt("staff_lv"));
+				int setStaffNum = (rs.getInt("staff_Num"));
+				String setStaffName = (rs.getString("staff_Name"));
+				int setStaffLv = (rs.getInt("staff_Lv"));
+				Date setworkmonth = (rs.getDate("workMonth"));
+				double setworktimeTotal = (rs.getDouble("worktimeTotal"));
+				staffD.setStaffNum(setStaffNum);
+				staffD.setStaffName(setStaffName);
+				staffD.setStaffLevel(setStaffLv);
+				staffD.setWorkMonth(setworkmonth);
+				staffD.setWorktimeTotal(setworktimeTotal);
+
 			}
 			rs.close();
 			smt.close();

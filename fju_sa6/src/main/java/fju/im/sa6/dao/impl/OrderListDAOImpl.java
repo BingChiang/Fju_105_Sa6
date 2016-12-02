@@ -2,15 +2,11 @@ package fju.im.sa6.dao.impl;
 
 import java.util.ArrayList;
 import javax.sql.DataSource;
-
 import fju.im.sa6.entity.OrderList;
-import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.ProductList;
 import fju.im.sa6.dao.OrderListDAO;
-import fju.im.sa6.dao.ProductDAO;
 
 import java.sql.*;
-
 
 //rebuild by bing 2016.11.30
 public class OrderListDAOImpl implements OrderListDAO {
@@ -103,11 +99,9 @@ public class OrderListDAOImpl implements OrderListDAO {
 		}
 	}
 
-	public ArrayList<ProductList> getOrderList(ProductList product) {
+	public ArrayList<ProductList> getOrderList(OrderList orderlist) {
 		// TODO Auto-generated method stub
 		Date searchDate = null;
-		ArrayList<ProductList> productlist = new ArrayList<ProductList>();
-		;
 		String sql = "SELECT * FROM OrderList WHERE order_Date = ?";
 		try {
 			conn = dataSource.getConnection();
@@ -123,7 +117,8 @@ public class OrderListDAOImpl implements OrderListDAO {
 				int setorder_amount = (rs.getInt("order_amount"));
 				int setorder_total = (rs.getInt("order_total"));
 				Date setorder_date = (rs.getDate("order_date"));
-				productlist.add((ProductList) rs);
+				orderlist = new OrderList(setOrder_Num, setProduct_Num, setType_Num, setorder_price, setorder_amount,
+						setorder_total, setorder_date, null);
 			}
 			rs.close();
 			smt.close();
@@ -140,26 +135,24 @@ public class OrderListDAOImpl implements OrderListDAO {
 			}
 		}
 
-		return productlist;
+		return getOrderList(orderlist);
 
 	}
 
 	@Override
-	public double gettotalprice(OrderList orderList) {
+	public OrderList gettotalprice(OrderList orderList, OrderList order) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM OrderList WHERE product_Num = ?";
+		String sql = "SELECT Order_Price FROM OrderList WHERE product_Num = ?";
+
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, orderList.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setOrder_Num = (rs.getInt("order_num"));
-				int setProduct = (rs.getInt("product_num"));
-				int setproduct_price = (rs.getInt("product_price"));
-				int setorder_Amount = (rs.getInt("order_Amount"));
 				int setorder_Total = (rs.getInt("order_Price"));
-				Date setorder_Date = (rs.getDate("order_Date"));
+				order.setOrderTotal(setorder_Total);
+
 			}
 			rs.close();
 			smt.close();
@@ -175,21 +168,8 @@ public class OrderListDAOImpl implements OrderListDAO {
 				}
 			}
 		}
-		return gettotalprice(null);
+		return order;
 
 	}
-
-	public ArrayList<OrderList> getList() {
-		
-		return null;
-	}
-
-	@Override
-	public OrderList getODP(OrderList orderList) {
-		
-		return null;
-	}
-
-	
 
 }
