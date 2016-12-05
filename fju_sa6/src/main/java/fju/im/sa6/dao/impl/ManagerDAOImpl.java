@@ -99,7 +99,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 
 	public double inquireAllWorktime(StaffDefault staffDefault) {
-		double setworktimeTotal = 0;
+		double worktimeTotal = 0;
 		String sql = "SELECT * FROM monthTime WHERE staffNum = ?";
 		try {
 
@@ -108,6 +108,8 @@ public class ManagerDAOImpl implements ManagerDAO {
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
+				double setworktimetotal = (rs.getDouble("worktime_total"));
+				worktimeTotal = setworktimetotal;
 				
 				
 			}
@@ -125,7 +127,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 				}
 			}
 		}
-		return setworktimeTotal;
+		return worktimeTotal;
 	}
 
 	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {

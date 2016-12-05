@@ -20,7 +20,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	@Override
 	public double getDayWorktime(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		StaffDefault staffnum = null;
+		double dayworktime = 0;
 		String sql = "SELECT * FROM StaffDefault WHERE staffNum = ?";
 		try {
 			conn = dataSource.getConnection();
@@ -28,9 +28,10 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				
-				String setstaffName = (rs.getString("staff_Name"));
-
+				double setontime = (rs.getDouble("onwork_time"));
+				double setoffworktime = (rs.getDouble("offwork_time"));
+				double setdayworktime = (rs.getDouble((int) (setoffworktime-setontime)));
+				dayworktime = setdayworktime;
 			}
 			rs.close();
 			smt.close();
@@ -45,11 +46,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 				}
 			}
 		}
-		return 0;
-	}
-
-	public ArrayList<WorktimeDAO> getList() {
-		return getList();
+		return dayworktime;
 	}
 
 	public void amendOnWork(WorkRecord workrecord) {

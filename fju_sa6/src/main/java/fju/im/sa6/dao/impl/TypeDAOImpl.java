@@ -20,10 +20,6 @@ public class TypeDAOImpl implements TypeDAO {
 		this.dataSource = dataSource;
 	}
 
-	public String getname(Type type) {
-
-		return null;
-	}
 
 	public Type getnum(Type searchType) {
 		Type typ = null;

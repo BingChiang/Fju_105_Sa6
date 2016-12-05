@@ -24,16 +24,15 @@ public class SupplierDAOImpl implements SupplierDAO {
 	@Override
 	public void add(Supplier addSup) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO supplier (supplier_num, supplier_name, supplier_phone, supplier_address, inventory_num, purchase_num ) VALUES(?, ?, ?, ? ,? ,?)";
+		String sql = "INSERT INTO supplier (supplier_name, supplier_phone, supplier_address, inventory_num, purchase_num ) VALUES(?, ?, ? ,? ,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addSup.getSupplierNum());
-			smt.setString(2, addSup.getSupplierName());
-			smt.setString(3, addSup.getSupplierPhone());
-			smt.setString(4, addSup.getSupplierAddress());
-			smt.setInt(5, addSup.getInventoryNum());
-			smt.setInt(6, addSup.getPurchaseNum());
+			smt.setString(1, addSup.getSupplierName());
+			smt.setString(2, addSup.getSupplierPhone());
+			smt.setString(3, addSup.getSupplierAddress());
+			smt.setInt(4, addSup.getInventoryNum());
+			smt.setInt(5, addSup.getPurchaseNum());
 
 			smt.executeUpdate();
 			smt.close();

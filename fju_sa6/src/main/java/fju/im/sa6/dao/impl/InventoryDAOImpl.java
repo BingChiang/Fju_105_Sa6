@@ -24,15 +24,14 @@ public class InventoryDAOImpl implements InventoryDAO {
 	public void add(Inventory inventory) {
 		// TODO Auto-generated method stub
 
-		String sql = "INSERT INTO inventory (inventory_num, purchase_num, supplier_num, inventory_amount ,inventory_name) VALUES(?, ?, ? ,? ,?)";
+		String sql = "INSERT INTO inventory (purchase_num, supplier_num, inventory_amount ,inventory_name) VALUES(?, ? ,? ,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, inventory.getInventoryNum());
-			smt.setInt(2, inventory.getPurchaseNum());
-			smt.setInt(3, inventory.getSupplierNum());
-			smt.setInt(4, inventory.getInventoryAmount());
-			smt.setString(5, inventory.getInventoryName());
+			smt.setInt(1, inventory.getPurchaseNum());
+			smt.setInt(2, inventory.getSupplierNum());
+			smt.setInt(3, inventory.getInventoryAmount());
+			smt.setString(4, inventory.getInventoryName());
 			smt.executeUpdate();
 			smt.close();
 
@@ -53,16 +52,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 	@Override
 	public void set(Inventory setInv) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE inventory SET inventory_num=?, purchase_num=?, supplier_num=?, inventory_amount=?, inventory_name=? "
+		String sql = "UPDATE inventory SET inventory_amount=?, inventory_name=? "
 				+ "WHERE purchase_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, setInv.getInventoryNum());
-			smt.setInt(2, setInv.getPurchaseNum());
-			smt.setInt(3, setInv.getSupplierNum());
-			smt.setInt(4, setInv.getInventoryAmount());
-			smt.setString(5, setInv.getInventoryName());
+			smt.setInt(1, setInv.getInventoryAmount());
+			smt.setString(2, setInv.getInventoryName());
 
 			smt.executeUpdate();
 			smt.close();

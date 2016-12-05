@@ -14,5 +14,6 @@ public interface WorktimeDAO {
 	public void amendOnWork(StaffDefault staffDefault, Date date, Date on);
 
 	public void amendOffWork(StaffDefault staffDefault, Date date, Date off);
+	
 
 }
