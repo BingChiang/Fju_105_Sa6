@@ -138,7 +138,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 				if (staffDefault.getStaffLevel() == 0) {
 					smt.setInt(1, staffDefault.getStaffLevel());
 				} else {
-					smt.setInt(0, staffDefault.getStaffLevel());
+					smt.setInt(1, staffDefault.getStaffLevel());
 				}
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
