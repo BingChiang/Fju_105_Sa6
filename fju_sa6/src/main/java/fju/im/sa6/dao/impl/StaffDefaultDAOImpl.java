@@ -1,5 +1,6 @@
 package fju.im.sa6.dao.impl;
 
+import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.dao.StaffDefaultDAO;
 import java.sql.Connection;
@@ -7,7 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import javax.sql.DataSource;
 
 //rebuild by bing 2016.11.30
@@ -61,4 +62,39 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 		}
 		return staffD;
 	}
+
+	@Override
+	public ArrayList<Staff> getList(Staff allstaff) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM staff ";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				int setstaffnum = (rs.getInt("staff_num"));
+				int setstafflv = (rs.getInt("staff_lv"));
+				String setstaffname = (rs.getString("staff_name"));
+				allstaff.setStaffNum(setstaffnum);
+				allstaff.setStaffLevel(setstafflv);
+				allstaff.setStaffName(setstaffname);
+
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return getList(allstaff);
+	}
+
 }
