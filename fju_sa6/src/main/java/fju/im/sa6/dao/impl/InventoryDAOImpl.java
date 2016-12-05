@@ -24,12 +24,10 @@ public class InventoryDAOImpl implements InventoryDAO {
 	public void add(Inventory inventory) {
 		// TODO Auto-generated method stub
 
-		String sql = "INSERT INTO inventory (purchase_num, supplier_num, inventory_amount ,inventory_name) VALUES(?, ? ,? ,?)";
+		String sql = "INSERT INTO inventory (inventory_amount ,inventory_name) VALUES(? ,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, inventory.getPurchaseNum());
-			smt.setInt(2, inventory.getSupplierNum());
 			smt.setInt(3, inventory.getInventoryAmount());
 			smt.setString(4, inventory.getInventoryName());
 			smt.executeUpdate();
