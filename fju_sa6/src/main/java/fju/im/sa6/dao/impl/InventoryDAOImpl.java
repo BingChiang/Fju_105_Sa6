@@ -1,6 +1,7 @@
 package fju.im.sa6.dao.impl;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.sql.*;
 import java.sql.*;
@@ -139,6 +140,11 @@ public class InventoryDAOImpl implements InventoryDAO {
 			}
 		}
 		return inv;
+	}
+
+	public ArrayList<Inventory> getList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

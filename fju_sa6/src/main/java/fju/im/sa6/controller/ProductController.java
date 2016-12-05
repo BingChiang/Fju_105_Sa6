@@ -36,9 +36,24 @@ public class ProductController {
 	
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public ModelAndView getProductList(){
+	public ModelAndView getProduct(@ModelAttribute Product product){
 	
 		ModelAndView model = new ModelAndView("product");
+		//logger.info("controller");
+		ProductDAOImpl productDAO = (ProductDAOImpl)context.getBean("productDAO");
+		Product product2;
+		product2 = productDAO.get(product);
+		//logger.info(""+productList.size());
+		model.addObject("product", product2);
+		
+		return model;
+		
+	}
+	
+	@RequestMapping(value = "/productList", method = RequestMethod.GET)
+	public ModelAndView getProductList(){
+	
+		ModelAndView model = new ModelAndView("productList");
 		//logger.info("controller");
 		ProductDAOImpl productDAO = (ProductDAOImpl)context.getBean("productDAO");
 		ArrayList<Product> productList = new ArrayList<Product>();
@@ -66,7 +81,7 @@ public class ProductController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/Mproductadd", method = RequestMethod.POST)
 	public ModelAndView insertProduct(@ModelAttribute Product product){
 		ModelAndView model = new ModelAndView("redirect:/product");
 		ProductDAOImpl productDAO = (ProductDAOImpl)context.getBean("productDAO");
