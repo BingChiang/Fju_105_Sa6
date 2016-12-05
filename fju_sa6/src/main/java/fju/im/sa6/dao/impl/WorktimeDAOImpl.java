@@ -4,7 +4,6 @@ import fju.im.sa6.dao.WorktimeDAO;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.WorkRecord;
 import java.sql.*;
-import java.util.ArrayList;
 import javax.sql.DataSource;
 
 public class WorktimeDAOImpl implements WorktimeDAO {
@@ -30,7 +29,8 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			if (rs.next()) {
 				double setontime = (rs.getDouble("onwork_time"));
 				double setoffworktime = (rs.getDouble("offwork_time"));
-				double setdayworktime = (rs.getDouble((int) (setoffworktime-setontime)));
+				double setdayworktime = (rs.getDouble((int) (setoffworktime - setontime)));
+
 				dayworktime = setdayworktime;
 			}
 			rs.close();

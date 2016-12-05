@@ -1,10 +1,8 @@
 package fju.im.sa6.dao.impl;
 
-import fju.im.sa6.entity.Manager;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.dao.ManagerDAO;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -97,10 +95,10 @@ public class ManagerDAOImpl implements ManagerDAO {
 		}
 	}
 
-
 	public double inquireAllWorktime(StaffDefault staffDefault) {
 		double worktimeTotal = 0;
-		String sql = "SELECT * FROM monthTime WHERE staffNum = ?";
+		String sql = "SELECT worktime_total FROM monthTime WHERE staffNum = ?";
+
 		try {
 
 			conn = dataSource.getConnection();
@@ -110,8 +108,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 			if (rs.next()) {
 				double setworktimetotal = (rs.getDouble("worktime_total"));
 				worktimeTotal = setworktimetotal;
-				
-				
+
 			}
 			rs.close();
 			smt.close();
@@ -143,7 +140,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 				if (staffDefault.getStaffLevel() == 0) {
 					smt.setInt(1, staffDefault.getStaffLevel());
 				} else {
-					smt.setInt(0, staffDefault.getStaffLevel());
+					smt.setInt(1, staffDefault.getStaffLevel());
 				}
 			} catch (SQLException e) {
 				throw new RuntimeException(e);

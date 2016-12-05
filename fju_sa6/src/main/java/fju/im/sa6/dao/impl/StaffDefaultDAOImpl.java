@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.sql.DataSource;
 
 //rebuild by bing 2016.11.30
@@ -63,6 +62,7 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 		}
 		return staffD;
 	}
+
 	@Override
 	public ArrayList<Staff> getList(Staff allstaff) {
 		// TODO Auto-generated method stub
@@ -96,6 +96,5 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 		}
 		return getList(allstaff);
 	}
-	}
-	
 
+}
