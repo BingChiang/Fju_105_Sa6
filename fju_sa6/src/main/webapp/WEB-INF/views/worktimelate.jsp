@@ -92,10 +92,10 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+                <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">新增進貨單介面</h1>
+                    <h1 class="page-header">補打卡介面</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -104,30 +104,27 @@
             <br>
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form method="post" action="inventoryorder.jsp" id="insertForm">
+                <form method="post" action="worktime.jsp" id="insertForm">
+                
                     <div class="form-group">
-                    <label>進貨單編號:</label>
-                        <input type="text" name="desc" placeholder="進貨單編號" required>
+                    <label>員工:</label>
+                        <input type="text" name="desc" placeholder="員工" required>
                         </div>
                         <div class="form-group">
-                        <label>進貨物品:</label>
-                        <input type="text" name="desc" placeholder="進貨物品" required>
+                        <label>時間:</label>
+                        <input type="text" name="desc" placeholder="時間" required>
                         
                     </div>
                     <div class="form-group">
-                    <label>進貨數量:</label>
-                        <input type="text" name="desc" placeholder="進貨數量" required>
+                    <label>上下班:</label>
+                        <select id=type name="type" onchange="updateData(this)">
+      <option value="">請選擇</option>
+      <option value="1">上班</option>
+      <option value="2">下班</option>
+     
+    </select>
                         </div>
-                        <div class="form-group">
-                        <label>填寫時間:</label>
-                        <input type="text" name="desc" placeholder="填寫時間" required>
                         
-                    </div>
-                    <div class="form-group">
-                        <label>填寫人員:</label>
-                        <input type="text" name="desc" placeholder="填寫人員" required>
-                        
-                    </div>
                     
                     <button type="submit" class="btn btn-default">新增</button>
                 </form>
@@ -136,7 +133,6 @@
         </div>
     </div>
     </div><!-- /.container -->
-
             
 
             <script src="../vendor/jquery/jquery.min.js"></script>

@@ -95,60 +95,53 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">庫存介面</h1>
+                    <h1 class="page-header">修改進貨單介面</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
-
             <div class="container">
         <div class="row">
             <br>
-            <div class="col-md-12">
-                <a class="btn btn-primary" href="inventoryleftadd.jsp">新增</a>
-                <table class="table">
-                    <tr>
-                        <th>編號</th>
-                        <th>項目</th>                       
-                        <th>庫存量</th>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form method="post" action="inventoryorder.jsp" id="insertForm">
+                    <div class="form-group">
+                    <label>進貨項目:</label>
+                        <input type="text" name="desc" placeholder="進貨項目" required>
+                        </div>
+                        <div class="form-group">
+                        <label>進貨數量:</label>
+                        <input type="text" name="desc" placeholder="進貨數量" required>
                         
-                    </tr>
+                    </div>
+                    <div class="form-group">
+                    <label>訂貨時間:</label>
+                        <input type="text" name="desc" placeholder="訂貨時間" required>
+                        </div>
+                        <div class="form-group">
+                        <label>訂貨人員:</label>
+                        <input type="text" name="desc" placeholder="訂貨人員" required>
+                        
+                            
+                    </div>
                     <c:forEach items="${inventoryList}" var="inventory">
                         <tr>
-                            <td>${inventory.id}</td>
-                            <td>${inventory.name}</td>
-                            <td>${inventory.number}</td>
-                            
-                            <td>
-                                <a class="btn btn-default" href="updateProduct?id=${inventory.id}">修改</a>
-                                <a class="btn btn-sm btn-danger deleteBtn" href="#" data-toggle="modal" data-target="#deleteModal" data-id="${inventory.id}">刪除</a>
-                            </td>
+                            <td>${inventoryorder.name}</td>
+                            <td>${inventoryorder.number}</td>  
+                            <td>${inventoryorder.ordertime}</td>
+                            <td>${inventoryorder.orderpeople}</td>
+                           
                         </tr>
                     </c:forEach>
-                </table>
+                    
+                    <button type="submit" class="btn btn-default">修改</button>
+                </form>
             </div>
+            <div class="col-md-3"></div>
         </div>
     </div>
-    <div class="modal fade bs-example-modal-sm" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">刪除</h4>
-                </div>
-                <div class="modal-body">
-                    <p>確認刪除後，相關之訊息也將刪除</p>
-                </div>
-                <div class="modal-footer">
-                    <form id="deleteForm" action="deleteProduct" method="post">
-                        <input type="hidden" name="id" id="deleteID">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-danger">確認刪除</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div><!-- /.container -->
+
             
 
             <script src="../vendor/jquery/jquery.min.js"></script>

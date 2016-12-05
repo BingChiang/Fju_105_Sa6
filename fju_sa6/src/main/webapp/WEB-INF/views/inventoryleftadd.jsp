@@ -64,10 +64,10 @@
                         </li>
 
                         <li>
-                            <a href="productorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
+                            <a href="inventoryorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
                         </li>
                         <li>
-                            <a href="inventory.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
+                            <a href="inventoryleft.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
                         </li>
                         <li>
                             <a href="worktime.jsp"><i class="fa fa-edit fa-fw"></i> 打卡</a>
@@ -79,7 +79,7 @@
                             <a href="Memployeemanage.jsp"><i class="fa fa-edit fa-fw"></i> 員工管理</a>
                         </li>
                         <li>
-                            <a href="login2.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
+                            <a href="index.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
                         </li>
                         
                             </ul>
@@ -95,7 +95,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">新增進貨單介面</h1>
+                    <h1 class="page-header">新增庫存介面</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -104,30 +104,21 @@
             <br>
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form method="post" action="productorder.jsp" id="insertForm">
+                <form method="post" action="inventoryleft.jsp" id="insertForm">
                     <div class="form-group">
-                    <label>進貨單編號:</label>
-                        <input type="text" name="desc" placeholder="進貨單編號" required>
+                    <label>庫存編號:</label>
+                        <input type="text" name="desc" placeholder="輸入產品編號" required>
                         </div>
                         <div class="form-group">
-                        <label>進貨物品:</label>
-                        <input type="text" name="desc" placeholder="進貨物品" required>
+                        <label>庫存項目:</label>
+                        <input type="text" name="desc" placeholder="輸入產品敘述" required>
                         
                     </div>
                     <div class="form-group">
-                    <label>進貨數量:</label>
-                        <input type="text" name="desc" placeholder="進貨數量" required>
+                    <label>庫存數量:</label>
+                        <input type="text" name="desc" placeholder="輸入目前庫存量" required>
+                        
                         </div>
-                        <div class="form-group">
-                        <label>填寫時間:</label>
-                        <input type="text" name="desc" placeholder="填寫時間" required>
-                        
-                    </div>
-                    <div class="form-group">
-                        <label>填寫人員:</label>
-                        <input type="text" name="desc" placeholder="填寫人員" required>
-                        
-                    </div>
                     
                     <button type="submit" class="btn btn-default">新增</button>
                 </form>

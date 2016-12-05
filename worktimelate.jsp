@@ -64,10 +64,10 @@
                         </li>
 
                         <li>
-                            <a href="productorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
+                            <a href="inventoryorder.jsp"><i class="fa fa-table fa-fw"></i> 進貨單</a>
                         </li>
                         <li>
-                            <a href="inventory.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
+                            <a href="inventoryleft.jsp"><i class="fa fa-edit fa-fw"></i> 庫存剩餘數量</a>
                         </li>
                         <li>
                             <a href="worktime.jsp"><i class="fa fa-edit fa-fw"></i> 打卡</a>
@@ -79,7 +79,7 @@
                             <a href="Memployeemanage.jsp"><i class="fa fa-edit fa-fw"></i> 員工管理</a>
                         </li>
                         <li>
-                            <a href="login2.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
+                            <a href="index.jsp"><i class="fa fa-edit fa-fw"></i> 登出</a>
                         </li>
                         
                             </ul>
@@ -92,10 +92,10 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+                <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">新增庫存介面</h1>
+                    <h1 class="page-header">補打卡介面</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -104,21 +104,27 @@
             <br>
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form method="post" action="inventory.jsp" id="insertForm">
+                <form method="post" action="worktime.jsp" id="insertForm">
+                
                     <div class="form-group">
-                    <label>庫存編號:</label>
-                        <input type="text" name="desc" placeholder="輸入產品編號" required>
+                    <label>員工:</label>
+                        <input type="text" name="desc" placeholder="員工" required>
                         </div>
                         <div class="form-group">
-                        <label>庫存物品:</label>
-                        <input type="text" name="desc" placeholder="輸入產品敘述" required>
+                        <label>時間:</label>
+                        <input type="text" name="desc" placeholder="時間" required>
                         
                     </div>
                     <div class="form-group">
-                    <label>庫存數量:</label>
-                        <input type="text" name="desc" placeholder="輸入目前庫存量" required>
-                        
+                    <label>上下班:</label>
+                        <select id=type name="type" onchange="updateData(this)">
+      <option value="">請選擇</option>
+      <option value="1">上班</option>
+      <option value="2">下班</option>
+     
+    </select>
                         </div>
+                        
                     
                     <button type="submit" class="btn btn-default">新增</button>
                 </form>
@@ -127,7 +133,6 @@
         </div>
     </div>
     </div><!-- /.container -->
-
             
 
             <script src="../vendor/jquery/jquery.min.js"></script>
