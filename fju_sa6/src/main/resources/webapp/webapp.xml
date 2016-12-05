@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+ 	<bean id="InevntoryDAO" class="fju.im.sa6.dao.impl.InevntoryDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+ 	<bean id="ManagerDAO" class="fju.im.sa6.dao.impl.ManagerDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="OrderDefaultDAO" class="fju.im.sa6.dao.impl.OrderDefaultDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="OrderListDAO" class="fju.im.sa6.dao.impl.OrderListDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="ProductDAO" class="fju.im.sa6.dao.impl.ProductDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="ProductListDAO" class="fju.im.sa6.dao.impl.ProductListDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="PurchaseDAO" class="fju.im.sa6.dao.impl.PurchaseDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="StaffDefaultDAO" class="fju.im.sa6.dao.impl.StaffDefaultDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="SupplierDAO" class="fju.im.sa6.dao.impl.SupplierDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="TypeDAO" class="fju.im.sa6.dao.impl.TypeDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="WorktimeDAO" class="fju.im.sa6.dao.impl.WorktimeDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+</beans>
