@@ -5,6 +5,6 @@
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
 	<import resource="database/spring-datasource.xml" />
-	<import resource="webapp/spring-webapp.xml" />
+	<import resource="webapp/webapp.xml" />
  
 </beans>

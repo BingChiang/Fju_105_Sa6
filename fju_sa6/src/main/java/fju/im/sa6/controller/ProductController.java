@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import fju.im.sa6.entity.Product;
+import fju.im.sa6.entity.Staff;
+import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.Type;
+import fju.im.sa6.dao.ManagerDAO;
 import fju.im.sa6.dao.ProductDAO;
 import fju.im.sa6.dao.impl.ProductDAOImpl;
 
@@ -40,7 +43,7 @@ public class ProductController {
 	
 		ModelAndView model = new ModelAndView("product");
 		//logger.info("controller");
-		ProductDAOImpl productDAO = (ProductDAOImpl)context.getBean("productDAO");
+		ProductDAOImpl productDAO = (ProductDAOImpl)context.getBean("roductDAO");
 		Product product2;
 		product2 = productDAO.get(product);
 		//logger.info(""+productList.size());
@@ -140,5 +143,66 @@ public class ProductController {
 		
 		return model;
 	}
+	
+	
+	@RequestMapping(value = "/Mproductmanage", method = RequestMethod.GET)
+	public ModelAndView ListProductToManage() {
+		ArrayList<Product> productList = new ArrayList<Product>();
+		ModelAndView model = new ModelAndView("");//mapping page
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		productList = productDAO.getList();
+		model.addObject("productList",productList);
+		return model;
+	}
+	
+	static Product tempProduct = null;
+	
+	@RequestMapping(value = "/Memployeemanagechange", method = RequestMethod.POST)
+	public ModelAndView postProductTochange(@ModelAttribute Product product) {
+		ModelAndView model = new ModelAndView("redirect:/Memployeemanagechange");//mapping page
+		ProductDAO productOAD = (ProductDAO) context.getBean("ProductOAD");
+		Product Product2 = productOAD.get(product);
+		tempProduct = Product2;
+		return model;
+	}
+	
+	@RequestMapping(value = "/Memployeemanagechange", method = RequestMethod.GET)
+	public ModelAndView productChange() {
+		Product Product2 = null;
+		if (tempProduct == null) {
+			Product2 = new Product();
+			tempProduct = null;
+		} else {
+			Product2 = tempProduct;
+			tempProduct = null;
+		}
+		ModelAndView model = new ModelAndView("redirect:/Mproductmanage");//mapping page
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		productDAO.set(Product2);
+		
+		return model;
+	}
+	
+
+	@RequestMapping(value = "/Mproductadd", method = RequestMethod.POST)
+	public ModelAndView addProduct(@ModelAttribute Product product) {
+		ModelAndView model = new ModelAndView("redirect:/Mproductmanage");//mapping page
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		productDAO.add(product);
+		return model;
+	}
+	
+
+	@RequestMapping(value = "/removeProduct", method = RequestMethod.POST)
+	public ModelAndView removeProduct(@ModelAttribute Product product) {
+		ModelAndView model = new ModelAndView("redirect:/Mproductmanage");//mapping page
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		productDAO.remove(product);
+		return model;
+	}
+	
+	
+
+
 
 }

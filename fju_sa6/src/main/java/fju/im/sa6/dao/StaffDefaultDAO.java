@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import fju.im.sa6.entity.StaffDefault;
 
 public interface StaffDefaultDAO {
-	public StaffDefault get(StaffDefault staffDefault, StaffDefault staff);
+	public StaffDefault get(StaffDefault staffDefault);
 
 	public ArrayList<StaffDefault> getList();
+
 	
 }
