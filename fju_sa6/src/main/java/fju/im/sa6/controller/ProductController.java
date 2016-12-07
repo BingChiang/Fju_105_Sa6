@@ -40,7 +40,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView getProduct(@ModelAttribute Product product){
-	
+		
 		ModelAndView model = new ModelAndView("product");
 		//logger.info("controller");
 		ProductDAOImpl productDAO = (ProductDAOImpl)context.getBean("roductDAO");
@@ -72,8 +72,6 @@ public class ProductController {
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.GET)
 	public ModelAndView insertProductPage(){
 		ModelAndView model = new ModelAndView("insertProduct");
-		
-		
 		//need the following part for product category
 		/*
 		ArticleCategoryDAO articleCategoryDAO = (ArticleCategoryDAO)context.getBean("articleCategoryDAO");
