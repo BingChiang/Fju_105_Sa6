@@ -56,12 +56,11 @@ public class TypeDAOImpl implements TypeDAO {
 	@Override
 	public void add(Type addType) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO Type (type_num, type_name ) VALUES(?, ?)";
+		String sql = "INSERT INTO Type (type_name) VALUES(?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addType.getTypeNum());
-			smt.setString(2, addType.getTypeName());
+			smt.setString(1, addType.getTypeName());
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {

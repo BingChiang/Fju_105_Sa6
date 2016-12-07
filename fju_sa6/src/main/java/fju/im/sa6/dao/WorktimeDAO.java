@@ -1,7 +1,8 @@
 package fju.im.sa6.dao;
 
 import java.sql.Date;
-
+import fju.im.sa6.entity.WorkRecord;
+import fju.im.sa6.entity.WorkTime;
 import fju.im.sa6.entity.StaffDefault;
 
 public interface WorktimeDAO {
@@ -15,5 +16,6 @@ public interface WorktimeDAO {
 
 	public void amendOffWork(StaffDefault staffDefault, Date date, Date off);
 	
-
+	public WorkTime searchworktime(WorkTime workrecord, WorkTime workdate);
+	
 }

@@ -27,9 +27,8 @@ public class ManagerDAOImpl implements ManagerDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-
 			smt.setString(1, staffDefault.getStaffName());
-			smt.setInt(1, staffDefault.getStaffLevel());
+			smt.setInt(2, staffDefault.getStaffLevel());
 			smt.executeUpdate();
 			smt.close();
 

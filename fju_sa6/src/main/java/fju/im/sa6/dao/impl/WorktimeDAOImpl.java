@@ -1,8 +1,11 @@
 package fju.im.sa6.dao.impl;
 
 import fju.im.sa6.dao.WorktimeDAO;
+import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.WorkRecord;
+import fju.im.sa6.entity.WorkTime;
+
 import java.sql.*;
 import javax.sql.DataSource;
 
@@ -204,5 +207,42 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			}
 		}
 	}
+	
+	@Override
+	public WorkTime searchworktime(WorkTime workrecord, WorkTime workdate){
+		String sql = "SELECT * FROM worktime WHERE work_date = ?";
+		WorkTime worktime = null;
+		  try { 
+		   conn = dataSource.getConnection(); 
+		   smt = conn.prepareStatement(sql); 
+		   smt.setDate(1, (Date) workdate.getdate()); 
+		   rs = smt.executeQuery(); 
+		   if (rs.next()) { 
+			   int setstaffNum = (rs.getInt("staff_num"));
+			   Date setworkDate = (rs.getDate("work_date"));
+			   Date setonworkTime = (rs.getDate("onwork_time"));
+			   Date setoffworkTime = (rs.getDate("offwork_time"));
+			   worktime = new WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime);
+			   
 
+		   } 
+		   rs.close(); 
+		   smt.close(); 
+
+		  } catch (SQLException e) { 
+		   throw new RuntimeException(e); 
+
+		  } finally { 
+		   if (conn != null) { 
+		    try { 
+		     conn.close(); 
+		    } catch (SQLException e) { 
+		    } 
+		   } 
+		  } 
+		  return worktime; 
+
+		 }
+		
+	
 }
