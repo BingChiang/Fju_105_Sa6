@@ -1,12 +1,13 @@
 package fju.im.sa6.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import fju.im.sa6.dao.ManagerDAO;
@@ -24,7 +25,11 @@ import java.util.ArrayList;
 //with Spring Security
 //these methods are called after /j_spring_security_check
 @Controller
+@SessionAttributes("newaccount")
 public class AccountController {
+	@Autowired
+	private StaffDefault account_session;
+
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 
@@ -75,6 +80,8 @@ public class AccountController {
 		} else {
 			model = new ModelAndView("mainpage");
 		}
+		//session add
+		model.addObject("newaccount",account_session);  
 		return model;
 	}
 
