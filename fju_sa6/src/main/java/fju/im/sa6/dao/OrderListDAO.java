@@ -10,5 +10,5 @@ public interface OrderListDAO {
 	public void remove(OrderList orderList);
 
 	// for checking method , not for object type!!
-	public OrderList gettotalprice(OrderList orderList, OrderList order);
+	public OrderList gettotalprice(OrderList orderList,OrderList order);
 }

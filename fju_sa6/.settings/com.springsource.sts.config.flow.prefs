@@ -1,0 +1,2 @@
+//com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/webflow\:/fju_sa6/src/main/resources/webapp.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<graph>\r\n<element clazz\="EndStateModelElement" type\="end-state">\r\n<structure end\="356" endstart\="356" start\="334" startend\="356"/>\r\n<bounds height\="92" width\="90" x\="19" y\="17"/>\r\n</element>\r\n</graph>
+eclipse.preferences.version=1

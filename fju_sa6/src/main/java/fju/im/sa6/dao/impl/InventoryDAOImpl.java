@@ -2,7 +2,6 @@ package fju.im.sa6.dao.impl;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-
 import javax.sql.*;
 import java.sql.*;
 import fju.im.sa6.dao.InventoryDAO;
@@ -25,46 +24,37 @@ public class InventoryDAOImpl implements InventoryDAO {
 	public void add(Inventory inventory) {
 		// TODO Auto-generated method stub
 
-		String sql = "INSERT INTO inventory (inventory_num, purchase_num, supplier_num, inventory_amount ,inventory_name) VALUES(?, ?, ? ,? ,?)";
+		String sql = "INSERT INTO inventory (inventory_amount ,inventory_name, reorder_point, purchase_date) VALUES(? ,?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, inventory.getInventoryNum());
-			smt.setInt(2, inventory.getPurchaseNum());
-			smt.setInt(3, inventory.getSupplierNum());
-			smt.setInt(4, inventory.getInventoryAmount());
-			smt.setString(5, inventory.getInventoryName());
-			smt.executeUpdate();
-			smt.close();
-
+			smt.setInt(1, inventory.getInventoryAmount());
+			smt.setString(2, inventory.getInventoryName());
+			smt.setInt(3, inventory.getReorderPoint());
+			smt.setDate(4, (Date) inventory.getPurchaseDate());
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
 			}
 		}
-
 	}
 
 	@Override
 	public void set(Inventory setInv) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE inventory SET inventory_num=?, purchase_num=?, supplier_num=?, inventory_amount=?, inventory_name=? "
-				+ "WHERE purchase_num = ?";
+		String sql = "UPDATE inventory SET inventory_amount=?, inventory_name=?, reorder_point=?"
+				+ "WHERE inventory_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, setInv.getInventoryNum());
-			smt.setInt(2, setInv.getPurchaseNum());
-			smt.setInt(3, setInv.getSupplierNum());
-			smt.setInt(4, setInv.getInventoryAmount());
-			smt.setString(5, setInv.getInventoryName());
-
+			smt.setInt(1, setInv.getInventoryAmount());
+			smt.setString(2, setInv.getInventoryName());
 			smt.executeUpdate();
 			smt.close();
 
@@ -108,7 +98,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 	}
 
 	public Inventory get(Inventory inventory) {
-		Inventory inv = null;
+		Inventory inv = new Inventory();
 		String sql = "SELECT * FROM inventory WHERE inventory_num = ?";
 		try {
 
@@ -120,14 +110,18 @@ public class InventoryDAOImpl implements InventoryDAO {
 				int setinventoryNum = (rs.getInt("inventory_num"));
 				int setpurchaseNum = (rs.getInt("purchase_num"));
 				int setsupplierNum = (rs.getInt("supplier_num"));
-				int setinventoryAmount = (rs.getInt("inventory_amount"));
+				int setinventoryAmount = (rs.getInt("inveinvntory_amount"));
 				String setinventoryName = (rs.getString("inventory_name"));
-				inv = new Inventory(setinventoryNum, setpurchaseNum, setinventoryAmount, setsupplierNum,
-						setinventoryName);
-			}
-			rs.close();
-			smt.close();
+				inv.setInventoryNum(setinventoryNum);
+				inv.setPurchaseNum(setpurchaseNum);
+				inv.setPurchaseNum(setsupplierNum);
+				inv.setInventoryAmount(setinventoryAmount);
+				inv.setInventoryName(setinventoryName);
 
+				rs.close();
+				smt.close();
+
+			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -141,11 +135,5 @@ public class InventoryDAOImpl implements InventoryDAO {
 		}
 		return inv;
 	}
-
-	public ArrayList<Inventory> getList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

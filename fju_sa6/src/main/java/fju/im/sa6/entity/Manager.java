@@ -6,8 +6,11 @@ import java.util.Date;
 public class Manager extends StaffDefault {
 
 	public Manager(int staffNum, String staffName, int staffLevel, Date onworkTime, Date offworDAkTime, Date workMonth,
+
 			double worktimeTotal) {
+
 		super(staffNum, staffName, staffLevel, workMonth, worktimeTotal);
+
 		super.setStaffLevel(0);
 
 		// TODO Auto-generated constructor stub
