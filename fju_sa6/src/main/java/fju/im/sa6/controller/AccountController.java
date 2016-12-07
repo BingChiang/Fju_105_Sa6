@@ -29,8 +29,13 @@ import java.util.ArrayList;
 public class AccountController {
 	@Autowired
 	private StaffDefault account_session;
+<<<<<<< HEAD
 	
 	
+=======
+
+
+>>>>>>> origin/Bing
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 	
 	@RequestMapping(value = "/loginSuccessful", method = RequestMethod.GET)
