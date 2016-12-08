@@ -1,51 +1,45 @@
 package fju.im.sa6.entity;
 
-import java.util.Date;
-
 public class OrderDefault {
 
-	private int orderNum;
+	private int orderlistNum;
 
 	private int productNum;
 
 	private int typeNum;
 
-	private int orderPrice;
+	private int productPrice;
 
 	private int orderAmount;
 
-	private int orderTotal;
+	private String productName;
 
-	private Date orderDate;
-
-	//2016.11.30 by bing ...and add init value
-	public OrderDefault(int orderNum, int productNum, int typeNum, int orderPrice, int orderAmount, int orderTotal,
-			Date orderDate) {
-		this.orderNum = orderNum;
+	public OrderDefault(int orderlistNum, int productNum, int typeNum, int productPrice, int orderAmount,
+			String productName) {
+		this.orderlistNum = orderlistNum;
 		this.productNum = productNum;
 		this.typeNum = typeNum;
-		this.orderPrice = orderPrice;
+		this.productPrice = productPrice;
 		this.orderAmount = orderAmount;
-		this.orderTotal = orderTotal;
-		this.orderDate = orderDate;
+		this.productName = productName;
 	}
 
 	public OrderDefault() {
-		this.orderNum = 0;
+		this.orderlistNum = 0;
 		this.productNum = 0;
 		this.typeNum = 0;
-		this.orderPrice = 0;
+		this.productPrice = 0;
 		this.orderAmount = 0;
-		this.orderTotal = 0;
-		this.orderDate = null;
+		this.productName = null;
+
 	}
 
-	public int getOrderPrice() {
-		return orderPrice;
+	public int getProductPrice() {
+		return productPrice;
 	}
 
-	public void setOrderPrice(int orderPrice) {
-		this.orderPrice = orderPrice;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 
 	public int getOrderAmount() {
@@ -56,24 +50,8 @@ public class OrderDefault {
 		this.orderAmount = orderAmount;
 	}
 
-	public int getOrderTotal() {
-		return orderTotal;
-	}
-
-	public void setOrderTotal(int orderTotal) {
-		this.orderTotal = orderTotal;
-	}
-
-	public java.sql.Date getOrderDate() {
-		return (java.sql.Date) orderDate;
-	}
-
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public int getOrderNum() {
-		return orderNum;
+	public int getOrderlistNum() {
+		return orderlistNum;
 	}
 
 	public int getProductNum() {
@@ -82,6 +60,14 @@ public class OrderDefault {
 
 	public int getTypeNum() {
 		return typeNum;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 }

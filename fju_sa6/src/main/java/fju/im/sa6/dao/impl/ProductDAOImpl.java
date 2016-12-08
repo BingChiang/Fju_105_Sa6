@@ -49,13 +49,13 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void set(Product setPro) {
 		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=? "
-				+ "WHERE product_num = ?";
+				+ "WHERE product_name = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(3, setPro.getProductName());
-			smt.setInt(4, setPro.getProductPrice());
-			smt.setInt(5, setPro.getProductSellMonth());
+			smt.setString(1, setPro.getProductName());
+			smt.setInt(2, setPro.getProductPrice());
+			smt.setInt(3, setPro.getProductSellMonth());
 			smt.executeUpdate();
 			smt.close();
 
@@ -75,11 +75,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void remove(Product removePro) {
-		String sql = "DELETE FROM product WHERE product_num = ?";
+		String sql = "DELETE FROM product WHERE product_name = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removePro.getProductNum());
+			smt.setString(1, removePro.getProductName());
 			smt.executeUpdate();
 			smt.close();
 
@@ -99,12 +99,12 @@ public class ProductDAOImpl implements ProductDAO {
 
 	public Product get(Product product) {
 		Product pro = null;
-		String sql = "SELECT * FROM product WHERE product_num = ?";
+		String sql = "SELECT * FROM product WHERE product_name = ?";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, product.getProductNum());
+			smt.setString(1, product.getProductName());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setproduct_Num = (rs.getInt("product_num"));

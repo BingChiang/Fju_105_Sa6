@@ -19,7 +19,7 @@ public class Inventory {
 	private int reorder_point;
 
 	// 2016.11.30 by bing.... add init value
-	public Inventory(int inventoryNum, int purchaseNum, int inventoryAmount, int supplierNum, String inventoryName,
+	public Inventory(int inventoryNum, int purchaseNum, int supplierNum, String inventoryName,
 			int reorder_point, Date purchase_date) {
 		this.inventoryNum = inventoryNum;
 		this.purchaseNum = purchaseNum;

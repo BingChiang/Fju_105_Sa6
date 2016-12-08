@@ -22,7 +22,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 
 	public void add(OrderList orderList) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO orderlist (order_price, order_amount, order_total, order_date) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO orderlist (order_price, order_amount, order_total, order_date) VALUES(?, ?, ?, NOW())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 	public ArrayList<ProductList> getOrderList(OrderList orderlist) {
 		// TODO Auto-generated method stub
 		Date searchDate = null;
-		String sql = "SELECT * FROM OrderList WHERE order_Date = ?";
+		String sql = "SELECT * FROM orderlist WHERE order_date = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 				int setorder_total = (rs.getInt("order_total"));
 				Date setorder_date = (rs.getDate("order_date"));
 				orderlist = new OrderList(setOrder_Num, setProduct_Num, setType_Num, setorder_price, setorder_amount,
-						setorder_total, setorder_date, null);
+						setorder_total, setorder_date);
 			}
 			rs.close();
 			smt.close();
@@ -142,7 +142,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 	@Override
 	public OrderList gettotalprice(OrderList order_date, OrderList order) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT SUM(order_price) FROM order WHERE order_date = ?";
+		String sql = "SELECT SUM(order_price) FROM orderlist WHERE order_date = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);

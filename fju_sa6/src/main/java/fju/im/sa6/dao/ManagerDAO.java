@@ -1,5 +1,8 @@
 package fju.im.sa6.dao;
 
+import java.util.ArrayList;
+
+import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
 
 public interface ManagerDAO {
@@ -12,4 +15,6 @@ public interface ManagerDAO {
 	public double inquireAllWorktime(StaffDefault staffDefault);
 
 	public void setLevel(StaffDefault manager, StaffDefault staffStaffDefault);
+	
+	public ArrayList<Staff> getList(Staff allstaff);
 }
