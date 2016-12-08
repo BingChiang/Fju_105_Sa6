@@ -6,5 +6,4 @@
  
 	<import resource="database/spring-datasource.xml" />
 	<import resource="webapp/webapp.xml" />
- 
 </beans>

@@ -24,12 +24,10 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void add(Product addPro) {
-		String sql = "INSERT INTO product (product_num, type_num,product_name, product_price, product_sell_month) VALUES(?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO product (product_name, product_price, product_sell_month) VALUES(?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addPro.getProductNum());
-			smt.setInt(2, addPro.getTypeNum());
 			smt.setString(3, addPro.getProductName());
 			smt.setInt(4, addPro.getProductPrice());
 			smt.setInt(5, addPro.getProductSellMonth());
@@ -51,7 +49,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void set(Product setPro) {
 		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=? "
-				+ "WHERE productID = ?";
+				+ "WHERE product_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -109,13 +107,12 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setInt(1, product.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setproduct_Num = (rs.getInt("product_Num"));
-				int settype_Num = (rs.getInt("type_Num"));
-				String setproduct_Name = (rs.getString("product_Name"));
+				int setproduct_Num = (rs.getInt("product_num"));
+				int settype_Num = (rs.getInt("type_num"));
+				String setproduct_Name = (rs.getString("product_name"));
 				int setproduct_price = (rs.getInt("product_price"));
 				int setproduct_sell_month = (rs.getInt("product_sell_month"));
-				pro = new Product(setproduct_Num, settype_Num, setproduct_Name, setproduct_price, setproduct_sell_month,
-						setproduct_sell_month);
+				pro = new Product(setproduct_Num, settype_Num, setproduct_Name, setproduct_price,setproduct_sell_month);
 			}
 			rs.close();
 			smt.close();
@@ -139,7 +136,7 @@ public class ProductDAOImpl implements ProductDAO {
 		ArrayList<Product> productArr = new ArrayList<Product>();
 		Product temp;
 
-		String sql = "SELECT * FROM product Where type_Num = ?";
+		String sql = "SELECT * FROM product Where type_num = ?";
 		try {
 
 			conn = dataSource.getConnection();
@@ -147,9 +144,8 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setInt(1, type.getTypeNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				temp = new Product(rs.getInt("product_Num"), rs.getInt("type_Num"), rs.getString("product_Name"),
-						rs.getInt("product_price"), (rs.getInt("product_sell_month")),
-						(rs.getInt("product_sell_month")));
+				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("product_name"),
+						rs.getInt("product_price"),(rs.getInt("product_sell_month")));
 				productArr.add(temp);
 			}
 			rs.close();
@@ -182,9 +178,8 @@ public class ProductDAOImpl implements ProductDAO {
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				temp = new Product(rs.getInt("product_Num"), rs.getInt("type_Num"), rs.getString("product_Name"),
-						rs.getInt("product_price"), (rs.getInt("product_sell_month")),
-						(rs.getInt("product_sell_month")));
+				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("product_name"),
+						rs.getInt("product_price"),(rs.getInt("product_sell_month")));
 				productArr.add(temp);
 			}
 			rs.close();

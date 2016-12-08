@@ -1,14 +1,17 @@
 package fju.im.sa6.dao.impl;
 
-import fju.im.sa6.entity.ProductList;
-import fju.im.sa6.dao.ProductListDAO;
-
-import java.sql.*;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.sql.DataSource;
+import fju.im.sa6.entity.Type;
+import fju.im.sa6.dao.TypeDAO;
 
-//rebuild by bing 2016.11.30
-public class ProductListDAOImpl implements ProductListDAO {
+//using by typeList to do something , notice!!
+public class TypeDAOImpl implements TypeDAO {
+
 	private DataSource dataSource;
 	private Connection conn = null;
 	private ResultSet rs = null;
@@ -18,70 +21,20 @@ public class ProductListDAOImpl implements ProductListDAO {
 		this.dataSource = dataSource;
 	}
 
-	@Override
-	public void set(ProductList productList) {
-		// TODO Auto-generated method stub
-		String sql = "UPDATE productlist(product_num, product_amount)";
+	public Type getType(Type searchType) {
+
+		Type typ = null;
+		String sql = "SELECT * FROM type WHERE type_num = ?";
 		try {
+
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, productList.getProductNum());
-			smt.setInt(2, productList.getAmount());
-			smt.executeUpdate();
-			smt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-
-	}
-
-	@Override
-	public void remove(ProductList productList) {
-		// TODO Auto-generated method stub
-		String sql = "DELETE FROM product WHERE product_num = ?";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setInt(1, productList.getProductNum());
-			smt.executeUpdate();
-			smt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-
-	}
-
-	public ProductList get(ProductList productList) {
-		// TODO Auto-generated method stub
-		ProductList productlist = null;
-		String sql = "SELECT * FROM productlist WHERE product_num = ?";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setInt(1, productList.getProductNum());
+			smt.setInt(1, searchType.getTypeNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setProduct = (rs.getInt("product_num"));
-				int setAmount = (rs.getInt("product_amount"));
-				productlist = new ProductList(setProduct, setAmount);
+				int settypeNum = (rs.getInt("type_num"));
+				String settypeName = (rs.getString("type_name"));
+				typ = new Type(settypeName, settypeNum);
 			}
 			rs.close();
 			smt.close();
@@ -97,23 +50,72 @@ public class ProductListDAOImpl implements ProductListDAO {
 				}
 			}
 		}
-		return productlist;
+		return typ;
 	}
 
 	@Override
-	public ProductList getSingleTotal(ProductList productList) {
+	public void add(Type addType) {
 		// TODO Auto-generated method stub
-		ProductList productlist = null;
-		String sql = "SELECT * FROM productlist WHERE product_num = ?";
+		String sql = "INSERT INTO Type (type_num, type_name ) VALUES(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, productList.getProductNum());
+			smt.setInt(1, addType.getTypeNum());
+			smt.setString(2, addType.getTypeName());
+			smt.executeUpdate();
+			smt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
+	@Override
+	public void set(Type setType) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE Type set type_name=?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setString(1, setType.getTypeName());
+			smt.executeUpdate();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
+
+	@Override
+	public ArrayList<Type> getList(Type Type) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM type WHERE type_num";
+		Type typ = null;
+		try {
+
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, Type.getTypeNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setProduct = (rs.getInt("product_num"));
-				int setAmount = (rs.getInt("product_amount"));
-				productlist = new ProductList(setProduct, setAmount);
+				int setTypenum = (rs.getInt("type_num"));
+				String setTypename = (rs.getString("type_name"));
+				typ = new Type(setTypename, setTypenum);
 			}
 			rs.close();
 			smt.close();
@@ -128,8 +130,8 @@ public class ProductListDAOImpl implements ProductListDAO {
 				} catch (SQLException e) {
 				}
 			}
-		}
-		return productlist;
-	}
 
+		}
+		return getList(typ);
+	}
 }

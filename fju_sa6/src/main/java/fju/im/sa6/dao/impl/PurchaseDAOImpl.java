@@ -26,7 +26,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public void add(Purchase addPur) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO purchase (purchase_name, purchase_num, purchase_price, purchaseDate) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO inventory (inventory_name,purchase_date) VALUES(?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -53,15 +53,14 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public void set(Purchase setPur) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE purchase SET purchase_name=?, purchase_num=?, purchase_price=? "
+		String sql = "UPDATE purchase SET purchase_name=?, purchase_price=? "
 				+ "WHERE purchase_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, setPur.getPurchaseName());
-			smt.setInt(2, setPur.getPurchaseNum());
-			smt.setDouble(3, setPur.getPurchasePrice());
-			smt.setDate(4, (Date) setPur.getPurchaseDate());
+			smt.setDouble(2, setPur.getPurchasePrice());
+			smt.setDate(3, (Date) setPur.getPurchaseDate());
 			smt.executeUpdate();
 			smt.close();
 
@@ -116,8 +115,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			smt.setInt(1, purchase.getPurchaseNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				String setpurchase_Name = (rs.getString("purchase_Name"));
-				int setpurchase_Num = (rs.getInt("purchase_Num"));
+				String setpurchase_Name = (rs.getString("purchase_name"));
+				int setpurchase_Num = (rs.getInt("purchase_num"));
 				Double setpurchase_price = (rs.getDouble("purchase_price"));
 				Date setpurchase_Date = (rs.getDate("purchase_date"));
 				pur = new Purchase(setpurchase_Name, setpurchase_Num, setpurchase_price, setpurchase_Date);
@@ -151,8 +150,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			smt.setInt(1, searchPur.getPurchaseNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				String setpurchase_Name = (rs.getString("purchase_Name"));
-				int setpurchase_Num = (rs.getInt("purchase_Num"));
+				String setpurchase_Name = (rs.getString("purchase_name"));
+				int setpurchase_Num = (rs.getInt("purchase_num"));
 				Double setpurchase_price = (rs.getDouble("purchase_price"));
 				Date setpurchase_Date = (rs.getDate("purchase_date"));
 				pur = new Purchase(setpurchase_Name, setpurchase_Num, setpurchase_price, setpurchase_Date);

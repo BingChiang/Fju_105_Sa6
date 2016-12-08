@@ -1,10 +1,8 @@
 package fju.im.sa6.dao.impl;
 
-import fju.im.sa6.entity.Manager;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.dao.ManagerDAO;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,13 +23,12 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void add(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO manager (staff_name, staff_lv)VALUE(?, ?)";
+		String sql = "INSERT INTO staff (staff_name, staff_lv)VALUE(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-
 			smt.setString(1, staffDefault.getStaffName());
-			smt.setInt(1, staffDefault.getStaffLevel());
+			smt.setInt(2, staffDefault.getStaffLevel());
 			smt.executeUpdate();
 			smt.close();
 
@@ -51,7 +48,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void set(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE manager (staff_name,staff_Lv) VALUES(?, ?)";
+		String sql = "UPDATE staff (staff_name,staff_lv) VALUES(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -76,7 +73,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	public void remove(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM manager WHERE staff_num = ?";
+		String sql = "DELETE FROM staff WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -97,10 +94,10 @@ public class ManagerDAOImpl implements ManagerDAO {
 		}
 	}
 
-
 	public double inquireAllWorktime(StaffDefault staffDefault) {
-		double setworktimeTotal = 0;
-		String sql = "SELECT * FROM monthTime WHERE staffNum = ?";
+		double worktimeTotal = 0;
+		String sql = "SELECT worktime_total FROM worktime WHERE staffNum = ?";
+
 		try {
 
 			conn = dataSource.getConnection();
@@ -108,8 +105,9 @@ public class ManagerDAOImpl implements ManagerDAO {
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				
-				
+				double setworktimetotal = (rs.getDouble("worktime_total"));
+				worktimeTotal = setworktimetotal;
+
 			}
 			rs.close();
 			smt.close();
@@ -125,7 +123,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 				}
 			}
 		}
-		return setworktimeTotal;
+		return worktimeTotal;
 	}
 
 	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {
@@ -134,14 +132,14 @@ public class ManagerDAOImpl implements ManagerDAO {
 		if (manager.getStaffNum() == staffDefault.getStaffNum()) {
 			// no set because it will set itself
 		} else {
-			String sql = "UPDATE manager (staff_num, staff_lv) VALUES(?, ?)";
+			String sql = "UPDATE staff (staff_num, staff_lv) VALUES(?, ?)";
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
 				if (staffDefault.getStaffLevel() == 0) {
 					smt.setInt(1, staffDefault.getStaffLevel());
 				} else {
-					smt.setInt(0, staffDefault.getStaffLevel());
+					smt.setInt(1, staffDefault.getStaffLevel());
 				}
 			} catch (SQLException e) {
 				throw new RuntimeException(e);

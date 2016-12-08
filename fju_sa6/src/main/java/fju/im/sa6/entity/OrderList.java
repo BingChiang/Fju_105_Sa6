@@ -15,7 +15,12 @@ public class OrderList extends OrderDefault {
 
 	public OrderList(ArrayList<ProductList> orderList) {
 		super();
+
 		this.orderList = orderList;
+	}
+
+	public OrderList() {
+		super();
 	}
 
 	public ArrayList<ProductList> getOrderList() {

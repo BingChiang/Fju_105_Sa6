@@ -46,7 +46,7 @@ public class AccountController {
 	public ModelAndView loginFailed() {
 		ModelAndView model = new ModelAndView("index");
 		System.out.println("failed");
-		model.addObject("message", "登入失敗");
+		model.addObject("message", "��憭望��");
 		return model;
 	}
 	
