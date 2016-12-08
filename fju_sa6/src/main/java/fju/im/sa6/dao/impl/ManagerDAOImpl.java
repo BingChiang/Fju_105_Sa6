@@ -23,7 +23,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void add(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO manager (staff_name, staff_lv)VALUE(?, ?)";
+		String sql = "INSERT INTO staff (staff_name, staff_lv)VALUE(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 	@Override
 	public void set(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE manager (staff_name,staff_Lv) VALUES(?, ?)";
+		String sql = "UPDATE staff (staff_name,staff_lv) VALUES(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	public void remove(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM manager WHERE staff_num = ?";
+		String sql = "DELETE FROM staff WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -96,7 +96,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 	public double inquireAllWorktime(StaffDefault staffDefault) {
 		double worktimeTotal = 0;
-		String sql = "SELECT worktime_total FROM monthTime WHERE staffNum = ?";
+		String sql = "SELECT worktime_total FROM worktime WHERE staffNum = ?";
 
 		try {
 
@@ -132,7 +132,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 		if (manager.getStaffNum() == staffDefault.getStaffNum()) {
 			// no set because it will set itself
 		} else {
-			String sql = "UPDATE manager (staff_num, staff_lv) VALUES(?, ?)";
+			String sql = "UPDATE staff (staff_num, staff_lv) VALUES(?, ?)";
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);

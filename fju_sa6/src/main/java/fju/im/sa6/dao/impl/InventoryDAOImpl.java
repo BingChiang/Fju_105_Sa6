@@ -1,6 +1,5 @@
 package fju.im.sa6.dao.impl;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import javax.sql.*;
 import java.sql.*;
@@ -25,7 +24,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 	public void add(Inventory inventory) {
 		// TODO Auto-generated method stub
 
-		String sql = "INSERT INTO inventory (inventory_amount ,inventory_name, reorder_point, purchase_date) VALUES(? ,?, ?, ?)";
+		String sql = "INSERT INTO inventory (inventory_amount ,inventory_name, reorder_point, purchase_date) VALUES(? ,?, ?,Now())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -50,7 +49,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 	@Override
 	public void set(Inventory setInv) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE inventory SET inventory_amount=?, inventory_name=?, reorder_point=?"
+		String sql = "UPDATE inventory SET inventory_amount=?, inventory_name=?, reorder_point=?, purchase_date=Now()"
 				+ "WHERE inventory_num = ?";
 
 		try {
@@ -58,6 +57,8 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, setInv.getInventoryAmount());
 			smt.setString(2, setInv.getInventoryName());
+			smt.setInt(3, setInv.getReorderPoint());
+			smt.setDate(3, (Date) setInv.getPurchaseDate());
 			smt.executeUpdate();
 			smt.close();
 
@@ -115,12 +116,10 @@ public class InventoryDAOImpl implements InventoryDAO {
 				int setsupplierNum = (rs.getInt("supplier_num"));
 				int setinventoryAmount = (rs.getInt("inveinvntory_amount"));
 				String setinventoryName = (rs.getString("inventory_name"));
-				inv.setInventoryNum(setinventoryNum);
-				inv.setPurchaseNum(setpurchaseNum);
-				inv.setPurchaseNum(setsupplierNum);
-				inv.setInventoryAmount(setinventoryAmount);
-				inv.setInventoryName(setinventoryName);
-
+				int setreorderpoint = (rs.getInt("reorder_point"));
+				Date setpurchasedate = (rs.getDate("purchase_date"));
+				inv = new Inventory(setinventoryNum, setpurchaseNum, setinventoryAmount, setsupplierNum,
+						setinventoryName, setreorderpoint, setpurchasedate);
 				rs.close();
 				smt.close();
 

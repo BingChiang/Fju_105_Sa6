@@ -107,13 +107,13 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 			smt.setInt(1, orderDefault.getOrderNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setOrder = (rs.getInt("order_Num"));
-				int setProduct = (rs.getInt("product_Num"));
-				int setType_Num = (rs.getInt("type_Num"));
-				int setOrder_Price = (rs.getInt("order_Price"));
-				int setOrder_Amount = (rs.getInt("order_Amount"));
-				int setOrder_Total = (rs.getInt("order_Total"));
-				Date setOrder_Date = (rs.getDate("order_Date"));
+				int setOrder = (rs.getInt("order_num"));
+				int setProduct = (rs.getInt("product_num"));
+				int setType_Num = (rs.getInt("type_num"));
+				int setOrder_Price = (rs.getInt("order_price"));
+				int setOrder_Amount = (rs.getInt("order_amount"));
+				int setOrder_Total = (rs.getInt("order_total"));
+				Date setOrder_Date = (rs.getDate("order_date"));
 				order = new OrderDefault(setOrder, setProduct, setType_Num, setOrder_Price, setOrder_Amount,
 						setOrder_Total, setOrder_Date);
 			}

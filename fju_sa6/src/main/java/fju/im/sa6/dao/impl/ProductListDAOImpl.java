@@ -21,7 +21,7 @@ public class ProductListDAOImpl implements ProductListDAO {
 	@Override
 	public void set(ProductList productList) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE productlist(product_num, amount)";
+		String sql = "UPDATE productlist(product_num, product_amount)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -79,8 +79,8 @@ public class ProductListDAOImpl implements ProductListDAO {
 			smt.setInt(1, productList.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setProduct = (rs.getInt("product_Num"));
-				int setAmount = (rs.getInt("amount"));
+				int setProduct = (rs.getInt("product_num"));
+				int setAmount = (rs.getInt("product_amount"));
 				productlist = new ProductList(setProduct, setAmount);
 			}
 			rs.close();
@@ -111,8 +111,8 @@ public class ProductListDAOImpl implements ProductListDAO {
 			smt.setInt(1, productList.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setProduct = (rs.getInt("product_Num"));
-				int setAmount = (rs.getInt("amount"));
+				int setProduct = (rs.getInt("product_num"));
+				int setAmount = (rs.getInt("product_amount"));
 				productlist = new ProductList(setProduct, setAmount);
 			}
 			rs.close();

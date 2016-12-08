@@ -23,7 +23,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	public double getDayWorktime(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
 		double dayworktime = 0;
-		String sql = "SELECT * FROM StaffDefault WHERE staffNum = ?";
+		String sql = "SELECT * FROM staff WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);

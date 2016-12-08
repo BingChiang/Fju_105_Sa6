@@ -9,12 +9,10 @@ public class Product {
 	private String productName;
 
 	private int productPrice;
-
-
+	
 	private int productSellMonth;
 	//2016.11.30 by bing....delete cost value and add init value
-	public Product(int productNum, int typeNum, String productName, int productPrice, int productCost,
-			int productSellMonth) {
+	public Product(int productNum, int typeNum, String productName, int productPrice,int productSellMonth) {
 		this.productNum = productNum;
 		this.typeNum = typeNum;
 		this.productName = productName;
