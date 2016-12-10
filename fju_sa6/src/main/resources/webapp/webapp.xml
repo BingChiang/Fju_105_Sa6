@@ -18,6 +18,9 @@
 			</map>
 		</property>
 	</bean>
+	<bean id="Cart" class="fju.im.sa6.entity.Cart">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="InevntoryDAO" class="fju.im.sa6.dao.impl.InevntoryDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

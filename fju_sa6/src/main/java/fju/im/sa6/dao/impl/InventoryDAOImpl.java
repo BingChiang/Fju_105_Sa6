@@ -1,6 +1,8 @@
 package fju.im.sa6.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.sql.*;
 import java.sql.*;
 import fju.im.sa6.dao.InventoryDAO;
@@ -32,7 +34,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt.setInt(2, inventory.getInventoryAmount());
 			smt.setInt(3, inventory.getSupplierNum());
 			smt.setInt(4, inventory.getReorderPoint());
-			smt.setDate(5, (Date) inventory.getUpdateDate());
+			smt.setDate(5, (java.sql.Date) inventory.getUpdateDate());
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -58,7 +60,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, setInv.getInventoryName());
 			smt.setInt(2, setInv.getReorderPoint());
-			smt.setDate(3, (Date) setInv.getUpdateDate());
+			smt.setDate(3, (java.sql.Date) setInv.getUpdateDate());
 			smt.executeUpdate();
 			smt.close();
 
@@ -137,9 +139,9 @@ public class InventoryDAOImpl implements InventoryDAO {
 		return inv;
 	}
 
-	@Override
-	public ArrayList<Inventory> getList(Inventory inventory) {
+	public ArrayList<Inventory> getList() {
 		// TODO Auto-generated method stub
+		ArrayList<Inventory> inv = new ArrayList<Inventory>();
 		String sql = "SELECT inventory_num, inventory_name FROM inventory ";
 		try {
 
@@ -147,11 +149,15 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setinventorynum = (rs.getInt("inventory_num"));
-				String setinventoryname = (rs.getString("inventory_name"));
-				inventory.setInventoryName(setinventoryname);
-				inventory.setInventoryNum(setinventorynum);
+				int inventorynum = (rs.getInt("inventory_num"));
+				int inventoryAmount = (rs.getInt("inventory_amount"));
+				int supplierNum = (rs.getInt("supplier_num"));
+				String inventoryname = (rs.getString("inventory_name"));
+				int reorder_point = (rs.getInt("reorder_point"));
+				Date update_date = (rs.getDate("update_date"));
 
+				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, inventoryname, reorder_point,
+						update_date));
 			}
 			rs.close();
 			smt.close();
@@ -167,30 +173,30 @@ public class InventoryDAOImpl implements InventoryDAO {
 				}
 			}
 		}
-		return getList(inventory);
+		return inv;
 	}
 
 	@Override
 	public ArrayList<Inventory> getList(Supplier supplier) {
 		// TODO Auto-generated method stub
-		Inventory inventory = new Inventory();
+		ArrayList<Inventory> inv = new ArrayList<Inventory>();
 		String sql = "SELECT supplier_num,inventory_num, inventory_name FROM inventory WHERE supplier_name = ?";
 		try {
+
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, supplier.getSupplierNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setsuppliernum = (rs.getInt("supplier_num"));
-				int setinventorynum = (rs.getInt("inventory_num"));
-				String setinventoryname = (rs.getString("inventory_name"));
-				inventory.setSupplierNum(setsuppliernum);
-				inventory.setInventoryNum(setinventorynum);
-				inventory.setInventoryName(setinventoryname);
-			}
-			rs.close();
-			smt.close();
+				int inventorynum = (rs.getInt("inventory_num"));
+				int inventoryAmount = (rs.getInt("inventory_amount"));
+				int supplierNum = (rs.getInt("supplier_num"));
+				String inventoryname = (rs.getString("inventory_name"));
+				int reorder_point = (rs.getInt("reorder_point"));
+				Date update_date = (rs.getDate("update_date"));
 
+				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, inventoryname, reorder_point,
+						update_date));
+			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -202,7 +208,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 				}
 			}
 		}
-		return getList(inventory);
+		return inv;
 	}
 
 }

@@ -16,7 +16,7 @@ public interface ManagerDAO {
 
 	public void setLevel(StaffDefault manager, StaffDefault staffStaffDefault);
 
-	public ArrayList<Staff> getList(Staff allstaff);
+	public ArrayList<StaffDefault> getList();
 
 	public double monthearntotal();
 }

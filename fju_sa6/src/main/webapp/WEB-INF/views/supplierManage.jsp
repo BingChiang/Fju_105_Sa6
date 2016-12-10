@@ -23,8 +23,8 @@
                     <div class="col-md-7">
                         <h2>供應商一覽</h2></div>
                     <div class="col-md-3">
-                        <a href="#">
-                            <button class="btn btn-primary" id="addStaff"><a href="#">新增供應商</a></button>
+                        <a href="supplierAdd">
+                            <button class="btn btn-primary" id="addStaff">新增供應商</button>
                         </a>
                     </div>
                     <table class="table table-striped">
@@ -35,20 +35,16 @@
                             <th>供應商地址</th>
                             <th>查看供應存貨</th>
                         </tr>
+                        <c:forEach items="${supplierList}" var="sup">
                         <tr>
-                            <td>0001</td>
-                            <td>茶葉AAA</td>
-                            <td>0987987987</td>
-                            <td>123123</td>
-                            <td><a role="button" href="#" class="btn btn-sm btn-primary">查看</a> </td>
+                            <td>${sup.supplierNum}</td>
+                            <td>${sup.supplierName}</td>
+                            <td>${sup.supplierPhone}</td>
+                            <td>${sup.supplierAddress}</td>
+                            <td><a role="button" href="showSupplier?supplierNum=${sup.supplierNum}" class="btn btn-sm btn-primary">查看</a> </td>
                         </tr>
-                        <tr>
-                            <td>0002</td>
-                            <td>茶</td>
-                            <td>098794879487</td>
-                            <td>22320</td>
-                            <td><a role="button" href="#" class="btn btn-sm btn-primary">查看</a> </td>
-                        </tr>
+                        </c:forEach>
+                        
                     </table>
                 </div>
             </div>

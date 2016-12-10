@@ -23,7 +23,7 @@
                     <div class="col-md-7">
                         <h2>產品管理</h2></div>
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="productAdd">
                             <button class="btn btn-primary" id="addStaff">新增產品</button>
                         </a>
                     </div>
@@ -35,35 +35,20 @@
                             <th>產品價格</th>
                             <th></th>
                         </tr>
+                       
+                        <c:forEach items="${productList}" var="pro">
                         <tr>
-                            <td>0001</td>
-                            <td>greentea</td>
+                            <td>${pro.productNum}</td>
+                            <td>${pro.productName}</td>
                             <td>green</td>
-                            <td>25</td>
-                            <td><span style="margin-top:-5px;" class="badge"><a class="inline" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color:white;"></span></a>
-                                </span> <span style="margin-top:-5px;" class="badge"><a class="inline" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:white;"></span></a>
+                            <td>${pro.productPrice}</td>
+                            <td><span style="margin-top:-5px;" class="badge"><a class="inline" href="productRemove?productNum=${pro.productNum}"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color:white;"></span></a>
+                                </span> <span style="margin-top:-5px;" class="badge"><a class="inline" href="productModify?productNum=${pro.productNum}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:white;"></span></a>
                                 </span>
                             </td>
                         </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>greentea</td>
-                            <td>green</td>
-                            <td>25</td>
-                            <td><span style="margin-top:-5px;" class="badge"><a class="inline" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color:white;"></span></a>
-                                </span> <span style="margin-top:-5px;" class="badge"><a class="inline" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:white;"></span></a>
-                                </span>
-                            </td>
-                        </tr><tr>
-                            <td>0001</td>
-                            <td>greentea</td>
-                            <td>green</td>
-                            <td>25</td>
-                            <td><span style="margin-top:-5px;" class="badge"><a class="inline" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color:white;"></span></a>
-                                </span> <span style="margin-top:-5px;" class="badge"><a class="inline" href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:white;"></span></a>
-                                </span>
-                            </td>
-                        </tr>
+                        </c:forEach>
+                        
                     </table>
                 </div>
             </div>

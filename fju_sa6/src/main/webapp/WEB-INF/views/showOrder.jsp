@@ -31,32 +31,16 @@
                             <th>訂單價格</th>
                             <th>查看訂單詳情</th>
                         </tr>
+                        <c:forEach items="${orderList}" var="ord">
                         <tr>
-                            <td>0001</td>
-                            <td>date</td>
-                            <td>205</td>
-                            <td><a role="button"  href="#" class="btn btn-sm btn-primary">查看</a>
+                            <td>${ord.orderlistNum}</td>
+                            <td>${ord.orderDate}</td>
+                            <td>${ord.orderTotal}</td>
+                            <td><a role="button"  href="orderDetail?orderlistNu=${ord.orderlistNum}" class="btn btn-sm btn-primary">查看</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>0001</td>
-                            <td>date</td>
-                            <td>205</td>
-                            <td><a role="button"  href="#" class="btn btn-sm btn-primary">查看</a>
-                            </td>
-                        </tr><tr>
-                            <td>0001</td>
-                            <td>date</td>
-                            <td>205</td>
-                            <td><a role="button"  href="#" class="btn btn-sm btn-primary">查看</a>
-                            </td>
-                        </tr><tr>
-                            <td>0001</td>
-                            <td>date</td>
-                            <td>205</td>
-                            <td><a role="button"  href="#" class="btn btn-sm btn-primary">查看</a>
-                            </td>
-                        </tr>
+                        </c:forEach>
+                        
                     </table>
                 </div>
             </div>

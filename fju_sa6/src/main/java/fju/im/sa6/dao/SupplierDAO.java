@@ -11,7 +11,7 @@ public interface SupplierDAO {
 
 	public void remove(Supplier supplier);
 
-	public ArrayList<Supplier> getList(Supplier supplier);
+	public ArrayList<Supplier> getList();
 
 	public Supplier get(Supplier supplier);
 }

@@ -31,56 +31,18 @@ public class AccountController {
 	private StaffDefault account_session;
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
-	
-	@RequestMapping(value = "/loginSuccessful", method = RequestMethod.GET)
-	public ModelAndView loginSuccessful(Principal principal) {
 
-		ModelAndView model = new ModelAndView("redirect:/product");
-		// http://www.baeldung.com/get-user-in-spring-security
-		System.out.println(principal.getName());
-
-		return model;
-	}
 	
-	@RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
-	public ModelAndView loginFailed() {
-		ModelAndView model = new ModelAndView("index");
-		System.out.println("failed");
-		model.addObject("message", "��憭望��");
-		return model;
-	}
-	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public ModelAndView logout() {
-		ModelAndView model = new ModelAndView("/index");
-		//session setting
-		return model;
-	}
-	
-	
-	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
-	// @RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView listAllSatff() {
-		ModelAndView model = new ModelAndView();
-		ArrayList<StaffDefault> allStaff = null;
-		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-		allStaff = staffDefaultDAO.getList();
-		//model.addObject(allStaff);
-		return model;
-	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView deleteProduct(@ModelAttribute StaffDefault staffDefault) {
-		ModelAndView model = new ModelAndView("");//mapping page
+	public ModelAndView login(int staffNum) {
+		ModelAndView model = new ModelAndView("");// mapping page
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-		if (staffDefault.getStaffLevel() == 0) {
-			model = new ModelAndView("login2");
-			model.addObject("staffDefault", staffDefault);//no session
-		} else {
-			model = new ModelAndView("mainpage");
-		}
-		//session add
-		model.addObject("newaccount",account_session);  
+		StaffDefault temp = new Staff(staffNum, null, 0, null, 0);
+		StaffDefault staff = staffDefaultDAO.get(temp);
+		model = new ModelAndView("redirect:/mainpage");
+		model.addObject("staff", staff);
+		// session add
+		model.addObject("newaccount", account_session);
 		return model;
 	}
 
@@ -89,7 +51,7 @@ public class AccountController {
 		ModelAndView model = new ModelAndView("");
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		if (1 == 1) {
-			model = new ModelAndView("mainpage");
+			model = new ModelAndView("redirect:/mainpage");
 			model.addObject("staffDefault", staffDefault);
 		} else {
 			model = new ModelAndView("index");
@@ -97,17 +59,17 @@ public class AccountController {
 
 		return model;
 	}
+
 	@RequestMapping(value = "/worktime", method = RequestMethod.GET)
 	public ModelAndView ListStaffWorktime() {
 		ArrayList<StaffDefault> staffDefaultList = new ArrayList<StaffDefault>();
-		ModelAndView model = new ModelAndView("");//mapping page
+		ModelAndView model = new ModelAndView("");// mapping page
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		staffDefaultList = managerDAO.getList();
-		model.addObject("employeeList",staffDefaultList);
+		model.addObject("employeeList", staffDefaultList);
 		return model;
 	}
-	
-	
+
 	@RequestMapping(value = "/onwork", method = RequestMethod.POST)
 	public ModelAndView onwork(@ModelAttribute StaffDefault staffDefault) {
 		ModelAndView model = new ModelAndView("redirect:/worktime");
@@ -116,7 +78,7 @@ public class AccountController {
 		worktimeDAO.statffOnWork(staffDefault);
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/offwork", method = RequestMethod.POST)
 	public ModelAndView offwork(@ModelAttribute StaffDefault staffDefault) {
 		ModelAndView model = new ModelAndView("redirect:/worktime");
@@ -127,43 +89,45 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/amendonwork", method = RequestMethod.POST)
-	public ModelAndView amendonwork(@ModelAttribute StaffDefault staffDefault,Date date) {
+	public ModelAndView amendonwork(@ModelAttribute StaffDefault staffDefault, Date date) {
 		ModelAndView model = new ModelAndView("redirect:/worktime");
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
 		worktimeDAO.amendOnWork(staffDefault, date);
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/amendoffwork", method = RequestMethod.POST)
-	public ModelAndView amendoffwork(@ModelAttribute StaffDefault staffDefault,Date date) {
+	public ModelAndView amendoffwork(@ModelAttribute StaffDefault staffDefault, Date date) {
 		ModelAndView model = new ModelAndView("redirect:/worktime");
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
 		worktimeDAO.amendOffWork(staffDefault, date);
 		return model;
 	}
+
 	@RequestMapping(value = "/Memployeemanage", method = RequestMethod.GET)
 	public ModelAndView ListStaff() {
 		ArrayList<StaffDefault> staffDefaultList = new ArrayList<StaffDefault>();
-		ModelAndView model = new ModelAndView("");//mapping page
+		ModelAndView model = new ModelAndView("");// mapping page
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		staffDefaultList = managerDAO.getList();
-		model.addObject("employeeList",staffDefaultList);
+		model.addObject("employeeList", staffDefaultList);
 		return model;
 	}
-	
+
 	static StaffDefault tempStaffDefault = null;
-	
+
 	@RequestMapping(value = "/Memployeemanagechange", method = RequestMethod.POST)
 	public ModelAndView postStaffTochange(@ModelAttribute StaffDefault staffDefault) {
-		ModelAndView model = new ModelAndView("redirect:/Memployeemanagechange");//mapping page
+		ModelAndView model = new ModelAndView("redirect:/Memployeemanagechange");// mapping
+																					// page
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		StaffDefault staffDefault2 = managerDAO.get(staffDefault);
 		tempStaffDefault = staffDefault2;
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/Memployeemanagechange", method = RequestMethod.GET)
 	public ModelAndView StaffChange() {
 		StaffDefault staffDefault2 = null;
@@ -174,31 +138,29 @@ public class AccountController {
 			staffDefault2 = tempStaffDefault;
 			tempStaffDefault = null;
 		}
-		ModelAndView model = new ModelAndView("redirect:/Memployeemanage");//mapping page
+		ModelAndView model = new ModelAndView("redirect:/Memployeemanage");// mapping
+																			// page
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		managerDAO.set(staffDefault2);
 		return model;
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/Memployeeadd", method = RequestMethod.POST)
 	public ModelAndView addStaff(@ModelAttribute StaffDefault staffDefault) {
-		ModelAndView model = new ModelAndView("redirect:/Memployeemanage");//mapping page
+		ModelAndView model = new ModelAndView("redirect:/Memployeemanage");// mapping
+																			// page
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		managerDAO.add(staffDefault);
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/removeStaff", method = RequestMethod.POST)
 	public ModelAndView removeStaff(@ModelAttribute StaffDefault staffDefault) {
-		ModelAndView model = new ModelAndView("redirect:/Memployeemanage");//mapping page
+		ModelAndView model = new ModelAndView("redirect:/Memployeemanage");// mapping
+																			// page
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		managerDAO.remove(staffDefault);
 		return model;
 	}
-	
 
-
-	
 }

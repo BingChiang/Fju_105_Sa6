@@ -26,7 +26,7 @@ public class Cart implements java.io.Serializable {
 		return productList;
 	}
 	
-	public void addproduct(Product product){
+	public void add(Product product){
 		productList.add(product);
 	}
 

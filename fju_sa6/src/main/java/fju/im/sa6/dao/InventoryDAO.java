@@ -13,7 +13,7 @@ public interface InventoryDAO {
 
 	public Inventory get(Inventory inventory);
 
-	public ArrayList<Inventory> getList(Inventory inventory);
+	public ArrayList<Inventory> getList();
 
 	public ArrayList<Inventory> getList(Supplier supplier);
 }

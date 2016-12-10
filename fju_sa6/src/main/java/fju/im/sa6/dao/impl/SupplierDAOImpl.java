@@ -20,6 +20,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
+
 	@Override
 	public void add(Supplier addSup) {
 		// TODO Auto-generated method stub
@@ -119,7 +120,8 @@ public class SupplierDAOImpl implements SupplierDAO {
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
 				int setavailableNum = (rs.getInt(0));
-				sup = new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName, setsupplierPhone, setsupplierAddress,setavailableNum);
+				sup = new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName, setsupplierPhone,
+						setsupplierAddress, setavailableNum);
 			}
 			rs.close();
 			smt.close();
@@ -139,15 +141,14 @@ public class SupplierDAOImpl implements SupplierDAO {
 	}
 
 	@Override
-	public ArrayList<Supplier> getList(Supplier supplier) {
-		Supplier sup = null;
+	public ArrayList<Supplier> getList() {
 
-		String sql = "SELECT * FROM supplier WHERE supplier_name = ?";
+		ArrayList<Supplier> sup = new ArrayList<Supplier>();
+		String sql = "SELECT * FROM supplier ";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, supplier.getSupplierName());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setsupplierNum = (rs.getInt("supplier_num"));
@@ -157,8 +158,8 @@ public class SupplierDAOImpl implements SupplierDAO {
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
 				int setavailableNum = (rs.getInt(0));
-				sup = new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName, setsupplierPhone,
-						setsupplierAddress, setavailableNum);
+				sup.add((new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName,
+						setsupplierPhone, setsupplierAddress, setavailableNum)));
 			}
 			rs.close();
 			smt.close();
@@ -174,7 +175,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 				}
 			}
 		}
-		return getList(sup);
+		return sup;
 	}
 
 }
