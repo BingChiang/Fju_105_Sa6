@@ -1,34 +1,48 @@
 package fju.im.sa6.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import fju.im.sa6.entity.Product;
 
 public class OrderList extends OrderDefault {
 
-	private ArrayList<ProductList> orderList;
+	private int orderlistNum;
 
-	public OrderList(int orderlist_Num, int product_Num, int type_Num,int order_Total,
-			Date order_Date) {
-		super(orderlist_Num, product_Num, type_Num, Product_Price, order_Amount, String productName);
+	private int orderTotal;
 
-	}
+	private Date orderDate;
 
-	public OrderList(ArrayList<ProductList> orderList) {
-		super();
+	public OrderList(int orderlistNum, int orderTotal, Date orderDate) {
 
-		this.orderList = orderList;
 	}
 
 	public OrderList() {
-		super();
+		this.orderlistNum = 0;
+		this.orderTotal = 0;
+		this.orderDate = null;
 	}
 
-	public ArrayList<ProductList> getOrderList() {
-		return orderList;
+	public int getOrderTotal() {
+		return orderTotal;
 	}
 
-	public void setOrderList(ArrayList<ProductList> orderList) {
-		this.orderList = orderList;
+	public void setOrderTotal(int orderTotal) {
+		this.orderTotal = orderTotal;
+	}
+
+	public int getOrderistNum() {
+		return orderlistNum;
+	}
+
+	public void setOrderistNum(int orderistNum) {
+		this.orderlistNum = orderistNum;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 
 }
