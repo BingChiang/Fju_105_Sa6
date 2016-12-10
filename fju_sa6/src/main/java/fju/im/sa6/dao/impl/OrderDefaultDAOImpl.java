@@ -91,7 +91,8 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 				int setOrder_Amount = (rs.getInt("order_Amount"));
 				int setOrder_Total = (rs.getInt("order_Total"));
 				Date setOrder_Date = (rs.getDate("order_Date"));
-				order = new OrderDefault(setOrder,setProduct,setType_Num,setOrder_Price,setOrder_Amount,setOrder_Total,setOrder_Date);
+				order = new OrderDefault(setOrder, setProduct, setType_Num, setOrder_Price, setOrder_Amount,
+						setOrder_Total, setOrder_Date);
 			}
 			rs.close();
 			smt.close();
@@ -110,9 +111,12 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		return order;
 	}
 
-	public List<Product> addcart(List<Product> productlist) {
-			Product product;
-		
+	public List<Product> addcart(List<Product> productarr) {
+		Product product;
+		List<Product> productList = new ArrayList<Product>();
+		for (int i = 1; i <= productarr.size(); i++) {
+			productList.get(i)==productarr.get(i);
+		}
 		String sql = "INSERT INTO orderitem(orderlist_num ,product_num, product_name, product_price) VALUE(?,?,?,?)";
 		try {
 			conn = dataSource.getConnection();
@@ -135,7 +139,7 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 			}
 		}
 
-		return ;
+		return;
 	}
 
 }
