@@ -1,7 +1,6 @@
 package fju.im.sa6.entity;
 
 import java.sql.Date;
-import fju.im.sa6.entity.Product;
 
 public class OrderList extends OrderDefault {
 
@@ -12,7 +11,7 @@ public class OrderList extends OrderDefault {
 	private Date orderDate;
 
 	public OrderList(int orderlistNum, int orderTotal, Date orderDate) {
-
+		super(orderlistNum, orderTotal,  orderDate);
 	}
 
 	public OrderList() {

@@ -91,7 +91,7 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 				int setOrder_Amount = (rs.getInt("order_Amount"));
 				int setOrder_Total = (rs.getInt("order_Total"));
 				Date setOrder_Date = (rs.getDate("order_Date"));
-				order = new OrderDefault();
+				order = new OrderDefault(setOrder,setProduct,setType_Num,setOrder_Price,setOrder_Amount,setOrder_Total,setOrder_Date);
 			}
 			rs.close();
 			smt.close();
@@ -110,15 +110,16 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		return order;
 	}
 
-	public List<Product> addcart(Product product) {
-		List<Product> productlist = new ArrayList<Product>();
-		String sql = "INSERT INTO orderitem(product_num, product_name, product_price) VALUES(?, ?, ?)";
+	public List<Product> addcart(List<Product> productlist) {
+			Product product;
+		
+		String sql = "INSERT INTO orderitem(orderlist_num ,product_num, product_name, product_price) VALUE(?,?,?,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 
 			smt.setInt(1, product.getProductNum());
-			smt.setInt(2, product.get);
+			smt.setString(2, product.getProductName());
 			smt.executeUpdate();
 			smt.close();
 
@@ -134,32 +135,7 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 			}
 		}
 
-		return productlist;
+		return ;
 	}
-
-	@Override
-	public void set(OrderDefault setOrder) { 
-		  // TODO Auto-generated method stub 
-		  String sql = "UPDATE INTO orderitem(order_price, order_amount, product_name)VALUES(?, ?)"; 
-		  try { 
-		   conn = dataSource.getConnection(); 
-		   smt = conn.prepareStatement(sql); 
-		   smt.setInt(1, setOrder.getProductPrice()); 
-		   smt.setInt(2, setOrder.getOrderAmount()); 
-		   smt.setString(3, setOrder.getProductName()); 
-		   smt.executeUpdate(); 
-		   smt.close(); 
-
-		  } catch (SQLException e) { 
-		   throw new RuntimeException(e); 
-
-		  } finally { 
-		   if (conn != null) { 
-		    try { 
-		     conn.close(); 
-		    } catch (SQLException e) { 
-		    } 
-		   } 
-		  }
 
 }

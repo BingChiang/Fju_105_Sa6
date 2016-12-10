@@ -32,7 +32,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 
-			smt.setInt(1, orderList.orderTotal());
+			smt.setInt(1, orderList.getOrderTotal());
 			smt.setDate(2, orderList.getOrderDate());
 			smt.executeUpdate();
 			smt.close();
@@ -106,4 +106,11 @@ public class OrderListDAOImpl implements OrderListDAO {
 		return order;
 
 	}
+
+	@Override
+	public void set(OrderList orderList) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
