@@ -11,13 +11,17 @@ public class Product {
 	private int productPrice;
 	
 	private int productSellMonth;
+	
+	private int productCost;
 	//2016.11.30 by bing....delete cost value and add init value
-	public Product(int productNum, int typeNum, String productName, int productPrice,int productSellMonth) {
+	public Product(int productNum, int typeNum, String productName, int productPrice,int productSellMonth, int productCost) {
 		this.productNum = productNum;
 		this.typeNum = typeNum;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productSellMonth = productSellMonth;
+		this.productCost = productCost;
+		
 	}
 	
 	public Product(){
@@ -26,6 +30,7 @@ public class Product {
 		this.productName = null;
 		this.productPrice = 0;
 		this.productSellMonth = 0;
+		this.productCost = 0;
 	}
 
 	public String getProductName() {
@@ -61,7 +66,12 @@ public class Product {
 	public int getTypeNum() {
 		return typeNum;
 	}
-
+	public int getProductCost(){
+		return productCost;
+	}
+	public void setProductCost(int productCost){
+		this.productCost = productCost;
+	}
 	
 	
 	

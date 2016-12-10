@@ -20,17 +20,17 @@ public class SupplierDAOImpl implements SupplierDAO {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
-
 	@Override
 	public void add(Supplier addSup) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO supplier (supplier_name, supplier_phone, supplier_address ) VALUES(?, ?, ?)";
+		String sql = "INSERT INTO supplier (supplier_name, supplier_phone, supplier_address, available_num) VALUES(?, ?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, addSup.getSupplierName());
 			smt.setString(2, addSup.getSupplierPhone());
 			smt.setString(3, addSup.getSupplierAddress());
+			smt.setInt(4, 0);
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {
@@ -78,7 +78,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 	@Override
 	public void remove(Supplier removeSup) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM supplier WHERE supplier_num = ?";
+		String sql = "UPDATE available_num=1 available_num=1 FROM supplier WHERE supplier_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -118,8 +118,8 @@ public class SupplierDAOImpl implements SupplierDAO {
 				String setsupplierName = (rs.getString("supplier_name"));
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
-				sup = new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName, setsupplierPhone,
-						setsupplierAddress);
+				int setavailableNum = (rs.getInt(0));
+				sup = new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName, setsupplierPhone, setsupplierAddress,setavailableNum);
 			}
 			rs.close();
 			smt.close();
@@ -156,8 +156,9 @@ public class SupplierDAOImpl implements SupplierDAO {
 				String setsupplierName = (rs.getString("supplier_name"));
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
+				int setavailableNum = (rs.getInt(0));
 				sup = new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName, setsupplierPhone,
-						setsupplierAddress);
+						setsupplierAddress, setavailableNum);
 			}
 			rs.close();
 			smt.close();
