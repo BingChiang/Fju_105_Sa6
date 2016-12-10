@@ -137,4 +137,29 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		return productlist;
 	}
 
+	@Override
+	public void set(OrderDefault setOrder) { 
+		  // TODO Auto-generated method stub 
+		  String sql = "UPDATE INTO orderitem(order_price, order_amount, product_name)VALUES(?, ?)"; 
+		  try { 
+		   conn = dataSource.getConnection(); 
+		   smt = conn.prepareStatement(sql); 
+		   smt.setInt(1, setOrder.getProductPrice()); 
+		   smt.setInt(2, setOrder.getOrderAmount()); 
+		   smt.setString(3, setOrder.getProductName()); 
+		   smt.executeUpdate(); 
+		   smt.close(); 
+
+		  } catch (SQLException e) { 
+		   throw new RuntimeException(e); 
+
+		  } finally { 
+		   if (conn != null) { 
+		    try { 
+		     conn.close(); 
+		    } catch (SQLException e) { 
+		    } 
+		   } 
+		  }
+
 }

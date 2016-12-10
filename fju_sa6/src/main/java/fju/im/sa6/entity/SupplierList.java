@@ -8,8 +8,8 @@ public class SupplierList extends Supplier {
 
 	// rebuild by bing 2016.11.30 ...and add init value
 	public SupplierList(int supplierNum, int inventoryNum, String inventoryName, String supplierName,
-			String supplierPhone, String supplierAddress) {
-		super(supplierNum, inventoryNum, inventoryName, supplierName, supplierPhone, supplierAddress);
+			String supplierPhone, String supplierAddress, int availableNum) {
+		super(supplierNum, inventoryNum, inventoryName, supplierName, supplierPhone, supplierAddress, availableNum);
 		SupplierList.supplierList = new ArrayList<Inventory>();
 		// TODO Auto-generated constructor stub
 	}
