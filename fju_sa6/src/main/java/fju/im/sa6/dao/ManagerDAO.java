@@ -12,9 +12,11 @@ public interface ManagerDAO {
 
 	public void remove(StaffDefault staffDefault);
 
-	public double inquireAllWorktime(StaffDefault staffDefault);
+	public double inquireAllWorktime();
 
 	public void setLevel(StaffDefault manager, StaffDefault staffStaffDefault);
-	
+
 	public ArrayList<Staff> getList(Staff allstaff);
+
+	public double monthearntotal();
 }

@@ -22,15 +22,14 @@ public class OrderListDAOImpl implements OrderListDAO {
 
 	public void add(OrderList orderList) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO orderlist (order_price, order_amount, order_total, order_date) VALUES(?, ?, ?, NOW())";
+		String sql = "INSERT INTO orderlist (order_total, order_date) VALUES(?, NOW())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 
-			smt.setInt(1, orderList.getOrderPrice());
-			smt.setInt(2, orderList.getOrderAmount());
-			smt.setInt(3, orderList.getOrderTotal());
-			smt.setDate(4, orderList.getOrderDate());
+
+			smt.setInt(1, orderList.);
+			smt.setDate(2, orderList.getOrderDate());
 			smt.executeUpdate();
 			smt.close();
 

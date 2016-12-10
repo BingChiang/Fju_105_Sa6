@@ -29,8 +29,9 @@ public class InventoryDAOImpl implements InventoryDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, inventory.getInventoryName());
-			smt.setInt(2, inventory.getReorderPoint());
-			smt.setDate(3, (Date) inventory.getPurchaseDate());
+			smt.setInt(2, inventory.getSupplierNum());
+			smt.setInt(3, inventory.getReorderPoint());
+			smt.setDate(4, (Date) inventory.getPurchaseDate());
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
