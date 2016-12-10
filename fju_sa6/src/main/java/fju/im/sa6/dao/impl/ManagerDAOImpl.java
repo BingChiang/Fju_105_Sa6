@@ -138,7 +138,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
-				if (staffDefault.getStaffLevel() == 2) {
+				if (staffDefault.getStaffLevel() == 0) {
 					smt.setInt(1, staffDefault.getStaffLevel());
 				} else {
 					conn.rollback();
