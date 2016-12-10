@@ -24,9 +24,7 @@
 	<bean id="ManagerDAO" class="fju.im.sa6.dao.impl.ManagerDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="OrderDefaultDAO" class="fju.im.sa6.dao.impl.OrderDefaultDAOImpl">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+
 	<bean id="OrderListDAO" class="fju.im.sa6.dao.impl.OrderListDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

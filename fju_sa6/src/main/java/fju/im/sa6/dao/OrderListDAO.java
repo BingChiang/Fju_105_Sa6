@@ -1,14 +1,15 @@
 package fju.im.sa6.dao;
 
+import java.util.ArrayList;
+
+import fju.im.sa6.entity.Cart;
 import fju.im.sa6.entity.OrderList;
+import fju.im.sa6.entity.Product;
 
 public interface OrderListDAO {
-	public void add(OrderList orderList);
+	public void add(Cart cart);
 
-	public void set(OrderList orderList);
-
-	public void remove(OrderList orderList);
-
-	// for checking method , not for object type!!
-	public OrderList getordertotal(OrderList orderList, OrderList order);
+	public OrderList get( );
+	
+	public ArrayList<Product> getOrderDetail(OrderList orderList);
 }
