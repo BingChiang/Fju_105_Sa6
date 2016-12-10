@@ -56,7 +56,7 @@ public class TypeDAOImpl implements TypeDAO {
 	@Override
 	public void add(Type addType) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO Type (type_name) VALUES(?)";
+		String sql = "INSERT INTO type (type_name) VALUES(?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class TypeDAOImpl implements TypeDAO {
 	@Override
 	public void set(Type setType) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE Type set type_name=?";
+		String sql = "UPDATE type set type_name=?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -103,13 +103,12 @@ public class TypeDAOImpl implements TypeDAO {
 	@Override
 	public ArrayList<Type> getList(Type Type) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM type WHERE type_num";
+		String sql = "SELECT * FROM type ";
 		Type typ = null;
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, Type.getTypeNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setTypenum = (rs.getInt("type_num"));

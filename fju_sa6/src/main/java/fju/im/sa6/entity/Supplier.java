@@ -6,31 +6,36 @@ public class Supplier {
 
 	private int inventoryNum;
 
-	private int purchaseNum;
+	private String inventoryName;
 
 	private String supplierName;
 
 	private String supplierPhone;
 
 	private String supplierAddress;
-	//rebuild by bing 2016.11.30 ...and add init value
-	public Supplier(int supplierNum, int inventoryNum, int purchaseNum, String supplierName, String supplierPhone,
-			String supplierAddress) {
+	
+	private int availableNum;
+
+	// rebuild by bing 2016.11.30 ...and add init value
+	public Supplier(int supplierNum, int inventoryNum, String inventoryName, String supplierName, String supplierPhone,
+			String supplierAddress, int availableNum) {
 		this.supplierNum = supplierNum;
 		this.inventoryNum = inventoryNum;
-		this.purchaseNum = purchaseNum;
+		this.inventoryName = inventoryName;
 		this.supplierName = supplierName;
 		this.supplierPhone = supplierPhone;
 		this.supplierAddress = supplierAddress;
+		this.availableNum = availableNum;
 	}
-	
-	public Supplier(){
+
+	public Supplier() {
 		this.supplierNum = 0;
 		this.inventoryNum = 0;
-		this.purchaseNum = 0;
+		this.inventoryName = null;
 		this.supplierName = null;
 		this.supplierPhone = null;
 		this.supplierAddress = null;
+		this.availableNum = 0;
 	}
 
 	public String getSupplierName() {
@@ -65,10 +70,13 @@ public class Supplier {
 		return inventoryNum;
 	}
 
-	public int getPurchaseNum() {
-		return purchaseNum;
+	public String getinventoryName() {
+		return inventoryName;
 	}
-
-	
-	
+	public int getavailableNum(){
+		return availableNum;
+	}
+	public void setavailableNum(int availableNum){
+		this.availableNum = availableNum;
+	}
 }

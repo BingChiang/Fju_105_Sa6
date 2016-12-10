@@ -1,12 +1,17 @@
 package fju.im.sa6.dao.impl;
 
 import fju.im.sa6.entity.OrderDefault;
+import fju.im.sa6.entity.Product;
 import fju.im.sa6.dao.OrderDefaultDAO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import fju.im.sa6.entity.cart;
 
 import javax.sql.DataSource;
 
@@ -24,14 +29,12 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 	@Override
 	public void add(OrderDefault addOrder) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO orderdefault(order_price, order_amount, order_total, order_date)VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO orderdefault(product_num, orderlist_num)VALUES(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, addOrder.getOrderPrice());
-			smt.setInt(2, addOrder.getOrderAmount());
-			smt.setInt(3, addOrder.getOrderTotal());
-			smt.setDate(4, (Date) addOrder.getOrderDate());
+			smt.setInt(1, addOrder.getProductNum());
+			smt.setInt(2, addOrder.getOrderlistNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -49,39 +52,13 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		}
 	}
 
-	@Override
-	public void set(OrderDefault setOrder) {
+	public void remove(OrderDefault removeorderdefault) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE INTO orderdefault(order_price, order_amount, order_total, order_date)VALUES(?, ?, ?, ?)";
+		String sql = "DELETE FROM orderitem WHERE orderlist_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, setOrder.getOrderPrice());
-			smt.setInt(2, setOrder.getOrderAmount());
-			smt.setInt(3, setOrder.getOrderTotal());
-			smt.setDate(4, (Date) setOrder.getOrderDate());
-			smt.executeUpdate();
-			smt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-	}
-	public void remove(OrderDefault removeOrder) {
-		// TODO Auto-generated method stub
-		String sql = "DELETE FROM orderdefault WHERE order_num = ?";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removeOrder.getOrderNum());
+			smt.setInt(1, removeorderdefault.getOrderlistNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -99,21 +76,21 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 	}
 
 	public OrderDefault get(OrderDefault orderDefault) {
+		String sql = "SELECT product_name, product_price FROM product WHERE product_num = ?";
 		OrderDefault order = null;
-		String sql = "SELECT * FROM orderdefault WHERE order_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, orderDefault.getOrderNum());
+			smt.setInt(1, orderDefault.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setOrder = (rs.getInt("order_num"));
-				int setProduct = (rs.getInt("product_num"));
-				int setType_Num = (rs.getInt("type_num"));
-				int setOrder_Price = (rs.getInt("order_price"));
-				int setOrder_Amount = (rs.getInt("order_amount"));
-				int setOrder_Total = (rs.getInt("order_total"));
-				Date setOrder_Date = (rs.getDate("order_date"));
+				int setOrder = (rs.getInt("order_Num"));
+				int setProduct = (rs.getInt("product_Num"));
+				int setType_Num = (rs.getInt("type_Num"));
+				int setOrder_Price = (rs.getInt("order_Price"));
+				int setOrder_Amount = (rs.getInt("order_Amount"));
+				int setOrder_Total = (rs.getInt("order_Total"));
+				Date setOrder_Date = (rs.getDate("order_Date"));
 				order = new OrderDefault(setOrder, setProduct, setType_Num, setOrder_Price, setOrder_Amount,
 						setOrder_Total, setOrder_Date);
 			}
@@ -134,6 +111,35 @@ public class OrderDefaultDAOImpl implements OrderDefaultDAO {
 		return order;
 	}
 
+	public List<Product> addcart(List<Product> productarr) {
+		Product product;
+		List<Product> productList = new ArrayList<Product>();
+		for (int i = 1; i <= productarr.size(); i++) {
+			productList.get(i)==productarr.get(i);
+		}
+		String sql = "INSERT INTO orderitem(orderlist_num ,product_num, product_name, product_price) VALUE(?,?,?,?)";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
 
+			smt.setInt(1, product.getProductNum());
+			smt.setString(2, product.getProductName());
+			smt.executeUpdate();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return;
+	}
 
 }

@@ -8,6 +8,5 @@ public interface StaffDefaultDAO {
 
 	public StaffDefault get(StaffDefault staffDefault, StaffDefault staffD);
 
-	public ArrayList<Staff> getList(Staff allstaff);
 
 }

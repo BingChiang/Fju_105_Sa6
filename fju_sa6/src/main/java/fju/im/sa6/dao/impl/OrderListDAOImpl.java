@@ -1,10 +1,14 @@
 package fju.im.sa6.dao.impl;
 
 import java.util.ArrayList;
+
+import java.util.Date;
+import java.util.List;
 import javax.sql.DataSource;
 import fju.im.sa6.entity.OrderList;
-import fju.im.sa6.entity.ProductList;
+import fju.im.sa6.entity.Product;
 import fju.im.sa6.dao.OrderListDAO;
+import fju.im.sa6.entity.cart;
 
 import java.sql.*;
 
@@ -22,15 +26,14 @@ public class OrderListDAOImpl implements OrderListDAO {
 
 	public void add(OrderList orderList) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO orderlist (order_price, order_amount, order_total, order_date) VALUES(?, ?, ?, ?)";
+
+		String sql = "INSERT INTO orderlist (orderTotal, orderDate) VALUES(?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 
-			smt.setInt(1, orderList.getOrderPrice());
-			smt.setInt(2, orderList.getOrderAmount());
-			smt.setInt(3, orderList.getOrderTotal());
-			smt.setDate(4, orderList.getOrderDate());
+			smt.setInt(1, orderList.getOrderTotal());
+			smt.setDate(2, orderList.getOrderDate());
 			smt.executeUpdate();
 			smt.close();
 
@@ -48,41 +51,13 @@ public class OrderListDAOImpl implements OrderListDAO {
 	}
 
 	@Override
-	public void set(OrderList setODP) {
-		// TODO Auto-generated method stub
-		String sql = "INSERT INTO orderlist (order_price, order_amount, order_total, order_date) VALUES(?, ?, ?, ?)";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-
-			smt.setInt(1, setODP.getOrderPrice());
-			smt.setInt(2, setODP.getOrderAmount());
-			smt.setInt(3, setODP.getOrderTotal());
-			smt.setDate(4, setODP.getOrderDate());
-			smt.executeUpdate();
-			smt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-	}
-
-	@Override
-	public void remove(OrderList removeODP) {
+	public void remove(OrderList removeOrderlist) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM orderlist WHERE orderlist_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, removeODP.getOrderNum());
+			smt.setInt(1, removeOrderlist.getOrderistNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -99,57 +74,18 @@ public class OrderListDAOImpl implements OrderListDAO {
 		}
 	}
 
-	public ArrayList<ProductList> getOrderList(OrderList orderlist) {
-		// TODO Auto-generated method stub
-		Date searchDate = null;
-		String sql = "SELECT * FROM OrderList WHERE order_Date = ?";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setDate(1, searchDate);
-			rs = smt.executeQuery();
-			if (rs.next()) {
-
-				int setOrder_Num = (rs.getInt("order_num"));
-				int setProduct_Num = (rs.getInt("product_num"));
-				int setType_Num = (rs.getInt("type_num"));
-				int setorder_price = (rs.getInt("order_price"));
-				int setorder_amount = (rs.getInt("order_amount"));
-				int setorder_total = (rs.getInt("order_total"));
-				Date setorder_date = (rs.getDate("order_date"));
-				orderlist = new OrderList(setOrder_Num, setProduct_Num, setType_Num, setorder_price, setorder_amount,
-						setorder_total, setorder_date, null);
-			}
-			rs.close();
-			smt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-
-		return getOrderList(orderlist);
-
-	}
-
 	@Override
-	public OrderList gettotalprice(OrderList order_date, OrderList order) {
+	public OrderList getordertotal(OrderList orderList, OrderList order) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT SUM(order_price) FROM order WHERE order_date = ?";
+		String sql = "SELECT order_total FROM OrderList WHERE orderlist_Num = ?";
+
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setDate(1, order_date.getOrderDate());
+			smt.setInt(1, orderList.getOrderistNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				int setorder_Total = (rs.getInt("SUM(order_price)"));
+				int setorder_Total = (rs.getInt("order_Price"));
 				order.setOrderTotal(setorder_Total);
 
 			}
@@ -168,6 +104,12 @@ public class OrderListDAOImpl implements OrderListDAO {
 			}
 		}
 		return order;
+
+	}
+
+	@Override
+	public void set(OrderList orderList) {
+		// TODO Auto-generated method stub
 
 	}
 

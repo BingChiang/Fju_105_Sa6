@@ -7,9 +7,9 @@ public class Manager extends StaffDefault {
 
 	public Manager(int staffNum, String staffName, int staffLevel, Date onworkTime, Date offworDAkTime, Date workMonth,
 
-			double worktimeTotal) {
+			double worktimedayTotal) {
 
-		super(staffNum, staffName, staffLevel, workMonth, worktimeTotal);
+		super(staffNum, staffName, staffLevel, workMonth, worktimedayTotal);
 
 		super.setStaffLevel(0);
 
