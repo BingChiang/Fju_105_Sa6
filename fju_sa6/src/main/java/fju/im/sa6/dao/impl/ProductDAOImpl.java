@@ -23,13 +23,14 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void add(Product addPro) {
-		String sql = "INSERT INTO product (product_name, product_price, product_sell_month) VALUES(?, ?, ?)";
+		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost) VALUES(?, ?, ?,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(3, addPro.getProductName());
 			smt.setInt(4, addPro.getProductPrice());
 			smt.setInt(5, addPro.getProductSellMonth());
+			smt.setInt(6, addPro.getProductCost());
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {
@@ -111,7 +112,8 @@ public class ProductDAOImpl implements ProductDAO {
 				String setproduct_Name = (rs.getString("product_name"));
 				int setproduct_price = (rs.getInt("product_price"));
 				int setproduct_sell_month = (rs.getInt("product_sell_month"));
-				pro = new Product(setproduct_Num, settype_Num, setproduct_Name, setproduct_price,setproduct_sell_month);
+				int setproductCost = (rs.getInt("product_cost"));
+				pro = new Product(setproduct_Num, settype_Num, setproduct_Name, setproduct_price,setproduct_sell_month, setproductCost);
 			}
 			rs.close();
 			smt.close();
@@ -144,7 +146,7 @@ public class ProductDAOImpl implements ProductDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("product_name"),
-						rs.getInt("product_price"),(rs.getInt("product_sell_month")));
+						rs.getInt("product_price"),rs.getInt("product_sell_month"), rs.getInt("product_cost"));
 				productArr.add(temp);
 			}
 			rs.close();
@@ -178,7 +180,7 @@ public class ProductDAOImpl implements ProductDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("product_name"),
-						rs.getInt("product_price"),(rs.getInt("product_sell_month")));
+						rs.getInt("product_price"),rs.getInt("product_sell_month"), rs.getInt("product_cost"));
 				productArr.add(temp);
 			}
 			rs.close();

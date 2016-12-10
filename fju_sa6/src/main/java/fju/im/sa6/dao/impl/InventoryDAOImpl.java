@@ -24,14 +24,15 @@ public class InventoryDAOImpl implements InventoryDAO {
 	public void add(Inventory inventory) {
 		// TODO Auto-generated method stub
 
-		String sql = "INSERT INTO inventory (inventory_name,supplier_num ,reorder_point, purchase_date) VALUES(?,?, ?,Now())";
+		String sql = "INSERT INTO inventory (inventory_name,inventory_amount,supplier_num,reorder_point,update_date) VALUES(?,?, ?,Now())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, inventory.getInventoryName());
-			smt.setInt(2, inventory.getSupplierNum());
-			smt.setInt(3, inventory.getReorderPoint());
-			smt.setDate(4, (Date) inventory.getPurchaseDate());
+			smt.setInt(2, inventory.getInventoryAmount());
+			smt.setInt(3, inventory.getSupplierNum());
+			smt.setInt(4, inventory.getReorderPoint());
+			smt.setDate(5, (Date) inventory.getUpdateDate());
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -49,7 +50,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 	@Override
 	public void set(Inventory setInv) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE inventory SET inventory_name=?, reorder_point=?, purchase_date=Now()"
+		String sql = "UPDATE inventory SET inventory_name=?, reorder_point=?, update_date = Now()"
 				+ "WHERE inventory_name = ?";
 
 		try {
@@ -57,7 +58,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, setInv.getInventoryName());
 			smt.setInt(2, setInv.getReorderPoint());
-			smt.setDate(3, (Date) setInv.getPurchaseDate());
+			smt.setDate(3, (Date) setInv.getUpdateDate());
 			smt.executeUpdate();
 			smt.close();
 
@@ -111,13 +112,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setinventoryNum = (rs.getInt("inventory_num"));
-				int setpurchaseNum = (rs.getInt("purchase_num"));
+				int setinventoryAmount = (rs.getInt("inventory_amount"));
 				int setsupplierNum = (rs.getInt("supplier_num"));
 				String setinventoryName = (rs.getString("inventory_name"));
 				int setreorderpoint = (rs.getInt("reorder_point"));
-				Date setpurchasedate = (rs.getDate("purchase_date"));
-				inv = new Inventory(setinventoryNum, setpurchaseNum, setsupplierNum, setinventoryName, setreorderpoint,
-						setpurchasedate);
+				Date setUpdateDate = (rs.getDate("update_date"));
+				inv = new Inventory(setinventoryNum, setinventoryAmount, setsupplierNum, setinventoryName,
+						setreorderpoint, setUpdateDate);
 				rs.close();
 				smt.close();
 

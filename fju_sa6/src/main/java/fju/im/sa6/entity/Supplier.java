@@ -13,16 +13,19 @@ public class Supplier {
 	private String supplierPhone;
 
 	private String supplierAddress;
+	
+	private int availableNum;
 
 	// rebuild by bing 2016.11.30 ...and add init value
 	public Supplier(int supplierNum, int inventoryNum, String inventoryName, String supplierName, String supplierPhone,
-			String supplierAddress) {
+			String supplierAddress, int availableNum) {
 		this.supplierNum = supplierNum;
 		this.inventoryNum = inventoryNum;
 		this.inventoryName = inventoryName;
 		this.supplierName = supplierName;
 		this.supplierPhone = supplierPhone;
 		this.supplierAddress = supplierAddress;
+		this.availableNum = availableNum;
 	}
 
 	public Supplier() {
@@ -32,6 +35,7 @@ public class Supplier {
 		this.supplierName = null;
 		this.supplierPhone = null;
 		this.supplierAddress = null;
+		this.availableNum = 0;
 	}
 
 	public String getSupplierName() {
@@ -69,5 +73,10 @@ public class Supplier {
 	public String getinventoryName() {
 		return inventoryName;
 	}
-
+	public int getavailableNum(){
+		return availableNum;
+	}
+	public void setavailableNum(int availableNum){
+		this.availableNum = availableNum;
+	}
 }
