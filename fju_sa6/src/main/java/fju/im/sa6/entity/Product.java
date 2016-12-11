@@ -9,32 +9,33 @@ public class Product {
 	private String productName;
 
 	private int productPrice;
-	
+
 	private int productSellMonth;
-	
+
 	private int productCost;
-	
-	private int typeName;
 
-	
+	private String typeName;
 
-	public Product(int productNum, int typeNum, String typeName, String productName, int productPrice, int productSellMonth, int productCost) {
+	public Product(int productNum, int typeNum, String typeName, String productName, int productPrice,
+			int productSellMonth, int productCost) {
 		this.productNum = productNum;
 		this.typeNum = typeNum;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productSellMonth = productSellMonth;
 		this.productCost = productCost;
-		
+		this.typeName = typeName;
+
 	}
-	
-	public Product(){
+
+	public Product() {
 		this.productNum = 0;
 		this.typeNum = 0;
 		this.productName = null;
 		this.productPrice = 0;
 		this.productSellMonth = 0;
 		this.productCost = 0;
+		this.typeName = null;
 	}
 
 	public String getProductName() {
@@ -53,8 +54,6 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 
-
-
 	public int getProductSellMonth() {
 		return productSellMonth;
 	}
@@ -70,19 +69,22 @@ public class Product {
 	public int getTypeNum() {
 		return typeNum;
 	}
-	public int getProductCost(){
+
+	public int getProductCost() {
 		return productCost;
 	}
-	public void setProductCost(int productCost){
+
+	public void setProductCost(int productCost) {
 		this.productCost = productCost;
 	}
-	
-	public int getTypeName() {
+
+	public String getTypeName() {
 		return typeName;
 	}
 
-	public void setTypeName(int typeName) {
+	public void setTypeName(String typeName) {
+
 		this.typeName = typeName;
 	}
-	
+
 }

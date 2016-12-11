@@ -1,3 +1,4 @@
+
 package fju.im.sa6.controller;
 
 import java.io.IOException;
@@ -69,24 +70,25 @@ public class InventoryController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/invertoryModify", method = RequestMethod.GET)
-	public ModelAndView invertoryModifyPage(@ModelAttribute("inventoryNum") int inventoryNum,HttpServletRequest request) {
+	public ModelAndView invertoryModifyPage(@ModelAttribute("inventoryNum") int inventoryNum,
+			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("invertoryModify");
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		ArrayList<Supplier> supplierList = null;
 		supplierList = supplierDAO.getList();
-		
-		Inventory temp = new Inventory(inventoryNum,0,0,null,null,0,null);
+
+		Inventory temp = new Inventory(inventoryNum, 0, 0, null, null, 0, null);
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		Inventory inv2 = inventoryDAO.get(temp);
-//		inventoryDAO.add(inv2);
-		model.addObject("inventory",inv2);
+		// inventoryDAO.add(inv2);
+		model.addObject("inventory", inv2);
 		model.addObject("supplierList", supplierList);
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/inventoryModify", method = RequestMethod.POST)
 	public ModelAndView invertoryModify(@ModelAttribute Inventory inv) {
 		ModelAndView model = new ModelAndView("redirect:/inventoryManage");
@@ -96,22 +98,19 @@ public class InventoryController {
 		return model;
 
 	}
-	
-	
 
-	
 	@RequestMapping(value = "/supplierModify", method = RequestMethod.GET)
-	public ModelAndView supplierModifyPage(@ModelAttribute("supplierNum") int supplierNum,HttpServletRequest request ) {
+	public ModelAndView supplierModifyPage(@ModelAttribute("supplierNum") int supplierNum, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("supplierModify");
-		Supplier temp = new Supplier(supplierNum,null,null,null,0);
+		Supplier temp = new Supplier(supplierNum, null, null, null, 0);
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		Supplier sup = supplierDAO.get(temp);
-		model.addObject("supplier",sup);
+		model.addObject("supplier", sup);
 
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/supplierModify", method = RequestMethod.POST)
 	public ModelAndView supplierModify(@ModelAttribute Supplier sup) {
 		ModelAndView model = new ModelAndView("redirect:/supplierManage");
@@ -121,7 +120,7 @@ public class InventoryController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/supplierAdd", method = RequestMethod.GET)
 	public ModelAndView supplierAdd() {
 		ModelAndView model = new ModelAndView("supplierAdd");
@@ -129,9 +128,7 @@ public class InventoryController {
 		return model;
 
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/supplierAdd", method = RequestMethod.POST)
 	public ModelAndView addNewSupplier(@ModelAttribute Supplier sup) {
 		ModelAndView model = new ModelAndView("redirect:/supplierManage");
@@ -141,21 +138,20 @@ public class InventoryController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/showSupplier", method = RequestMethod.GET)
-	public ModelAndView showSupplier(@ModelAttribute("supplierNum") int supplierNum,HttpServletRequest request  ) {
+	public ModelAndView showSupplier(@ModelAttribute("supplierNum") int supplierNum, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("showSupplier");
-		Supplier sup = new Supplier(supplierNum,null,null,null,0);
+		Supplier sup = new Supplier(supplierNum, null, null, null, 0);
 		ArrayList<Inventory> temp = null;
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
-		temp=inventoryDAO.getList(sup);
-		
-		model.addObject("supplier",sup);
-		model.addObject("invList",temp);
+		temp = inventoryDAO.getList(sup);
+
+		model.addObject("supplier", sup);
+		model.addObject("invList", temp);
 		return model;
 
 	}
-	
-	
+
 }

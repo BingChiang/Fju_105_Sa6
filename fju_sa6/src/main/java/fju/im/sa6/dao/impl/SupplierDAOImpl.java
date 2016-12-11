@@ -112,14 +112,14 @@ public class SupplierDAOImpl implements SupplierDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, searchSup.getSupplierNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				int setsupplierNum = (rs.getInt("supplier_num"));
 				String setsupplierName = (rs.getString("supplier_name"));
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
 				int setavailableNum = (rs.getInt(0));
-				sup = new Supplier(setsupplierNum, setsupplierName, setsupplierPhone,
-						setsupplierAddress, setavailableNum);
+				sup = new Supplier(setsupplierNum, setsupplierName, setsupplierPhone, setsupplierAddress,
+						setavailableNum);
 			}
 			rs.close();
 			smt.close();
@@ -148,14 +148,15 @@ public class SupplierDAOImpl implements SupplierDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				int setsupplierNum = (rs.getInt("supplier_num"));
 				String setsupplierName = (rs.getString("supplier_name"));
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
 				int setavailableNum = (rs.getInt("available_num"));
-				sup.add((new Supplier(setsupplierNum, setsupplierName,
-						setsupplierPhone, setsupplierAddress, setavailableNum)));
+				sup.add(new Supplier(setsupplierNum, setsupplierName, setsupplierPhone, setsupplierAddress,
+						setavailableNum));
+
 			}
 			rs.close();
 			smt.close();

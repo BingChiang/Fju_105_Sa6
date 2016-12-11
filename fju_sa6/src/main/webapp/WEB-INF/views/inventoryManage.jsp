@@ -36,7 +36,7 @@
 				<th>存貨名稱</th>
 				<th>供應商名稱</th>
 				<th>存貨數量</th>
-				<th>更新時間</th>
+				<!--  <th>更新時間</th>-->
 				<th></th>
 			</tr>
 			<c:forEach items="${inventoryList}" var="inv">
@@ -45,7 +45,6 @@
 					<td>${inv.inventoryName}</td>
 					<td>${inv.supplierName}</td>
 					<td>${inv.inventoryAmount}</td>
-					<td>${inv.update_date}</td>
 					<td><span style="margin-top: -5px;" class="badge"><a
 							class="inline" href="inventoryModify?inventoryNum=${inv.inventoryNum}"><span
 								class="glyphicon glyphicon-pencil" aria-hidden="true"

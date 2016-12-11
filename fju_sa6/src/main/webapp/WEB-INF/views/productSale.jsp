@@ -22,7 +22,7 @@
 	<div class="col-md-10 col-md-offset-2 main" style="margin-top: 50px;">
 		<div class="row">
 			<div class="col-md-7">
-				<c:forEach items="${typeList}" var = "pro">
+				<c:forEach items="${typeProList}" var = "pro">
 					<a href="addCart?productNum =${productNum}&typeNum=${pro.typeNum}">
 						<div class="col-md-2  btn-lg btn-primary" id="product">
 							<p>${pro.productName}</p>
@@ -32,7 +32,7 @@
 
 			</div>
 			<div class="col-md-5">
-				<c:forEach items="${typeProList}" var="type">
+				<c:forEach items="${typeList}" var="type">
 					<a href="productSale?typeNum=${type.typeNum}">
 						<div id="productType" class="col-md-2  btn-lg btn-primary">
 							<p>${type.typeName}</p>
