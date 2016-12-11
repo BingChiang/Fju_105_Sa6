@@ -27,7 +27,7 @@
 			<ul class="nav nav-sidebar">
 				<li
 					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/productSale.jsp' ? ' active' : ' ' }"><a
-					href="productSale">產品銷售</a></li>
+					href="productSale?typeNum=1">產品銷售</a></li>
 			</ul>
 			<ul class="nav nav-sidebar">
 

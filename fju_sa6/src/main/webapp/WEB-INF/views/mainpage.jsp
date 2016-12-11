@@ -22,7 +22,7 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
 		<h2>功能選擇</h2>
 		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-			<a href="productSale" role="button">
+			<a href="productSale?typeNum=1" role="button">
 				<p>點餐介面</p>
 			</a>
 		</div>

@@ -61,7 +61,7 @@ public class ProductController {
 	public ModelAndView productModify(@ModelAttribute("typeNum") int typeNum,HttpServletRequest request ) {
 		ModelAndView model = new ModelAndView(":productModify");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		Type temp = new Type(null,typeNum);
+		Type temp = new Type(null,typeNum,0);
 		Type temp2 = typeDAO.getType(temp);
 		model.addObject("type",temp2);
 		return model;
@@ -94,7 +94,7 @@ public class ProductController {
 		ArrayList<Type> typeList = null;
 		typeList = typeDAO.getList();
 		
-		Product temp = new Product(productNum,0,null,0,0,0);
+		Product temp = new Product(productNum,0,null,null,0,0,0);
 		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
 		Product temp2 = productDAO.get(temp);
 //		inventoryDAO.add(inv2);

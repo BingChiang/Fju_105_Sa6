@@ -43,7 +43,7 @@ public class SalesOrderController {
 //		long pid = product.getProductNum();
 //		System.out.println("pid="+pid);
 		ProductDAO productDAO = (ProductDAO)context.getBean("productDAO");
-		Product temp = new Product(productNum,0,null,0,0,0);
+		Product temp = new Product(productNum,0,null,null,0,0,0);
 		Product temp2;
 		temp2 = productDAO.get(temp);//retrieve all information with id
 		Cart shoppingCart = (Cart)context.getBean("Cart"); 
@@ -71,8 +71,8 @@ public class SalesOrderController {
 		
 //		List<Product> pList =  shoppingCart.getCart();
 //		List<Long> pList2 = new ArrayList<Long>();
-		
-		orderListDAO.add(shoppingCart);
+		OrderList temp = new OrderList()
+		orderListDAO.addorderlist(orderlist);
 		
 		shoppingCart.clean();
 //		for (int i=0; i<pList.size();i++){
