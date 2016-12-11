@@ -22,63 +22,24 @@
                 <div class="col-md-10 col-md-offset-2 main" style="margin-top:50px;">
                     <div class="row">
                         <div class="col-md-7">
-                            <a href="#">
+                            <c:forEach items="${typeList} var = "pro">
+                            <a href="addCart?productNum =${productNum}&typeNum=${pro.typeNum}">
                                 <div class="col-md-2  btn-lg btn-primary" id="product">
-                                    <p>staffme</p>
+                                    <p>${pro.productName}</p>
                                 </div>
                             </a>
-                            <a href="#">
-                                <div class="col-md-2  btn-lg btn-primary" id="product">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-2  btn-lg btn-primary" id="product">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-2  btn-lg btn-primary" id="product">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="col-md-2  btn-lg btn-primary" id="product">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
+                            </c:forEach>
+                            
                         </div>
                         <div class="col-md-5">
-                            <a href="#">
+                        <c:forEach items="${typeProList}" var="type">
+                            <a href="productSale?typeNum=${type.typeNum}">
                                 <div id="productType" class="col-md-2  btn-lg btn-primary">
-                                    <p>staffme</p>
+                                    <p>${type.typeName}</p>
                                 </div>
                             </a>
-                            <a href="#">
-                                <div id="productType" class="col-md-2  btn-lg btn-primary">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div id="productType" class="col-md-2  btn-lg btn-primary">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div id="productType" class="col-md-2  btn-lg btn-primary">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div id="productType" class="col-md-2  btn-lg btn-primary">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div id="productType" class="col-md-2  btn-lg btn-primary">
-                                    <p>staffme</p>
-                                </div>
-                            </a>
+                            </c:forEach>
+                            
                             <div>
                                 <table class="table">
                                     <tr>
@@ -86,13 +47,15 @@
                                         <th>價格</th>
                                         <th>刪除</th>
                                     </tr>
+                                    <c:forEach items="${cart}" var="cart">
                                     <tr>
-                                        <td>紅茶</td>
-                                        <td>25</td>
+                                        <td>${cart.productName}</td>
+                                        <td>${cart.productPrice}</td>
                                         <td>
                                             <a href="#" role="button" class="btn btn-sm btn-danger" style="margin-top:-5px;">刪除</a>
                                         </td>
                                     </tr>
+                                    </c:forEach>
                                     <tr>
                                         <td colspan="3">
                                             <hr>
@@ -100,8 +63,8 @@
                                     </tr>
                                     <tr>
                                         <td  class="Checkout">小計</td>
-                                        <td class="Checkout">50</td>
-                                        <td class="Checkout"> <a href="#" role="button" class="btn btn-sm btn-default" style="margin-top:-5px;">清除</a> <a href="#" role="button" class="btn btn-sm btn-primary" style="margin-top:-5px;">結帳</a></td>
+                                        <td class="Checkout">${cartTotal}</td>
+                                        <td class="Checkout"> <a href="cartClean" role="button" class="btn btn-sm btn-default" style="margin-top:-5px;">清除</a> <a href="#" role="button" class="btn btn-sm btn-primary" style="margin-top:-5px;">結帳</a></td>
                                     </tr>
                                 </table>
                                 

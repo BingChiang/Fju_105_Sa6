@@ -12,5 +12,5 @@ public interface TypeDAO {
 
 	public void set(Type setType);
 
-	public ArrayList<Type> getList(Type Type);
+	public ArrayList<Type> getList();
 }

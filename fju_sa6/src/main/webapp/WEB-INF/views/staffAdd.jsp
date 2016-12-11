@@ -25,7 +25,7 @@
                         
                     <div class="col-md-12">
                         <br>
-                        <form class="form-horizontal" role="form" action="#" method="post">
+                        <form class="form-horizontal" role="form" action="staffAdd" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">員工姓名</label>
                                 <div class="col-sm-8">

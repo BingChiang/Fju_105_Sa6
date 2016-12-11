@@ -23,7 +23,7 @@
                     <div class="col-md-12">
                         <h2>工時查詢</h2>
                         <hr>
-                        <form action="#" method="post">
+                        <form action="manageWorktimeSearch" method="post">
                             <input type="date" name="searchTime" class="form-control" style="text-align:center;"> 
                             <button type="submit" class="btn btn-primary" style="margin-left:45%">確認</button>
                             </form>
@@ -35,22 +35,15 @@
                             <th>員工名稱</th>
                             <th>工作時數</th>
                         </tr>
+                        <c:forEach items="${worktime}" var="worktime">
                         <tr>
-                            <td>0001</td>
-                            <td>name</td>
-                            <td>3</td>
+                            <td>${worktime.staffNum}</td>
+                            <td>${worktime.staffName}</td>
+                            <td>${worktime.daywork}</td>
                             
                         </tr>
-                        <tr>
-                            <td>0002</td>
-                            <td>name2</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>0003</td>
-                            <td>name3</td>
-                            <td>7</td>
-                        </tr>
+                        </c:forEach>
+                        
                     </table>
                 </div>
             </div>

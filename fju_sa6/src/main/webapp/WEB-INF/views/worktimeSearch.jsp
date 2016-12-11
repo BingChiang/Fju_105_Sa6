@@ -36,25 +36,16 @@
                             <th>上班時間</th>
                             <th>下班時間</th>
                         </tr>
+                        <c:forEach items="${worktime}" var="worktime">
                         <tr>
-                            <td>0001</td>
-                            <td>name</td>
-                            <td></td>
-                            <td></td>
+                            <td>${worktime.staffNum}</td>
+                            <td>${worktime.staffName}</td>
+                            <td>${worktime.onwork}</td>
+                            <td>${worktime.offwork}</td>
                            
                         </tr>
-                        <tr>
-                            <td>0002</td>
-                            <td>name2</td>
-                            <td></td>
-                           <td></td>
-                        </tr>
-                        <tr>
-                            <td>0003</td>
-                            <td>name3</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        </c:forEach>
+                        
                     </table>
                 </div>
             </div>

@@ -24,10 +24,11 @@
                         <h2>新增供應商</h2></div>
                     <div class="col-md-12">
                         <br>
-                        <form class="form-horizontal" role="form" action="#" method="post">
+                        <form class="form-horizontal" role="form" action="supplierAdd" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">供應商名稱</label>
                                 <div class="col-sm-8">
+                                	<input type="hidden" name="supplierNum" value=0 ></input>
                                     <input type="text" class="form-control" name="supplierName" placeholder="輸入供應商名稱" value=""> </div>
                             </div>
                             <div class="form-group">

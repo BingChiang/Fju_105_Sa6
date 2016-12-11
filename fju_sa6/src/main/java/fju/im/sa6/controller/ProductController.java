@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.Type;
 import fju.im.sa6.dao.ManagerDAO;
+import fju.im.sa6.dao.OrderListDAO;
 import fju.im.sa6.dao.ProductDAO;
 import fju.im.sa6.dao.impl.ProductDAOImpl;
 
@@ -36,6 +38,18 @@ public class ProductController {
 	ApplicationContext context =  new ClassPathXmlApplicationContext("spring-module.xml");
 	
 	//private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+	
+	
+	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
+	public ModelAndView mainpage(int orderlistNum) {
+		ModelAndView model = new ModelAndView("orderDetail");
+		OrderList temp = new OrderList(orderlistNum,0,null,null);
+		OrderListDAO orderListDAO = (OrderListDAO)context.getBean("OrderListDAO");
+		temp = orderListDAO.get();
+		
+		model.addObject("order",temp);
+		return model;
+	}
 	
 
 	@RequestMapping(value = "/product", method = RequestMethod.GET)

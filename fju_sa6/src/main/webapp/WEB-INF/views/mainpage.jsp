@@ -27,12 +27,12 @@
                         </a>
                     </div>
                     <div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-                        <a href="#" role="button">
+                        <a href="onwork" role="button">
                             <p>上班打卡</p>
                         </a>
                     </div>
                     <div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-                        <a href="#" role="button">
+                        <a href="offwork" role="button">
                             <p>下班打卡</p>
                         </a>
                     </div>
@@ -52,7 +52,7 @@
                         </a>
                     </div>
                     <div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-                        <a href="#" role="button">
+                        <a href="amendWork" role="button">
                             <p>補打卡</p>
                         </a>
                     </div>

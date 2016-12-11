@@ -37,27 +37,30 @@ public class SalesOrderController {
 	private Cart shoppingCart;
 	
 	@RequestMapping(value = "/addCart", method = RequestMethod.GET)
-	public ModelAndView addShoppingCart(@ModelAttribute Product product){
+	public ModelAndView addShoppingCart(int productNum,int typeNum){
 		ModelAndView model = new ModelAndView("redirect:/productSale");
 		//only id is passed
-		long pid = product.getProductNum();
-		System.out.println("pid="+pid);
+//		long pid = product.getProductNum();
+//		System.out.println("pid="+pid);
 		ProductDAO productDAO = (ProductDAO)context.getBean("productDAO");
-		product = productDAO.get(product);//retrieve all information with id
+		Product temp = new Product(productNum,0,null,0,0,0);
+		Product temp2;
+		temp2 = productDAO.get(temp);//retrieve all information with id
 		Cart shoppingCart = (Cart)context.getBean("Cart"); 
-		shoppingCart.add(product);
+		shoppingCart.add(temp2);
 		//System.out.println(shoppingCart.count());
+		model.addObject("typeNum",typeNum);
 		return model;
 	}
-	
-	@RequestMapping(value = "/showCart", method = RequestMethod.GET)
-	public ModelAndView showShoppingCart(){
-		ModelAndView model = new ModelAndView("showCart");
-		//ShoppingCart shoppingCart = (ShoppingCart)context.getBean("shoppingCart");
-		List<Product> content =  shoppingCart.getCart();
-		model.addObject("shoppingCart",content);
-		return model;
-	}
+//	
+//	@RequestMapping(value = "/showCart", method = RequestMethod.GET)
+//	public ModelAndView showShoppingCart(){
+//		ModelAndView model = new ModelAndView("showCart");
+//		//ShoppingCart shoppingCart = (ShoppingCart)context.getBean("shoppingCart");
+//		List<Product> content =  shoppingCart.getCart();
+//		model.addObject("shoppingCart",content);
+//		return model;
+//	}
 	
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public ModelAndView checkout(){

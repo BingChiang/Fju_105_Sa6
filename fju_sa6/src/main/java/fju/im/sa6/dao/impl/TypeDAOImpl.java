@@ -101,19 +101,21 @@ public class TypeDAOImpl implements TypeDAO {
 	}
 
 	@Override
-	public ArrayList<Type> getList(Type Type) {
+	public ArrayList<Type> getList() {
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM type ";
-		Type typ = null;
+		ArrayList<Type> arr = new ArrayList<Type> ();
 		try {
-
+			Type type = null;
+			
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setTypenum = (rs.getInt("type_num"));
 				String setTypename = (rs.getString("type_name"));
-				typ = new Type(setTypename, setTypenum);
+				type = new Type(setTypename, setTypenum);
+				arr.add(type);
 			}
 			rs.close();
 			smt.close();
@@ -130,6 +132,6 @@ public class TypeDAOImpl implements TypeDAO {
 			}
 
 		}
-		return getList(typ);
+		return arr;
 	}
 }

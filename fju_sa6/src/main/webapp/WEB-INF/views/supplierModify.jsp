@@ -24,27 +24,27 @@
                         <h2>修改供應商</h2></div>
                     <div class="col-md-12">
                         <br>
-                        <form class="form-horizontal" role="form" action="#" method="post">
+                        <form class="form-horizontal" role="form" action="supplierModify" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">供應商編號</label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static">1232</p>
-                                    <input type="hidden" name="supplierNum" value=""> </div>
+                                    <p class="form-control-static">${supplier.supplierNum}</p>
+                                    <input type="hidden" name="supplierNum" value="${supplier.supplierNum}"> </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">供應商名稱</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="supplierName" placeholder="輸入供應商名稱" value="green"> </div>
+                                    <input type="text" class="form-control" name="supplierName" placeholder="輸入供應商名稱" value="${supplier.supplierName}"> </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">供應商電話</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="supplierPhone" placeholder="輸入供應商電話" value="green"> </div>
+                                    <input type="text" class="form-control" name="supplierPhone" placeholder="輸入供應商電話" value="${supplier.supplierPhone}"> </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">供應商地址</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="supplierAddress" placeholder="輸入供應商地址" value="green"> </div>
+                                    <input type="text" class="form-control" name="supplierAddress" placeholder="輸入供應商地址" value="${supplier.supplierAddress}"> </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">

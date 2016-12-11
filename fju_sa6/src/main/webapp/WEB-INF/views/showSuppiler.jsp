@@ -23,18 +23,19 @@
                     <div class="col-md-12 form-group">
                         <h2>查看供應商供應存貨</h2>
                         <hr> 
-                        <h3>供應商名稱：124</h3></div>
+                        <h3>供應商名稱：${supplier.supplierName}</h3></div>
                     <table class="table table-striped">
                         <tr>
 
                             <th>存貨編號</th>
                             <th>存貨名稱</th>
                         </tr>
+                        <c:forEach items="${invList}" var="inv">
                         <tr>
-
-                            <td>0002</td>
-                            <td> teatea</td>
+                            <td>${inv.inventoryNum}</td>
+                            <td>${inv.inventoryName}</td>
                         </tr>
+                        </c:forEach>
                     </table>
                     <button class="btn btn-dafault" type="button" onClick="javascript:history.back(1)">按此返回上頁 </button>
                 </div>

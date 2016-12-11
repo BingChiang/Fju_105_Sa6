@@ -23,7 +23,7 @@
                     <div class="col-md-12">
                         <h2>查看月盈餘</h2>
                         <hr>
-                        <form action="#" method="post">
+                        <form action="showMonth" method="post">
                             <input type="month" name="searchTime" class="form-control" style="text-align:center;"> 
                             <button type="submit" class="btn btn-primary" style="margin-left:45%">確認</button>
                             </form>
@@ -34,7 +34,7 @@
                             <th>該月盈餘狀況</th>
                         </tr>
                         <tr>
-                            <td>+1234</td>
+                            <td>${monthTotal}</td>
 
                            
                         </tr>

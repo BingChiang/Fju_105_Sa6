@@ -28,15 +28,15 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">員工編號</label>
                                 <div class="col-sm-8">
-                                    <p class="form-control-static">1232</p>
+                                    <p class="form-control-static">${staff.staffNum}</p>
                                 </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">員工姓名</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="staffName" placeholder="員工姓名" value="0001"> 
-                                         <input type="hidden" name="staffNum" value=""></div>
+                                        <input type="text" class="form-control" name="staffName" placeholder="員工姓名" value="${staff.staffName}"> 
+                                         <input type="hidden" name="staffNum" value="${staff.staffNum}"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">員工階級</label>

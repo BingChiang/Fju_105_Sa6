@@ -4,6 +4,8 @@ import fju.im.sa6.dao.WorktimeDAO;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.WorkTime;
 import java.sql.*;
+import java.util.ArrayList;
+
 import javax.sql.DataSource;
 
 public class WorktimeDAOImpl implements WorktimeDAO {
@@ -16,8 +18,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		this.dataSource = dataSource;
 	}
 
-	@Override
-	public double getDayWorktime(StaffDefault staffDefault) {
+	public ArrayList<StaffDefault> getDayWorktime(Date date) {
 		// TODO Auto-generated method stub
 		double dayworktime = 0;
 		String sql = "SELECT * FROM staff WHERE staff_num = ?";
@@ -102,7 +103,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	}
 
 	@Override
-	public void amendOnWork(StaffDefault staffDefault, Date date, Date on) {
+	public void amendOnWork(StaffDefault staffDefault, Date date ) {
 		// TODO Auto-generated method stub
 		String sql = "INSERT into worktime (staff_num, work_date, onwork_time) VALUES(?, ?, ?)";
 		try {
@@ -110,7 +111,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
 			smt.setDate(2, date);
-			smt.setDate(2, on);
 			smt.executeUpdate();
 			smt.close();
 			// System.out.println("id ="+aProduct.getId());
@@ -130,7 +130,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	}
 
 	@Override
-	public void amendOffWork(StaffDefault staffDefault, Date date, Date off) {
+	public void amendOffWork(StaffDefault staffDefault, Date date ) {
 		// TODO Auto-generated method stub
 		String sql = "INSERT into worktime (staff_num, work_date, offwork_time) VALUES(?, ?, ?)";
 		try {
@@ -138,7 +138,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
 			smt.setDate(2, date);
-			smt.setDate(2, off);
 			smt.executeUpdate();
 			smt.close();
 			// System.out.println("id ="+aProduct.getId());
@@ -157,7 +156,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	}
 
 	@Override
-	public WorkTime searchworktime(WorkTime workrecord, WorkTime workdate) {
+	public WorkTime searchworktime(Date date) {
 		String sql = "SELECT * FROM worktime WHERE work_date = ?";
 		WorkTime worktime = null;
 		try {
@@ -189,6 +188,12 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		}
 		return worktime;
 
+	}
+
+	@Override
+	public double getDayWorktime(StaffDefault staffDefault) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -22,10 +22,10 @@
                     <div class="col-md-12">
                         <h2>補打卡</h2>
                         <hr>
-                        <form action="#" method="post">
-                            <input type="datetime-local" name="searchTime" class="form-control" style="text-align:center;"> <br>
-                            <button type="submit" name="onwork" class="btn btn-success" style="margin-left:40%">補上班</button>
-                            <button type="submit" name="offwork" class="btn btn-success" style="margin-left:5%">補下班</button>
+                        <form action="amend" method="post">
+                            <input type="datetime-local" name="date" class="form-control" style="text-align:center;"> <br>
+                            <button type="submit" name="submit" value=1 class="btn btn-success"  style="margin-left:40%">補上班</button>
+                            <button type="submit" name="submit" value=2 class="btn btn-success" style="margin-left:5%">補下班</button>
                             </form>
                             <hr><br>
                     </div>
