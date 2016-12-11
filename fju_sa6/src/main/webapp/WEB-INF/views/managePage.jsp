@@ -22,7 +22,7 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-12 col-md-offset-2 main">
 		<h2>管理者選項</h2>
 		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-			<a href="productSale" role="button">
+			<a href="showMonth" role="button">
 				<p>盈餘查詢</p>
 			</a>
 		</div>

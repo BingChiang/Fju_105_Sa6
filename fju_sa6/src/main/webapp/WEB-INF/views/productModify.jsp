@@ -26,30 +26,32 @@
 		</div>
 		<div class="col-md-12">
 			<br>
-			<form class="form-horizontal" role="form" action="#" method="post">
+			<form class="form-horizontal" role="form" action="productModify"
+				method="post">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">產品編號</label>
 					<div class="col-sm-8">
-						<p class="form-control-static">1232</p>
-						<input type="hidden" name="productNum" value="">
+						<p class="form-control-static">${product.productNum}</p>
+						<input type="hidden" name="productNum"
+							value="${product.productNum}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">產品名稱</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="productName"
-							placeholder="產品姓名" value="greentea">
+							placeholder="產品姓名" value="${product.productName}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">產品類型</label>
 					<div class="col-sm-8">
 						<select name="productType" class="form-control">
-							<option value="">1</option>
-							<option value="">2</option>
-							<option value="">3</option>
-							<option value="">4</option>
-						</select> <a role="button" href="#" class="btn btn-success">新增類別</a>
+							<c:forEach items="typeList" var="type">
+								<option value="#{type.typeNum}">Type.typeNum</option>
+							</c:forEach>
+							
+						</select> <a role="button" href="productTypeAdd" class="btn btn-success">新增類別</a>
 
 					</div>
 				</div>
@@ -57,14 +59,14 @@
 					<label class="col-sm-2 control-label">產品價格</label>
 					<div class="col-sm-8">
 						<input type="number" class="form-control" name="productPrice"
-							placeholder="產品價格" value="25">
+							placeholder="產品價格" value="${product.productPrice}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">產品成本</label>
 					<div class="col-sm-8">
 						<p class="form-control-static">8</p>
-						<input type="hidden" name="productCost" value="">
+						<input type="hidden" name="productCost" value="${product.productCose">
 					</div>
 				</div>
 				<div class="form-group">

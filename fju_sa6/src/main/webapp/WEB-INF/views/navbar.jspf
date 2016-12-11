@@ -52,11 +52,11 @@
 					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/managePage.jsp' ? ' active' : ' ' }"><a
 					href="managePage">管理者功能</a></li>
 			</ul>
-			<ul>
-				<li>${newaccount.username}你好</li>
+			<ul class="nav nav-sidebar" >
+				<li><a>你好${newaccount.staffName}</a></li>
 			</ul>
 			<ul class="nav nav-sidebar">
-				<li><a href="">登出</a></li>
+				<li><a href="logout">登出</a></li>
 			</ul>
 
 		</div>

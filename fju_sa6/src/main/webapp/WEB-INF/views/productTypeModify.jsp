@@ -27,12 +27,12 @@
 
 		<div class="col-md-12">
 			<br>
-			<form class="form-horizontal" role="form" action="#" method="post">
+			<form class="form-horizontal" role="form" action="productTypeModify" method="post">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">類別編號</label>
 					<div class="col-sm-8">
-						<p class="form-control-static">1232</p>
-						<input type="hidden" name="typeNum" value="">
+						<p class="form-control-static">${type.typeNum}</p>
+						<input type="hidden" name="typeNum" value="${type.typeNum}">
 					</div>
 				</div>
 
@@ -40,7 +40,7 @@
 					<label class="col-sm-2 control-label">類別名稱</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="typeName"
-							placeholder="輸入類別名稱" value="green">
+							placeholder="輸入類別名稱" value="${type.typeName}">
 					</div>
 				</div>
 

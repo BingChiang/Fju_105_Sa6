@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -138,6 +140,15 @@ public class pageController {
 		model.addObject("productList", proList);
 		return model;
 	}
+	@RequestMapping(value = "/productTypeManage", method = RequestMethod.GET)
+	public ModelAndView productTypeManage() {
+		ModelAndView model = new ModelAndView("productTypeManage");
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		ArrayList<Type> typeList = null;
+		typeList = typeDAO.getList();
+		model.addObject("typeList", typeList);
+		return model;
+	}
 
 	@RequestMapping(value = "/showOrder", method = RequestMethod.GET)
 	public ModelAndView showOrder() {
@@ -196,7 +207,7 @@ public class pageController {
 	}
 	
 	@RequestMapping(value = "/showMonth", method = RequestMethod.GET)
-	public ModelAndView showMonth(Date searchTime) {
+	public ModelAndView showMonth(@ModelAttribute("searchTime") Date searchTime,HttpServletRequest request ) {
 		ModelAndView model = new ModelAndView("showMonth");
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		double monthTotal = 0;
