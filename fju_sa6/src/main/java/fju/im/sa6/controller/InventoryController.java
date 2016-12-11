@@ -74,7 +74,7 @@ public class InventoryController {
 		ArrayList<Supplier> supplierList = null;
 		supplierList = supplierDAO.getList();
 		
-		Inventory temp = new Inventory(inventoryNum,0,0,null,null, 0,null);
+		Inventory temp = new Inventory(inventoryNum,0,0,null,0,null);
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		Inventory inv2 = inventoryDAO.get(temp);
 //		inventoryDAO.add(inv2);

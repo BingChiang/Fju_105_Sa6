@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class AccountController {
 	
 	@Autowired
-	static StaffDefault account_session = new Staff(6,"allen",0,null, 0);
+	static StaffDefault account_session = new Staff(6,"allen",0,0);
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 
@@ -115,7 +115,7 @@ public class AccountController {
 		ModelAndView model = new ModelAndView("redirect:mainpage");
 //		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-		worktimeDAO.amendOnWork(account_session, date, date);
+		worktimeDAO.amendOnWork(account_session, date);
 		return model;
 	}
 
@@ -124,7 +124,7 @@ public class AccountController {
 		ModelAndView model = new ModelAndView("redirect:mainpage");
 //		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-		worktimeDAO.amendOffWork(account_session, date, date);
+		worktimeDAO.amendOffWork(account_session, date);
 		return model;
 	}
 
@@ -178,7 +178,7 @@ public class AccountController {
 	public ModelAndView staffModify(int staffNum) {
 		ModelAndView model = new ModelAndView("staffModify");
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-		StaffDefault temp = new Staff(staffNum,null,0,null, 0);
+		StaffDefault temp = new Staff(staffNum,null,0,0);
 		StaffDefault staff = staffDefaultDAO.get(temp);
 		model.addObject("staff",staff);
 		return model;

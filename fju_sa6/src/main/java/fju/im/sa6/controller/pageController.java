@@ -34,7 +34,7 @@ import fju.im.sa6.entity.Type;
 //@SessionAttributes("newaccount")
 
 public class pageController {
-	static StaffDefault newaccount = new Staff(6,"allen",0,null, 0);
+	static StaffDefault newaccount = new Staff(6,"allen",0,0);
 
 	static Cart shoppingCart;
 
@@ -138,6 +138,15 @@ public class pageController {
 		model.addObject("productList", proList);
 		return model;
 	}
+	@RequestMapping(value = "/productTypeManage", method = RequestMethod.GET)
+	public ModelAndView productTypeManage() {
+		ModelAndView model = new ModelAndView("productTypeManage");
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		ArrayList<Type> typeList = null;
+		typeList = typeDAO.getList();
+		model.addObject("typeList", typeList);
+		return model;
+	}
 
 	@RequestMapping(value = "/showOrder", method = RequestMethod.GET)
 	public ModelAndView showOrder() {
@@ -200,7 +209,7 @@ public class pageController {
 		ModelAndView model = new ModelAndView("showMonth");
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		double monthTotal = 0;
-		monthTotal = managerDAO.monthearntotal(searchTime);
+		monthTotal = managerDAO.monthearntotal();
 				
 		model.addObject("monthTotal",monthTotal);	
 		return model;
