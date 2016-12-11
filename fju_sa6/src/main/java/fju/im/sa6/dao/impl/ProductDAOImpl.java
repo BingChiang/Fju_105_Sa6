@@ -122,8 +122,12 @@ public class ProductDAOImpl implements ProductDAO {
 				int setproduct_price = (rs.getInt("product_price"));
 				int setproduct_sell_month = (rs.getInt("product_sell_month"));
 				int setproductCost = (rs.getInt("product_cost"));
+<<<<<<< HEAD
 				pro = new Product(setproduct_Num, settype_Num, settype_Name, setproduct_Name, setproduct_price,
 						setproduct_sell_month, setproductCost);
+=======
+				pro = new Product(setproduct_Num, settype_Num, settype_Name, setproduct_Name, setproduct_price,setproduct_sell_month, setproductCost);
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 			}
 			rs.close();
 			smt.close();
@@ -147,14 +151,21 @@ public class ProductDAOImpl implements ProductDAO {
 	public ArrayList<Product> getTypeList(Type type) {
 		ArrayList<Product> productArr = new ArrayList<Product>();
 		Product temp;
+<<<<<<< HEAD
 		int typenum = type.getTypeNum();
 		String typeName = null;
 		String sql = "SELECT * FROM product Where type_num ="+typenum;
+=======
+
+		String sql = "SELECT * FROM product Where type_num = ?";
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 		String sql1 = "SELECT type_name FROM type WHERE type_num=?";
 		try {
 			conn = dataSource.getConnection();
+			conn1 = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
+<<<<<<< HEAD
 
 			while (rs.next()) {
 
@@ -178,9 +189,20 @@ public class ProductDAOImpl implements ProductDAO {
 						productcost));
 				rs1.close();
 				smt1.close();
+=======
+			if (rs.next()) {
+				smt1.setInt(1, rs.getInt("type_num"));
+				smt1 = conn1.prepareStatement(sql1);
+				rs1 = smt1.executeQuery();
+				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs1.getString("type_name"), rs.getString("product_name"),
+						rs.getInt("product_price"),rs.getInt("product_sell_month"), rs.getInt("product_cost"));
+				productArr.add(temp);
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 			}
 			rs.close();
 			smt.close();
+			rs1.close();
+			smt1.close();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -200,14 +222,21 @@ public class ProductDAOImpl implements ProductDAO {
 	public ArrayList<Product> getList() {
 		// TODO Auto-generated method stub
 		ArrayList<Product> productArr = new ArrayList<Product>();
+<<<<<<< HEAD
 		int typenum = 0;
 		String typeName = null;
+=======
+
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 		String sql = "SELECT * FROM product ";
 		String sql1 = "SELECT type_name FROM type WHERE type_num=?";
 		try {
 			conn = dataSource.getConnection();
+			conn1 = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
+			smt1 = conn1.prepareStatement(sql1);
 			rs = smt.executeQuery();
+<<<<<<< HEAD
 
 			while (rs.next()) {
 
@@ -231,6 +260,19 @@ public class ProductDAOImpl implements ProductDAO {
 						productcost));
 				rs1.close();
 				smt1.close();
+=======
+			if (rs.next()) {
+				smt1.setInt(1, rs.getInt("type_num"));
+				rs1 = smt1.executeQuery();
+				int productNum = (rs.getInt("product_num"));
+				int typeNum = (rs.getInt("type_num"));
+				String typeName = (rs1.getString("type_name"));
+				String productName = (rs.getString("product_name"));
+				int productprice = (rs.getInt("product_price"));
+				int productsellmonth = (rs.getInt("product_sell_month"));
+				int productcost = (rs.getInt("product_cost"));
+				productArr.add(new Product(productNum,typeNum,typeName,productName,productprice,productsellmonth,productcost));
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 			}
 			rs.close();
 			smt.close();

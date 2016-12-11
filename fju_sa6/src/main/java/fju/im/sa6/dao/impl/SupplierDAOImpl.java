@@ -154,8 +154,13 @@ public class SupplierDAOImpl implements SupplierDAO {
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
 				int setavailableNum = (rs.getInt("available_num"));
+<<<<<<< HEAD
 				sup.add(new Supplier(setsupplierNum, setsupplierName,
 						setsupplierPhone, setsupplierAddress, setavailableNum));
+=======
+				sup.add((new Supplier(setsupplierNum, setsupplierName,
+						setsupplierPhone, setsupplierAddress, setavailableNum)));
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 			}
 			rs.close();
 			smt.close();

@@ -61,4 +61,8 @@ public class Orderitem {
 	}
 
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6

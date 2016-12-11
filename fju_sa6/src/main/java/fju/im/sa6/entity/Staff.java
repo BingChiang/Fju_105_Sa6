@@ -12,4 +12,8 @@ public class Staff extends StaffDefault {
 		// TODO Auto-generated constructor stub
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6

@@ -14,7 +14,11 @@ public class Product {
 	
 	private int productCost;
 	
+<<<<<<< HEAD
 	private String typeName;
+=======
+	private int typeName;
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 
 	
 
@@ -79,11 +83,19 @@ public class Product {
 		this.productCost = productCost;
 	}
 	
+<<<<<<< HEAD
 	public String getTypeName() {
 		return typeName;
 	}
 
 	public void setTypeName(String typeName) {
+=======
+	public int getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(int typeName) {
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 		this.typeName = typeName;
 	}
 	

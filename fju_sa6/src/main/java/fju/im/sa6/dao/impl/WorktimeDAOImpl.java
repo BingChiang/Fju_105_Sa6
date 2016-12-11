@@ -293,7 +293,11 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				smt2.setInt(1, rs.getInt("staff_num"));
+<<<<<<< HEAD
 				rs2 = smt2.executeQuery();
+=======
+				rs2 = smt2 .executeQuery();
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 				int setstaffNum = (rs.getInt("staff_num"));
 				Date setworkDate = (rs.getDate("work_date"));
 				Date setonworkTime = (rs.getDate("onwork_time"));
