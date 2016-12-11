@@ -24,14 +24,14 @@
 		<div class="col-md-12 form-group">
 			<h2>查看訂單詳情</h2>
 			<hr>
-			<h3>訂單編號：${order.orderlistNum}</h3>
+			<h3></h3>
 		</div>
 		<table class="table table-striped">
 			<tr>
 				<th>產品名稱</th>
 				<th>產品價格</th>
 			</tr>
-			<c:forEach items="${order.orderList}" var="pro">
+			<c:forEach items="${order}" var="pro">
 				<tr>
 					<td>${pro.productName}</td>
 					<td>${pro.productPrice}</td>
