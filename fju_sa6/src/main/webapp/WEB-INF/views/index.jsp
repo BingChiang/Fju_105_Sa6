@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>index</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 <link href="css/dashboard.css" rel="stylesheet">
 <script src="js/ie-emulation-modes-warning.js"></script>
 </head>
@@ -21,14 +22,13 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 		style="margin-top: 30px;">
 		<h2>請選擇登入員工</h2>
+		
 		<c:forEach items="${staffList}" var="staff">
-
-			<a href="login?staffNum=${staff.staffNum }" role="button">
+			<a href="login?staffNum=${staff.staffNum}" role="button">
 				<div class="col-sm-3 btn-lg btn-primary" id="staffName">
 					<p>${staff.staffName}</p>
 				</div>
 			</a>
-
 		</c:forEach>
 	</div>
 	</div>

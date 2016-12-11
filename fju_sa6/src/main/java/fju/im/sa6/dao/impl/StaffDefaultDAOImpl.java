@@ -38,7 +38,7 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 				String setStaffName = (rs.getString("staff_name"));
 				int setStaffLv = (rs.getInt("staff_lv"));
 
-				StaffDefault2 = new Staff(setStaffNum,setStaffName,setStaffLv,null,0);
+				StaffDefault2 = new Staff(setStaffNum,setStaffName,setStaffLv,0);
 			}
 			rs.close();
 			smt.close();
@@ -69,7 +69,7 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 				int setstaffnum = (rs.getInt("staff_num"));
 				int setstafflv = (rs.getInt("staff_lv"));
 				String setstaffname = (rs.getString("staff_name"));
-				arr.add(new Staff(setstaffnum,setstaffname,setstafflv,null,0));
+				arr.add(new Staff(setstaffnum,setstaffname,setstafflv,0));
 				
 
 			}

@@ -26,16 +26,17 @@ import fju.im.sa6.entity.Cart;
 import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
+import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.Supplier;
 import fju.im.sa6.entity.Type;
 @Controller
-@SessionAttributes("newaccount")
+//@SessionAttributes("newaccount")
 
 public class pageController {
+	static StaffDefault newaccount = new Staff(6,"allen",0,0);
 
-	@Autowired
-	private Cart shoppingCart;
+	static Cart shoppingCart;
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 
@@ -43,61 +44,66 @@ public class pageController {
 	public ModelAndView indexLoginpage() {
 		System.out.print("1234567898765432");
 		ModelAndView model = new ModelAndView("index");
-//		ArrayList<StaffDefault> staffList = null;
-//		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-//		staffList = staffDefaultDAO.getList();
-//		model.addObject("staffList", staffList);
+		ArrayList<StaffDefault> staffList = null;
+		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+		staffList = staffDefaultDAO.getList();
+		model.addObject("staffList", staffList);
 		return model;
 	}
 
+	@RequestMapping(value = "/mainpage", method = RequestMethod.GET)
+	public ModelAndView mainpage() {
+		ModelAndView model = new ModelAndView("mainpage");
 
+		return model;
+	}
 
 	
 	
 	
 
 	// *****
-	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
-	public ModelAndView productSale() {
-		ModelAndView model = new ModelAndView("redirect:productSale");
-		// ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-		// TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		// ArrayList<Product> typeProList = null;
-		// ArrayList<Type> typeList = null;
-		//
-		// typeList = typeDAO.getList();
-		model.addObject("typeNum", 1);
-
-		return model;
-	}
-
-	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
-	public ModelAndView productSale(int typeNum) {
-		ModelAndView model = new ModelAndView("productSale");
-		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		ArrayList<Product> typeProList = null;
-		ArrayList<Type> typeList = null;
-
-		typeList = typeDAO.getList();
-
-		Type temp = null;
-
-		temp = new Type(null, typeNum);
-		typeProList = productDAO.getTypeList(temp);
-
-		model.addObject("typeList", typeList);
-		model.addObject("typeProList", typeProList);
-
-		List<Product> content = shoppingCart.getCart();
-		int cartTotal = 0;
-		cartTotal = shoppingCart.orderTotal();
-		model.addObject("cart", content);
-		model.addObject("cartTotal", cartTotal);
-		
-		return model;
-	}
-	
+//	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
+//	public ModelAndView productSale() {
+//		ModelAndView model = new ModelAndView("redirect:productSale");
+//		// ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+//		// TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+//		// ArrayList<Product> typeProList = null;
+//		// ArrayList<Type> typeList = null;
+//		//
+//		// typeList = typeDAO.getList();
+//		model.addObject("typeNum", 1);
+//
+//		return model;
+//	}
+//
+//	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
+//	public ModelAndView productSale(int typeNum) {
+//		ModelAndView model = new ModelAndView("productSale");
+//		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+//		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+//		ArrayList<Product> typeProList = null;
+//		ArrayList<Type> typeList = null;
+//
+//		typeList = typeDAO.getList();
+//
+//		Type temp = null;
+//
+//		temp = new Type(null, typeNum);
+//		typeProList = productDAO.getTypeList(temp);
+//
+//		model.addObject("typeList", typeList);
+//		model.addObject("typeProList", typeProList);
+//
+//		List<Product> content = shoppingCart.getCart();
+//		int cartTotal = 0;
+//		cartTotal = shoppingCart.orderTotal();
+//		model.addObject("cart", content);
+//		model.addObject("cartTotal", cartTotal);
+//		
+//		return model;
+//	}
+//	
 	@RequestMapping(value = "/cartClean", method = RequestMethod.GET)
 	public ModelAndView cartClean() {
 		ModelAndView model = new ModelAndView("redirect:productSale");

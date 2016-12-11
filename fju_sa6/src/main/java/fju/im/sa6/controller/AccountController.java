@@ -29,23 +29,23 @@ import java.util.ArrayList;
 //these methods are called after /j_spring_security_check
 
 @Controller
-@SessionAttributes("newaccount")
+//@SessionAttributes("newaccount")
 public class AccountController {
 	
 	@Autowired
-	StaffDefault account_session ;
+	static StaffDefault account_session = new Staff(6,"allen",0,0);
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(int staffNum) {
+	public ModelAndView login() {
 		ModelAndView model = new ModelAndView("redirect:/mainpage");// mapping page
-		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-		StaffDefault temp = new Staff(staffNum, null, 0, null, 0);
-		StaffDefault staff = staffDefaultDAO.get(temp);
+//		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+//		StaffDefault temp = new Staff(staffNum,"",0,0);
+//		StaffDefault staff = staffDefaultDAO.get(temp);
 		model = new ModelAndView("redirect:/mainpage");
-		account_session = staff;
+//		account_session = staff;
 		// session add
 		model.addObject("newaccount", account_session);
 		return model;
@@ -151,20 +151,20 @@ public class AccountController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.GET)
-	public ModelAndView worktimeSearch(Date searchTime) {
-		ModelAndView model = new ModelAndView("worktimeSearch");
-		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-		ArrayList<WorkTime> arr ;	
-		if(searchTime == null){
-				arr = new ArrayList<WorkTime>();
-			}
-		else{
-			arr =worktimeDAO.searchworktime(searchTime);
-		}
-		model.addObject("worktime",arr);	
-		return model;
-	}
+//	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.GET)
+//	public ModelAndView worktimeSearch(Date searchTime) {
+//		ModelAndView model = new ModelAndView("worktimeSearch");
+//		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+//		ArrayList<WorkTime> arr ;	
+//		if(searchTime == null){
+//				arr = new ArrayList<WorkTime>();
+//			}
+//		else{
+//			arr =worktimeDAO.searchworktime(searchTime);
+//		}
+//		model.addObject("worktime",arr);	
+//		return model;
+//	}
 	
 	
 	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.POST)
@@ -178,7 +178,7 @@ public class AccountController {
 	public ModelAndView staffModify(int staffNum) {
 		ModelAndView model = new ModelAndView("staffModify");
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-		StaffDefault temp = new Staff(staffNum,null,0,null,0);
+		StaffDefault temp = new Staff(staffNum,null,0,0);
 		StaffDefault staff = staffDefaultDAO.get(temp);
 		model.addObject("staff",staff);
 		return model;

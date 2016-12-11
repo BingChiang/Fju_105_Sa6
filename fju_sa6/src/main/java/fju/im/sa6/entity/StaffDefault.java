@@ -14,22 +14,21 @@ public abstract class StaffDefault {
 	private Date workMonth;
 
 	private double worktimeTotal;
+	private double daywork;
 
 	// rebuild by bing 2016.11.30 and add init value
-	public StaffDefault(int staffNum, String staffName, int staffLevel, Date workMonth, double worktimeTotal) {
+	public StaffDefault(int staffNum, String staffName, int staffLevel, double worktimeTotal) {
 
 		this.staffNum = staffNum;
 		this.staffName = staffName;
 		this.staffLevel = staffLevel;
-		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
 	}
 
 	public StaffDefault() {
 		this.staffNum = 0;
-		this.staffName = null;
-		this.staffLevel = 1;
-		this.workMonth = null;
+		this.staffName = "";
+		this.staffLevel = 0;
 		this.worktimeTotal = 0;
 	}
 

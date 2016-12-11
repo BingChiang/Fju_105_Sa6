@@ -18,18 +18,25 @@
 			</map>
 		</property>
 	</bean>
-	
+	<context:annotation-config />
+	<!-- <bean id="StaffDefault" class="fju.im.sa6.dao.entity.StaffDefault">
+		<property name="staffNum" value="0" />
+		<property name="staffName" value="" />
+		<property name="staffLevel" value="0" />
+		<property name="worktimeTotal" value="0" />
+		<property name="daywork" value="0" />
+
+	</bean>
+	<bean id="Cart" class="fju.im.sa6.dao.entity.Cart">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+ -->
+
+
 	<bean id="InventoryDAO" class="fju.im.sa6.dao.impl.InventoryDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="ManagerDAO" class="fju.im.sa6.dao.impl.ManagerDAOImpl">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-	<bean id="StaffDefault" class="fju.im.sa6.dao.entity.StaffDefault">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<bean id="Cart" class="fju.im.sa6.dao.entity.Cart">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
