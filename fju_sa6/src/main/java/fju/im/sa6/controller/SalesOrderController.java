@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fju.im.sa6.dao.OrderListDAO;
 import fju.im.sa6.dao.ProductDAO;
 import fju.im.sa6.entity.Cart;
+import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
 
 
@@ -71,8 +72,8 @@ public class SalesOrderController {
 		
 //		List<Product> pList =  shoppingCart.getCart();
 //		List<Long> pList2 = new ArrayList<Long>();
-		OrderList temp = new OrderList()
-		orderListDAO.addorderlist(orderlist);
+		OrderList temp = new OrderList(0,shoppingCart.orderTotal(),null,shoppingCart.getCart());
+		orderListDAO.addorderlist(temp);
 		
 		shoppingCart.clean();
 //		for (int i=0; i<pList.size();i++){

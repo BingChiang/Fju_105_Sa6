@@ -16,6 +16,8 @@ public class ProductDAOImpl implements ProductDAO {
 	private Connection conn = null;
 	private ResultSet rs = null;
 	private PreparedStatement smt = null;
+	private ResultSet rs1 = null;
+	private PreparedStatement smt1 = null;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -99,17 +101,21 @@ public class ProductDAOImpl implements ProductDAO {
 
 	public Product get(Product product) {
 		Product pro = null;
-		String sql = "SELECT * FROM product WHERE product_name = ?";
+		String sql = "SELECT * FROM product WHERE product_num = ?";
+		String sql1 = "SELECT type_name FROM type WHERE type_num=?";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, product.getProductName());
+			smt1 = conn.prepareStatement(sql1);
+			smt.setInt(1, product.getProductNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
+				smt1.setInt(1, rs.getInt("type_num"));
+				rs1 = smt1.executeQuery();
 				int setproduct_Num = (rs.getInt("product_num"));
 				int settype_Num = (rs.getInt("type_num"));
-				String settype_Name = (rs.getString("type_name"));
+				String settype_Name = (rs1.getString("type_name"));
 				String setproduct_Name = (rs.getString("product_name"));
 				int setproduct_price = (rs.getInt("product_price"));
 				int setproduct_sell_month = (rs.getInt("product_sell_month"));
@@ -118,6 +124,8 @@ public class ProductDAOImpl implements ProductDAO {
 			}
 			rs.close();
 			smt.close();
+			rs1.close();
+			smt1.close();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -139,6 +147,7 @@ public class ProductDAOImpl implements ProductDAO {
 		Product temp;
 
 		String sql = "SELECT * FROM product Where type_num = ?";
+		String sql1 = "SELECT type_name FROM type WHERE type_num=?";
 		try {
 
 			conn = dataSource.getConnection();
@@ -146,12 +155,17 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setInt(1, type.getTypeNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("type_name"), rs.getString("product_name"),
+				smt1.setInt(1, rs1.getInt("type_num"));
+				smt1 = conn.prepareStatement(sql1);
+				rs1 = smt1.executeQuery();
+				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs1.getString("type_name"), rs.getString("product_name"),
 						rs.getInt("product_price"),rs.getInt("product_sell_month"), rs.getInt("product_cost"));
 				productArr.add(temp);
 			}
 			rs.close();
 			smt.close();
+			rs1.close();
+			smt1.close();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -173,16 +187,18 @@ public class ProductDAOImpl implements ProductDAO {
 		ArrayList<Product> productArr = new ArrayList<Product>();
 
 		String sql = "SELECT * FROM product ";
+		String sql1 = "SELECT type_name FROM type WHERE type_num=?";
 		try {
-
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
+			smt1 = conn.prepareStatement(sql1);
 			rs = smt.executeQuery();
 			if (rs.next()) {
+				smt1.setInt(1, rs.getInt("type_num"));
+				rs1 = smt1.executeQuery();
 				int productNum = (rs.getInt("product_num"));
 				int typeNum = (rs.getInt("type_num"));
-				int supplierNum = (rs.getInt("supplier_num"));
-				String typeName = (rs.getString("type_name"));
+				String typeName = (rs1.getString("type_name"));
 				String productName = (rs.getString("product_name"));
 				int productprice = (rs.getInt("product_price"));
 				int productsellmonth = (rs.getInt("product_sell_month"));

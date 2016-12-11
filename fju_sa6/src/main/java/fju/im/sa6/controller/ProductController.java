@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.OrderList;
+import fju.im.sa6.entity.Orderitem;
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
@@ -59,7 +60,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productTypeModify", method = RequestMethod.GET)
 	public ModelAndView productModify(@ModelAttribute("typeNum") int typeNum,HttpServletRequest request ) {
-		ModelAndView model = new ModelAndView(":productModify");
+		ModelAndView model = new ModelAndView("redirec:productModify");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
 		Type temp = new Type(null,typeNum,0);
 		Type temp2 = typeDAO.getType(temp);
@@ -103,6 +104,17 @@ public class ProductController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
+	public ModelAndView orderDetail(@ModelAttribute("orderlistNum") int orderlistNum,HttpServletRequest request ) {
+		ModelAndView model = new ModelAndView("orderDetail");
+		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
+		OrderList temp = new OrderList(orderlistNum,0,null,null);
+		ArrayList<Orderitem> temp2 = orderListDAO.getorderitem(temp);
+		model.addObject("order",temp2);
+		return model;
 
+	}
 
 }

@@ -27,7 +27,7 @@
 			</a>
 		</div>
 		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-			<a href="#" role="button">
+			<a href="staffManage" role="button">
 				<p>員工管理</p>
 			</a>
 		</div>

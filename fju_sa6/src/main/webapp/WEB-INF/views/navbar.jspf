@@ -39,7 +39,7 @@
 					href="inventoryManage">存貨管理</a></li>
 				<li
 					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/suplierManage.jsp' ? ' active' : ' ' }"><a
-					href="suplierManage">供應商管理</a></li>
+					href="supplierManage">供應商管理</a></li>
 				<li
 					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/amendWork.jsp' ? ' active' : ' ' }"><a
 					href="amendWork">補打卡</a></li>

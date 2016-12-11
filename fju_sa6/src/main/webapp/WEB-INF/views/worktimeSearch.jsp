@@ -25,7 +25,7 @@
 		<div class="col-md-12">
 			<h2>打卡記錄查詢</h2>
 			<hr>
-			<form action="#" method="post">
+			<form action="worktimeSearch" method="post">
 				<input type="date" name="searchTime" class="form-control"
 					style="text-align: center;">
 				<button type="submit" class="btn btn-primary"
@@ -37,14 +37,12 @@
 		<table class="table table-striped">
 			<tr>
 				<th>員工編號</th>
-				<th>員工名稱</th>
 				<th>上班時間</th>
 				<th>下班時間</th>
 			</tr>
 			<c:forEach items="${worktime}" var="worktime">
 				<tr>
 					<td>${worktime.staffNum}</td>
-					<td>${worktime.staffName}</td>
 					<td>${worktime.onwork}</td>
 					<td>${worktime.offwork}</td>
 

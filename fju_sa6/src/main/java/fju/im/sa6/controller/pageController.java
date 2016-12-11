@@ -126,6 +126,16 @@ public class pageController {
 		model.addObject("inventoryList", invList);
 		return model;
 	}
+	
+	@RequestMapping(value = "/supplierManage", method = RequestMethod.GET)
+	public ModelAndView supplierManage() {
+		ModelAndView model = new ModelAndView("supplierManage");
+		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
+		ArrayList<Supplier> supList = null;
+		supList = supplierDAO.getList();
+		model.addObject("supplierListList", supList);
+		return model;
+	}
 
 	@RequestMapping(value = "/productManage", method = RequestMethod.GET)
 	public ModelAndView productManage() {
@@ -152,7 +162,7 @@ public class pageController {
 		ModelAndView model = new ModelAndView("showOrder");
 		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
 		ArrayList<OrderList> orderList = null;
-		orderList = orderListDAO.getList();
+		orderList = orderListDAO.getorderlist();
 		model.addObject("orderList", orderList);
 
 		return model;
@@ -173,11 +183,21 @@ public class pageController {
 	public ModelAndView worktimeSearch() {
 		ModelAndView model = new ModelAndView("worktimeSearch");
 
-		// DAO ERROR
 
 		return model;
 	}
+	
+	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.POST)
+	public ModelAndView worktimeSearch(@ModelAttribute("searchTime") Date searchTime,HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:worktimeSearch");
 
+		// DAO ERROR
+		WorktimeDAO worktimeDAO = (WorktimeDAO)context.getBean("WorktimeDAO");
+		
+		return model;
+	}
+
+	
 	@RequestMapping(value = "/amendWork", method = RequestMethod.GET)
 	public ModelAndView amendWork() {
 		ModelAndView model = new ModelAndView("amendWork");

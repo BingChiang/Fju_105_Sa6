@@ -39,7 +39,7 @@
 					<td>${ord.orderDate}</td>
 					<td>${ord.orderTotal}</td>
 					<td><a role="button"
-						href="orderDetail?orderlistNu=${ord.orderlistNum}"
+						href="orderDetail?orderlistNum=${ord.orderlistNum}"
 						class="btn btn-sm btn-primary">查看</a></td>
 				</tr>
 			</c:forEach>

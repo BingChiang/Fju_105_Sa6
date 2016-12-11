@@ -62,7 +62,7 @@ public class InventoryController {
 
 	@RequestMapping(value = "/invertoryAdd", method = RequestMethod.POST)
 	public ModelAndView addNewInv(@ModelAttribute Inventory inv) {
-		ModelAndView model = new ModelAndView("redirect:/inventoryManage");
+		ModelAndView model = new ModelAndView("redirect:inventoryManage");
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		inventoryDAO.add(inv);
 

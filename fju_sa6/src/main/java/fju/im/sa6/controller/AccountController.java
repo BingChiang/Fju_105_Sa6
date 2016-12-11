@@ -181,11 +181,7 @@ public class AccountController {
 //	}
 	
 	
-	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.POST)
-	public ModelAndView worktimeSearch() {
-		ModelAndView model = new ModelAndView("redirect:worktimeSearch");
-		return model;
-	}
+
 	
 	
 	@RequestMapping(value = "/staffModify", method = RequestMethod.GET)
@@ -210,7 +206,7 @@ public class AccountController {
 	
 	@RequestMapping(value = "/staffAdd", method = RequestMethod.GET)
 	public ModelAndView staffAdd() {
-		ModelAndView model = new ModelAndView("staffModify");
+		ModelAndView model = new ModelAndView("staffAdd");
 
 		return model;
 	}
