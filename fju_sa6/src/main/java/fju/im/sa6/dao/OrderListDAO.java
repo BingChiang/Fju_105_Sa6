@@ -9,8 +9,9 @@ import fju.im.sa6.entity.Product;
 public interface OrderListDAO {
 	public void add(Cart cart);
 
-	public OrderList get( );
-	
+	public OrderList get();
+
 	public ArrayList<OrderList> getList();
+
 	public ArrayList<Product> getOrderDetail();
 }
