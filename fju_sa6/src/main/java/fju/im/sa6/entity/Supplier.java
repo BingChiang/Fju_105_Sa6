@@ -24,6 +24,7 @@ public class Supplier {
 
 	public Supplier() {
 		this.supplierNum = 0;
+		
 		this.supplierName = null;
 		this.supplierPhone = null;
 		this.supplierAddress = null;
@@ -57,7 +58,6 @@ public class Supplier {
 	public int getSupplierNum() {
 		return supplierNum;
 	}
-
 
 	public int getavailableNum(){
 		return availableNum;

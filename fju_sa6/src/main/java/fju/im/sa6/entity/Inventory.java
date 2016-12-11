@@ -2,7 +2,7 @@ package fju.im.sa6.entity;
 
 import java.util.Date;
 
-public class Inventory {
+public class Inventory extends Supplier{
 
 	private int inventoryNum;
 
@@ -16,14 +16,16 @@ public class Inventory {
 	
 	private Date update_date;
 	
+	private String supplierName;
 
-	// 2016.11.30 by bing.... add init value
-	public Inventory(int inventoryNum,int inventoryAmount,int supplierNum, String inventoryName,
+
+	public Inventory(int inventoryNum,int inventoryAmount,int supplierNum, String supplierName, String inventoryName,
 			int reorder_point, Date update_date) {
 		this.inventoryNum = inventoryNum;
 		this.inventoryAmount = inventoryAmount;
 		this.supplierNum = supplierNum;
 		this.inventoryName = inventoryName;
+		this.supplierName = supplierName;
 		this.reorder_point = reorder_point;
 		this.update_date = update_date;
 	}
@@ -34,6 +36,7 @@ public class Inventory {
 		this.supplierNum = 0;
 		this.inventoryName = null;
 		this.reorder_point = 0;
+		this.supplierName = null;
 		this.update_date = null;
 	}
 
@@ -81,4 +84,13 @@ public class Inventory {
 	public Date getUpdateDate(){
 	return update_date;
 	}
+	
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+	
 }

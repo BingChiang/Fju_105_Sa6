@@ -22,18 +22,6 @@ public class Cart implements java.io.Serializable {
 	
 	private ArrayList<Product> productList = new ArrayList<Product>();
 	
-	public ArrayList<Product> getProductList() {
-		return productList;
-	}
-
-	public void setProductList(ArrayList<Product> productList) {
-		this.productList = productList;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public ArrayList<Product> getCart(){
 		return productList;
 	}

@@ -11,22 +11,24 @@ public class OrderList  {
 	private int orderTotal;
 
 	private Date orderDate;
-
-	public OrderList(int orderlistNum, int orderTotal, Date orderDate, ArrayList<Product> orderList) {
-		this.orderlistNum = orderlistNum;
-		this.orderTotal =orderTotal;
-		this.orderDate = orderDate;
-		this.orderList =  new ArrayList<Product>();
 	
-	}
+	private String productName;
+	
+	private Product product = new Product();
+	
+	private int productNum;
+	
+	
 
-	public OrderList() {
-		super();
-		this.orderlistNum = 0;
-		this.orderTotal = 0;
-		this.orderDate = null;
-		orderList = new ArrayList<Product>();
+	private int productPrice;
+
+	public OrderList(int orderlistNum, int orderTotal, Date orderDate){
+		this.orderlistNum = orderlistNum;
+		this.orderTotal = orderTotal;
+		this.orderDate = orderDate;
 	}
+	
+	
 
 	public int getOrderTotal() {
 		return orderTotal;
@@ -36,20 +38,39 @@ public class OrderList  {
 		this.orderTotal = orderTotal;
 	}
 
-	public int getOrderistNum() {
+	public int getOrderlistNum() {
 		return orderlistNum;
 	}
 
-	public void setOrderistNum(int orderistNum) {
+	public void setOrderlistNum(int orderistNum) {
 		this.orderlistNum = orderistNum;
 	}
 
 	public Date getOrderDate() {
 		return orderDate;
 	}
+	
+	public Product getproduct() {
+		return product;
+	}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
+	
+	public String getProductName() {
+		return productName;
+	}
 
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public int getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
 }
