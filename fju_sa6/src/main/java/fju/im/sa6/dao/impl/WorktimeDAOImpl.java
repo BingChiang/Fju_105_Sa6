@@ -4,34 +4,43 @@ import fju.im.sa6.dao.WorktimeDAO;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.WorkTime;
 import java.sql.*;
+import java.util.ArrayList;
+
 import javax.sql.DataSource;
 
 public class WorktimeDAOImpl implements WorktimeDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
 	private ResultSet rs = null;
+	private ResultSet rs2 = null;
 	private PreparedStatement smt = null;
+	private PreparedStatement smt2 = null;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
 	@Override
-	public double getDayWorktime(StaffDefault staffDefault) {
+	public ArrayList<StaffDefault> getDayWorktime(Date date) {
 		// TODO Auto-generated method stub
-		double dayworktime = 0;
-		String sql = "SELECT * FROM staff WHERE staff_num = ?";
+		ArrayList<StaffDefault> arr = new ArrayList<StaffDefault>();
+		StaffDefault staff = new StaffDefault();
+		double dayworktime=0;
+		String sql = "SELECT * FROM staff WHERE work_date = ? ";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, staffDefault.getStaffNum());
+			smt.setDate(1, date);
 			rs = smt.executeQuery();
 			if (rs.next()) {
+				int setstaffNum = (rs.getInt("staff_num"));
 				double setontime = (rs.getDouble("onwork_time"));
 				double setoffworktime = (rs.getDouble("offwork_time"));
 				double setdayworktime = (rs.getDouble((int) (setoffworktime - setontime)));
-
 				dayworktime = setdayworktime;
+				staff= new StaffDefault(setstaffNum, null, 0, null,setdayworktime);
+				staff.setDaywork(dayworktime);
+				arr.add(staff);
 			}
 			rs.close();
 			smt.close();
@@ -46,17 +55,31 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 				}
 			}
 		}
-		return dayworktime;
+		return arr;
 	}
 
 	@Override
 	public void statffOnWork(StaffDefault staffDefault) {
-		String sql = "INSERT into worktime (staff_num, work_date, onwork_time) VALUES(?, select TO_CHAR(ADD_MONTHS(sysdate,-1),'mmdd') from worktime), Now())";
+		String sql1 = "SELECT work_date,onwork_time FROM worktime WHERE staff_num=?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql1);
+			smt.setInt(1, staffDefault.getStaffNum());
+			boolean doit=false;
+			Date checkdate=(rs.getDate("work_date"));
+			Date checktime=(rs.getDate("onwork_time"));
+			if(checkdate==null && checktime==null){
+			doit=true;
+			}
+			
+			smt.executeUpdate();
+			smt.close();
+		if(doit==true){
+		String sql = "INSERT into worktime (staff_num, work_date, onwork_time) VALUES(?,select CONVERT(varchar(12) , getdate(), 112)), Now())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
-			smt.setDate(2, (Date) staffDefault.getWorkMonth());
 			smt.executeUpdate();
 			smt.close();
 			// System.out.println("id ="+aProduct.getId());
@@ -72,17 +95,45 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 				}
 			}
 		}
+		}else{
+			conn.rollback();
+		}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 
 	}
-
+	
 	@Override
 	public void staffOffWork(StaffDefault staffDefault) {
-		String sql = "INSERT into worktime (staff_num, work_date, offwork_time) VALUES(?, select TO_CHAR(ADD_MONTHS(sysdate,-1),'mmdd') from worktime), Now())";
+		String sql1 = "SELECT work_date,offwork_time FROM worktime WHERE staff_num=?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql1);
+			smt.setInt(1, staffDefault.getStaffNum());
+			boolean doit=false;
+			Date checkdate=(rs.getDate("work_date"));
+			Date checktime=(rs.getDate("offwork_time"));
+			if(checkdate==null && checktime==null){
+			doit=true;
+			}
+			
+			smt.executeUpdate();
+			smt.close();
+		if(doit==true){
+		String sql = "INSERT into worktime (staff_num, work_date, offwork_time) VALUES(?,select CONVERT(varchar(12) , getdate(), 112)), Now())";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
-			smt.setDate(2, (Date) staffDefault.getWorkMonth());
 			smt.executeUpdate();
 			smt.close();
 			// System.out.println("id ="+aProduct.getId());
@@ -98,24 +149,120 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 				}
 			}
 		}
+		}else{
+			conn.rollback();
+		}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 
 	}
 
 	@Override
-	public void amendOnWork(StaffDefault staffDefault, Date date, Date on) {
+	public void amendOnWork(StaffDefault staffDefault, Date date, Date time) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT into worktime (staff_num, work_date, onwork_time) VALUES(?, ?, ?)";
+		String sql1 = "SELECT work_date,onwork_time FROM worktime WHERE staff_num=?";
 		try {
 			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
+			smt = conn.prepareStatement(sql1);
 			smt.setInt(1, staffDefault.getStaffNum());
-			smt.setDate(2, date);
-			smt.setDate(2, on);
+			boolean doit=false;
+			Date checkdate=(rs.getDate("work_date"));
+			Date checktime=(rs.getDate("onwork_time"));
+			if(checkdate==null && checktime==null){
+			doit=true;
+			}
+			
 			smt.executeUpdate();
 			smt.close();
-			// System.out.println("id ="+aProduct.getId());
+		if(doit==true){
+			String sql = "INSERT into worktime (staff_num, work_date, onwork_time) VALUES(?, ?, ?)";
+			try {
+				conn = dataSource.getConnection();
+				smt = conn.prepareStatement(sql);
+				smt.setInt(1, staffDefault.getStaffNum());
+				smt.setDate(2, date);
+				smt.setDate(3, time);
+				smt.executeUpdate();
+				smt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		}else{
+			conn.rollback();
+		}
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+	}
+		
+	@Override
+	public void amendOffWork(StaffDefault staffDefault, Date date, Date time) {
+		String sql1 = "SELECT work_date,offwork_time FROM worktime WHERE staff_num=?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql1);
+			smt.setInt(1, staffDefault.getStaffNum());
+			boolean doit=false;
+			Date checkdate=(rs.getDate("work_date"));
+			Date checktime=(rs.getDate("offwork_time"));
+			if(checkdate==null && checktime==null){
+			doit=true;
+			}
+			
+			smt.executeUpdate();
+			smt.close();
+		if(doit==true){
+			String sql = "INSERT into worktime (staff_num, work_date, offwork_time) VALUES(?, ?, ?)";
+			try {
+				conn = dataSource.getConnection();
+				smt = conn.prepareStatement(sql);
+				smt.setInt(1, staffDefault.getStaffNum());
+				smt.setDate(2, date);
+				smt.setDate(3, time);
+				smt.executeUpdate();
+				smt.close();
 
 		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		}else{
+			conn.rollback();
+		}
+		}catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
@@ -129,52 +276,34 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 	}
 
-	@Override
-	public void amendOffWork(StaffDefault staffDefault, Date date, Date off) {
-		// TODO Auto-generated method stub
-		String sql = "INSERT into worktime (staff_num, work_date, offwork_time) VALUES(?, ?, ?)";
-		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			smt.setInt(1, staffDefault.getStaffNum());
-			smt.setDate(2, date);
-			smt.setDate(2, off);
-			smt.executeUpdate();
-			smt.close();
-			// System.out.println("id ="+aProduct.getId());
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-	}
 
 	@Override
-	public WorkTime searchworktime(WorkTime workrecord, WorkTime workdate) {
+	public WorkTime searchworktime(Date date) {
+		
 		String sql = "SELECT * FROM worktime WHERE work_date = ?";
+		String sql2 = "SELECT staff_name FROM staff WHERE staff_num = ?";
 		WorkTime worktime = null;
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setDate(1, (Date) workdate.getdate());
+			smt2 = conn.prepareStatement(sql2);
+			smt.setDate(1, date);
 			rs = smt.executeQuery();
 			if (rs.next()) {
+				smt2.setInt(1, rs.getInt("staff_num"));
+				rs2 = smt.executeQuery();
 				int setstaffNum = (rs.getInt("staff_num"));
 				Date setworkDate = (rs.getDate("work_date"));
 				Date setonworkTime = (rs.getDate("onwork_time"));
 				Date setoffworkTime = (rs.getDate("offwork_time"));
 				worktime = new WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime);
+				worktime.setStaffName(rs2.getString("staff_name"));
 
 			}
 			rs.close();
 			smt.close();
+			rs2.close();
+			smt2.close();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -190,5 +319,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		return worktime;
 
 	}
+
 
 }

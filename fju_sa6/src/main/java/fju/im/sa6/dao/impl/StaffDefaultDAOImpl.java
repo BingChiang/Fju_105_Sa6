@@ -28,7 +28,6 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 		String sql = "Select * FROM staff WHERE staff_num = ?";
 		StaffDefault StaffDefault2 = null ;
 		try {
-
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
@@ -37,7 +36,7 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 				int setStaffNum = (rs.getInt("staff_num"));
 				String setStaffName = (rs.getString("staff_name"));
 				int setStaffLv = (rs.getInt("staff_lv"));
-
+				
 				StaffDefault2 = new Staff(setStaffNum,setStaffName,setStaffLv,null,0);
 			}
 			rs.close();
@@ -70,8 +69,6 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 				int setstafflv = (rs.getInt("staff_lv"));
 				String setstaffname = (rs.getString("staff_name"));
 				arr.add(new Staff(setstaffnum,setstaffname,setstafflv,null,0));
-				
-
 			}
 			rs.close();
 			smt.close();

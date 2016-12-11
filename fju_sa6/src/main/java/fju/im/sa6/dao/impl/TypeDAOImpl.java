@@ -34,7 +34,8 @@ public class TypeDAOImpl implements TypeDAO {
 			if (rs.next()) {
 				int settypeNum = (rs.getInt("type_num"));
 				String settypeName = (rs.getString("type_name"));
-				typ = new Type(settypeName, settypeNum);
+				int setavailabetype = (rs.getInt("available_type"));
+				typ = new Type(settypeName, settypeNum, setavailabetype);
 			}
 			rs.close();
 			smt.close();
@@ -56,11 +57,12 @@ public class TypeDAOImpl implements TypeDAO {
 	@Override
 	public void add(Type addType) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO type (type_name) VALUES(?)";
+		String sql = "INSERT INTO type (type_name,available_type) VALUES(?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, addType.getTypeName());
+			smt.setInt(2, addType.getAvailabletype());
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {
@@ -99,12 +101,33 @@ public class TypeDAOImpl implements TypeDAO {
 			}
 		}
 	}
+	@Override
+	public void remove(Type removeType){
+		String sql = "UPDATE type set available_type = 1 WHERE type_num=?";
+		try{
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setInt(1, removeType.getTypeNum());
+			smt.executeUpdate();
+			smt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+	}
 
 	@Override
 	public ArrayList<Type> getList(Type Type) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM type ";
-		Type typ = null;
+		String sql = "SELECT * FROM type";
+		ArrayList<Type>typ= new ArrayList<Type>();
 		try {
 
 			conn = dataSource.getConnection();
@@ -113,7 +136,8 @@ public class TypeDAOImpl implements TypeDAO {
 			if (rs.next()) {
 				int setTypenum = (rs.getInt("type_num"));
 				String setTypename = (rs.getString("type_name"));
-				typ = new Type(setTypename, setTypenum);
+				int setavailabletype = (rs.getInt("available_type"));
+				typ.add(new Type(setTypename, setTypenum,setavailabletype));
 			}
 			rs.close();
 			smt.close();
@@ -130,6 +154,6 @@ public class TypeDAOImpl implements TypeDAO {
 			}
 
 		}
-		return getList(typ);
+		return typ;
 	}
 }

@@ -1,5 +1,6 @@
 package fju.im.sa6.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import fju.im.sa6.entity.Staff;
@@ -12,11 +13,13 @@ public interface ManagerDAO {
 
 	public void remove(StaffDefault staffDefault);
 
-	public double inquireAllWorktime();
-
 	public void setLevel(StaffDefault manager, StaffDefault staffStaffDefault);
 
 	public ArrayList<StaffDefault> getList();
 
-	public double monthearntotal();
+	double monthearntotal(Date indicatedate);
+
+	//double inquireAllWorktimeforALL(Date indicatedate);
+
+	double inquireAllWorktime(StaffDefault staffDefault);
 }

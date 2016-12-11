@@ -35,7 +35,6 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			smt.setInt(2, staffDefault.getStaffLevel());
 			smt.executeUpdate();
 			smt.close();
-
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -48,16 +47,16 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			}
 		}
 	}
-
 	@Override
 	public void set(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE staff (staff_name,staff_lv) VALUES(?, ?)";
+		String sql = "UPDATE staff SET staff_name=?, staff_lv=? WHERE staff_num=?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, staffDefault.getStaffName());
 			smt.setInt(2, staffDefault.getStaffLevel());
+			smt.setInt(3, staffDefault.getStaffNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -72,16 +71,14 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 				}
 			}
 		}
-
 	}
-
 	public void remove(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-		String sql = "DELETE FROM staff WHERE staff_name = ?";
+		String sql = "DELETE FROM staff WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, staffDefault.getStaffName());
+			smt.setInt(1, staffDefault.getStaffNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -99,13 +96,10 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 	}
 
 	@Override
-	public double inquireAllWorktime() {
-		StaffDefault staffDefault = new Manager();
+	/*--public double inquireAllWorktime(StaffDefault staffDefault) {
 		double worktimeTotal = 0;
 		String sql = "SELECT worktime_daytotal FROM worktime WHERE staff_num = ?";
-
 		try {
-
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
@@ -130,7 +124,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			}
 		}
 		return worktimeTotal;
-	}
+	} --*/
 
 	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
@@ -138,7 +132,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		if (manager.getStaffNum() == staffDefault.getStaffNum()) {
 			// no set because it will set itself
 		} else {
-			String sql = "UPDATE staff (staff_num, staff_lv) VALUES(?, ?)";
+			String sql = "UPDATE staff SET staff_lv=?";
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
@@ -164,11 +158,10 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 	
 	@Override
-	public double monthearntotal() {
+	public double monthearntotal(Date indicatedate) {
 		// TODO Auto-generated method stub
-		Date indicatedate = null;
 		double sum = 0;
-		String sql = "SELECT SUM(order_total) FROM orderlist WHERE (SELECT DATEPART(mm,order_date) FROM orderlist WHERE order_date = ? )";
+		String sql = "SELECT SUM(order_total) FROM orderlist WHERE (SELECT DATEPART(yyyymm,order_date) FROM orderlist WHERE order_date = ? )";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -178,7 +171,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 				double setmonthcounttotal = (rs.getDouble("order_total"));
 				sum += setmonthcounttotal;
 			}
-			sum = sum - (inquireAllWorktimeforALL() * 150);// -Product_cost
+			sum = sum - (inquireAllWorktimeforALL(indicatedate) * 150 )-(producttotalcost(indicatedate));
 			rs.close();
 			smt.close();
 		} catch (SQLException e) {
@@ -196,18 +189,19 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		return sum;
 	}
 
-	public double inquireAllWorktimeforALL() {
+	public double inquireAllWorktimeforALL(Date indicatedate) {
 		double worktimeTotalALL = 0;
-		String sql = "SELECT SUM(worktime_daytotal) FROM worktime WHERE (SELECT DATEPART(mm,order_date) FROM orderlist WHERE order_date = ? )";
+		String sql = "SELECT worktime_daytotal FROM worktime WHERE (SELECT DATEPART(yyyymm,order_date) FROM orderlist WHERE order_date = ? )";
 
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
+			smt.setDate(1, indicatedate);
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				double setworktimetotal = (rs.getDouble("worktime_daytotal"));
-				worktimeTotalALL = setworktimetotal;
+				worktimeTotalALL+= setworktimetotal;
 
 			}
 			rs.close();
@@ -226,4 +220,44 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		}
 		return worktimeTotalALL;
 	}
+	public double producttotalcost(Date indicatedate){
+		double producttotalcost = 0;
+		String sql = "SELECT product_cost FROM product WHERE (SELECT product_num FROM orderitem WHERE(SELECT orderlist_num FROM orderlist WHERE order_date = ?)))";
+		try {
+
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setDate(1, indicatedate);
+			rs = smt.executeQuery();
+			if (rs.next()) {
+				double setproducttotalcost = (rs.getDouble("product_cost"));
+				producttotalcost+= setproducttotalcost;
+
+			}
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return producttotalcost; 
+		
+		
+	}
+
+	@Override
+	public double inquireAllWorktime(StaffDefault staffDefault) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

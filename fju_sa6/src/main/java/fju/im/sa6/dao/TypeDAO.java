@@ -13,4 +13,6 @@ public interface TypeDAO {
 	public void set(Type setType);
 
 	public ArrayList<Type> getList(Type Type);
+
+	void remove(Type removeType);
 }

@@ -12,6 +12,10 @@ public class WorkTime {
 		
 		private int staffNum;
 		
+		private String staffName;
+		
+		
+
 		//Constructor
 		public WorkTime(int staffNum, Date date, Date onwork, Date offwork) {
 			this.staffNum = staffNum;
@@ -21,14 +25,23 @@ public class WorkTime {
 		}
 		
 		public WorkTime(){
-			this.staffNum = staffNum;
-			this.date = date;
-			this.onwork = onwork;
-			this.offwork = offwork;
+			this.staffNum = 0;
+			this.date = null;
+			this.onwork = null;
+			this.offwork = null;
+			this.staffName = null;
 			
 		}
 
 
+		public String getStaffName() {
+			return staffName;
+		}
+
+		public void setStaffName(String staffName) {
+			this.staffName = staffName;
+		}
+		
 		public int getStaffNum() {
 			return staffNum;
 		}
