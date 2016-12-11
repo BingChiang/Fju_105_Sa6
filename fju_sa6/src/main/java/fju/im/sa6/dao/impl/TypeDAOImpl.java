@@ -31,7 +31,7 @@ public class TypeDAOImpl implements TypeDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, searchType.getTypeNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				int settypeNum = (rs.getInt("type_num"));
 				String settypeName = (rs.getString("type_name"));
 				int setavailabetype = (rs.getInt("available_type"));
@@ -133,7 +133,7 @@ public class TypeDAOImpl implements TypeDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int setTypenum = (rs.getInt("type_num"));
 				String setTypename = (rs.getString("type_name"));
 				int setavailabletype = (rs.getInt("available_type"));

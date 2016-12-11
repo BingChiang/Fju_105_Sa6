@@ -42,7 +42,7 @@
 				<tr>
 					<td>${pro.productNum}</td>
 					<td>${pro.productName}</td>
-					<td>green</td>
+					<td>${pro.typeName}</td>
 					<td>${pro.productPrice}</td>
 					<td><span style="margin-top: -5px;" class="badge"><a
 							class="inline" href="productRemove?productNum=${pro.productNum}"><span

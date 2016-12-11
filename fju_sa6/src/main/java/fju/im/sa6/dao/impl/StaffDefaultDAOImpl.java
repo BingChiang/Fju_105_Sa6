@@ -32,7 +32,7 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, staffDefault.getStaffNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int setStaffNum = (rs.getInt("staff_num"));
 				String setStaffName = (rs.getString("staff_name"));
 				int setStaffLv = (rs.getInt("staff_lv"));
@@ -64,7 +64,7 @@ public class StaffDefaultDAOImpl implements StaffDefaultDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int setstaffnum = (rs.getInt("staff_num"));
 				int setstafflv = (rs.getInt("staff_lv"));
 				String setstaffname = (rs.getString("staff_name"));

@@ -15,6 +15,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 
 	private DataSource dataSource;
 	private Connection conn = null;
+	private Connection conn1 = null;
 	private ResultSet rs = null;
 	private PreparedStatement smt = null;
 	private ResultSet rs1 = null;
@@ -113,13 +114,15 @@ public class InventoryDAOImpl implements InventoryDAO {
 		try {
 
 			conn = dataSource.getConnection();
+			
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, inventory.getInventoryNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				smt1 = conn.prepareStatement(sql1);
-				rs1 = smt.executeQuery();
-				smt1.setInt(1, inventory.getSupplierNum());
+				conn1 = dataSource.getConnection();
+				smt1 = conn1.prepareStatement(sql1);
+				rs1 = smt1.executeQuery();
+				smt1.setInt(1, rs.getInt("supplier_num"));
 				int setinventoryNum = (rs.getInt("inventory_num"));
 				int setinventoryAmount = (rs.getInt("inventory_amount"));
 				int setsupplierNum = (rs.getInt("supplier_num"));
@@ -129,12 +132,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 				Date setUpdateDate = (rs.getDate("update_date"));
 				inv = new Inventory(setinventoryNum, setinventoryAmount, setsupplierNum, setsupplierName, setinventoryName,
 						setreorderpoint, setUpdateDate);
-				rs.close();
-				smt.close();
-				rs1.close();
-				smt1.close();
-
+			
 			}
+			rs.close();
+			smt.close();
+			rs1.close();
+			smt1.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -151,34 +155,48 @@ public class InventoryDAOImpl implements InventoryDAO {
 
 	public ArrayList<Inventory> getList() {
 		// TODO Auto-generated method stub
-		Inventory inventory = new Inventory();
 		ArrayList<Inventory> inv = new ArrayList<Inventory>();
-		String sql = "SELECT * FROM inventory ";
+		int suppliernum = 0;
+		String supplierName=null;
+		String sql = "SELECT * FROM inventory";
 		String sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num = ?";
 		try {
-
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
-				smt1 = conn.prepareStatement(sql1);
-				rs1 = smt.executeQuery();
-				smt1.setInt(1, inventory.getSupplierNum());
+			
+			
+			
+			while(rs.next()) {
 				int inventorynum = (rs.getInt("inventory_num"));
 				int inventoryAmount = (rs.getInt("inventory_amount"));
 				int supplierNum = (rs.getInt("supplier_num"));
-				String supplierName = (rs.getString("supplier_name"));
 				String inventoryName = (rs.getString("inventory_name"));
 				int reorder_point = (rs.getInt("reorder_point"));
 				Date update_date = (rs.getDate("update_date"));
+				suppliernum =  rs.getInt("supplier_num");
+				conn1 = dataSource.getConnection();
+				
+				sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num ="+suppliernum;
+				smt1 = conn1.prepareStatement(sql1);
+				rs1 = smt1.executeQuery();
+				//smt1.setInt(1, suppliernum);
+				
+			while(rs1.next()){
+				
+				supplierName = (rs1.getString("supplier_name"));
+			}
 
 				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName, reorder_point,
 						update_date));
+				
+			
+			rs1.close();
+			smt1.close();
 			}
 			rs.close();
 			smt.close();
-			rs1.close();
-			smt1.close();
+			
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -203,10 +221,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 		try {
 
 			conn = dataSource.getConnection();
+			
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, supplier.getSupplierNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
+				conn1 = dataSource.getConnection();
+				smt1 = conn1.prepareStatement(sql1);
 				smt1.setInt(1, rs.getInt("supplier_num"));
 				rs1 = smt1.executeQuery();
 				int inventorynum = (rs.getInt("inventory_num"));

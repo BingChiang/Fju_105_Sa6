@@ -14,7 +14,7 @@ public class Product {
 	
 	private int productCost;
 	
-	private int typeName;
+	private String typeName;
 
 	
 
@@ -25,6 +25,7 @@ public class Product {
 		this.productPrice = productPrice;
 		this.productSellMonth = productSellMonth;
 		this.productCost = productCost;
+		this.typeName = typeName;
 		
 	}
 	
@@ -35,6 +36,7 @@ public class Product {
 		this.productPrice = 0;
 		this.productSellMonth = 0;
 		this.productCost = 0;
+		this.typeName = null;
 	}
 
 	public String getProductName() {
@@ -77,11 +79,11 @@ public class Product {
 		this.productCost = productCost;
 	}
 	
-	public int getTypeName() {
+	public String getTypeName() {
 		return typeName;
 	}
 
-	public void setTypeName(int typeName) {
+	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
 	

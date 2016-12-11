@@ -79,6 +79,14 @@ public class ProductController {
 
 	}
 	
+	@RequestMapping(value = "/productAdd", method = RequestMethod.GET)
+	public ModelAndView productAdd() {
+		ModelAndView model = new ModelAndView("productAdd");
+
+		return model;
+
+	}
+	
 	@RequestMapping(value = "/productAdd", method = RequestMethod.POST)
 	public ModelAndView productTypeAddPage(@ModelAttribute Product product) {
 		ModelAndView model = new ModelAndView("redirec:productManage");
