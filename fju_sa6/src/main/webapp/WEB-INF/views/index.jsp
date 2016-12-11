@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <title>index</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="css/dashboard.css" rel="stylesheet">
+<link href="resources/css/dashboard.css" rel="stylesheet">
 <script src="js/ie-emulation-modes-warning.js"></script>
 </head>
 
