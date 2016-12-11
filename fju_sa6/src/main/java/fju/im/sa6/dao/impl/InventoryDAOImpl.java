@@ -114,19 +114,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 		try {
 
 			conn = dataSource.getConnection();
-<<<<<<< HEAD
-			
-=======
-			conn1 = dataSource.getConnection();
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
+
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, inventory.getInventoryNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-<<<<<<< HEAD
 				conn1 = dataSource.getConnection();
-=======
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
+
 				smt1 = conn1.prepareStatement(sql1);
 				rs1 = smt1.executeQuery();
 				smt1.setInt(1, rs.getInt("supplier_num"));
@@ -137,17 +131,9 @@ public class InventoryDAOImpl implements InventoryDAO {
 				String setinventoryName = (rs.getString("inventory_name"));
 				int setreorderpoint = (rs.getInt("reorder_point"));
 				Date setUpdateDate = (rs.getDate("update_date"));
-				inv = new Inventory(setinventoryNum, setinventoryAmount, setsupplierNum, setsupplierName, setinventoryName,
-						setreorderpoint, setUpdateDate);
-<<<<<<< HEAD
-			
-=======
-				rs.close();
-				smt.close();
-				rs1.close();
-				smt1.close();
+				inv = new Inventory(setinventoryNum, setinventoryAmount, setsupplierNum, setsupplierName,
+						setinventoryName, setreorderpoint, setUpdateDate);
 
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 			}
 			rs.close();
 			smt.close();
@@ -171,68 +157,47 @@ public class InventoryDAOImpl implements InventoryDAO {
 	public ArrayList<Inventory> getList() {
 		// TODO Auto-generated method stub
 		ArrayList<Inventory> inv = new ArrayList<Inventory>();
-<<<<<<< HEAD
+
 		int suppliernum = 0;
-		String supplierName=null;
+		String supplierName = null;
 		String sql = "SELECT * FROM inventory";
-=======
-		String sql = "SELECT * FROM inventory ";
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
+
 		String sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			conn1 = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-<<<<<<< HEAD
-			
-			
-			
-			while(rs.next()) {
-=======
-			if (rs.next()) {
-				smt1 = conn1.prepareStatement(sql1);
-				rs1 = smt1.executeQuery();
-				smt1.setInt(1, rs.getInt("supplier_num"));
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
+
+			while (rs.next()) {
+
 				int inventorynum = (rs.getInt("inventory_num"));
 				int inventoryAmount = (rs.getInt("inventory_amount"));
 				int supplierNum = (rs.getInt("supplier_num"));
-<<<<<<< HEAD
-=======
-				String supplierName = (rs1.getString("supplier_name"));
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 				String inventoryName = (rs.getString("inventory_name"));
 				int reorder_point = (rs.getInt("reorder_point"));
 				Date update_date = (rs.getDate("update_date"));
-				suppliernum =  rs.getInt("supplier_num");
+				suppliernum = rs.getInt("supplier_num");
 				conn1 = dataSource.getConnection();
-				
-				sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num ="+suppliernum;
+
+				sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num =" + suppliernum;
 				smt1 = conn1.prepareStatement(sql1);
 				rs1 = smt1.executeQuery();
-				//smt1.setInt(1, suppliernum);
-				
-			while(rs1.next()){
-				
-				supplierName = (rs1.getString("supplier_name"));
-			}
+				// smt1.setInt(1, suppliernum);
 
-				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName, reorder_point,
-						update_date));
-				
-			
-			rs1.close();
-			smt1.close();
+				while (rs1.next()) {
+
+					supplierName = (rs1.getString("supplier_name"));
+				}
+
+				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName,
+						reorder_point, update_date));
+
+				rs1.close();
+				smt1.close();
 			}
 			rs.close();
 			smt.close();
-<<<<<<< HEAD
-			
-=======
-			rs1.close();
-			smt1.close();
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -257,21 +222,12 @@ public class InventoryDAOImpl implements InventoryDAO {
 		try {
 
 			conn = dataSource.getConnection();
-<<<<<<< HEAD
-			
-=======
-			conn1 = dataSource.getConnection();
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, supplier.getSupplierNum());
 			rs = smt.executeQuery();
-<<<<<<< HEAD
-			while(rs.next()) {
+			while (rs.next()) {
 				conn1 = dataSource.getConnection();
-=======
-			if (rs.next()) {
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
-				smt1 = conn1.prepareStatement(sql1);
+
 				smt1.setInt(1, rs.getInt("supplier_num"));
 				rs1 = smt1.executeQuery();
 				int inventorynum = (rs.getInt("inventory_num"));
@@ -282,8 +238,8 @@ public class InventoryDAOImpl implements InventoryDAO {
 				int reorder_point = (rs.getInt("reorder_point"));
 				Date update_date = (rs.getDate("update_date"));
 
-				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName, reorder_point,
-						update_date));
+				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName,
+						reorder_point, update_date));
 			}
 			rs.close();
 			smt.close();

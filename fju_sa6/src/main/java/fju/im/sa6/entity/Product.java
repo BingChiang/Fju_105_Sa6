@@ -9,20 +9,15 @@ public class Product {
 	private String productName;
 
 	private int productPrice;
-	
+
 	private int productSellMonth;
-	
+
 	private int productCost;
-	
-<<<<<<< HEAD
+
 	private String typeName;
-=======
-	private int typeName;
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 
-	
-
-	public Product(int productNum, int typeNum, String typeName, String productName, int productPrice, int productSellMonth, int productCost) {
+	public Product(int productNum, int typeNum, String typeName, String productName, int productPrice,
+			int productSellMonth, int productCost) {
 		this.productNum = productNum;
 		this.typeNum = typeNum;
 		this.productName = productName;
@@ -30,10 +25,10 @@ public class Product {
 		this.productSellMonth = productSellMonth;
 		this.productCost = productCost;
 		this.typeName = typeName;
-		
+
 	}
-	
-	public Product(){
+
+	public Product() {
 		this.productNum = 0;
 		this.typeNum = 0;
 		this.productName = null;
@@ -59,8 +54,6 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 
-
-
 	public int getProductSellMonth() {
 		return productSellMonth;
 	}
@@ -76,27 +69,22 @@ public class Product {
 	public int getTypeNum() {
 		return typeNum;
 	}
-	public int getProductCost(){
+
+	public int getProductCost() {
 		return productCost;
 	}
-	public void setProductCost(int productCost){
+
+	public void setProductCost(int productCost) {
 		this.productCost = productCost;
 	}
-	
-<<<<<<< HEAD
+
 	public String getTypeName() {
 		return typeName;
 	}
 
 	public void setTypeName(String typeName) {
-=======
-	public int getTypeName() {
-		return typeName;
-	}
 
-	public void setTypeName(int typeName) {
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 		this.typeName = typeName;
 	}
-	
+
 }

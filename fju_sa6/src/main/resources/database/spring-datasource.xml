@@ -9,11 +9,7 @@
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
-<<<<<<< HEAD
 		<property name="url" value="jdbc:mysql://127.0.0.1/new_database" />
-=======
-		<property name="url" value="jdbc:mysql://localhost:3306/new_database" />
->>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 
 		<property name="username" value="root" />
 		<property name="password" value="kmaei" />
