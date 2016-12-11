@@ -2,7 +2,6 @@ package fju.im.sa6.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import javax.sql.*;
 import java.sql.*;
 import fju.im.sa6.dao.InventoryDAO;
