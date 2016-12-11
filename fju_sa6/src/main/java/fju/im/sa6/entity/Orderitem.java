@@ -13,9 +13,7 @@ public class Orderitem {
 	
 	private int productPrice;
 	
-	private ArrayList<Orderitem> orderitem = new ArrayList<Orderitem>();
 	
-
 	public Orderitem(int productNum, int orderlistNum, String productName, int productPrice){
 		this.productNum = productNum;
 		this.orderlistNum = orderlistNum;
@@ -25,15 +23,14 @@ public class Orderitem {
 	
 	public int orderTotal(){
 		int total = 0 ;
+		ArrayList<Orderitem> orderitem  = new ArrayList<Orderitem>();
 		for (int i = 0 ; i < orderitem.size(); i++ ){
 			total += orderitem.get(i).getProductPrice();
 		}
 		return total;
 	}
 	
-	public int getOrderlistNum() {
-		return orderlistNum;
-	}
+	
 
 	public void setOrderlistNum(int orderlistNum) {
 		this.orderlistNum = orderlistNum;

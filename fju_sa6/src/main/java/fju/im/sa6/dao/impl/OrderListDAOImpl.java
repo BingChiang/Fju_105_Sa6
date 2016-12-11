@@ -50,6 +50,30 @@ public class OrderListDAOImpl implements OrderListDAO {
 				}
 			}
 		}
+		
+		String sql1 = "INSERT INTO orderitem (product_num, orderlist_num, product_name, product_price) VALUES(?, ?, ?, ?)";
+		try {
+			conn = dataSource.getConnection();
+			smt2 = conn.prepareStatement(sql1);
+			rs2 = smt.executeQuery();
+			smt.setInt(1, orderitem.getProductNum());
+			smt.setInt(2, orderitem.getOrderlistNum());
+			smt.setString(3, orderitem.getProductName());
+			smt.setInt(4, orderitem.getProductPrice());
+			smt.executeUpdate();
+			smt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 	}
 	
 	public void addorderitem(Orderitem orderitem) {
@@ -247,6 +271,13 @@ public class OrderListDAOImpl implements OrderListDAO {
 		
 		
 		return totalcost;
+	}
+
+	@Override
+	public void add(Cart shoppingCart) {
+		// TODO Auto-generated method stub
+		
+		
 	}
 
 }

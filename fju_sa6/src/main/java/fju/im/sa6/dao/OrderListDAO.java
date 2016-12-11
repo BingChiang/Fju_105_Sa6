@@ -23,4 +23,6 @@ public interface OrderListDAO {
 	
 	public double gettotalcost(Date date);
 
+	public void add(Cart shoppingCart);
+
 }
