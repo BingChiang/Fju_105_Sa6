@@ -18,7 +18,7 @@
 
 <body>
 	<%@include file="navbar.jspf"%>
-
+ 
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 		style="margin-top: 30px;">
 		<div class="col-md-7 col-md-offset-1">
@@ -27,7 +27,7 @@
 
 		<div class="col-md-12">
 			<br>
-			<form class="form-horizontal" role="form" action="#" method="post">
+			<form class="form-horizontal" role="form" action="productTypeAdd" method="post">
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">類別名稱</label>

@@ -27,7 +27,7 @@
 
 		<div class="col-md-12">
 			<br>
-			<form class="form-horizontal" role="form" action="#" method="post">
+			<form class="form-horizontal" role="form" action="productAdd" method="post">
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">產品名稱</label>

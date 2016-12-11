@@ -35,39 +35,20 @@
 				<th>類型名稱</th>
 				<th></th>
 			</tr>
+			<c:forEach items="typeList" var="typeList">
 			<tr>
-				<td>0001</td>
-				<td>greentea</td>
+				<td>${typeList.typeNum}</td>
+				<td>${typeList.typeName}</td>
 				<td><span style="margin-top: -5px;" class="badge"><a
-						class="inline" href="#"><span
+						class="inline" href="typeRemove?typeNum = ${typeList.typeNum}"><span
 							class="glyphicon glyphicon-trash" aria-hidden="true"
 							style="color: white;"></span></a> </span> <span style="margin-top: -5px;"
-					class="badge"><a class="inline" href="#"><span
+					class="badge"><a class="inline" href="typeModify?typeNum = ${typeList.typeNum}"><span
 							class="glyphicon glyphicon-pencil" aria-hidden="true"
 							style="color: white;"></span></a> </span></td>
 			</tr>
-			<tr>
-				<td>0001</td>
-				<td>greentea</td>
-				<td><span style="margin-top: -5px;" class="badge"><a
-						class="inline" href="#"><span
-							class="glyphicon glyphicon-trash" aria-hidden="true"
-							style="color: white;"></span></a> </span> <span style="margin-top: -5px;"
-					class="badge"><a class="inline" href="#"><span
-							class="glyphicon glyphicon-pencil" aria-hidden="true"
-							style="color: white;"></span></a> </span></td>
-			</tr>
-			<tr>
-				<td>0001</td>
-				<td>greentea</td>
-				<td><span style="margin-top: -5px;" class="badge"><a
-						class="inline" href="#"><span
-							class="glyphicon glyphicon-trash" aria-hidden="true"
-							style="color: white;"></span></a> </span> <span style="margin-top: -5px;"
-					class="badge"><a class="inline" href="#"><span
-							class="glyphicon glyphicon-pencil" aria-hidden="true"
-							style="color: white;"></span></a> </span></td>
-			</tr>
+			</c:forEach>
+			
 		</table>
 	</div>
 	</div>

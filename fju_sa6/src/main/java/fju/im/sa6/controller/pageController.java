@@ -138,6 +138,15 @@ public class pageController {
 		model.addObject("productList", proList);
 		return model;
 	}
+	@RequestMapping(value = "/productTypeManage", method = RequestMethod.GET)
+	public ModelAndView productTypeManage() {
+		ModelAndView model = new ModelAndView("productTypeManage");
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		ArrayList<Type> typeList = null;
+		typeList = typeDAO.getList();
+		model.addObject("typeList", typeList);
+		return model;
+	}
 
 	@RequestMapping(value = "/showOrder", method = RequestMethod.GET)
 	public ModelAndView showOrder() {
