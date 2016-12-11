@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 //import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 //import javax.servlet.http.HttpSession;
@@ -38,7 +40,7 @@ public class SalesOrderController {
 	private Cart shoppingCart;
 	
 	@RequestMapping(value = "/addCart", method = RequestMethod.GET)
-	public ModelAndView addShoppingCart(int productNum,int typeNum){
+	public ModelAndView addShoppingCart(@ModelAttribute("productNum") int productNum,@ModelAttribute("typeNum") int typeNum,HttpServletRequest requestint){
 		ModelAndView model = new ModelAndView("redirect:/productSale");
 		//only id is passed
 //		long pid = product.getProductNum();

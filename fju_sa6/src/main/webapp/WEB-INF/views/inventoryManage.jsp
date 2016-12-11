@@ -43,7 +43,7 @@
 				<tr>
 					<td>${inv.inventoryNum}</td>
 					<td>${inv.inventoryName}</td>
-					<td>fju</td>
+					<td>${inv.supplierName}</td>
 					<td>${inv.inventoryAmount}</td>
 					<td>${inv.update_date}</td>
 					<td><span style="margin-top: -5px;" class="badge"><a
