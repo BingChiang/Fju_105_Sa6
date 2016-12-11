@@ -9,24 +9,26 @@ public class Product {
 	private String productName;
 
 	private int productPrice;
-
+	
 	private int productSellMonth;
-
+	
 	private int productCost;
+	
+	private int typeName;
 
-	// 2016.11.30 by bing....delete cost value and add init value
-	public Product(int productNum, int typeNum, String productName, int productPrice, int productSellMonth,
-			int productCost) {
+	
+
+	public Product(int productNum, int typeNum, String typeName, String productName, int productPrice, int productSellMonth, int productCost) {
 		this.productNum = productNum;
 		this.typeNum = typeNum;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productSellMonth = productSellMonth;
 		this.productCost = productCost;
-
+		
 	}
-
-	public Product() {
+	
+	public Product(){
 		this.productNum = 0;
 		this.typeNum = 0;
 		this.productName = null;
@@ -51,6 +53,8 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 
+
+
 	public int getProductSellMonth() {
 		return productSellMonth;
 	}
@@ -66,13 +70,19 @@ public class Product {
 	public int getTypeNum() {
 		return typeNum;
 	}
-
-	public int getProductCost() {
+	public int getProductCost(){
 		return productCost;
 	}
-
-	public void setProductCost(int productCost) {
+	public void setProductCost(int productCost){
 		this.productCost = productCost;
 	}
+	
+	public int getTypeName() {
+		return typeName;
+	}
 
+	public void setTypeName(int typeName) {
+		this.typeName = typeName;
+	}
+	
 }

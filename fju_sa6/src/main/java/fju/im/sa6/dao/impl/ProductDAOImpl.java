@@ -27,10 +27,10 @@ public class ProductDAOImpl implements ProductDAO {
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(3, addPro.getProductName());
-			smt.setInt(4, addPro.getProductPrice());
-			smt.setInt(5, addPro.getProductSellMonth());
-			smt.setInt(6, addPro.getProductCost());
+			smt.setString(1, addPro.getProductName());
+			smt.setInt(2, addPro.getProductPrice());
+			smt.setInt(3, addPro.getProductSellMonth());
+			smt.setInt(4, addPro.getProductCost());
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {
@@ -109,11 +109,12 @@ public class ProductDAOImpl implements ProductDAO {
 			if (rs.next()) {
 				int setproduct_Num = (rs.getInt("product_num"));
 				int settype_Num = (rs.getInt("type_num"));
+				String settype_Name = (rs.getString("type_name"));
 				String setproduct_Name = (rs.getString("product_name"));
 				int setproduct_price = (rs.getInt("product_price"));
 				int setproduct_sell_month = (rs.getInt("product_sell_month"));
 				int setproductCost = (rs.getInt("product_cost"));
-				pro = new Product(setproduct_Num, settype_Num, setproduct_Name, setproduct_price,setproduct_sell_month, setproductCost);
+				pro = new Product(setproduct_Num, settype_Num, settype_Name, setproduct_Name, setproduct_price,setproduct_sell_month, setproductCost);
 			}
 			rs.close();
 			smt.close();
@@ -145,7 +146,7 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setInt(1, type.getTypeNum());
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("product_name"),
+				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("type_name"), rs.getString("product_name"),
 						rs.getInt("product_price"),rs.getInt("product_sell_month"), rs.getInt("product_cost"));
 				productArr.add(temp);
 			}
@@ -170,7 +171,6 @@ public class ProductDAOImpl implements ProductDAO {
 	public ArrayList<Product> getList() {
 		// TODO Auto-generated method stub
 		ArrayList<Product> productArr = new ArrayList<Product>();
-		Product temp;
 
 		String sql = "SELECT * FROM product ";
 		try {
@@ -179,9 +179,15 @@ public class ProductDAOImpl implements ProductDAO {
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
 			if (rs.next()) {
-				temp = new Product(rs.getInt("product_num"), rs.getInt("type_num"), rs.getString("product_name"),
-						rs.getInt("product_price"),rs.getInt("product_sell_month"), rs.getInt("product_cost"));
-				productArr.add(temp);
+				int productNum = (rs.getInt("product_num"));
+				int typeNum = (rs.getInt("type_num"));
+				int supplierNum = (rs.getInt("supplier_num"));
+				String typeName = (rs.getString("type_name"));
+				String productName = (rs.getString("product_name"));
+				int productprice = (rs.getInt("product_price"));
+				int productsellmonth = (rs.getInt("product_sell_month"));
+				int productcost = (rs.getInt("product_cost"));
+				productArr.add(new Product(productNum,typeNum,typeName,productName,productprice,productsellmonth,productcost));
 			}
 			rs.close();
 			smt.close();

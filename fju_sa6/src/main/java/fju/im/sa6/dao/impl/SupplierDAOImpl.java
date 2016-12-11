@@ -79,7 +79,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 	@Override
 	public void remove(Supplier removeSup) {
 		// TODO Auto-generated method stub
-		String sql = "UPDATE available_num=1 available_num=1 FROM supplier WHERE supplier_num = ?";
+		String sql = "UPDATE available_num=1 FROM supplier WHERE supplier_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -114,13 +114,11 @@ public class SupplierDAOImpl implements SupplierDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setsupplierNum = (rs.getInt("supplier_num"));
-				int setinventoryNum = (rs.getInt("inventory_num"));
-				String setinventoryName = (rs.getString("inventory_name"));
 				String setsupplierName = (rs.getString("supplier_name"));
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
 				int setavailableNum = (rs.getInt(0));
-				sup = new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName, setsupplierPhone,
+				sup = new Supplier(setsupplierNum, setsupplierName, setsupplierPhone,
 						setsupplierAddress, setavailableNum);
 			}
 			rs.close();
@@ -152,13 +150,11 @@ public class SupplierDAOImpl implements SupplierDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				int setsupplierNum = (rs.getInt("supplier_num"));
-				int setinventoryNum = (rs.getInt("inventory_num"));
-				String setinventoryName = (rs.getString("inventory_name"));
 				String setsupplierName = (rs.getString("supplier_name"));
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
-				int setavailableNum = (rs.getInt(0));
-				sup.add((new Supplier(setsupplierNum, setinventoryNum, setinventoryName, setsupplierName,
+				int setavailableNum = (rs.getInt("available_num"));
+				sup.add((new Supplier(setsupplierNum, setsupplierName,
 						setsupplierPhone, setsupplierAddress, setavailableNum)));
 			}
 			rs.close();

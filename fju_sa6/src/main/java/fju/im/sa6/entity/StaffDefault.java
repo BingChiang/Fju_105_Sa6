@@ -2,7 +2,7 @@ package fju.im.sa6.entity;
 
 import java.util.Date;
 
-public abstract class StaffDefault {
+public class StaffDefault {
 
 	private int staffNum;
 
@@ -10,26 +10,29 @@ public abstract class StaffDefault {
 
 	private int staffLevel;
 
-	// record the month of working day
 	private Date workMonth;
 
 	private double worktimeTotal;
+	
 	private double daywork;
 
-	// rebuild by bing 2016.11.30 and add init value
-	public StaffDefault(int staffNum, String staffName, int staffLevel, double worktimeTotal) {
+	
+	public StaffDefault(int staffNum, String staffName, int staffLevel, Date workMonth, double worktimeTotal) {
 
 		this.staffNum = staffNum;
 		this.staffName = staffName;
 		this.staffLevel = staffLevel;
+		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
 	}
 
 	public StaffDefault() {
 		this.staffNum = 0;
-		this.staffName = "";
-		this.staffLevel = 0;
+		this.staffName = null;
+		this.staffLevel = 1;
+		this.workMonth = null;
 		this.worktimeTotal = 0;
+		this.daywork = 0;
 	}
 
 	public String getStaffName() {
@@ -70,6 +73,14 @@ public abstract class StaffDefault {
 
 	public void setStaffNum(int staffNum) {
 		this.staffNum = staffNum;
+	}
+	
+	public double getDaywork() {
+		return daywork;
+	}
+
+	public void setDaywork(double daywork) {
+		this.daywork = daywork;
 	}
 
 }

@@ -9,6 +9,7 @@ import java.sql.Date;
 
 import javax.sql.DataSource;
 
+import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.Purchase;
 import fju.im.sa6.dao.PurchaseDAO;
 
@@ -105,7 +106,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public ArrayList<Purchase> getList(Purchase purchase) {
 		// TODO Auto-generated method stub
-		Purchase pur = null;
+		ArrayList<Purchase> pur = new ArrayList<Purchase>();
 
 		String sql = "SELECT * FROM purchase WHERE purchase_num = ?";
 		try {
@@ -119,7 +120,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 				int setpurchase_Num = (rs.getInt("purchase_num"));
 				Double setpurchase_price = (rs.getDouble("purchase_price"));
 				Date setpurchase_Date = (rs.getDate("purchase_date"));
-				pur = new Purchase(setpurchase_Name, setpurchase_Num, setpurchase_price, setpurchase_Date);
+				pur.add(new Purchase(setpurchase_Name, setpurchase_Num, setpurchase_price, setpurchase_Date));
 			}
 			rs.close();
 			smt.close();
@@ -135,7 +136,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 				}
 			}
 		}
-		return getList(pur);
+		return pur;
 	}
 
 	@Override
