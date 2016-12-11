@@ -1,8 +1,11 @@
 package fju.im.sa6.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
@@ -59,7 +62,7 @@ public class InventoryController {
 
 	@RequestMapping(value = "/invertoryAdd", method = RequestMethod.POST)
 	public ModelAndView addNewInv(@ModelAttribute Inventory inv) {
-		ModelAndView model = new ModelAndView("redirect:/inventoryManage");
+		ModelAndView model = new ModelAndView("redirect:inventoryManage");
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		inventoryDAO.add(inv);
 
@@ -68,13 +71,13 @@ public class InventoryController {
 	}
 	
 	@RequestMapping(value = "/invertoryModify", method = RequestMethod.GET)
-	public ModelAndView invertoryModifyPage(int inventoryNum) {
+	public ModelAndView invertoryModifyPage(@ModelAttribute("inventoryNum") int inventoryNum,HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("invertoryModify");
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		ArrayList<Supplier> supplierList = null;
 		supplierList = supplierDAO.getList();
 		
-		Inventory temp = new Inventory(inventoryNum,0,0,null,null, 0,null);
+		Inventory temp = new Inventory(inventoryNum,0,0,null,null,0,null);
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		Inventory inv2 = inventoryDAO.get(temp);
 //		inventoryDAO.add(inv2);
@@ -98,7 +101,7 @@ public class InventoryController {
 
 	
 	@RequestMapping(value = "/supplierModify", method = RequestMethod.GET)
-	public ModelAndView supplierModifyPage(int supplierNum) {
+	public ModelAndView supplierModifyPage(@ModelAttribute("supplierNum") int supplierNum,HttpServletRequest request ) {
 		ModelAndView model = new ModelAndView("supplierModify");
 		Supplier temp = new Supplier(supplierNum,null,null,null,0);
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
@@ -140,7 +143,7 @@ public class InventoryController {
 	}
 	
 	@RequestMapping(value = "/showSupplier", method = RequestMethod.GET)
-	public ModelAndView showSupplier(int supplierNum) {
+	public ModelAndView showSupplier(@ModelAttribute("supplierNum") int supplierNum,HttpServletRequest request  ) {
 		ModelAndView model = new ModelAndView("showSupplier");
 		Supplier sup = new Supplier(supplierNum,null,null,null,0);
 		ArrayList<Inventory> temp = null;

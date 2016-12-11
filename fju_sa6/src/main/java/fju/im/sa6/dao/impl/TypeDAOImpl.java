@@ -124,7 +124,7 @@ public class TypeDAOImpl implements TypeDAO {
 	}
 
 	@Override
-	public ArrayList<Type> getList(Type Type) {
+	public ArrayList<Type> getList() {
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM type";
 		ArrayList<Type>typ= new ArrayList<Type>();

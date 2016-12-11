@@ -16,7 +16,7 @@ public interface WorktimeDAO {
 
 	public void amendOffWork(StaffDefault staffDefault, Date date, Date time);
 	
-	public WorkTime searchworktime(Date date);
+	public ArrayList<WorkTime> searchworktime(Date date);
 
 	
 }

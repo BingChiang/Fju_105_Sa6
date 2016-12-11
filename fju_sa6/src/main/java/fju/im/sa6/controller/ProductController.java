@@ -2,8 +2,11 @@ package fju.im.sa6.controller;
 
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fju.im.sa6.entity.Inventory;
 import fju.im.sa6.entity.OrderList;
+import fju.im.sa6.entity.Orderitem;
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
@@ -55,10 +59,10 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productTypeModify", method = RequestMethod.GET)
-	public ModelAndView productModify(int typeNum) {
-		ModelAndView model = new ModelAndView(":productModify");
+	public ModelAndView productModify(@ModelAttribute("typeNum") int typeNum,HttpServletRequest request ) {
+		ModelAndView model = new ModelAndView("redirec:productModify");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		Type temp = new Type(null,typeNum);
+		Type temp = new Type(null,typeNum,0);
 		Type temp2 = typeDAO.getType(temp);
 		model.addObject("type",temp2);
 		return model;
@@ -85,18 +89,30 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productModify", method = RequestMethod.GET)
-	public ModelAndView invertoryModifyPage(int productNum) {
+	public ModelAndView invertoryModifyPage(@ModelAttribute("productNum") int productNum,HttpServletRequest request ) {
 		ModelAndView model = new ModelAndView("productModify");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
 		ArrayList<Type> typeList = null;
 		typeList = typeDAO.getList();
 		
-		Product temp = new Product(productNum,0,null,0,0,0);
+		Product temp = new Product(productNum,0,null,null,0,0,0);
 		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
 		Product temp2 = productDAO.get(temp);
 //		inventoryDAO.add(inv2);
 		model.addObject("product",temp2);
 		model.addObject("typeList", typeList);
+		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
+	public ModelAndView orderDetail(@ModelAttribute("orderlistNum") int orderlistNum,HttpServletRequest request ) {
+		ModelAndView model = new ModelAndView("orderDetail");
+		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
+		OrderList temp = new OrderList(orderlistNum,0,null,null);
+		ArrayList<Orderitem> temp2 = orderListDAO.getorderitem(temp);
+		model.addObject("order",temp2);
 		return model;
 
 	}

@@ -3,32 +3,29 @@ package fju.im.sa6.entity;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class OrderList  {
+public class OrderList {
 
 	private int orderlistNum;
-	private ArrayList<Product> orderList ;
-	
+
+	private ArrayList<Product> orderList;
+
 	private int orderTotal;
 
 	private Date orderDate;
-	
-	private String productName;
-	
-	private Product product = new Product();
-	
-	private int productNum;
-	
-	
 
 	private int productPrice;
 
-	public OrderList(int orderlistNum, int orderTotal, Date orderDate){
+	public OrderList(int orderlistNum, int orderTotal, Date orderDate,ArrayList<Product> orderList) {
 		this.orderlistNum = orderlistNum;
 		this.orderTotal = orderTotal;
 		this.orderDate = orderDate;
+		this.orderList =orderList;
 	}
-	
-	
+
+	public ArrayList<Product> getOrderList() {
+
+		return orderList;
+	}
 
 	public int getOrderTotal() {
 		return orderTotal;
@@ -49,22 +46,11 @@ public class OrderList  {
 	public Date getOrderDate() {
 		return orderDate;
 	}
-	
-	public Product getproduct() {
-		return product;
-	}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	
-	public String getProductName() {
-		return productName;
-	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
 
 	public int getProductPrice() {
 		return productPrice;

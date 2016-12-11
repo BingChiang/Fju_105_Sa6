@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -30,13 +32,14 @@ import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.Supplier;
 import fju.im.sa6.entity.Type;
+
 @Controller
-//@SessionAttributes("newaccount")
+// @SessionAttributes("newaccount")
 
 public class pageController {
-	static StaffDefault newaccount = new Staff(6,"allen",0,0);
+	static StaffDefault newaccount = new Staff(6, "allen", 0, null, 0);
 
-	static Cart shoppingCart;
+	static Cart shoppingCart = new Cart();
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 
@@ -58,10 +61,6 @@ public class pageController {
 		return model;
 	}
 
-	
-	
-	
-
 	// *****
 //	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
 //	public ModelAndView productSale() {
@@ -72,48 +71,47 @@ public class pageController {
 //		// ArrayList<Type> typeList = null;
 //		//
 //		// typeList = typeDAO.getList();
-//		model.addObject("typeNum", 1);
 //
 //		return model;
 //	}
-//
-//	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
-//	public ModelAndView productSale(int typeNum) {
-//		ModelAndView model = new ModelAndView("productSale");
-//		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-//		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-//		ArrayList<Product> typeProList = null;
-//		ArrayList<Type> typeList = null;
-//
-//		typeList = typeDAO.getList();
-//
-//		Type temp = null;
-//
-//		temp = new Type(null, typeNum);
-//		typeProList = productDAO.getTypeList(temp);
-//
-//		model.addObject("typeList", typeList);
-//		model.addObject("typeProList", typeProList);
-//
-//		List<Product> content = shoppingCart.getCart();
-//		int cartTotal = 0;
-//		cartTotal = shoppingCart.orderTotal();
-//		model.addObject("cart", content);
-//		model.addObject("cartTotal", cartTotal);
-//		
-//		return model;
-//	}
-//	
+
+	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
+	public ModelAndView productSale(@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("productSale");
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		ArrayList<Product> typeProList = null;
+		ArrayList<Type> typeList = null;
+
+		typeList = typeDAO.getList();
+
+		Type temp = null;
+
+		temp = new Type(null, typeNum, typeNum);
+		typeProList = productDAO.getTypeList(temp);
+
+		model.addObject("typeList", typeList);
+		model.addObject("typeProList", typeProList);
+
+		List<Product> content = shoppingCart.getCart();
+		int cartTotal = 0;
+		cartTotal = shoppingCart.orderTotal();
+		model.addObject("cart", content);
+		model.addObject("cartTotal", cartTotal);
+
+		return model;
+	}
+
 	@RequestMapping(value = "/cartClean", method = RequestMethod.GET)
 	public ModelAndView cartClean() {
 		ModelAndView model = new ModelAndView("redirect:productSale");
 		shoppingCart.clean();
-		// ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-		// TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		// ArrayList<Product> typeProList = null;
-		// ArrayList<Type> typeList = null;
-		//
-		// typeList = typeDAO.getList();
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		ArrayList<Product> typeProList = null;
+		ArrayList<Type> typeList = null;
+
+		typeList = typeDAO.getList();
 		model.addObject("typeNum", 1);
 
 		return model;
@@ -128,6 +126,16 @@ public class pageController {
 		model.addObject("inventoryList", invList);
 		return model;
 	}
+	
+	@RequestMapping(value = "/supplierManage", method = RequestMethod.GET)
+	public ModelAndView supplierManage() {
+		ModelAndView model = new ModelAndView("supplierManage");
+		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
+		ArrayList<Supplier> supList = null;
+		supList = supplierDAO.getList();
+		model.addObject("supplierListList", supList);
+		return model;
+	}
 
 	@RequestMapping(value = "/productManage", method = RequestMethod.GET)
 	public ModelAndView productManage() {
@@ -138,6 +146,7 @@ public class pageController {
 		model.addObject("productList", proList);
 		return model;
 	}
+
 	@RequestMapping(value = "/productTypeManage", method = RequestMethod.GET)
 	public ModelAndView productTypeManage() {
 		ModelAndView model = new ModelAndView("productTypeManage");
@@ -153,7 +162,7 @@ public class pageController {
 		ModelAndView model = new ModelAndView("showOrder");
 		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
 		ArrayList<OrderList> orderList = null;
-		orderList = orderListDAO.getList();
+		orderList = orderListDAO.getorderlist();
 		model.addObject("orderList", orderList);
 
 		return model;
@@ -174,10 +183,20 @@ public class pageController {
 	public ModelAndView worktimeSearch() {
 		ModelAndView model = new ModelAndView("worktimeSearch");
 
-		// DAO ERROR
 
 		return model;
 	}
+	
+	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.POST)
+	public ModelAndView worktimeSearch(@ModelAttribute("searchTime") Date searchTime,HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:worktimeSearch");
+
+		// DAO ERROR
+		WorktimeDAO worktimeDAO = (WorktimeDAO)context.getBean("WorktimeDAO");
+		
+		return model;
+	}
+
 	
 	@RequestMapping(value = "/amendWork", method = RequestMethod.GET)
 	public ModelAndView amendWork() {
@@ -203,25 +222,6 @@ public class pageController {
 
 		return model;
 	}
-	
-	@RequestMapping(value = "/showMonth", method = RequestMethod.GET)
-	public ModelAndView showMonth(Date searchTime) {
-		ModelAndView model = new ModelAndView("showMonth");
-		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
-		double monthTotal = 0;
-		monthTotal = managerDAO.monthearntotal();
-				
-		model.addObject("monthTotal",monthTotal);	
-		return model;
-	}
-	
-	
-	@RequestMapping(value = "/showMonth", method = RequestMethod.POST)
-	public ModelAndView showMonth() {
-		ModelAndView model = new ModelAndView("redirect:showMonth");
-		return model;
-	}
-	
-	
+
 
 }

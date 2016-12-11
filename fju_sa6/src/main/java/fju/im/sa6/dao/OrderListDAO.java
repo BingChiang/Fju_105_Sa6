@@ -11,16 +11,15 @@ import fju.im.sa6.entity.Product;
 public interface OrderListDAO {
 	public void addorderlist(OrderList orderlist);
 	
-	public void addorderitem(Orderitem orderitem);
 
-	public OrderList getorderlist(OrderList orderlist);
+	public ArrayList<OrderList> getorderlist();
 	
-	public ArrayList<Orderitem> getorderitem(Orderitem orderitem);
+	public ArrayList<Orderitem> getorderitem(OrderList orderList);
 	
-	public ArrayList<OrderList> getList();
 	
 	public int getordertotal(OrderList orderlist);
 	
 	public double gettotalcost(Date date);
+
 
 }

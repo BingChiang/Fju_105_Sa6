@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 public class WorktimeDAOImpl implements WorktimeDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
+	private Connection conn1 = null;
 	private ResultSet rs = null;
 	private ResultSet rs2 = null;
 	private PreparedStatement smt = null;
@@ -278,26 +279,27 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 
 	@Override
-	public WorkTime searchworktime(Date date) {
-		
+	public ArrayList<WorkTime> searchworktime(Date date) {
+		ArrayList<WorkTime> worktime = new ArrayList<WorkTime>();
+		WorkTime work = new WorkTime();
 		String sql = "SELECT * FROM worktime WHERE work_date = ?";
 		String sql2 = "SELECT staff_name FROM staff WHERE staff_num = ?";
-		WorkTime worktime = null;
 		try {
 			conn = dataSource.getConnection();
+			conn1 = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt2 = conn.prepareStatement(sql2);
+			smt2 = conn1.prepareStatement(sql2);
 			smt.setDate(1, date);
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				smt2.setInt(1, rs.getInt("staff_num"));
-				rs2 = smt.executeQuery();
+				rs2 = smt2 .executeQuery();
 				int setstaffNum = (rs.getInt("staff_num"));
 				Date setworkDate = (rs.getDate("work_date"));
 				Date setonworkTime = (rs.getDate("onwork_time"));
 				Date setoffworkTime = (rs.getDate("offwork_time"));
-				worktime = new WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime);
-				worktime.setStaffName(rs2.getString("staff_name"));
+				worktime.add(new WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime));
+				work.setStaffName(rs2.getString("staff_name"));
 
 			}
 			rs.close();
