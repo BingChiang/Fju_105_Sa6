@@ -34,7 +34,7 @@ import fju.im.sa6.entity.Type;
 //@SessionAttributes("newaccount")
 
 public class pageController {
-	static StaffDefault newaccount = new Staff(6,"allen",0,0);
+	static StaffDefault newaccount = new Staff(6,"allen",0,null, 0);
 
 	static Cart shoppingCart;
 
@@ -200,7 +200,7 @@ public class pageController {
 		ModelAndView model = new ModelAndView("showMonth");
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		double monthTotal = 0;
-		monthTotal = managerDAO.monthearntotal();
+		monthTotal = managerDAO.monthearntotal(searchTime);
 				
 		model.addObject("monthTotal",monthTotal);	
 		return model;
