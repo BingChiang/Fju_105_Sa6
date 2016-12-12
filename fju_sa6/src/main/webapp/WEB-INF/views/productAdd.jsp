@@ -41,7 +41,7 @@
 					<div class="col-sm-8">
 						<select name="typeNum" class="form-control">
 						<c:forEach items="${typeList}" var="typeList">
-							<option value="${typeList.typeNum}">${typeList.typeName}</option>
+							<option value=${typeList.typeNum}>${typeList.typeName}</option>
 							</c:forEach>
 							
 						</select> <a role="button" href="productTypeAdd" class="btn btn-success">新增類別</a>

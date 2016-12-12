@@ -81,6 +81,9 @@ public class Product {
 	public String getTypeName() {
 		return typeName;
 	}
+	public void setTypeNum(int num) {
+		this.typeNum = num;
+	}
 
 	public void setTypeName(String typeName) {
 

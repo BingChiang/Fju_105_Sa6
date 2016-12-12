@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 //configuration for session, please refer to: http://tuhrig.de/making-a-spring-bean-session-scoped/
+
 @Component
 @Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class Cart implements java.io.Serializable {

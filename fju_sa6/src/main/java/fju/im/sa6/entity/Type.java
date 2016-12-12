@@ -34,6 +34,9 @@ public class Type {
 	public int getTypeNum() {
 		return typeNum;
 	}
+	public void setTypeNum(int num) {
+		this.typeNum = num;
+	}
 public int getAvailabletype() {
 		return availabletype;
 	}
