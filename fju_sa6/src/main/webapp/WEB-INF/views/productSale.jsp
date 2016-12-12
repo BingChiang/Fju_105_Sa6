@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-md-7">
 				<c:forEach items="${typeProList}" var = "pro">
-					<a href="addCart?productNum =${productNum}&typeNum=${pro.typeNum}">
+					<a href="addCart?productNum=${pro.productNum}&typeNum=${pro.typeNum}">
 						<div class="col-md-2  btn-lg btn-primary" id="product">
 							<p>${pro.productName}</p>
 						</div>
@@ -47,7 +47,7 @@
 							<th>價格</th>
 							<th>刪除</th>
 						</tr>
-						<c:forEach items="${cart}" var="cart">
+						<c:forEach items="${cartrrr}" var="cart">
 							<tr>
 								<td>${cart.productName}</td>
 								<td>${cart.productPrice}</td>
@@ -65,7 +65,7 @@
 							<td class="Checkout">${cartTotal}</td>
 							<td class="Checkout"><a href="cartClean" role="button"
 								class="btn btn-sm btn-default" style="margin-top: -5px;">清除</a>
-								<a href="#" role="button" class="btn btn-sm btn-primary"
+								<a href="checkout" role="button" class="btn btn-sm btn-primary"
 								style="margin-top: -5px;">結帳</a></td>
 						</tr>
 					</table>

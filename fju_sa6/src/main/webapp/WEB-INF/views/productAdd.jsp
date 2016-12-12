@@ -33,18 +33,18 @@
 					<label class="col-sm-2 control-label">產品名稱</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="productName"
-							placeholder="產品姓名" value="greentea">
+							placeholder="產品名稱" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">產品類型</label>
 					<div class="col-sm-8">
-						<select name="productType" class="form-control">
-							<option value="">1</option>
-							<option value="">2</option>
-							<option value="">3</option>
-							<option value="">4</option>
-						</select> <a role="button" href="#" class="btn btn-success">新增類別</a>
+						<select name="typeNum" class="form-control">
+						<c:forEach items="${typeList}" var="typeList">
+							<option value=${typeList.typeNum}>${typeList.typeName}</option>
+							</c:forEach>
+							
+						</select> <a role="button" href="productTypeAdd" class="btn btn-success">新增類別</a>
 
 					</div>
 				</div>
@@ -52,14 +52,14 @@
 					<label class="col-sm-2 control-label">產品價格</label>
 					<div class="col-sm-8">
 						<input type="number" class="form-control" name="productPrice"
-							placeholder="產品價格" value="25">
+							placeholder="產品價格" value="">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">產品成本</label>
 					<div class="col-sm-8">
 						<input type="number" class="form-control" name="productCost"
-							placeholder="產品成本" value="8">
+							placeholder="產品成本" value="">
 					</div>
 				</div>
 				<div class="form-group">

@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AccountController {
 
 	@Autowired
-	static StaffDefault account_session = null;
+	static StaffDefault account_session = new Staff(0, null, 0, null, 0);
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 
@@ -57,9 +57,9 @@ public class AccountController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView model = new ModelAndView("redirect:/");// mapping page
-
-		account_session = null;
-		// session add
+		
+		account_session =new Staff(0, null, 0, null, 0);;
+//		 session add
 		model.addObject("newaccount", account_session);
 		return model;
 	}

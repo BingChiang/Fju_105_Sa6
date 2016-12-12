@@ -26,11 +26,11 @@
 		<property name="worktimeTotal" value="0" />
 		<property name="daywork" value="0" />
 
-	</bean>
-	<bean id="Cart" class="fju.im.sa6.dao.entity.Cart">
+	</bean> -->
+	<!-- <bean id="Cart" class="fju.im.sa6.dao.entity.Cart">
 		<property name="dataSource" ref="dataSource" />
-	</bean>
- -->
+	</bean> -->
+
 
 
 	<bean id="InventoryDAO" class="fju.im.sa6.dao.impl.InventoryDAOImpl">
