@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import fju.im.sa6.entity.Supplier;
+import fju.im.sa6.entity.SupplierList;
 import fju.im.sa6.dao.SupplierDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -140,9 +141,9 @@ public class SupplierDAOImpl implements SupplierDAO {
 
 	@Override
 	public ArrayList<Supplier> getList() {
-
 		ArrayList<Supplier> sup = new ArrayList<Supplier>();
-		String sql = "SELECT * FROM supplier ";
+		String sql = "SELECT * FROM supplier";
+		
 		try {
 
 			conn = dataSource.getConnection();
@@ -154,9 +155,8 @@ public class SupplierDAOImpl implements SupplierDAO {
 				String setsupplierPhone = (rs.getString("supplier_phone"));
 				String setsupplierAddress = (rs.getString("supplier_address"));
 				int setavailableNum = (rs.getInt("available_num"));
-				sup.add(new Supplier(setsupplierNum, setsupplierName, setsupplierPhone, setsupplierAddress,
+				sup.add(new SupplierList(setsupplierNum,setsupplierName, setsupplierPhone, setsupplierAddress,
 						setavailableNum));
-
 			}
 			rs.close();
 			smt.close();

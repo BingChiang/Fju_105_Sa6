@@ -45,7 +45,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 			// conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				orderNum = rs.getInt("order_num");
 			}
 			sql = "INSERT INTO orderitem (orderlist_num, product_num,product_name,product_price) VALUES(?, ?,?,?)";
@@ -81,7 +81,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int setorderlistNum = (rs.getInt("orderlist_num"));
 				Date setorderdate = (rs.getDate("order_date"));
 				int setordertotal = (rs.getInt("order_total"));
@@ -105,21 +105,18 @@ public class OrderListDAOImpl implements OrderListDAO {
 	@Override
 	public ArrayList<Orderitem> getorderitem(OrderList orderList) {
 		// TODO Auto-generated method stub
-
 		ArrayList<Orderitem> detail = new ArrayList<Orderitem>();
-		String sql = "SELECT * FROM orderitem WHERE orderlist_num=?";
+		int orderlistNum=orderList.getOrderlistNum();
+		String sql = "SELECT * FROM orderitem WHERE orderlist_num="+orderlistNum;
 		try {
-
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, orderList.getOrderlistNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int productnum = (rs.getInt("product_num"));
 				String productname = (rs.getString("product_name"));
-				int productprice = (rs.getInt("prodcut_price"));
-				int orderlistnum = (rs.getInt("oderlist_num"));
-
+				int productprice = (rs.getInt("product_price"));
+				int orderlistnum = (rs.getInt("orderlist_num"));
 				detail.add(new Orderitem(productnum, orderlistnum, productname, productprice));
 
 			}
@@ -148,7 +145,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, orderlist.getOrderlistNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int productprice = (rs.getInt("product_price"));
 				ordertotal += productprice;
 			}
@@ -178,13 +175,13 @@ public class OrderListDAOImpl implements OrderListDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setDate(1, date);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				smt2 = conn.prepareStatement(sql1);
 				smt.setInt(1, rs.getInt("orderlist_num"));
 				int setorderlistNum = (rs.getInt("orderlist_num"));
 				int setproductNum = (rs2.getInt("product_num"));
-				// ordercost.add(new Orderitem(setproductNum, setorderlistNum,
-				// null, 0));
+//				 ordercost.add(new Orderitem(setproductNum, setorderlistNum,
+//				 null, 0));
 
 			}
 
