@@ -46,7 +46,7 @@ public class pageController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView indexLoginpage() {
-		System.out.print("1234567898765432");
+//		System.out.print("1234567898765432");
 		ModelAndView model = new ModelAndView("index");
 		ArrayList<StaffDefault> staffList = null;
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
@@ -75,48 +75,6 @@ public class pageController {
 //
 //		return model;
 //	}
-
-	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
-	public ModelAndView productSale(@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("productSale");
-		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		ArrayList<Product> typeProList = null;
-		ArrayList<Type> typeList = null;
-
-		typeList = typeDAO.getList();
-
-		Type temp = null;
-
-		temp = new Type(null, typeNum, typeNum);
-		typeProList = productDAO.getTypeList(temp);
-
-		model.addObject("typeList", typeList);
-		model.addObject("typeProList", typeProList);
-
-		List<Product> content = shoppingCart.getCart();
-		int cartTotal = 0;
-		cartTotal = shoppingCart.orderTotal();
-		model.addObject("cart", content);
-		model.addObject("cartTotal", cartTotal);
-
-		return model;
-	}
-
-	@RequestMapping(value = "/cartClean", method = RequestMethod.GET)
-	public ModelAndView cartClean() {
-		ModelAndView model = new ModelAndView("redirect:productSale");
-		shoppingCart.clean();
-		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		ArrayList<Product> typeProList = null;
-		ArrayList<Type> typeList = null;
-
-		typeList = typeDAO.getList();
-		model.addObject("typeNum", 1);
-
-		return model;
-	}
 
 	@RequestMapping(value = "/inventoryManage", method = RequestMethod.GET)
 	public ModelAndView inventoryManage() {

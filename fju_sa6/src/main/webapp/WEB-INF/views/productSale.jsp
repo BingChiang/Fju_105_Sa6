@@ -45,14 +45,14 @@
 						<tr>
 							<th>項目</th>
 							<th>價格</th>
-							<th>刪除</th>
+							<th><a href="removecart" role="button" class="btn btn-sm btn-danger"
+									style="margin-top: -5px;">刪除上項</a></th>
 						</tr>
 						<c:forEach items="${cartrrr}" var="cart">
 							<tr>
 								<td>${cart.productName}</td>
 								<td>${cart.productPrice}</td>
-								<td><a href="#" role="button" class="btn btn-sm btn-danger"
-									style="margin-top: -5px;">刪除</a></td>
+								<td></td>
 							</tr>
 						</c:forEach>
 						<tr>

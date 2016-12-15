@@ -26,7 +26,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void add(Product addPro) {
-		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost) VALUES(?, ?, ?,?)";
+		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost, type_num) VALUES(?, ?, ?,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -34,6 +34,7 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setInt(2, addPro.getProductPrice());
 			smt.setInt(3, addPro.getProductSellMonth());
 			smt.setInt(4, addPro.getProductCost());
+			smt.setInt(5, addPro.getTypeNum());
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {
@@ -51,7 +52,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void set(Product setPro) {
-		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=? "
+		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=?, type_num=? "
 				+ "WHERE product_name = ?";
 		try {
 			conn = dataSource.getConnection();
@@ -59,6 +60,7 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setString(1, setPro.getProductName());
 			smt.setInt(2, setPro.getProductPrice());
 			smt.setInt(3, setPro.getProductSellMonth());
+			smt.setInt(4, setPro.getTypeNum());
 			smt.executeUpdate();
 			smt.close();
 
@@ -102,11 +104,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 	public Product get(Product product) {
 		Product pro = null;
-		int productnum=product.getProductNum();
-		int typenum=0;
-		String typename=null;
-		String sql = "SELECT * FROM product WHERE product_num = "+productnum;
-		String sql1 = "SELECT type_name FROM type WHERE type_num="+typenum;
+		int productnum = product.getProductNum();
+		int typenum = 0;
+		String typename = null;
+		String sql = "SELECT * FROM product WHERE product_num = " + productnum;
+		String sql1 = "SELECT type_name FROM type WHERE type_num=" + typenum;
 		try {
 			conn = dataSource.getConnection();
 			conn1 = dataSource.getConnection();
@@ -119,22 +121,23 @@ public class ProductDAOImpl implements ProductDAO {
 				int setproduct_price = (rs.getInt("product_price"));
 				int setproduct_sell_month = (rs.getInt("product_sell_month"));
 				int setproductCost = (rs.getInt("product_cost"));
-				typenum=rs.getInt("type_num");
+				typenum = rs.getInt("type_num");
 				conn1 = dataSource.getConnection();
 				smt1 = conn1.prepareStatement(sql1);
 				rs1 = smt1.executeQuery();
-				while(rs1.next()){
+				while (rs1.next()) {
 					typename = (rs1.getString("type_name"));
-				
-			}
+
+				}
+
 				pro = new Product(setproduct_Num, settype_Num, typename, setproduct_Name, setproduct_price,
+
 						setproduct_sell_month, setproductCost);
 				rs1.close();
 				smt1.close();
 			}
 			rs.close();
 			smt.close();
-			
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

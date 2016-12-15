@@ -91,17 +91,31 @@ public class InventoryController {
 
 	@RequestMapping(value = "/inventoryModify", method = RequestMethod.POST)
 	public ModelAndView invertoryModify(@ModelAttribute Inventory inv) {
-		ModelAndView model = new ModelAndView("redirect:/inventoryManage");
+		ModelAndView model = new ModelAndView("redirect:inventoryManage");
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		inventoryDAO.add(inv);
 
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/invertoryRemove", method = RequestMethod.GET)
+	public ModelAndView invertoryRemove(@ModelAttribute("inventoryNum") int inventoryNum,
+			HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:invertoryModify");
+
+		Inventory temp = new Inventory(inventoryNum, 0, 0, null, null, 0, null);
+		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
+		inventoryDAO.remove(temp);
+
+		return model;
+
+	}
+
 
 	@RequestMapping(value = "/supplierModify", method = RequestMethod.GET)
 	public ModelAndView supplierModifyPage(@ModelAttribute("supplierNum") int supplierNum, HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("supplierModify");
+		ModelAndView model = new ModelAndView("/supplierModify");
 		Supplier temp = new Supplier(supplierNum, null, null, null, 0);
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		Supplier sup = supplierDAO.get(temp);
@@ -113,7 +127,7 @@ public class InventoryController {
 
 	@RequestMapping(value = "/supplierModify", method = RequestMethod.POST)
 	public ModelAndView supplierModify(@ModelAttribute Supplier sup) {
-		ModelAndView model = new ModelAndView("redirect:/supplierManage");
+		ModelAndView model = new ModelAndView("redirect:supplierManage");
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		supplierDAO.add(sup);
 

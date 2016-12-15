@@ -24,6 +24,8 @@ import fju.im.sa6.entity.WorkTime;
 
 import java.security.Principal;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +38,8 @@ import javax.servlet.http.HttpServletRequest;
 public class AccountController {
 
 	@Autowired
-	static StaffDefault account_session = new Staff(0, null, 0, null, 0);
+//	static StaffDefault account_session = new Staff(0, null, 0, null, 0);
+	static StaffDefault account_session ;
 
 	ApplicationContext context = new ClassPathXmlApplicationContext("spring-module.xml");
 
@@ -112,42 +115,62 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/amend", method = RequestMethod.POST)
-	public ModelAndView amend(@ModelAttribute("date") Date date, @ModelAttribute("submit") String submit,
-			HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("");
+	public ModelAndView amend(@ModelAttribute("date") String date2, @ModelAttribute("submit") String submit,
+			HttpServletRequest request) throws ParseException {
+		System.out.print(date2);
+		ModelAndView model = new ModelAndView("redirect:mainpage");
+		String dat = date2.substring(0,10);
+		String tim = date2.substring(11);
+		System.out.println(dat);
+		System.out.println(tim);
+		String date3 = dat +" "+tim;
+		
+//		String dateString = date;
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		java.util.Date date2 = null;
 		// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
 		// context.getBean("StaffDefaultDAO");
 		// WorktimeDAO worktimeDAO = (WorktimeDAO)
 		// context.getBean("WorktimeDAO");
 		// worktimeDAO.amendOnWork(account_session, date);
 		if (Integer.parseInt(submit) == 1) {
-			model = new ModelAndView("amendonwork");
+//			model = new ModelAndView("amendonwork");
+			model = new ModelAndView("redirect:mainpage");
+			// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
+			// context.getBean("StaffDefaultDAO");
+			WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+			worktimeDAO.amendOnWork(account_session,date3);
 		} else {
-			model = new ModelAndView("amendonwork");
+//			model = new ModelAndView("amendoffnwork");
+			model = new ModelAndView("redirect:mainpage");
+			// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
+			// context.getBean("StaffDefaultDAO");
+			WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+			worktimeDAO.amendOffWork(account_session,date2);
 		}
-		model.addObject("date", date);
+//		model.addObject("date", date);
 		return model;
 	}
 
-	@RequestMapping(value = "/amendonwork", method = RequestMethod.GET)
-	public ModelAndView amendonwork(@ModelAttribute("date") Date date, HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("redirect:mainpage");
-		// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
-		// context.getBean("StaffDefaultDAO");
-		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-		worktimeDAO.amendOnWork(account_session, date, null);
-		return model;
-	}
-
-	@RequestMapping(value = "/amendoffwork", method = RequestMethod.GET)
-	public ModelAndView amendoffwork(@ModelAttribute("date") Date date, HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("redirect:mainpage");
-		// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
-		// context.getBean("StaffDefaultDAO");
-		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-		worktimeDAO.amendOffWork(account_session, date, null);
-		return model;
-	}
+//	@RequestMapping(value = "/amendonwork", method = RequestMethod.GET)
+//	public ModelAndView amendonwork(@ModelAttribute("date") Date date, HttpServletRequest request) {
+//		ModelAndView model = new ModelAndView("redirect:mainpage");
+//		// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
+//		// context.getBean("StaffDefaultDAO");
+//		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+//		worktimeDAO.amendOnWork(account_session, date, null);
+//		return model;
+//	}
+//
+//	@RequestMapping(value = "/amendoffwork", method = RequestMethod.GET)
+//	public ModelAndView amendoffwork(@ModelAttribute("date") Date date, HttpServletRequest request) {
+//		ModelAndView model = new ModelAndView("redirect:mainpage");
+//		// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
+//		// context.getBean("StaffDefaultDAO");
+//		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+//		worktimeDAO.amendOffWork(account_session, date, null);
+//		return model;
+//	}
 
 	@RequestMapping(value = "/manageWorktimeSearch", method = RequestMethod.GET)
 	public ModelAndView manageWorktime(@ModelAttribute("searchTime") Date searchTime, HttpServletRequest request) {
