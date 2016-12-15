@@ -88,10 +88,10 @@ public class ProductController {
 
 	}
 	@RequestMapping(value = "/productAdd", method = RequestMethod.POST)
-	public ModelAndView productTypeAddPage(@ModelAttribute Product product,@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
+	public ModelAndView productTypeAddPage(@ModelAttribute Product product,@ModelAttribute("productNum") int productNum, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("redirect:productManage");
 		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-		product.setTypeNum(typeNum);
+		//product.setProductNum(productNum);
 		productDAO.add(product);
 		return model;
 
@@ -125,6 +125,8 @@ public class ProductController {
 		return model;
 
 	}
+	
+
 
 	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
 	public ModelAndView orderDetail(@ModelAttribute("orderlistNum") int orderlistNum, HttpServletRequest request) {

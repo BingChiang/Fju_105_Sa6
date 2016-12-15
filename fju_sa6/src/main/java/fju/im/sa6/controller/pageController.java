@@ -46,7 +46,6 @@ public class pageController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView indexLoginpage() {
-		System.out.print("1234567898765432");
 		ModelAndView model = new ModelAndView("index");
 		ArrayList<StaffDefault> staffList = null;
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
@@ -134,7 +133,7 @@ public class pageController {
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		ArrayList<Supplier> supList = null;
 		supList = supplierDAO.getList();
-		model.addObject("supplierListList", supList);
+		model.addObject("supplier", supList);
 		return model;
 	}
 

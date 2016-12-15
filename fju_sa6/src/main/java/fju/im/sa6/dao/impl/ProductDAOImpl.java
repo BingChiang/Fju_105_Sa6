@@ -26,7 +26,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void add(Product addPro) {
-		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost) VALUES(?, ?, ?,?)";
+		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost, type_num) VALUES(?, ?, ?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -34,6 +34,7 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setInt(2, addPro.getProductPrice());
 			smt.setInt(3, addPro.getProductSellMonth());
 			smt.setInt(4, addPro.getProductCost());
+			smt.setInt(5, addPro.getTypeNum());
 			smt.executeUpdate();
 			smt.close();
 		} catch (SQLException e) {
@@ -51,14 +52,17 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void set(Product setPro) {
-		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=? "
-				+ "WHERE product_name = ?";
+		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=?, type_num=? "
+				+ "WHERE product_num = ?";
 		try {
+			System.out.println(123);
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, setPro.getProductName());
 			smt.setInt(2, setPro.getProductPrice());
 			smt.setInt(3, setPro.getProductSellMonth());
+			smt.setInt(4, setPro.getTypeNum());
+			smt.setInt(5, setPro.getProductNum());
 			smt.executeUpdate();
 			smt.close();
 
