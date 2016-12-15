@@ -48,7 +48,7 @@
 					<div class="col-sm-8">
 						<select name="productType" class="form-control">
 							<c:forEach items="typeList" var="type">
-								<option value="#{type.typeNum}">Type.typeNum</option>
+								<option value="${type.typeNum}">${type.typeName}</option>
 							</c:forEach>
 							
 						</select> <a role="button" href="productTypeAdd" class="btn btn-success">新增類別</a>
@@ -66,7 +66,7 @@
 					<label class="col-sm-2 control-label">產品成本</label>
 					<div class="col-sm-8">
 						<p class="form-control-static">8</p>
-						<input type="hidden" name="productCost" value="${product.productCose">
+						<input type="hidden" name="productCost" value="${product.productCose}">
 					</div>
 				</div>
 				<div class="form-group">
