@@ -33,10 +33,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">庫存名稱</label>
 					<div class="col-sm-8">
-						<input type="hidden" name="inventoryNum" value="0">
-					</div>
-
-					<input type="text" class="form-control" name="inventoryNmae"
+					<input type="text" class="form-control" name="inventoryName"
 						placeholder="輸入庫存名稱" value="">
 				</div>
 		</div>

@@ -206,6 +206,17 @@ public class AccountController {
 	// model.addObject("worktime",arr);
 	// return model;
 	// }
+	
+	
+	@RequestMapping(value = "/staffLevelModify", method = RequestMethod.GET)
+	public ModelAndView staffLevelModify(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("staffModify");
+		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+		StaffDefault temp = new Staff(staffNum, null, 0, null, 0);
+		StaffDefault staff = staffDefaultDAO.get(temp);
+		model.addObject("staff", staff);
+		return model;
+	}
 
 	@RequestMapping(value = "/staffModify", method = RequestMethod.GET)
 	public ModelAndView staffModify(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) {
@@ -216,9 +227,16 @@ public class AccountController {
 		model.addObject("staff", staff);
 		return model;
 	}
+	
+	
 
 	@RequestMapping(value = "/staffModify", method = RequestMethod.POST)
-	public ModelAndView invertoryModify(@ModelAttribute StaffDefault staff) {
+	public ModelAndView invertoryModify(@ModelAttribute StaffDefault staff,@ModelAttribute("staffLevel") String staffLevel, HttpServletRequest response) {
+		System.out.println(staff);
+
+		staff.setStaffLevel(Integer.parseInt(staffLevel));
+		System.out.println(staff);
+
 		ModelAndView model = new ModelAndView("redirect:staffManage");
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		managerDAO.set(staff);

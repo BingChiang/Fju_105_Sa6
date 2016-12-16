@@ -77,6 +77,7 @@ public class ProductController {
 		return model;
 
 	}
+	
 	@RequestMapping(value = "/productAdd", method = RequestMethod.GET)
 	public ModelAndView productAdd() {
 		ModelAndView model = new ModelAndView("productAdd");
@@ -113,6 +114,22 @@ public class ProductController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/productModify", method = RequestMethod.POST)
+	public ModelAndView productModify(@ModelAttribute Product product) {
+		ModelAndView model = new ModelAndView("redirect:productManage");
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		System.out.println(product.getProductNum());
+		System.out.println(product.getProductName());
+		System.out.println(product.getProductPrice());
+		System.out.println(product.getTypeNum());
+		System.out.println(product.getProductCost());
+
+		productDAO.set(product);
+		return model;
+
+	}
+
 
 	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
 	public ModelAndView orderDetail(@ModelAttribute("orderlistNum") int orderlistNum, HttpServletRequest request) {

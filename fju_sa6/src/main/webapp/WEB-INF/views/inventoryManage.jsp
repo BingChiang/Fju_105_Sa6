@@ -48,6 +48,9 @@
 					<td><span style="margin-top: -5px;" class="badge"><a
 							class="inline" href="inventoryModify?inventoryNum=${inv.inventoryNum}"><span
 								class="glyphicon glyphicon-pencil" aria-hidden="true"
+								style="color: white;"></span></a> </span><span style="margin-top: -5px;" class="badge"><a
+							class="inline" href="inventoryRemove?inventoryNum=${inv.inventoryNum}"><span
+								class="glyphicon glyphicon-trash" aria-hidden="true"
 								style="color: white;"></span></a> </span></td>
 				</tr>
 			</c:forEach>

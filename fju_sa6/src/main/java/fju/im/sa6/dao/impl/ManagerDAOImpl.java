@@ -50,6 +50,8 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 	@Override
 	public void set(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
+		System.out.println(staffDefault.getStaffLevel());
+
 		String sql = "UPDATE staff SET staff_name=?, staff_lv=? WHERE staff_num=?";
 		try {
 			conn = dataSource.getConnection();

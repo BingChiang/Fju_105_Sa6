@@ -92,7 +92,11 @@ public class pageController {
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		ArrayList<Supplier> supList = null;
 		supList = supplierDAO.getList();
-		model.addObject("supplierListList", supList);
+		System.out.println(supList.get(0).getSupplierName());
+		System.out.println(supList.get(0).getSupplierAddress());
+		System.out.println(supList.get(0).getSupplierPhone());
+
+		model.addObject("supplierList", supList);
 		return model;
 	}
 

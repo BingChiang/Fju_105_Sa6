@@ -38,7 +38,7 @@ public class InventoryController {
 	@RequestMapping(value = "/inventoryorder", method = RequestMethod.GET)
 	public ModelAndView getInventoryList() {
 		ArrayList<Inventory> inventory2 = new ArrayList<Inventory>();
-		ModelAndView model = new ModelAndView("redirect:/inventoryorder");
+		ModelAndView model = new ModelAndView("redirect:inventoryorder");
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		inventory2 = inventoryDAO.getList();
 		model.addObject("inventoryList", inventory2);
@@ -50,9 +50,10 @@ public class InventoryController {
 	static Inventory tempInv = null;
 	static PurchaseList purchaseList = null;
 
-	@RequestMapping(value = "/invertoryAdd", method = RequestMethod.GET)
+	@RequestMapping(value = "/inventoryAdd", method = RequestMethod.GET)
 	public ModelAndView inventoryAddPage() {
-		ModelAndView model = new ModelAndView("invertoryAdd");
+//		System.out.println("123");
+		ModelAndView model = new ModelAndView("inventoryAdd");
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		ArrayList<Supplier> supplierList = null;
 		supplierList = supplierDAO.getList();
@@ -71,7 +72,7 @@ public class InventoryController {
 
 	}
 
-	@RequestMapping(value = "/invertoryModify", method = RequestMethod.GET)
+	@RequestMapping(value = "/inventoryModify", method = RequestMethod.GET)
 	public ModelAndView invertoryModifyPage(@ModelAttribute("inventoryNum") int inventoryNum,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("invertoryModify");
@@ -99,10 +100,10 @@ public class InventoryController {
 
 	}
 	
-	@RequestMapping(value = "/invertoryRemove", method = RequestMethod.GET)
-	public ModelAndView invertoryRemove(@ModelAttribute("inventoryNum") int inventoryNum,
+	@RequestMapping(value = "/inventoryRemove", method = RequestMethod.GET)
+	public ModelAndView inventoryRemove(@ModelAttribute("inventoryNum") int inventoryNum,
 			HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("redirect:invertoryModify");
+		ModelAndView model = new ModelAndView("redirect:inventoryModify");
 
 		Inventory temp = new Inventory(inventoryNum, 0, 0, null, null, 0, null);
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");

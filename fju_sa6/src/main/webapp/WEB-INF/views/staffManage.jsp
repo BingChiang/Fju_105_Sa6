@@ -44,7 +44,7 @@
 								class="glyphicon glyphicon-trash" aria-hidden="true"
 								style="color: white;"></span></a> </span> <span style="margin-top: -5px;"
 						class="badge"><a class="inline"
-							href="staffModify?staffNum=${staff.staffNum}"><span
+							href="staffLevelModify?staffNum=${staff.staffNum}"><span
 								class="glyphicon glyphicon-pencil" aria-hidden="true"
 								style="color: white;"></span></a> </span></td>
 				</tr>

@@ -53,7 +53,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public void set(Product setPro) {
 		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=?, type_num=? "
-				+ "WHERE product_name = ?";
+				+ "WHERE product_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -61,6 +61,7 @@ public class ProductDAOImpl implements ProductDAO {
 			smt.setInt(2, setPro.getProductPrice());
 			smt.setInt(3, setPro.getProductSellMonth());
 			smt.setInt(4, setPro.getTypeNum());
+			smt.setInt(5, setPro.getProductNum());
 			smt.executeUpdate();
 			smt.close();
 

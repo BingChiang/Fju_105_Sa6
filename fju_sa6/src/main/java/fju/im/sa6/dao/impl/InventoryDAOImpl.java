@@ -28,8 +28,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 	@Override
 	public void add(Inventory inventory) {
 		// TODO Auto-generated method stub
-
-		String sql = "INSERT INTO inventory (inventory_name,inventory_amount,supplier_num,reorder_point,update_date) VALUES(?, ?, ?, ?,Now())";
+		System.out.println(inventory.getInventoryName());
+		System.out.println(inventory.getInventoryAmount());
+		System.out.println(inventory.getSupplierNum());
+		System.out.println(inventory.getReorderPoint());
+		
+//		String sql = "INSERT INTO inventory (inventory_name,inventory_amount,supplier_num,reorder_point,update_date) VALUES(?, ?, ?, ?,Now())";
+		String sql = "INSERT INTO inventory (inventory_name,inventory_amount,supplier_num,reorder_point) VALUES(?, ?, ?, ?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -37,7 +42,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt.setInt(2, inventory.getInventoryAmount());
 			smt.setInt(3, inventory.getSupplierNum());
 			smt.setInt(4, inventory.getReorderPoint());
-			smt.setDate(5, (java.sql.Date) inventory.getUpdateDate());
+//			smt.setDate(5, (java.sql.Date) inventory.getUpdateDate());
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -130,10 +135,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 				String setsupplierName = (rs1.getString("supplier_name"));
 				String setinventoryName = (rs.getString("inventory_name"));
 				int setreorderpoint = (rs.getInt("reorder_point"));
-				Date setUpdateDate = (rs.getDate("update_date"));
+//				Date setUpdateDate = (rs.getDate("update_date"));
+				
+//				inv = new Inventory(setinventoryNum, setinventoryAmount, setsupplierNum, setsupplierName,
+//						setinventoryName, setreorderpoint, setUpdateDate);
 				inv = new Inventory(setinventoryNum, setinventoryAmount, setsupplierNum, setsupplierName,
-						setinventoryName, setreorderpoint, setUpdateDate);
-
+						setinventoryName, setreorderpoint, null);
+				
 			}
 			rs.close();
 			smt.close();
@@ -176,7 +184,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 				int supplierNum = (rs.getInt("supplier_num"));
 				String inventoryName = (rs.getString("inventory_name"));
 				int reorder_point = (rs.getInt("reorder_point"));
-				Date update_date = (rs.getDate("update_date"));
+//				Date update_date = (rs.getDate("update_date"));
 				suppliernum = rs.getInt("supplier_num");
 				conn1 = dataSource.getConnection();
 
@@ -191,7 +199,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 				}
 
 				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName,
-						reorder_point, update_date));
+						reorder_point, null));
 
 				rs1.close();
 				smt1.close();
