@@ -126,7 +126,14 @@ public class ProductController {
 
 	}
 	
+	@RequestMapping(value = "/productModify", method = RequestMethod.POST)
+	 public ModelAndView productModify(@ModelAttribute Product product) {
+	  ModelAndView model = new ModelAndView("redirec:productManage");
+	  ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+	  productDAO.set(product);
+	  return model;
 
+	 }
 
 	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
 	public ModelAndView orderDetail(@ModelAttribute("orderlistNum") int orderlistNum, HttpServletRequest request) {
