@@ -35,10 +35,10 @@ import fju.im.sa6.entity.Supplier;
 import fju.im.sa6.entity.Type;
 
 @Controller
-// @SessionAttributes("newaccount")
+@SessionAttributes("newaccount")
 
 public class pageController {
-	static StaffDefault newaccount = new Staff(6, "allen", 0, null, 0);
+//	StaffDefault newaccount = new Staff(6, "allen", 0, null, 0);
 
 	static Cart shoppingCart = new Cart();
 
@@ -82,6 +82,7 @@ public class pageController {
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		ArrayList<Inventory> invList = null;
 		invList = inventoryDAO.getList();
+		System.out.println(invList.get(invList.size()-1).getUpdateDate());
 		model.addObject("inventoryList", invList);
 		return model;
 	}
@@ -161,30 +162,6 @@ public class pageController {
 	}
 
 	
-	@RequestMapping(value = "/amendWork", method = RequestMethod.GET)
-	public ModelAndView amendWork() {
-		ModelAndView model = new ModelAndView("amendWork");
-
-		return model;
-	}
-
-	@RequestMapping(value = "/managePage", method = RequestMethod.GET)
-	public ModelAndView managePage() {
-		ModelAndView model = new ModelAndView("managePage");
-
-		return model;
-	}
-
-	@RequestMapping(value = "/staffManage", method = RequestMethod.GET)
-	public ModelAndView staffManage() {
-		ModelAndView model = new ModelAndView("staffManage");
-		ArrayList<StaffDefault> staffList = null;
-		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-		staffList = staffDefaultDAO.getList();
-		model.addObject("staffList", staffList);
-
-		return model;
-	}
 
 
 }

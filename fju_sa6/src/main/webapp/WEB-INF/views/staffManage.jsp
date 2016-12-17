@@ -38,7 +38,7 @@
 				<tr>
 					<td>${staff.staffNum}</td>
 					<td>${staff.staffName}</td>
-					<td>一般員工</td>
+					<td>${staff.level}</td>
 					<td><span style="margin-top: -5px;" class="badge"><a
 							class="inline" href="staffRemove?staffNum=${staff.staffNum}"><span
 								class="glyphicon glyphicon-trash" aria-hidden="true"

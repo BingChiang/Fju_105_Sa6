@@ -49,18 +49,25 @@ public class ProductController {
 	// private static final Logger logger =
 	// LoggerFactory.getLogger(ProductController.class);
 
+	@RequestMapping(value = "/productTypeAdd", method = RequestMethod.GET)
+	public ModelAndView productTypeAdd(@ModelAttribute Type type) {
+		ModelAndView model = new ModelAndView("productTypeAdd");
+		return model;
+
+	}
+	
 	@RequestMapping(value = "/productTypeAdd", method = RequestMethod.POST)
 	public ModelAndView productTypeAddPage(@ModelAttribute Type type) {
-		ModelAndView model = new ModelAndView("redirec:productTypeManage");
+		ModelAndView model = new ModelAndView("redirect:productTypeManage");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
 		typeDAO.add(type);
 		return model;
 
 	}
 
-	@RequestMapping(value = "/productTypeModify", method = RequestMethod.GET)
+	@RequestMapping(value = "/typeModify", method = RequestMethod.GET)
 	public ModelAndView productModify(@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("redirec:productModify");
+		ModelAndView model = new ModelAndView("productTypeModify");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
 		Type temp = new Type(null, typeNum, 0);
 		Type temp2 = typeDAO.getType(temp);
@@ -71,9 +78,9 @@ public class ProductController {
 
 	@RequestMapping(value = "/productTypeModify", method = RequestMethod.POST)
 	public ModelAndView productTypeModify(@ModelAttribute Type type) {
-		ModelAndView model = new ModelAndView("redirec:productType");
+		ModelAndView model = new ModelAndView("redirect:productTypeManage");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		typeDAO.add(type);
+		typeDAO.set(type);
 		return model;
 
 	}
@@ -90,7 +97,7 @@ public class ProductController {
 	}
 	@RequestMapping(value = "/productAdd", method = RequestMethod.POST)
 	public ModelAndView productTypeAddPage(@ModelAttribute Product product,@ModelAttribute("typeNum") int productNum, HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("redirec:productManage");
+		ModelAndView model = new ModelAndView("redirect:productManage");
 		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
 		product.setTypeNum(productNum);
 		productDAO.add(product);
@@ -141,5 +148,29 @@ public class ProductController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/typeRemove", method = RequestMethod.GET)
+	public ModelAndView typeRemove(@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:productTypeManage");
+		System.out.println(typeNum);
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		Type temp = new Type (null,typeNum,0);
+		System.out.println(temp.getTypeNum());
 
+		typeDAO.remove(temp);
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/productRemove", method = RequestMethod.GET)
+	public ModelAndView productRemove(@ModelAttribute("productNum") int productNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:productManage");
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		Product temp = new Product(productNum, 0, null, null, 0, 0, 0);
+		productDAO.remove(temp);
+		return model;
+
+	}
+	
 }

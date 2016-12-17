@@ -68,6 +68,11 @@ public class InventoryController {
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		inventoryDAO.add(inv);
 
+		System.out.println(inv.getInventoryName());
+		System.out.println(inv.getInventoryAmount());
+		System.out.println(inv.getSupplierNum());
+		System.out.println(inv.getReorderPoint());
+
 		return model;
 
 	}
@@ -75,7 +80,7 @@ public class InventoryController {
 	@RequestMapping(value = "/inventoryModify", method = RequestMethod.GET)
 	public ModelAndView invertoryModifyPage(@ModelAttribute("inventoryNum") int inventoryNum,
 			HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("invertoryModify");
+		ModelAndView model = new ModelAndView("inventoryModify");
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		ArrayList<Supplier> supplierList = null;
 		supplierList = supplierDAO.getList();
@@ -94,7 +99,7 @@ public class InventoryController {
 	public ModelAndView invertoryModify(@ModelAttribute Inventory inv) {
 		ModelAndView model = new ModelAndView("redirect:inventoryManage");
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
-		inventoryDAO.add(inv);
+		inventoryDAO.set(inv);
 
 		return model;
 
@@ -103,7 +108,7 @@ public class InventoryController {
 	@RequestMapping(value = "/inventoryRemove", method = RequestMethod.GET)
 	public ModelAndView inventoryRemove(@ModelAttribute("inventoryNum") int inventoryNum,
 			HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("redirect:inventoryModify");
+		ModelAndView model = new ModelAndView("redirect:inventoryManage");
 
 		Inventory temp = new Inventory(inventoryNum, 0, 0, null, null, 0, null);
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");

@@ -24,7 +24,7 @@
 			<div class="title">
 				請輸入驗證密碼
 				<hr>
-				<form action="#" method="post" name="managerCheck">
+				<form action="adminLogin" method="post" name="managerCheck">
 					<input type="password" name="password"></input><br>
 					<br>
 					<button class="btn btn-success" type="submit">確認送出</button>

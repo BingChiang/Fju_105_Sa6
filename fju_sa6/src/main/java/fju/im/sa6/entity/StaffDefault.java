@@ -15,6 +15,7 @@ public class StaffDefault {
 	private double worktimeTotal;
 	
 	private double daywork;
+	private String level;
 
 	
 	public StaffDefault(int staffNum, String staffName, int staffLevel, Date workMonth, double worktimeTotal) {
@@ -24,6 +25,7 @@ public class StaffDefault {
 		this.staffLevel = staffLevel;
 		this.workMonth = workMonth;
 		this.worktimeTotal = worktimeTotal;
+		this.level=null;
 	}
 
 	public StaffDefault() {
@@ -33,6 +35,20 @@ public class StaffDefault {
 		this.workMonth = null;
 		this.worktimeTotal = 0;
 		this.daywork = 0;
+		this.level=null;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel() {
+		if(this.staffLevel==1){
+			this.level="Manager";
+		}
+		else{
+			this.level="Staff";
+		}
 	}
 
 	public String getStaffName() {

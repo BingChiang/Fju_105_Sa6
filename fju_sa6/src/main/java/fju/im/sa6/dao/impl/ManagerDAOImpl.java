@@ -47,6 +47,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			}
 		}
 	}
+
 	@Override
 	public void set(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
@@ -74,6 +75,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			}
 		}
 	}
+
 	public void remove(StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM staff WHERE staff_num = ?";
@@ -109,14 +111,14 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			if (rs.next()) {
 				double setworktimetotal = (rs.getDouble("worktime_daytotal"));
 				worktimeTotal = setworktimetotal;
-
+	
 			}
 			rs.close();
 			smt.close();
-
+	
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-
+	
 		} finally {
 			if (conn != null) {
 				try {
@@ -130,19 +132,29 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 	public void setLevel(StaffDefault manager, StaffDefault staffDefault) {
 		// TODO Auto-generated method stub
-
+		int changeNum = staffDefault.getStaffNum();
 		if (manager.getStaffNum() == staffDefault.getStaffNum()) {
 			// no set because it will set itself
 		} else {
-			String sql = "UPDATE staff SET staff_lv=?";
+			String sql = "UPDATE staff SET staff_lv=? WHERE staff_num ="+changeNum;
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
-				if (staffDefault.getStaffLevel() == 0) {
-					smt.setInt(1, staffDefault.getStaffLevel());
+				System.out.println(staffDefault.getStaffLevel());
+				if (staffDefault.getStaffLevel() == 1) {
+					smt.setInt(1, 0);
+					System.out.println("YYY");
+					smt.executeUpdate();
+
 				} else {
-					conn.rollback();
+					smt.setInt(1, 1);
+					System.out.println("NNN");
+					smt.executeUpdate();
+
+
 				}
+				System.out.println(staffDefault.getStaffLevel());
+				smt.close();
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 
@@ -158,7 +170,6 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		}
 	}
 
-	
 	@Override
 	public double monthearntotal(Date indicatedate) {
 		// TODO Auto-generated method stub
@@ -173,7 +184,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 				double setmonthcounttotal = (rs.getDouble("order_total"));
 				sum += setmonthcounttotal;
 			}
-			sum = sum - (inquireAllWorktimeforALL(indicatedate) * 150 )-(producttotalcost(indicatedate));
+			sum = sum - (inquireAllWorktimeforALL(indicatedate) * 150) - (producttotalcost(indicatedate));
 			rs.close();
 			smt.close();
 		} catch (SQLException e) {
@@ -203,7 +214,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				double setworktimetotal = (rs.getDouble("worktime_daytotal"));
-				worktimeTotalALL+= setworktimetotal;
+				worktimeTotalALL += setworktimetotal;
 
 			}
 			rs.close();
@@ -222,7 +233,8 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		}
 		return worktimeTotalALL;
 	}
-	public double producttotalcost(Date indicatedate){
+
+	public double producttotalcost(Date indicatedate) {
 		double producttotalcost = 0;
 		String sql = "SELECT product_cost FROM product WHERE (SELECT product_num FROM orderitem WHERE(SELECT orderlist_num FROM orderlist WHERE order_date = ?)))";
 		try {
@@ -233,7 +245,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			rs = smt.executeQuery();
 			if (rs.next()) {
 				double setproducttotalcost = (rs.getDouble("product_cost"));
-				producttotalcost+= setproducttotalcost;
+				producttotalcost += setproducttotalcost;
 
 			}
 			rs.close();
@@ -251,9 +263,8 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 			}
 		}
 
-		return producttotalcost; 
-		
-		
+		return producttotalcost;
+
 	}
 
 	@Override

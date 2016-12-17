@@ -12,22 +12,25 @@ public class Inventory extends Supplier{
 
 	private String inventoryName;
 	
-	private int reorder_point;
+	private int reorderPoint;
 	
 	private Date update_date;
 	
 	private String supplierName;
-
+	
+	private String update;
 
 	public Inventory(int inventoryNum,int inventoryAmount,int supplierNum, String supplierName, String inventoryName,
-			int reorder_point, Date update_date) {
+			int reorderPoint, Date update_date) {
 		this.inventoryNum = inventoryNum;
 		this.inventoryAmount = inventoryAmount;
 		this.supplierNum = supplierNum;
 		this.inventoryName = inventoryName;
 		this.supplierName = supplierName;
-		this.reorder_point = reorder_point;
+		this.reorderPoint = reorderPoint;
 		this.update_date = update_date;
+		this.update="";
+
 	}
 
 	public Inventory() {
@@ -35,9 +38,12 @@ public class Inventory extends Supplier{
 		this.inventoryAmount = 0;
 		this.supplierNum = 0;
 		this.inventoryName = null;
-		this.reorder_point = 0;
+		this.reorderPoint = 0;
 		this.supplierName = null;
 		this.update_date = null;
+		
+		this.update = "";
+
 	}
 
 	public int getInventoryNum() {
@@ -73,10 +79,10 @@ public class Inventory extends Supplier{
 		this.supplierNum = supplierNum;
 	}
 	public int getReorderPoint(){
-		return reorder_point;
+		return reorderPoint;
 	}
-	public void setReorderPoint(int reorder_point){
-		this.reorder_point = reorder_point;	
+	public void setReorderPoint(int reorderPoint){
+		this.reorderPoint = reorderPoint;	
 	}
 	public void setUpdateDate(Date update_date){
 		this.update_date = update_date;	
@@ -93,4 +99,10 @@ public class Inventory extends Supplier{
 		this.supplierName = supplierName;
 	}
 	
+	public void setUpdate(String update_date) {
+		this.update = update_date;
+	}
+	public String getUpdate(){
+		return this.update;
+	}
 }

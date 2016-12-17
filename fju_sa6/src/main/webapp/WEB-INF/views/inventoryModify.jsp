@@ -39,7 +39,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">庫存名稱</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="inventoryNmae"
+						<input type="text" class="form-control" name="inventoryName"
 							placeholder="輸入庫存名稱" value="${inventory.inventoryName}">
 					</div>
 				</div>
@@ -58,6 +58,13 @@
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="inventoryAmount"
 							placeholder="輸入庫存數量" value="${inventory.inventoryAmount}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">安全庫存數量</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="reorderPoint"
+							placeholder="輸入安全庫存數量" value="${inventory.reorderPoint}">
 					</div>
 				</div>
 				<div class="form-group">

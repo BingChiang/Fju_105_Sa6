@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib
-	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +35,7 @@
 				<th>存貨名稱</th>
 				<th>供應商名稱</th>
 				<th>存貨數量</th>
-				<!--  <th>更新時間</th>-->
+				<th>更新時間</th>
 				<th></th>
 			</tr>
 			<c:forEach items="${inventoryList}" var="inv">
@@ -45,11 +44,16 @@
 					<td>${inv.inventoryName}</td>
 					<td>${inv.supplierName}</td>
 					<td>${inv.inventoryAmount}</td>
-					<td><span style="margin-top: -5px;" class="badge"><a
-							class="inline" href="inventoryModify?inventoryNum=${inv.inventoryNum}"><span
+					<td>${inv.update}</td>
+
+<!-- 					<td></td>
+ -->					<td><span style="margin-top: -5px;" class="badge"><a
+							class="inline"
+							href="inventoryModify?inventoryNum=${inv.inventoryNum}"><span
 								class="glyphicon glyphicon-pencil" aria-hidden="true"
-								style="color: white;"></span></a> </span><span style="margin-top: -5px;" class="badge"><a
-							class="inline" href="inventoryRemove?inventoryNum=${inv.inventoryNum}"><span
+								style="color: white;"></span></a> </span><span style="margin-top: -5px;"
+						class="badge"><a class="inline"
+							href="inventoryRemove?inventoryNum=${inv.inventoryNum}"><span
 								class="glyphicon glyphicon-trash" aria-hidden="true"
 								style="color: white;"></span></a> </span></td>
 				</tr>
