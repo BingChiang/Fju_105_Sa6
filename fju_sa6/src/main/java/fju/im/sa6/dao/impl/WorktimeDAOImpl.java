@@ -107,21 +107,21 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 					smt.setInt(1, staffDefault.getStaffNum());
 					smt.executeUpdate();
 					smt.close();
-				
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
 
-			} finally {
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+						}
 					}
+
 				}
-			
-		} 
 			}
-			}catch (SQLException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
@@ -191,20 +191,14 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 	public void amendOnWork(StaffDefault staffDefault, String date) throws ParseException {
 		// TODO Auto-generated method stub
+		// String sql1 = "SELECT work_date,onwork_time FROM worktime WHERE
+		// staff_num=?";
 		try {
-			String sql1 = "SELECT work_date,onwork_time FROM worktime WHERE staff_num=?";
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql1);
-			Date checkdate = (rs.getDate("work_date"));
-			Date checktime = (rs.getDate("onwork_time"));
-			boolean doit = false;
-			
-			if (checkdate == null && checktime == null) {
-				doit = true;
-			}
-			
-			String dateStr = date+":00";
-			//System.out.print(dateStr);
+
+			// conn = dataSource.getConnection();
+			// smt = conn.prepareStatement(sql1);
+			// String dateStr = date+":00";
+			// System.out.print(dateStr);
 			String date1 = date.substring(0, 10);
 			String time1 = date.substring(11) + ":00";
 
@@ -227,7 +221,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 			System.out.print("test" + parseDate1);
 			System.out.print("test" + parseTime1);
-
 			// if (doit == true) {
 			String sql = "INSERT into worktime (staff_num, work_date, onwork_time) VALUES(?, ?, ?)";
 			try {
@@ -265,7 +258,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	}
 
 	@Override
-	public void amendOffWork(StaffDefault staffDefault, String date) throws ParseException{
+	public void amendOffWork(StaffDefault staffDefault, String date) {
 		String sql1 = "SELECT work_date,offwork_time FROM worktime WHERE staff_num=?";
 		try {
 			conn = dataSource.getConnection();

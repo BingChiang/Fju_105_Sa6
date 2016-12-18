@@ -65,6 +65,10 @@ public class Product {
 	public int getProductNum() {
 		return productNum;
 	}
+	
+	public void setProductNum(int num){
+		this.productNum=num;
+	}
 
 	public int getTypeNum() {
 		return typeNum;

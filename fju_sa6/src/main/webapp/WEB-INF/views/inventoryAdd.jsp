@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	<%@ taglib
-	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,46 +27,51 @@
 		</div>
 		<div class="col-md-12">
 			<br>
-			<form class="form-horizontal" role="form" action="invertoryAdd" method="post">
+			<form class="form-horizontal" role="form" action="invertoryAdd"
+				method="post">
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">庫存名稱</label>
 					<div class="col-sm-8">
-						<input type="hidden" name="inventoryNum" value="0">
+						<input type="text" class="form-control" name="inventoryName"
+							placeholder="輸入庫存名稱" value="">
 					</div>
-
-					<input type="text" class="form-control" name="inventoryNmae"
-						placeholder="輸入庫存名稱" value="">
 				</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">產品類型</label>
-			<div class="col-sm-8">
-				<select name="supplierNum" class="form-control">
-					<c:forEach items="${supplierList}" var= "sup">
-					<option value="${sup.supplierNum}">${sup.supplierName}</option>
-					</c:forEach>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">供應廠商</label>
+					<div class="col-sm-8">
+						<select name="supplierNum" class="form-control">
+							<c:forEach items="${supplierList}" var="sup">
+								<option value="${sup.supplierNum}">${sup.supplierName}</option>
+							</c:forEach>
 
-				</select> <a role="button" href="supplierAdd" class="btn btn-success">新增供應商</a>
+						</select> <a role="button" href="supplierAdd" class="btn btn-success">新增供應商</a>
 
-			</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">庫存數量</label>
+					<div class="col-sm-8">
+						<input type="number" class="form-control" name="inventoryAmount"
+							placeholder="輸入庫存數量" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">安全庫存數量</label>
+					<div class="col-sm-8">
+						<input type="number" class="form-control" name="reorderPoint"
+							placeholder="輸入安全庫存數量" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">確認</button>
+						<button class="btn btn-dafault" type="button"
+							onClick="javascript:history.back(1)">按此返回上頁</button>
+					</div>
+				</div>
+			</form>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">庫存數量</label>
-			<div class="col-sm-8">
-				<input type="text" class="form-control" name="inventoryAmount"
-					placeholder="輸入庫存數量" value="">
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary">確認</button>
-				<button class="btn btn-dafault" type="button"
-					onClick="javascript:history.back(1)">按此返回上頁</button>
-			</div>
-		</div>
-		</form>
-	</div>
 	</div>
 	</div>
 	</div>

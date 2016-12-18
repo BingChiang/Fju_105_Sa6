@@ -37,23 +37,28 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">員工姓名</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="staffName"
+						<p class="form-control-static">${staff.staffName}</p>
+						<%-- <input type="text" class="form-control" name="staffName"
 							placeholder="員工姓名" value="${staff.staffName}"> <input
-							type="hidden" name="staffNum" value="${staff.staffNum}">
+							type="hidden" name="staffNum" value="${staff.staffNum}"> --%>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">員工階級</label> <label
+					<label class="col-sm-2 control-label">員工階級</label>
+					<p class="form-control-static">${staff.level}</p>
+
+					<!-- <label
 						class="radio-inline" style="margin-left: 20px;"> <input
 						type="radio" name="staffLevel" value="0"> 管理者
 					</label> <label class="radio-inline"> <input type="radio"
 						name="staffLevel" value="1" checked> 一般員工
-					</label>
+					</label> -->
 				</div>
 				<div class="form-group">
 					<br>
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">確認</button>
+						<a role="button" href="setLevel?staffNum=${staff.staffNum}"
+							type="submit" class="btn btn-primary">修改員工階級</a>
 						<button class="btn btn-dafault" type="button"
 							onClick="javascript:history.back(1)">按此返回上頁</button>
 					</div>

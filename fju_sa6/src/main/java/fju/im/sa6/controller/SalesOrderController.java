@@ -26,11 +26,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fju.im.sa6.dao.OrderListDAO;
 import fju.im.sa6.dao.ProductDAO;
+import fju.im.sa6.dao.TypeDAO;
 import fju.im.sa6.entity.Cart;
 import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
+import fju.im.sa6.entity.Type;
 
-@SessionAttributes("cartrrr")
+//@SessionAttributes("cartrrr")
 
 @Controller
 public class SalesOrderController {
@@ -39,14 +41,14 @@ public class SalesOrderController {
 	// LoggerFactory.getLogger(ProductController.class);
 	// configuration for session, please refer to:
 	// http://tuhrig.de/making-a-spring-bean-session-scoped/
-	// @Autowired
-	static Cart shoppingCart = new Cart();
-	
-	ArrayList<Product> cart2 = new ArrayList<Product>();
-	static int cartTotal=0;
-	
+	@Autowired
+	private Cart shoppingCart;
+
+	// ArrayList<Product> cart2 = new ArrayList<Product>();
+	// static int cartTotal=0;
+
 	@RequestMapping(value = "/addCart", method = RequestMethod.GET)
-	public ModelAndView addShoppingCart(@ModelAttribute("productNum") int productNum,HttpServletRequest request){
+	public ModelAndView addShoppingCart(@ModelAttribute("productNum") int productNum, HttpServletRequest request) {
 
 		ModelAndView model = new ModelAndView("redirect:/productSale");
 		// only id is passed
@@ -56,16 +58,15 @@ public class SalesOrderController {
 		Product temp = new Product(productNum, 0, null, null, 0, 0, 0);
 		Product temp2;
 		temp2 = productDAO.get(temp);
-		cartTotal+=temp2.getProductPrice();
-//		Cart shoppingCart = 
-		cart2.add(temp2);
-//		ArrayList<Product> arr = shoppingCart.getCart();
-//		int cartTotal = shoppingCart.orderTotal();
+		// Cart shoppingCart =
+		shoppingCart.add(temp2);
+		// ArrayList<Product> arr = shoppingCart.getCart();
+		// int cartTotal = shoppingCart.orderTotal();
 		// System.out.println(shoppingCart.count());
-		model.addObject("typeNum", 1);
-		model.addObject("cartrrr",cart2);
-//		model.addObject("cartList",cart2);
-		model.addObject("cartTotal",cartTotal);
+		model.addObject("typeNum", temp2.getTypeNum());
+		model.addObject("cart", shoppingCart.getCart());
+		// model.addObject("cartList",cart2);
+		model.addObject("cartTotal", shoppingCart.orderTotal());
 		return model;
 	}
 	//
@@ -82,29 +83,26 @@ public class SalesOrderController {
 	@RequestMapping(value = "/cartclean", method = RequestMethod.GET)
 	public ModelAndView cartclean() {
 		ModelAndView model = new ModelAndView("productSale");
-		
-		
-		cart2 = new ArrayList<Product>();
-		cartTotal=0;
-		model.addObject("cartTotal",cartTotal);
-		model.addObject("cartrrr",cart2);
+
+		shoppingCart.clean();
+		model.addObject("cartTotal", shoppingCart.orderTotal());
+		model.addObject("cartrrr", shoppingCart);
 		model.addObject("typeNum", 1);
 		return model;
 	}
-	
-	
+
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public ModelAndView checkout() {
 		ModelAndView model = new ModelAndView("redirect:/productSale");
-//		Cart shoppingCart = (Cart) context.getBean("Cart");
+		// Cart shoppingCart = (Cart) context.getBean("Cart");
 		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
 
 		// List<Product> pList = shoppingCart.getCart();
 		// List<Long> pList2 = new ArrayList<Long>();
-		OrderList temp = new OrderList(0, cartTotal, null, cart2);
-		orderListDAO.addorderlist(temp);
+		// OrderList temp = new OrderList(0, cartTotal, null, cart2);
+		// orderListDAO.addorderlist(temp);
 
-//		shoppingCart.clean();
+		// shoppingCart.clean();
 		// for (int i=0; i<pList.size();i++){
 		// pList2.add(pList.get(i).getId());
 		// }
@@ -119,12 +117,64 @@ public class SalesOrderController {
 		// if (result != 0){ //successfully updated, clean up shopping cart
 		// shoppingCart.cleanup();
 		// }
-		cart2 = new ArrayList<Product>();
-		cartTotal=0;
-		model.addObject("cartTotal",cartTotal);
-		model.addObject("cartrrr",cart2);
+		OrderList ord = new OrderList(0, shoppingCart.orderTotal(), null, shoppingCart.getCart());
+		orderListDAO.addorderlist(ord);
+
+		shoppingCart.clean();
+		model.addObject("cartTotal", shoppingCart.orderTotal());
+		model.addObject("cartrrr", shoppingCart);
 		model.addObject("typeNum", 1);
 		return model;
 	}
 
+	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
+	public ModelAndView productSale(@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("productSale");
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		ArrayList<Product> typeProList = null;
+		ArrayList<Type> typeList = null;
+
+		typeList = typeDAO.getList();
+
+		Type temp = null;
+
+		temp = new Type(null, typeNum, typeNum);
+		typeProList = productDAO.getTypeList(temp);
+
+		model.addObject("typeList", typeList);
+		model.addObject("typeProList", typeProList);
+
+		int cartTotal = shoppingCart.orderTotal();
+		model.addObject("cartrrr", shoppingCart.getCart());
+		model.addObject("cartTotal", cartTotal);
+
+		return model;
+	}
+
+	@RequestMapping(value = "/cartClean", method = RequestMethod.GET)
+	public ModelAndView cartClean() {
+		ModelAndView model = new ModelAndView("redirect:productSale");
+		shoppingCart.clean();
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+		ArrayList<Product> typeProList = null;
+		ArrayList<Type> typeList = null;
+
+		typeList = typeDAO.getList();
+		model.addObject("typeNum", 1);
+
+		return model;
+	}
+
+	@RequestMapping(value = "/removecart", method = RequestMethod.GET)
+	public ModelAndView removecart() {
+		ModelAndView model = new ModelAndView("redirect:productSale");
+		if ((shoppingCart.getCart().size()) > 0) {
+			shoppingCart.getCart().remove(shoppingCart.getCart().size() - 1);
+		}
+		model.addObject("typeNum", 1);
+
+		return model;
+	}
 }

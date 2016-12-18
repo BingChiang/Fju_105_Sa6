@@ -39,9 +39,9 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">員工階級</label> <label
 						class="radio-inline" style="margin-left: 20px;"> <input
-						type="radio" name="staffLevel" value="0"> 管理者
+						type="radio" name="staffLevel" value="1"> 管理者
 					</label> <label class="radio-inline"> <input type="radio"
-						name="staffLevel" value="1" checked> 一般員工
+						name="staffLevel" value="0" checked> 一般員工
 					</label>
 				</div>
 				<div class="form-group">

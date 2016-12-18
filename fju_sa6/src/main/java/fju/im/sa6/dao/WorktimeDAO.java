@@ -14,11 +14,10 @@ public interface WorktimeDAO {
 
 	public void staffOffWork(StaffDefault staffDefault);
 
-	public void amendOnWork(StaffDefault staffDefault, String date)throws ParseException;
+	public void amendOnWork(StaffDefault staffDefault, String date) throws ParseException;
 
-	public void amendOffWork(StaffDefault staffDefault, String date)throws ParseException;
-	
+	public void amendOffWork(StaffDefault staffDefault, String date);
+
 	public ArrayList<WorkTime> searchworktime(Date date);
 
-	
 }

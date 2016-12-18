@@ -26,7 +26,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void add(Product addPro) {
-		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost, type_num) VALUES(?, ?, ?, ?, ?)";
+
+		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost, type_num) VALUES(?, ?, ?,?,?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -82,11 +83,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void remove(Product removePro) {
-		String sql = "DELETE FROM product WHERE product_name = ?";
+		String sql = "DELETE FROM product WHERE product_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, removePro.getProductName());
+			smt.setInt(1, removePro.getProductNum());
 			smt.executeUpdate();
 			smt.close();
 

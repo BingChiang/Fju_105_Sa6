@@ -25,7 +25,7 @@
 			<h2>產品類別管理</h2>
 		</div>
 		<div class="col-md-3">
-			<a href="#">
+			<a href="productTypeAdd">
 				<button class="btn btn-primary" id="addStaff">新增產品類別</button>
 			</a>
 		</div>
@@ -35,15 +35,15 @@
 				<th>類型名稱</th>
 				<th></th>
 			</tr>
-			<c:forEach items="typeList" var="typeList">
+			<c:forEach items="${typeList}" var="typeList">
 			<tr>
 				<td>${typeList.typeNum}</td>
 				<td>${typeList.typeName}</td>
 				<td><span style="margin-top: -5px;" class="badge"><a
-						class="inline" href="typeRemove?typeNum = ${typeList.typeNum}"><span
+						class="inline" href="typeRemove?typeNum=${typeList.typeNum}"><span
 							class="glyphicon glyphicon-trash" aria-hidden="true"
 							style="color: white;"></span></a> </span> <span style="margin-top: -5px;"
-					class="badge"><a class="inline" href="typeModify?typeNum = ${typeList.typeNum}"><span
+					class="badge"><a class="inline" href="typeModify?typeNum=${typeList.typeNum}"><span
 							class="glyphicon glyphicon-pencil" aria-hidden="true"
 							style="color: white;"></span></a> </span></td>
 			</tr>
