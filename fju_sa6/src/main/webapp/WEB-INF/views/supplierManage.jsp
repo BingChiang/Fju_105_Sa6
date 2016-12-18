@@ -37,7 +37,7 @@
 				<th>供應商地址</th>
 				<th>查看供應存貨</th>
 			</tr>
-			<c:forEach items="${supplierList}" var="sup">
+			<c:forEach items="${supplier}" var="sup">
 				<tr>
 					<td>${sup.supplierNum}</td>
 					<td>${sup.supplierName}</td>

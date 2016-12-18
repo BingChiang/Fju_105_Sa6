@@ -117,7 +117,7 @@ public class SalesOrderController {
 		// if (result != 0){ //successfully updated, clean up shopping cart
 		// shoppingCart.cleanup();
 		// }
-		OrderList ord= new OrderList(0,shoppingCart.orderTotal(),null,shoppingCart.getCart());
+		OrderList ord = new OrderList(0, shoppingCart.orderTotal(), null, shoppingCart.getCart());
 		orderListDAO.addorderlist(ord);
 
 		shoppingCart.clean();
@@ -145,7 +145,6 @@ public class SalesOrderController {
 		model.addObject("typeList", typeList);
 		model.addObject("typeProList", typeProList);
 
-
 		int cartTotal = shoppingCart.orderTotal();
 		model.addObject("cartrrr", shoppingCart.getCart());
 		model.addObject("cartTotal", cartTotal);
@@ -167,12 +166,12 @@ public class SalesOrderController {
 
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/removecart", method = RequestMethod.GET)
 	public ModelAndView removecart() {
 		ModelAndView model = new ModelAndView("redirect:productSale");
-		if((shoppingCart.getCart().size()) > 0 ){
-		shoppingCart.getCart().remove(shoppingCart.getCart().size()-1);
+		if ((shoppingCart.getCart().size()) > 0) {
+			shoppingCart.getCart().remove(shoppingCart.getCart().size() - 1);
 		}
 		model.addObject("typeNum", 1);
 

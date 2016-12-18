@@ -55,7 +55,7 @@ public class ProductController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/productTypeAdd", method = RequestMethod.POST)
 	public ModelAndView productTypeAddPage(@ModelAttribute Type type) {
 		ModelAndView model = new ModelAndView("redirect:productTypeManage");
@@ -67,6 +67,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/typeModify", method = RequestMethod.GET)
 	public ModelAndView productModify(@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
+
 		ModelAndView model = new ModelAndView("productTypeModify");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
 		Type temp = new Type(null, typeNum, 0);
@@ -84,23 +85,37 @@ public class ProductController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/productAdd", method = RequestMethod.GET)
 	public ModelAndView productAdd() {
 		ModelAndView model = new ModelAndView("productAdd");
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
 		ArrayList<Type> typeList = null;
 		typeList = typeDAO.getList();
-		model.addObject("typeList",typeList);
+		model.addObject("typeList", typeList);
 		return model;
 
 	}
+
 	@RequestMapping(value = "/productAdd", method = RequestMethod.POST)
-	public ModelAndView productTypeAddPage(@ModelAttribute Product product,@ModelAttribute("typeNum") int productNum, HttpServletRequest request) {
+	public ModelAndView productTypeAddPage(@ModelAttribute Product product, @ModelAttribute("typeNum") int productNum,
+			HttpServletRequest request) {
+
 		ModelAndView model = new ModelAndView("redirect:productManage");
 		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-		product.setTypeNum(productNum);
+		// product.setProductNum(productNum);
 		productDAO.add(product);
+		return model;
+
+	}
+
+	@RequestMapping(value = "/productRemove", method = RequestMethod.GET)
+	public ModelAndView productTypeAddPage(@ModelAttribute("productNum") int productNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:productManage");
+		ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+		Product pro = new Product(productNum, 0, null, null, 0, 0, 0);
+		Product pro2 = productDAO.get(pro);
+		productDAO.remove(pro2);
 		return model;
 
 	}
@@ -121,7 +136,7 @@ public class ProductController {
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/productModify", method = RequestMethod.POST)
 	public ModelAndView productModify(@ModelAttribute Product product) {
 		ModelAndView model = new ModelAndView("redirect:productManage");
@@ -137,7 +152,6 @@ public class ProductController {
 
 	}
 
-
 	@RequestMapping(value = "/orderDetail", method = RequestMethod.GET)
 	public ModelAndView orderDetail(@ModelAttribute("orderlistNum") int orderlistNum, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("orderDetail");
@@ -148,21 +162,20 @@ public class ProductController {
 		return model;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/typeRemove", method = RequestMethod.GET)
 	public ModelAndView typeRemove(@ModelAttribute("typeNum") int typeNum, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("redirect:productTypeManage");
 		System.out.println(typeNum);
 		TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-		Type temp = new Type (null,typeNum,0);
+		Type temp = new Type(null, typeNum, 0);
 		System.out.println(temp.getTypeNum());
 
 		typeDAO.remove(temp);
 		return model;
 
 	}
-	
+
 	@RequestMapping(value = "/productRemove", method = RequestMethod.GET)
 	public ModelAndView productRemove(@ModelAttribute("productNum") int productNum, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("redirect:productManage");
@@ -172,5 +185,5 @@ public class ProductController {
 		return model;
 
 	}
-	
+
 }

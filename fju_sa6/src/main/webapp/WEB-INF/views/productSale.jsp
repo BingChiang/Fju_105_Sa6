@@ -61,8 +61,10 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="Checkout">小計</td>
-							<td class="Checkout">${cartTotal}</td>
+							<!--  <td class="Checkout">小計</td>
+							<td class="Checkout">${cartTotal}</td>-->
+							<td></td>
+							<td></td>
 							<td class="Checkout"><a href="cartClean" role="button"
 								class="btn btn-sm btn-default" style="margin-top: -5px;">清除</a>
 								<a href="checkout" role="button" class="btn btn-sm btn-primary"
