@@ -25,8 +25,25 @@
 			<h2>補打卡</h2>
 			<hr>
 			<form action="amend" method="post">
-				<input type="datetime-local" name="date" class="form-control"
-					style="text-align: center;"> <br>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">選擇員工</label>
+					<div class="col-sm-10">
+						<select name="staffNum" class="form-control">
+							<c:forEach items="${staffList}" var="staff">
+								<option value="${staff.staffNum}">${staff.staffName}</option>
+							</c:forEach>
+						</select>
+					</div>
+
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label"></label>
+					<div class="col-sm-10">
+						<input type="datetime-local" name="date" class="form-control"
+							style="text-align: center;"> <br>
+					</div>
+
+				</div>
 				<button type="submit" name="submit" value=1 class="btn btn-success"
 					style="margin-left: 40%">補上班</button>
 				<button type="submit" name="submit" value=2 class="btn btn-success"

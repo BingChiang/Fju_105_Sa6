@@ -67,7 +67,8 @@ public class AccountController {
 	@RequestMapping(value = "/login2", method = RequestMethod.GET)
 	public ModelAndView login2() {
 		ModelAndView model = new ModelAndView("login2");
-
+		
+		
 		return model;
 	}
 
@@ -150,8 +151,14 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/amend", method = RequestMethod.POST)
-	public ModelAndView amend(@ModelAttribute("date") String date2, @ModelAttribute("submit") String submit,
+	public ModelAndView amend(@ModelAttribute("date") String date2, @ModelAttribute("submit") String submit,@ModelAttribute("staffNum") int staffNum,
 			HttpServletRequest request) throws ParseException {
+		
+		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+		StaffDefault temp = new Staff(staffNum, "", 0, null, 0);
+		StaffDefault staff = staffDefaultDAO.get(temp);
+		
+		
 		System.out.print(date2);
 		ModelAndView model = new ModelAndView("redirect:mainpage");
 		String dat = date2.substring(0, 10);
@@ -174,14 +181,14 @@ public class AccountController {
 			// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
 			// context.getBean("StaffDefaultDAO");
 			WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-			worktimeDAO.amendOnWork(account_session, date3);
+			worktimeDAO.amendOnWork(staff, date3);
 		} else {
 			// model = new ModelAndView("amendoffnwork");
 			model = new ModelAndView("redirect:mainpage");
 			// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
 			// context.getBean("StaffDefaultDAO");
 			WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-			worktimeDAO.amendOffWork(account_session, date2);
+			worktimeDAO.amendOffWork(staff, date2);
 		}
 		// model.addObject("date", date);
 		return model;
@@ -368,6 +375,10 @@ public class AccountController {
 			model = new ModelAndView("redirect:mainpage");
 
 		}
+		ArrayList<StaffDefault> staffList = null;
+		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+		staffList = staffDefaultDAO.getList();
+		model.addObject("staffList",staffList);
 
 		return model;
 	}
