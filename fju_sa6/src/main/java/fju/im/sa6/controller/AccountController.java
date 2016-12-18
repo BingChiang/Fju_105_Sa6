@@ -77,15 +77,13 @@ public class AccountController {
 
 		if (password.equals("1234")) {
 			account_session = temptest;
-			model.addObject("newaccount", account_session);			
-		}
-		else{
+			model.addObject("newaccount", account_session);
+		} else {
 			temptest = null;
 			model = new ModelAndView("redirect:/login");
 		}
-		
 
-//		account_session = staff;
+		// account_session = staff;
 		// session add
 		model.addObject("newaccount", account_session);
 		return model;
@@ -334,15 +332,15 @@ public class AccountController {
 	// return model;
 	// }
 	//
-	 @RequestMapping(value = "/staffRemove", method = RequestMethod.GET)
-	 public ModelAndView removeStaff(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) {
-	 ModelAndView model = new ModelAndView("redirect:/staffManage");//
+	@RequestMapping(value = "/staffRemove", method = RequestMethod.GET)
+	public ModelAndView removeStaff(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:/staffManage");//
 
-	 ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
-	 StaffDefault temp = new Staff(staffNum, null, 0, null, 0);
-	 managerDAO.remove(temp);
-	 return model;
-	 }
+		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
+		StaffDefault temp = new Staff(staffNum, null, 0, null, 0);
+		managerDAO.remove(temp);
+		return model;
+	}
 
 	// for manage
 	@RequestMapping(value = "/managePage", method = RequestMethod.GET)

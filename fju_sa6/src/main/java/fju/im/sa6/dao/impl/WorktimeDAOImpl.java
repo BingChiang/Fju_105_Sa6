@@ -66,13 +66,13 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	public void statffOnWork(StaffDefault staffDefault) {
 		String sql1 = "SELECT work_date,onwork_time FROM worktime WHERE staff_num=?";
 		try {
-			conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql1);
-			smt.setInt(1, staffDefault.getStaffNum());
+			conn1 = dataSource.getConnection();
+			smt2 = conn1.prepareStatement(sql1);
+			smt2.setInt(1, staffDefault.getStaffNum());
 			boolean doit = false;
 			Date checkdate = (rs.getDate("work_date"));
-			Date checktime = (rs.getDate("onwork_time"));
-			if (checkdate == null && checktime == null) {
+			Time checktime = (rs.getTime("onwork_time"));
+			if (checkdate == null || checktime == null) {
 				doit = true;
 			}
 
@@ -100,7 +100,26 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 					}
 				}
 			} else {
-				conn.rollback();
+				String sql = "UPDATE  worktime SET onwork_time VALUES(Now()) WHERE staff_num=?";
+				try {
+					conn = dataSource.getConnection();
+					smt = conn.prepareStatement(sql);
+					smt.setInt(1, staffDefault.getStaffNum());
+					smt.executeUpdate();
+					smt.close();
+
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+						}
+					}
+
+				}
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -175,6 +194,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		// String sql1 = "SELECT work_date,onwork_time FROM worktime WHERE
 		// staff_num=?";
 		try {
+
 			// conn = dataSource.getConnection();
 			// smt = conn.prepareStatement(sql1);
 			// String dateStr = date+":00";
@@ -201,7 +221,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 			System.out.print("test" + parseDate1);
 			System.out.print("test" + parseTime1);
-			
 			// if (doit == true) {
 			String sql = "INSERT into worktime (staff_num, work_date, onwork_time) VALUES(?, ?, ?)";
 			try {

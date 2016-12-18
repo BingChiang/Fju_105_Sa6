@@ -1,7 +1,7 @@
 package fju.im.sa6.dao;
 
 import java.util.ArrayList;
-
+import fju.im.sa6.entity.SupplierList;
 import fju.im.sa6.entity.Supplier;
 
 public interface SupplierDAO {
