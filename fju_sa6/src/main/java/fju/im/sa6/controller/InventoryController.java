@@ -167,6 +167,7 @@ public class InventoryController {
 		SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		temp = inventoryDAO.getList(sup);
+		sup = supplierDAO.get(sup);
 
 		model.addObject("supplier", sup);
 		model.addObject("invList", temp);
