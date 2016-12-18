@@ -26,6 +26,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void add(Product addPro) {
+
 		String sql = "INSERT INTO product (product_name, product_price, product_sell_month, product_cost, type_num) VALUES(?, ?, ?,?,?)";
 		try {
 			conn = dataSource.getConnection();
@@ -55,6 +56,7 @@ public class ProductDAOImpl implements ProductDAO {
 		String sql = "UPDATE product SET product_name=?, product_price=?, product_sell_month=?, type_num=? "
 				+ "WHERE product_num = ?";
 		try {
+			System.out.println(123);
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, setPro.getProductName());

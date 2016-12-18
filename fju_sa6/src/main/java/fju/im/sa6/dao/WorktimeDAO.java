@@ -16,9 +16,13 @@ public interface WorktimeDAO {
 
 	public void amendOnWork(StaffDefault staffDefault, String date) throws ParseException;
 
+<<<<<<< HEAD
 	public void amendOffWork(StaffDefault staffDefault, String date) throws ParseException;
 	
+=======
+	public void amendOffWork(StaffDefault staffDefault, String date);
+
+>>>>>>> branch 'Cheyu' of https://github.com/BingChiang/Fju_105_Sa6
 	public ArrayList<WorkTime> searchworktime(Date date);
 
-	
 }

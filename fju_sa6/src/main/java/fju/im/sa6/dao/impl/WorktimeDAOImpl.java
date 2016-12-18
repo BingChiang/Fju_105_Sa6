@@ -294,7 +294,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 		int staffNum = staffDefault.getStaffNum();
 
-		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1+"'";
+		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1 + "'";
 		try {
 
 			conn1 = dataSource.getConnection();
@@ -456,7 +456,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 		int staffNum = staffDefault.getStaffNum();
 
-		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1+"'";
+		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1 + "'";
 		try {
 
 			conn1 = dataSource.getConnection();

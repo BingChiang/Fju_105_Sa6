@@ -22,6 +22,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 	private PreparedStatement smt = null;
 	private ResultSet rs2 = null;
 	private PreparedStatement smt2 = null;
+	private PreparedStatement smt1 = null;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -43,21 +44,26 @@ public class OrderListDAOImpl implements OrderListDAO {
 			sql = "SELECT LAST_INSERT_ID( )";
 			int orderNum = 0;
 			// conn = dataSource.getConnection();
-			smt = conn.prepareStatement(sql);
-			rs = smt.executeQuery();
+			smt1 = conn.prepareStatement(sql);
+			rs = smt1.executeQuery();
 			if (rs.next()) {
+
 				orderNum = rs.getInt("order_num");
 			}
 			sql = "INSERT INTO orderitem (orderlist_num, product_num,product_name,product_price) VALUES(?, ?,?,?)";
 			for (int i = 0; i < orderlist.getOrderList().size(); i++) {
-				smt = conn.prepareStatement(sql);
-				smt.setInt(1, orderNum);
-				smt.setInt(2, orderlist.getOrderList().get(i).getProductNum());
-				smt.setString(3, orderlist.getOrderList().get(i).getProductName());
-				smt.setInt(4, orderlist.getOrderList().get(i).getProductPrice());
-				smt.executeUpdate();
+				smt2 = conn.prepareStatement(sql);
+				smt2.setInt(1, orderNum);
+				smt2.setInt(2, orderlist.getOrderList().get(i).getProductNum());
+				smt2.setString(3, orderlist.getOrderList().get(i).getProductName());
+				smt2.setInt(4, orderlist.getOrderList().get(i).getProductPrice());
+				smt2.executeUpdate();
+
 			}
-			smt.close();
+
+			rs.close();
+			smt2.close();
+			smt1.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -72,7 +78,6 @@ public class OrderListDAOImpl implements OrderListDAO {
 
 	}
 
-
 	public ArrayList<OrderList> getorderlist() {
 		// TODO Auto-generated method stub
 		ArrayList<OrderList> arr = new ArrayList<OrderList>();
@@ -81,13 +86,14 @@ public class OrderListDAOImpl implements OrderListDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int setorderlistNum = (rs.getInt("orderlist_num"));
 				Date setorderdate = (rs.getDate("order_date"));
 				int setordertotal = (rs.getInt("order_total"));
-				arr.add( new OrderList(setorderlistNum, setordertotal, setorderdate, null));
+				arr.add(new OrderList(setorderlistNum, setordertotal, setorderdate, null));
 			}
-
+			rs.close();
+			smt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -105,24 +111,23 @@ public class OrderListDAOImpl implements OrderListDAO {
 	@Override
 	public ArrayList<Orderitem> getorderitem(OrderList orderList) {
 		// TODO Auto-generated method stub
-
 		ArrayList<Orderitem> detail = new ArrayList<Orderitem>();
-		String sql = "SELECT * FROM orderitem WHERE orderlist_num=?";
+		int orderlistNum=orderList.getOrderlistNum();
+		String sql = "SELECT * FROM orderitem WHERE orderlist_num="+orderlistNum;
 		try {
-
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setInt(1, orderList.getOrderlistNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int productnum = (rs.getInt("product_num"));
 				String productname = (rs.getString("product_name"));
-				int productprice = (rs.getInt("prodcut_price"));
-				int orderlistnum = (rs.getInt("oderlist_num"));
-
+				int productprice = (rs.getInt("product_price"));
+				int orderlistnum = (rs.getInt("orderlist_num"));
 				detail.add(new Orderitem(productnum, orderlistnum, productname, productprice));
 
 			}
+			rs.close();
+			smt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -137,8 +142,6 @@ public class OrderListDAOImpl implements OrderListDAO {
 		return detail;
 	}
 
-	
-
 	public int getordertotal(OrderList orderlist) {
 		int ordertotal = 0;
 		String sql = "SELECT product_price FROM orderitem WHERE orderlist_num=?";
@@ -148,11 +151,12 @@ public class OrderListDAOImpl implements OrderListDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, orderlist.getOrderlistNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while(rs.next()) {
 				int productprice = (rs.getInt("product_price"));
 				ordertotal += productprice;
 			}
-
+			rs.close();
+			smt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -178,16 +182,17 @@ public class OrderListDAOImpl implements OrderListDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setDate(1, date);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				smt2 = conn.prepareStatement(sql1);
 				smt.setInt(1, rs.getInt("orderlist_num"));
 				int setorderlistNum = (rs.getInt("orderlist_num"));
 				int setproductNum = (rs2.getInt("product_num"));
-				// ordercost.add(new Orderitem(setproductNum, setorderlistNum,
-				// null, 0));
+//				 ordercost.add(new Orderitem(setproductNum, setorderlistNum,
+//				 null, 0));
 
 			}
-
+			rs.close();
+			smt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -202,8 +207,5 @@ public class OrderListDAOImpl implements OrderListDAO {
 
 		return totalcost;
 	}
-
-
-
 
 }

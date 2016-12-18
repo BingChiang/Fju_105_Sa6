@@ -41,14 +41,13 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt.setInt(2, inventory.getInventoryAmount());
 			smt.setInt(3, inventory.getSupplierNum());
 			smt.setInt(4, inventory.getReorderPoint());
-//			smt.setDate(5, (java.sql.Date) inventory.getUpdateDate());
+			// smt.setDate(5, (java.sql.Date) inventory.getUpdateDate());
 			smt.executeUpdate();
 			smt.close();
 
 		} catch (SQLException e) {
 			System.out.println("ERROR");
 			throw new RuntimeException(e);
-			
 
 		} finally {
 		}
@@ -72,7 +71,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, setInv.getInventoryName());
 			smt.setInt(2, setInv.getReorderPoint());
-//			smt.setDate(3, (java.sql.Date) setInv.getUpdateDate());
+			// smt.setDate(3, (java.sql.Date) setInv.getUpdateDate());
 			smt.setInt(3, setInv.getInventoryNum());
 			smt.executeUpdate();
 			smt.close();
@@ -122,7 +121,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 		int suppliernum = inventory.getSupplierNum();
 		String setsupplierName = null;
 		String sql = "SELECT * FROM inventory WHERE inventory_num = " + inventorynum;
-		
+
 		try {
 
 			conn = dataSource.getConnection();
@@ -130,21 +129,21 @@ public class InventoryDAOImpl implements InventoryDAO {
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
 			while (rs.next()) {
-				
+
 				int setinventoryNum = (rs.getInt("inventory_num"));
 				int setinventoryAmount = (rs.getInt("inventory_amount"));
 				int setsupplierNum = (rs.getInt("supplier_num"));
 				String setinventoryName = (rs.getString("inventory_name"));
 				int setreorderpoint = (rs.getInt("reorder_point"));
 				Date setUpdateDate = (rs.getDate("update_date"));
-				
+
 				String sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num = " + suppliernum;
 				smt1 = conn1.prepareStatement(sql1);
 				rs1 = smt1.executeQuery();
-				while(rs1.next()){
+				while (rs1.next()) {
 					setsupplierName = (rs1.getString("supplier_name"));
 				}
-				
+
 				inv = new Inventory(setinventoryNum, setinventoryAmount, setsupplierNum, setsupplierName,
 						setinventoryName, setreorderpoint, setUpdateDate);
 
@@ -153,8 +152,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 			}
 			rs.close();
 			smt.close();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
@@ -202,7 +200,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 
 					supplierName = (rs1.getString("supplier_name"));
 				}
-				
+
 				Inventory temp = null;
 				temp = new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName,
 						reorder_point, update_date);
@@ -236,14 +234,14 @@ public class InventoryDAOImpl implements InventoryDAO {
 		int suppliernum = supplier.getSupplierNum();
 		String supplierName = null;
 		String sql = "SELECT * FROM inventory WHERE supplier_num = " + suppliernum;
-		
+
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
 			while (rs.next()) {
-				
+
 				int inventorynum = (rs.getInt("inventory_num"));
 				int inventoryAmount = (rs.getInt("inventory_amount"));
 				int supplierNum = (rs.getInt("supplier_num"));
@@ -252,12 +250,12 @@ public class InventoryDAOImpl implements InventoryDAO {
 				Date update_date = (rs.getDate("update_date"));
 				conn1 = dataSource.getConnection();
 				String sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num = " + suppliernum;
-				smt = conn.prepareStatement(sql1);
+				smt1 = conn1.prepareStatement(sql1);
 				rs1 = smt1.executeQuery();
-				while(rs1.next()){
+				while (rs1.next()) {
 					supplierName = (rs1.getString("supplier_name"));
 				}
-				
+
 				inv.add(new Inventory(inventorynum, inventoryAmount, supplierNum, supplierName, inventoryName,
 						reorder_point, update_date));
 				rs1.close();
@@ -265,15 +263,15 @@ public class InventoryDAOImpl implements InventoryDAO {
 			}
 			rs.close();
 			smt.close();
-			
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
-			if (conn != null) {
+			if (conn != null || conn1 != null) {
 				try {
 					conn.close();
+					conn1.close();
 				} catch (SQLException e) {
 				}
 			}
