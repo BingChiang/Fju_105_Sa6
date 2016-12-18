@@ -38,7 +38,7 @@ import fju.im.sa6.entity.Type;
 @SessionAttributes("newaccount")
 
 public class pageController {
-//	StaffDefault newaccount = new Staff(6, "allen", 0, null, 0);
+	// StaffDefault newaccount = new Staff(6, "allen", 0, null, 0);
 
 	static Cart shoppingCart = new Cart();
 
@@ -46,7 +46,7 @@ public class pageController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView indexLoginpage() {
-//		System.out.print("1234567898765432");
+		// System.out.print("1234567898765432");
 		ModelAndView model = new ModelAndView("index");
 		ArrayList<StaffDefault> staffList = null;
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
@@ -63,18 +63,18 @@ public class pageController {
 	}
 
 	// *****
-//	@RequestMapping(value = "/productSale", method = RequestMethod.GET)
-//	public ModelAndView productSale() {
-//		ModelAndView model = new ModelAndView("redirect:productSale");
-//		// ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
-//		// TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
-//		// ArrayList<Product> typeProList = null;
-//		// ArrayList<Type> typeList = null;
-//		//
-//		// typeList = typeDAO.getList();
-//
-//		return model;
-//	}
+	// @RequestMapping(value = "/productSale", method = RequestMethod.GET)
+	// public ModelAndView productSale() {
+	// ModelAndView model = new ModelAndView("redirect:productSale");
+	// // ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+	// // TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+	// // ArrayList<Product> typeProList = null;
+	// // ArrayList<Type> typeList = null;
+	// //
+	// // typeList = typeDAO.getList();
+	//
+	// return model;
+	// }
 
 	@RequestMapping(value = "/inventoryManage", method = RequestMethod.GET)
 	public ModelAndView inventoryManage() {
@@ -82,11 +82,11 @@ public class pageController {
 		InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
 		ArrayList<Inventory> invList = null;
 		invList = inventoryDAO.getList();
-		System.out.println(invList.get(invList.size()-1).getUpdateDate());
+		System.out.println(invList.get(invList.size() - 1).getUpdateDate());
 		model.addObject("inventoryList", invList);
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/supplierManage", method = RequestMethod.GET)
 	public ModelAndView supplierManage() {
 		ModelAndView model = new ModelAndView("supplierManage");
@@ -147,22 +147,17 @@ public class pageController {
 	public ModelAndView worktimeSearch() {
 		ModelAndView model = new ModelAndView("worktimeSearch");
 
-
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.POST)
-	public ModelAndView worktimeSearch(@ModelAttribute("searchTime") Date searchTime,HttpServletRequest request) {
+	public ModelAndView worktimeSearch(@ModelAttribute("searchTime") Date searchTime, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("redirect:worktimeSearch");
 
 		// DAO ERROR
-		WorktimeDAO worktimeDAO = (WorktimeDAO)context.getBean("WorktimeDAO");
-		
+		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+
 		return model;
 	}
 
-	
-
-
 }
-
