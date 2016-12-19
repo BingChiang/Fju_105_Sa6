@@ -301,10 +301,17 @@ public class AccountController {
 		return model;
 
 	}
-
 	@RequestMapping(value = "/showMonth", method = RequestMethod.GET)
-	public ModelAndView showMonth(@ModelAttribute("date") Date date, HttpServletRequest request) {
+	public ModelAndView showMonth() {
 		ModelAndView model = new ModelAndView("showMonth");
+
+		return model;
+	}
+	
+	@RequestMapping(value = "/showMonthAction", method = RequestMethod.POST)
+	public ModelAndView showMonthAction(@ModelAttribute("date") Date date, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:showMonth");
+		System.out.println(date);
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		double month = managerDAO.monthearntotal(date);
 

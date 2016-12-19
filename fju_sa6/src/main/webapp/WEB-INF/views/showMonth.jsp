@@ -24,7 +24,7 @@
 		<div class="col-md-12">
 			<h2>查看月盈餘</h2>
 			<hr>
-			<form action="showMonth" method="post">
+			<form action="showMonthAction" method="post">
 				<input type="month" name="searchTime" class="form-control"
 					style="text-align: center;">
 				<button type="submit" class="btn btn-primary"
