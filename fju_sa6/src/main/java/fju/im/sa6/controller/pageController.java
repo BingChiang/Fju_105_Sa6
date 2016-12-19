@@ -2,6 +2,7 @@
 package fju.im.sa6.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
 import fju.im.sa6.entity.Supplier;
 import fju.im.sa6.entity.Type;
+import fju.im.sa6.entity.WorkTime;
 
 @Controller
 @SessionAttributes("newaccount")
@@ -152,12 +154,17 @@ public class pageController {
 	}
 	
 	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.POST)
-	public ModelAndView worktimeSearch(@ModelAttribute("searchTime") Date searchTime,HttpServletRequest request) {
-		ModelAndView model = new ModelAndView("redirect:worktimeSearch");
-
+	public ModelAndView worktimeSearch(@ModelAttribute("searchTime") String searchTime,HttpServletRequest request) throws ParseException {
+//		ModelAndView model = new ModelAndView("redirect:worktimeSearch");
+		ModelAndView model = new ModelAndView("worktimeSearch");
 		// DAO ERROR
 		WorktimeDAO worktimeDAO = (WorktimeDAO)context.getBean("WorktimeDAO");
-		
+		ArrayList<WorkTime> workList = null;
+		workList = worktimeDAO.searchworktime(searchTime);
+
+		System.out.println("testController");
+		System.out.println(workList.get(0).getDate());
+		model.addObject("workList",workList);
 		return model;
 	}
 

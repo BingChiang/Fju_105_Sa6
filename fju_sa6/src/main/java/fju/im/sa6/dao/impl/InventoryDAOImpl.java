@@ -252,7 +252,7 @@ public class InventoryDAOImpl implements InventoryDAO {
 				Date update_date = (rs.getDate("update_date"));
 				conn1 = dataSource.getConnection();
 				String sql1 = "SELECT supplier_name FROM supplier WHERE supplier_num = " + suppliernum;
-				smt = conn.prepareStatement(sql1);
+				smt1 = conn.prepareStatement(sql1);
 				rs1 = smt1.executeQuery();
 				while(rs1.next()){
 					supplierName = (rs1.getString("supplier_name"));

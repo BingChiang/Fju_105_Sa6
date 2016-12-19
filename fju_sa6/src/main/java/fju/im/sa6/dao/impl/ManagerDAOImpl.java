@@ -269,7 +269,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 	@Override
 	public double inquireAllWorktime(StaffDefault staffDefault) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

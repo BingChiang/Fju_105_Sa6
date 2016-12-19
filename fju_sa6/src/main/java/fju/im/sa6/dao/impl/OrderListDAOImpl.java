@@ -72,7 +72,6 @@ public class OrderListDAOImpl implements OrderListDAO {
 
 	}
 
-
 	public ArrayList<OrderList> getorderlist() {
 		// TODO Auto-generated method stub
 		ArrayList<OrderList> arr = new ArrayList<OrderList>();
@@ -81,11 +80,11 @@ public class OrderListDAOImpl implements OrderListDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				int setorderlistNum = (rs.getInt("orderlist_num"));
 				Date setorderdate = (rs.getDate("order_date"));
 				int setordertotal = (rs.getInt("order_total"));
-				arr.add( new OrderList(setorderlistNum, setordertotal, setorderdate, null));
+				arr.add(new OrderList(setorderlistNum, setordertotal, setorderdate, null));
 			}
 
 		} catch (SQLException e) {
@@ -114,11 +113,11 @@ public class OrderListDAOImpl implements OrderListDAO {
 			smt = conn.prepareStatement(sql);
 			smt.setInt(1, orderList.getOrderlistNum());
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				int productnum = (rs.getInt("product_num"));
 				String productname = (rs.getString("product_name"));
-				int productprice = (rs.getInt("prodcut_price"));
-				int orderlistnum = (rs.getInt("oderlist_num"));
+				int productprice = (rs.getInt("product_price"));
+				int orderlistnum = (rs.getInt("orderlist_num"));
 
 				detail.add(new Orderitem(productnum, orderlistnum, productname, productprice));
 
@@ -136,8 +135,6 @@ public class OrderListDAOImpl implements OrderListDAO {
 		}
 		return detail;
 	}
-
-	
 
 	public int getordertotal(OrderList orderlist) {
 		int ordertotal = 0;
@@ -185,9 +182,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 				int setproductNum = (rs2.getInt("product_num"));
 				// ordercost.add(new Orderitem(setproductNum, setorderlistNum,
 				// null, 0));
-
 			}
-
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
@@ -199,11 +194,7 @@ public class OrderListDAOImpl implements OrderListDAO {
 				}
 			}
 		}
-
 		return totalcost;
 	}
-
-
-
 
 }

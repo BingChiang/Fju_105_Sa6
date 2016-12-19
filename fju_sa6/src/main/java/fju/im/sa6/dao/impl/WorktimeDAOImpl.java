@@ -554,39 +554,88 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 	}
 
 	@Override
-	public ArrayList<WorkTime> searchworktime(Date date) {
+	public ArrayList<WorkTime> searchworktime(String date) throws ParseException {
+		
+		System.out.println(date);
+		String date1 = date.substring(0);
+		System.out.println(date1);
+
+		String pattern = "yyyy-MM-dd";
+		java.util.Date parseDate = null;
+		java.sql.Date parseDate1 = null;
+
+		parseDate = new SimpleDateFormat(pattern).parse(date1);
+
+		// parseDate = new SimpleDateFormat(pattern).parse(dateStr);
+		parseDate1 = new java.sql.Date(parseDate.getTime());
+		System.out.println(parseDate1.toString());
+
+//
+//		String pattern1 = "HH:mm:ss";
+//		java.util.Date parseTime = null;
+//		java.sql.Time parseTime1 = null;
+//		parseTime = new SimpleDateFormat(pattern1).parse(time1);
+//
+//		// parseDate = new SimpleDateFormat(pattern).parse(dateStr);
+//		parseTime1 = new java.sql.Time(parseTime.getTime());
+		
+		
 		ArrayList<WorkTime> worktime = new ArrayList<WorkTime>();
-		WorkTime work = new WorkTime();
-		String sql = "SELECT * FROM worktime WHERE work_date = ?";
+//		WorkTime work = new WorkTime();
+		String sql = "SELECT * FROM worktime WHERE work_date = '"+parseDate1+"'";
 		String sql2 = "SELECT staff_name FROM staff WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
-			conn1 = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt2 = conn1.prepareStatement(sql2);
-			smt.setDate(1, date);
+
+//			smt.setDate(1, date);
 			rs = smt.executeQuery();
-			if (rs.next()) {
+			System.out.println("beforeRS");
+
+			while (rs.next()) {
+				System.out.println("test123");
+				conn1 = dataSource.getConnection();
+				smt2 = conn1.prepareStatement(sql2);
 				smt2.setInt(1, rs.getInt("staff_num"));
 				rs2 = smt2.executeQuery();
 
 				int setstaffNum = (rs.getInt("staff_num"));
 				Date setworkDate = (rs.getDate("work_date"));
-				Date setonworkTime = (rs.getDate("onwork_time"));
-				Date setoffworkTime = (rs.getDate("offwork_time"));
-				worktime.add(new WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime));
-				work.setStaffName(rs2.getString("staff_name"));
+				Time setonworkTime = (rs.getTime("onwork_time"));
+				Time setoffworkTime = (rs.getTime("offwork_time"));
+				WorkTime temp = new  WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime);
+				System.out.println("temp create");
 
+				if(rs2.next()){
+					System.out.println("rs2!!");
+
+				temp.setStaffName(rs2.getString("staff_name"));
+				}
+				rs2.close();
+				smt2.close();
+
+				System.out.println(temp.getStaffNum());
+				System.out.println(temp.getStaffName());
+				System.out.println(temp.getDate());
+				System.out.println(temp.getOnWorkTime());
+				System.out.println(temp.getOffWorkTime());
+				
+
+				worktime.add(temp);
 			}
+			System.out.println("RS END");
+
 			rs.close();
 			smt.close();
-			rs2.close();
-			smt2.close();
 
 		} catch (SQLException e) {
+			System.out.println("SQLException");
+
 			throw new RuntimeException(e);
 
 		} finally {
+			System.out.println("finally");
+
 			if (conn != null) {
 				try {
 					conn.close();

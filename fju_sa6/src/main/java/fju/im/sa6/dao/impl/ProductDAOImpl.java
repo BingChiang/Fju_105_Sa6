@@ -81,7 +81,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void remove(Product removePro) {
-		String sql = "DELETE FROM product WHERE product_num = ?";
+		String sql = "UPDATE product SET available_num = 1 WHERE product_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -159,13 +159,14 @@ public class ProductDAOImpl implements ProductDAO {
 		Product temp;
 		int typenum = type.getTypeNum();
 		String typeName = null;
-		String sql = "SELECT * FROM product Where type_num =" + typenum;
+		String sql = "SELECT * FROM product Where type_num = ? AND available_num = 0";
 
 		String sql1 = "SELECT type_name FROM type WHERE type_num=?";
 		try {
 			conn = dataSource.getConnection();
 			conn1 = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
+			smt.setInt(1,typenum);
 			rs = smt.executeQuery();
 
 			while (rs.next()) {
@@ -218,7 +219,7 @@ public class ProductDAOImpl implements ProductDAO {
 		int typenum = 0;
 		String typeName = null;
 
-		String sql = "SELECT * FROM product ";
+		String sql = "SELECT * FROM product WHERE available_num = 0";
 		String sql1 = "SELECT type_name FROM type WHERE type_num=?";
 		try {
 			conn = dataSource.getConnection();

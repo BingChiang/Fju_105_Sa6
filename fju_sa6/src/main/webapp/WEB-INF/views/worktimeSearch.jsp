@@ -37,14 +37,16 @@
 		<table class="table table-striped">
 			<tr>
 				<th>員工編號</th>
+				<th>員工姓名</th>
 				<th>上班時間</th>
 				<th>下班時間</th>
 			</tr>
-			<c:forEach items="${worktime}" var="worktime">
+			<c:forEach items="${workList}" var="worktime">
 				<tr>
 					<td>${worktime.staffNum}</td>
-					<td>${worktime.onwork}</td>
-					<td>${worktime.offwork}</td>
+					<td>${worktime.staffName}</td>
+					<td>${worktime.getOnWorkTime()}</td>
+					<td>${worktime.getOffWorkTime()}</td>
 
 				</tr>
 			</c:forEach>
