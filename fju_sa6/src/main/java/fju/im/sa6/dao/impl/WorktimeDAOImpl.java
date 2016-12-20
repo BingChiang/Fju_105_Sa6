@@ -294,7 +294,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 		int staffNum = staffDefault.getStaffNum();
 
-		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1+"'";
+		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1 + "'";
 		try {
 
 			conn1 = dataSource.getConnection();
@@ -356,7 +356,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 					}
 				}
 			} else if (checkdate != null && offwork != null) {
-				String sql = "UPDATE worktime SET onwork_time = ? WHERE num = " + changeNum;
+				String sql = "UPDATE worktime SET onwork_time = ? WHERE staff_num = " + changeNum;
 				try {
 					conn = dataSource.getConnection();
 					smt = conn.prepareStatement(sql);
@@ -456,7 +456,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 		int staffNum = staffDefault.getStaffNum();
 
-		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1+"'";
+		String sql1 = "SELECT * FROM worktime WHERE staff_num=? AND work_date ='" + parseDate1 + "'";
 		try {
 
 			conn1 = dataSource.getConnection();
@@ -555,7 +555,7 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 	@Override
 	public ArrayList<WorkTime> searchworktime(String date) throws ParseException {
-		
+
 		System.out.println(date);
 		String date1 = date.substring(0);
 		System.out.println(date1);
@@ -570,25 +570,24 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 		parseDate1 = new java.sql.Date(parseDate.getTime());
 		System.out.println(parseDate1.toString());
 
-//
-//		String pattern1 = "HH:mm:ss";
-//		java.util.Date parseTime = null;
-//		java.sql.Time parseTime1 = null;
-//		parseTime = new SimpleDateFormat(pattern1).parse(time1);
-//
-//		// parseDate = new SimpleDateFormat(pattern).parse(dateStr);
-//		parseTime1 = new java.sql.Time(parseTime.getTime());
-		
-		
+		//
+		// String pattern1 = "HH:mm:ss";
+		// java.util.Date parseTime = null;
+		// java.sql.Time parseTime1 = null;
+		// parseTime = new SimpleDateFormat(pattern1).parse(time1);
+		//
+		// // parseDate = new SimpleDateFormat(pattern).parse(dateStr);
+		// parseTime1 = new java.sql.Time(parseTime.getTime());
+
 		ArrayList<WorkTime> worktime = new ArrayList<WorkTime>();
-//		WorkTime work = new WorkTime();
-		String sql = "SELECT * FROM worktime WHERE work_date = '"+parseDate1+"'";
+		// WorkTime work = new WorkTime();
+		String sql = "SELECT * FROM worktime WHERE work_date = '" + parseDate1 + "'";
 		String sql2 = "SELECT staff_name FROM staff WHERE staff_num = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 
-//			smt.setDate(1, date);
+			// smt.setDate(1, date);
 			rs = smt.executeQuery();
 			System.out.println("beforeRS");
 
@@ -603,13 +602,13 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 				Date setworkDate = (rs.getDate("work_date"));
 				Time setonworkTime = (rs.getTime("onwork_time"));
 				Time setoffworkTime = (rs.getTime("offwork_time"));
-				WorkTime temp = new  WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime);
+				WorkTime temp = new WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime);
 				System.out.println("temp create");
 
-				if(rs2.next()){
+				if (rs2.next()) {
 					System.out.println("rs2!!");
 
-				temp.setStaffName(rs2.getString("staff_name"));
+					temp.setStaffName(rs2.getString("staff_name"));
 				}
 				rs2.close();
 				smt2.close();
@@ -619,7 +618,6 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 				System.out.println(temp.getDate());
 				System.out.println(temp.getOnWorkTime());
 				System.out.println(temp.getOffWorkTime());
-				
 
 				worktime.add(temp);
 			}
