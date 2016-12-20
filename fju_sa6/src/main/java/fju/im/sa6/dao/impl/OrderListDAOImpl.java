@@ -36,11 +36,12 @@ public class OrderListDAOImpl implements OrderListDAO {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 
-			smt.setInt(1, getordertotal(orderlist));
+			smt.setInt(1, orderlist.getOrderTotal());
 			smt.executeUpdate();
 			smt.close();
 
-			sql = "SELECT LAST_INSERT_ID( )";
+			System.out.println("insert new");
+			sql = "SELECT LAST_INSERT_ID( ) as order_num FROM orderlist ";
 			int orderNum = 0;
 			// conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -49,8 +50,9 @@ public class OrderListDAOImpl implements OrderListDAO {
 				orderNum = rs.getInt("order_num");
 			}
 			sql = "INSERT INTO orderitem (orderlist_num, product_num,product_name,product_price) VALUES(?, ?,?,?)";
+			smt = conn.prepareStatement(sql);
 			for (int i = 0; i < orderlist.getOrderList().size(); i++) {
-				smt = conn.prepareStatement(sql);
+
 				smt.setInt(1, orderNum);
 				smt.setInt(2, orderlist.getOrderList().get(i).getProductNum());
 				smt.setString(3, orderlist.getOrderList().get(i).getProductName());
