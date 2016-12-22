@@ -136,7 +136,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		if (manager.getStaffNum() == staffDefault.getStaffNum()) {
 			// no set because it will set itself
 		} else {
-			String sql = "UPDATE staff SET staff_lv=? WHERE staff_num ="+changeNum;
+			String sql = "UPDATE staff SET staff_lv=? WHERE staff_num =" + changeNum;
 			try {
 				conn = dataSource.getConnection();
 				smt = conn.prepareStatement(sql);
@@ -150,7 +150,6 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 					smt.setInt(1, 1);
 					System.out.println("NNN");
 					smt.executeUpdate();
-
 
 				}
 				System.out.println(staffDefault.getStaffLevel());
@@ -171,20 +170,30 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 	}
 
 	@Override
-	public double monthearntotal(Date indicatedate) {
+	public double monthearntotal(String date) {
+		
+
+		String indicatedate = "'" + date.substring(0,7) + "-01'";
+		System.out.println(indicatedate);
+
 		// TODO Auto-generated method stub
 		double sum = 0;
-		String sql = "SELECT SUM(order_total) FROM orderlist WHERE (SELECT DATEPART(yyyymm,order_date) FROM orderlist WHERE order_date = ? )";
+		String sql = "SELECT SUM(order_total) as sum_total FROM orderlist  where month(order_date) = month(?)";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setDate(1, indicatedate);
+			smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
-			if (rs.next()) {
-				double setmonthcounttotal = (rs.getDouble("order_total"));
+			while (rs.next()) {
+
+				int setmonthcounttotal = (rs.getInt("sum_total"));
+				System.out.println(sum);
 				sum += setmonthcounttotal;
 			}
+			System.out.println(sum);
 			sum = sum - (inquireAllWorktimeforALL(indicatedate) * 150) - (producttotalcost(indicatedate));
+			System.out.println("new:" + sum);
+
 			rs.close();
 			smt.close();
 		} catch (SQLException e) {
@@ -202,18 +211,17 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		return sum;
 	}
 
-	public double inquireAllWorktimeforALL(Date indicatedate) {
+	public double inquireAllWorktimeforALL(String indicatedate) {
 		double worktimeTotalALL = 0;
-		String sql = "SELECT worktime_daytotal FROM worktime WHERE (SELECT DATEPART(yyyymm,order_date) FROM orderlist WHERE order_date = ? )";
-
+		String sql = "SELECT timestampdiff(hour,worktime.onwork_time,worktime.offwork_time)  as work_hour FROM worktime WHERE month(work_date) = month(?)";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setDate(1, indicatedate);
+			smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
-			if (rs.next()) {
-				double setworktimetotal = (rs.getDouble("worktime_daytotal"));
+			while (rs.next()) {
+				double setworktimetotal = (rs.getDouble("work_hour"));
 				worktimeTotalALL += setworktimetotal;
 
 			}
@@ -234,17 +242,19 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		return worktimeTotalALL;
 	}
 
-	public double producttotalcost(Date indicatedate) {
+	public double producttotalcost(String indicatedate) {
 		double producttotalcost = 0;
-		String sql = "SELECT product_cost FROM product WHERE (SELECT product_num FROM orderitem WHERE(SELECT orderlist_num FROM orderlist WHERE order_date = ?)))";
+		String sql = "Select SUM(product_cost) as cost_total " + "FROM orderitem  JOIN product,orderlist  "
+				+ "where orderitem.product_num = product.product_num AND orderitem.orderlist_num =orderlist.orderlist_num "
+				+ "AND month(order_date) = month(?)";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setDate(1, indicatedate);
+			smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
-			if (rs.next()) {
-				double setproducttotalcost = (rs.getDouble("product_cost"));
+			while (rs.next()) {
+				double setproducttotalcost = (rs.getDouble("cost_total"));
 				producttotalcost += setproducttotalcost;
 
 			}
@@ -269,7 +279,7 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 	@Override
 	public double inquireAllWorktime(StaffDefault staffDefault) {
-		
+
 		return 0;
 	}
 

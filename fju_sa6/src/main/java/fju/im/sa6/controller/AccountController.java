@@ -1,4 +1,3 @@
-
 package fju.im.sa6.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -309,7 +308,9 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "/showMonthAction", method = RequestMethod.POST)
-	public ModelAndView showMonthAction(@ModelAttribute("date") Date date, HttpServletRequest request) {
+	public ModelAndView showMonthAction(@ModelAttribute("searchTime") String date, HttpServletRequest request) {
+		System.out.println("test:"+date);
+
 		ModelAndView model = new ModelAndView("redirect:showMonth");
 		System.out.println(date);
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");

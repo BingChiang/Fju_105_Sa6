@@ -17,7 +17,7 @@ public interface ManagerDAO {
 
 	public ArrayList<StaffDefault> getList();
 
-	double monthearntotal(Date indicatedate);
+	double monthearntotal(String indicatedate);
 
 	//double inquireAllWorktimeforALL(Date indicatedate);
 
