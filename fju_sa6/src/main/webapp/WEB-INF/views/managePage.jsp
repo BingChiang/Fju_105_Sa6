@@ -31,7 +31,31 @@
 				<p>員工管理</p>
 			</a>
 		</div>
-
+		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
+			<a href="productManage" role="button">
+				<p>產品管理</p>
+			</a>
+		</div>
+		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
+			<a href="productTypeManage" role="button">
+				<p>產品類別管理</p>
+			</a>
+		</div>
+		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
+			<a href="inventoryManage" role="button">
+				<p>存貨管理</p>
+			</a>
+		</div>
+		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
+			<a href="supplierManage" role="button">
+				<p>供應商管理</p>
+			</a>
+		</div>
+		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
+			<a href="worktimeSearch" role="button">
+				<p>工作時數管理</p>
+			</a>
+		</div>
 	</div>
 	</div>
 	</div>

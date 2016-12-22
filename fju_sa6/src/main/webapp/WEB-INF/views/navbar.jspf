@@ -28,33 +28,17 @@
 				<li
 					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/productSale.jsp' ? ' active' : ' ' }"><a
 					href="productSale?typeNum=1">產品銷售</a></li>
+				<li
+					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/showOrder.jsp' ? ' active' : ' ' }"><a
+					href="showOrder">訂單查詢</a></li>
 			</ul>
 			<ul class="nav nav-sidebar">
-
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/productManage.jsp' ? ' active' : ' ' }"><a
-					href="productManage">產品管理</a></li>
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/productTypeManage.jsp' ? ' active' : ' ' }"><a
-					href="productTypeManage">類別管理</a></li>
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/inventoryManage.jsp' ? ' active' : ' ' }"><a
-					href="inventoryManage">存貨管理</a></li>
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/suplierManage.jsp' ? ' active' : ' ' }"><a
-					href="supplierManage">供應商管理</a></li>
-
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/worktimeSearch.jsp' ? ' active' : ' ' }"><a
-					href="worktimeSearch">工時查詢</a></li>
 			</ul>
 			<ul class="nav nav-sidebar">
 				<li
 					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/managePage.jsp' ? ' active' : ' ' }"><a
 					href="managePage">管理者功能</a></li>
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/amendWork.jsp' ? ' active' : ' ' }"><a
-					href="amendWork">補打卡</a></li>
+
 			</ul>
 			<ul class="nav nav-sidebar">
 				<li><a>你好${newaccount.staffName}</a></li>

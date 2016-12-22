@@ -26,9 +26,25 @@
 			<h2>打卡記錄查詢</h2>
 			<hr>
 			<form action="worktimeSearch" method="post">
+				<h4>選日期</h4>
 				<input type="date" name="searchTime" class="form-control"
 					style="text-align: center;">
-				<button type="submit" class="btn btn-primary"
+				<button type="submit" class="btn btn-primary" name="submit" value=1
+					style="margin-left: 45%">確認</button>
+			</form>
+			<hr>
+			<br>
+		</div>
+		
+		<div class="col-md-12">
+			<form action="staffWorktimeSearch" method="post">
+				<h4>選員工</h4>
+				<select name="staffNum" class="form-control">
+					<c:forEach items="${staffList}" var="staff">
+					<option value="${staff.staffNum}">${staff.staffName}</option>
+					</c:forEach>
+				</select>
+				<button type="submit" class="btn btn-primary" name="submit" value=0
 					style="margin-left: 45%">確認</button>
 			</form>
 			<hr>
@@ -38,6 +54,7 @@
 			<tr>
 				<th>員工編號</th>
 				<th>員工姓名</th>
+				<th>工作日期</th>
 				<th>上班時間</th>
 				<th>下班時間</th>
 			</tr>
@@ -45,6 +62,7 @@
 				<tr>
 					<td>${worktime.staffNum}</td>
 					<td>${worktime.staffName}</td>
+					<td>${worktime.getWorkDate()}</td>
 					<td>${worktime.getOnWorkTime()}</td>
 					<td>${worktime.getOffWorkTime()}</td>
 

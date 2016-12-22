@@ -87,5 +87,12 @@ public class WorkTime {
 			return this.offwork.toString();
 		}
 	}
+	public String getWorkDate() {
+		if (date == null) {
+			return "";
+		} else {
+			return this.date.toString();
+		}
+	}
 
 }

@@ -647,4 +647,65 @@ public class WorktimeDAOImpl implements WorktimeDAO {
 
 	}
 
+	@Override
+	public ArrayList<WorkTime> staffSearchworktime(StaffDefault staffDefault) {
+		// TODO Auto-generated method stub
+		ArrayList<WorkTime> worktime = new ArrayList<WorkTime>();
+
+		String sql = "SELECT * FROM worktime WHERE staff_num = ?";
+		String sql2 = "SELECT staff_name FROM staff WHERE staff_num = ?";
+
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+
+			smt.setInt(1, staffDefault.getStaffNum());
+			rs = smt.executeQuery();
+
+			while (rs.next()) {
+				conn1 = dataSource.getConnection();
+				smt2 = conn1.prepareStatement(sql2);
+				smt2.setInt(1, rs.getInt("staff_num"));
+				rs2 = smt2.executeQuery();
+
+				int setstaffNum = (rs.getInt("staff_num"));
+				Date setworkDate = (rs.getDate("work_date"));
+				Time setonworkTime = (rs.getTime("onwork_time"));
+				Time setoffworkTime = (rs.getTime("offwork_time"));
+				WorkTime temp = new  WorkTime(setstaffNum, setworkDate, setonworkTime, setoffworkTime);
+				System.out.println("temp create");
+				if(rs2.next()){
+					System.out.println("rs2!!");
+
+				temp.setStaffName(rs2.getString("staff_name"));
+				}
+				rs2.close();
+				smt2.close();
+
+				worktime.add(temp);
+			}
+			System.out.println("RS END");
+
+			rs.close();
+			smt.close();
+
+		} catch (SQLException e) {
+			System.out.println("SQLException");
+
+			throw new RuntimeException(e);
+
+		} finally {
+			System.out.println("finally");
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return worktime;
+		
+	}
+
 }

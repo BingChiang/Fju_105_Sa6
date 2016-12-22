@@ -19,6 +19,9 @@ public interface WorktimeDAO {
 	public void amendOffWork(StaffDefault staffDefault, String date) throws ParseException;
 	
 	public ArrayList<WorkTime> searchworktime(String date) throws ParseException;
+	
+	public ArrayList<WorkTime> staffSearchworktime(StaffDefault staffDefault);
+	
 
 	
 }

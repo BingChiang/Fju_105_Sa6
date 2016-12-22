@@ -12,13 +12,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fju.im.sa6.dao.InventoryDAO;
 import fju.im.sa6.dao.ManagerDAO;
+import fju.im.sa6.dao.OrderListDAO;
 import fju.im.sa6.dao.ProductDAO;
 import fju.im.sa6.dao.StaffDefaultDAO;
+import fju.im.sa6.dao.SupplierDAO;
+import fju.im.sa6.dao.TypeDAO;
 import fju.im.sa6.dao.WorktimeDAO;
 import fju.im.sa6.entity.Inventory;
+import fju.im.sa6.entity.OrderList;
 import fju.im.sa6.entity.Product;
 import fju.im.sa6.entity.Staff;
 import fju.im.sa6.entity.StaffDefault;
+import fju.im.sa6.entity.Supplier;
+import fju.im.sa6.entity.Type;
 import fju.im.sa6.entity.WorkTime;
 
 import java.security.Principal;
@@ -66,8 +72,7 @@ public class AccountController {
 	@RequestMapping(value = "/login2", method = RequestMethod.GET)
 	public ModelAndView login2() {
 		ModelAndView model = new ModelAndView("login2");
-		
-		
+
 		return model;
 	}
 
@@ -77,16 +82,12 @@ public class AccountController {
 
 		if (password.equals("1234")) {
 			account_session = temptest;
-			model.addObject("newaccount", account_session);			
-		}
-		else{
+			model.addObject("newaccount", account_session);
+		} else {
 			temptest = null;
 			model = new ModelAndView("redirect:/login");
 		}
-		
 
-//		account_session = staff;
-		// session add
 		model.addObject("newaccount", account_session);
 		return model;
 	}
@@ -103,21 +104,6 @@ public class AccountController {
 	}
 
 	//
-	// @RequestMapping(value = "/check", method = RequestMethod.POST)
-	// public ModelAndView manegerCheck(@ModelAttribute StaffDefault
-	// staffDefault) {
-	// ModelAndView model = new ModelAndView("");
-	// StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
-	// context.getBean("StaffDefaultDAO");
-	// if (1 == 1) {
-	// model = new ModelAndView("redirect:/mainpage");
-	// model.addObject("staffDefault", staffDefault);
-	// } else {
-	// model = new ModelAndView("index");
-	// }
-	//
-	// return model;
-	// }
 
 	@RequestMapping(value = "/worktime", method = RequestMethod.GET)
 	public ModelAndView ListStaffWorktime() {
@@ -150,14 +136,13 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/amend", method = RequestMethod.POST)
-	public ModelAndView amend(@ModelAttribute("date") String date2, @ModelAttribute("submit") String submit,@ModelAttribute("staffNum") int staffNum,
-			HttpServletRequest request) throws ParseException {
-		
+	public ModelAndView amend(@ModelAttribute("date") String date2, @ModelAttribute("submit") String submit,
+			@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) throws ParseException {
+
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		StaffDefault temp = new Staff(staffNum, "", 0, null, 0);
 		StaffDefault staff = staffDefaultDAO.get(temp);
-		
-		
+
 		System.out.print(date2);
 		ModelAndView model = new ModelAndView("redirect:mainpage");
 		String dat = date2.substring(0, 10);
@@ -193,28 +178,6 @@ public class AccountController {
 		return model;
 	}
 
-	// @RequestMapping(value = "/amendonwork", method = RequestMethod.GET)
-	// public ModelAndView amendonwork(@ModelAttribute("date") Date date,
-	// HttpServletRequest request) {
-	// ModelAndView model = new ModelAndView("redirect:mainpage");
-	// // StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
-	// // context.getBean("StaffDefaultDAO");
-	// WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-	// worktimeDAO.amendOnWork(account_session, date, null);
-	// return model;
-	// }
-	//
-	// @RequestMapping(value = "/amendoffwork", method = RequestMethod.GET)
-	// public ModelAndView amendoffwork(@ModelAttribute("date") Date date,
-	// HttpServletRequest request) {
-	// ModelAndView model = new ModelAndView("redirect:mainpage");
-	// // StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO)
-	// // context.getBean("StaffDefaultDAO");
-	// WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-	// worktimeDAO.amendOffWork(account_session, date, null);
-	// return model;
-	// }
-
 	@RequestMapping(value = "/manageWorktimeSearch", method = RequestMethod.GET)
 	public ModelAndView manageWorktime(@ModelAttribute("searchTime") Date searchTime, HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("manageWorktimeSearch");
@@ -234,21 +197,6 @@ public class AccountController {
 		ModelAndView model = new ModelAndView("redirect:manageWorktimeSearch");
 		return model;
 	}
-
-	// @RequestMapping(value = "/worktimeSearch", method = RequestMethod.GET)
-	// public ModelAndView worktimeSearch(Date searchTime) {
-	// ModelAndView model = new ModelAndView("worktimeSearch");
-	// WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-	// ArrayList<WorkTime> arr ;
-	// if(searchTime == null){
-	// arr = new ArrayList<WorkTime>();
-	// }
-	// else{
-	// arr =worktimeDAO.searchworktime(searchTime);
-	// }
-	// model.addObject("worktime",arr);
-	// return model;
-	// }
 
 	@RequestMapping(value = "/staffLevelModify", method = RequestMethod.GET)
 	public ModelAndView staffLevelModify(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) {
@@ -300,23 +248,25 @@ public class AccountController {
 		return model;
 
 	}
+
 	@RequestMapping(value = "/showMonth", method = RequestMethod.GET)
 	public ModelAndView showMonth() {
 		ModelAndView model = new ModelAndView("showMonth");
 
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/showMonthAction", method = RequestMethod.POST)
 	public ModelAndView showMonthAction(@ModelAttribute("searchTime") String date, HttpServletRequest request) {
-		System.out.println("test:"+date);
+		System.out.println("test:" + date);
 
-		ModelAndView model = new ModelAndView("redirect:showMonth");
+		ModelAndView model = new ModelAndView("showMonth");
 		System.out.println(date);
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
-		double month = managerDAO.monthearntotal(date);
-
-		model.addObject("earn", month);
+		int month = (int) managerDAO.monthearntotal(date);
+		Product displaytemp = new Product();
+		displaytemp.setProductPrice(250);
+		model.addObject("earn", displaytemp);
 		return model;
 	}
 
@@ -349,15 +299,15 @@ public class AccountController {
 	// return model;
 	// }
 	//
-	 @RequestMapping(value = "/staffRemove", method = RequestMethod.GET)
-	 public ModelAndView removeStaff(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) {
-	 ModelAndView model = new ModelAndView("redirect:/staffManage");//
+	@RequestMapping(value = "/staffRemove", method = RequestMethod.GET)
+	public ModelAndView removeStaff(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:/staffManage");//
 
-	 ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
-	 StaffDefault temp = new Staff(staffNum, null, 0, null, 0);
-	 managerDAO.remove(temp);
-	 return model;
-	 }
+		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
+		StaffDefault temp = new Staff(staffNum, null, 0, null, 0);
+		managerDAO.remove(temp);
+		return model;
+	}
 
 	// for manage
 	@RequestMapping(value = "/managePage", method = RequestMethod.GET)
@@ -366,11 +316,12 @@ public class AccountController {
 
 		if (account_session.getStaffLevel() == 1) {
 			model = new ModelAndView("managePage");
+			return model;
 		} else {
 			model = new ModelAndView("redirect:mainpage");
+			return model;
 
 		}
-		return model;
 	}
 
 	@RequestMapping(value = "/amendWork", method = RequestMethod.GET)
@@ -386,28 +337,164 @@ public class AccountController {
 		ArrayList<StaffDefault> staffList = null;
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		staffList = staffDefaultDAO.getList();
-		model.addObject("staffList",staffList);
+		model.addObject("staffList", staffList);
 
 		return model;
 	}
 
 	@RequestMapping(value = "/staffManage", method = RequestMethod.GET)
 	public ModelAndView staffManage() {
-
-		ModelAndView model = new ModelAndView("managePage");
-
-		if (account_session.getStaffLevel() == 1) {
-			model = new ModelAndView("staffManage");
+		if (account_session.getStaffLevel() == 0) {
+			ModelAndView model = new ModelAndView("mainpage");
+			return model;
 		} else {
-			model = new ModelAndView("redirect:mainpage");
 
+			ModelAndView model = new ModelAndView("staffManage");
+
+			ArrayList<StaffDefault> staffList = null;
+			StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+			staffList = staffDefaultDAO.getList();
+			model.addObject("staffList", staffList);
+
+			return model;
 		}
-		ArrayList<StaffDefault> staffList = null;
-		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
-		staffList = staffDefaultDAO.getList();
-		model.addObject("staffList", staffList);
+	}
 
+	@RequestMapping(value = "/inventoryManage", method = RequestMethod.GET)
+	public ModelAndView inventoryManage() {
+		if (account_session.getStaffLevel() == 0) {
+			ModelAndView model = new ModelAndView("mainpage");
+			return model;
+		} else {
+			ModelAndView model = new ModelAndView("inventoryManage");
+			InventoryDAO inventoryDAO = (InventoryDAO) context.getBean("InventoryDAO");
+			ArrayList<Inventory> invList = null;
+			invList = inventoryDAO.getList();
+			System.out.println(invList.get(invList.size() - 1).getUpdateDate());
+			model.addObject("inventoryList", invList);
+			return model;
+		}
+	}
+
+	@RequestMapping(value = "/supplierManage", method = RequestMethod.GET)
+	public ModelAndView supplierManage() {
+		if (account_session.getStaffLevel() == 0) {
+			ModelAndView model = new ModelAndView("mainpage");
+			return model;
+		} else {
+			ModelAndView model = new ModelAndView("supplierManage");
+			SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
+			ArrayList<Supplier> supList = null;
+			supList = supplierDAO.getList();
+			System.out.println(supList.get(0).getSupplierName());
+			System.out.println(supList.get(0).getSupplierAddress());
+			System.out.println(supList.get(0).getSupplierPhone());
+
+			model.addObject("supplierList", supList);
+			return model;
+		}
+	}
+
+	@RequestMapping(value = "/productManage", method = RequestMethod.GET)
+	public ModelAndView productManage() {
+		if (account_session.getStaffLevel() == 0) {
+			ModelAndView model = new ModelAndView("mainpage");
+			return model;
+		} else {
+			ModelAndView model = new ModelAndView("productManage");
+			ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAO");
+			ArrayList<Product> proList = null;
+			proList = productDAO.getList();
+			model.addObject("productList", proList);
+			return model;
+		}
+	}
+
+	@RequestMapping(value = "/productTypeManage", method = RequestMethod.GET)
+	public ModelAndView productTypeManage() {
+		if (account_session.getStaffLevel() == 0) {
+			ModelAndView model = new ModelAndView("mainpage");
+			return model;
+		} else {
+			ModelAndView model = new ModelAndView("productTypeManage");
+			TypeDAO typeDAO = (TypeDAO) context.getBean("TypeDAO");
+			ArrayList<Type> typeList = null;
+			typeList = typeDAO.getList();
+			model.addObject("typeList", typeList);
+			return model;
+		}
+	}
+
+	@RequestMapping(value = "/suplierManage", method = RequestMethod.GET)
+	public ModelAndView suplierManage() {
+		if (account_session.getStaffLevel() == 0) {
+			ModelAndView model = new ModelAndView("mainpage");
+			return model;
+		} else {
+			ModelAndView model = new ModelAndView("suplierManage");
+			SupplierDAO supplierDAO = (SupplierDAO) context.getBean("SupplierDAO");
+			ArrayList<Supplier> supplierList = null;
+			supplierList = supplierDAO.getList();
+			model.addObject("supplierList", supplierList);
+
+			return model;
+		}
+	}
+
+	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.GET)
+	public ModelAndView worktimeSearch() {
+		if (account_session.getStaffLevel() == 0) {
+			ModelAndView model = new ModelAndView("mainpage");
+			return model;
+		} else {
+			ModelAndView model = new ModelAndView("worktimeSearch");
+			ArrayList<StaffDefault> staffList = null;
+			StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+			staffList = staffDefaultDAO.getList();
+			model.addObject("staffList", staffList);
+			return model;
+		}
+	}
+
+	@RequestMapping(value = "/worktimeSearch", method = RequestMethod.POST)
+	public ModelAndView worktimeSearch(@ModelAttribute("searchTime") String searchTime, HttpServletRequest request)
+			throws ParseException {
+		// ModelAndView model = new ModelAndView("redirect:worktimeSearch");
+		ModelAndView model = new ModelAndView("worktimeSearch");
+		// DAO ERROR
+		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+		ArrayList<WorkTime> workList = new ArrayList<WorkTime>();
+		workList = worktimeDAO.searchworktime(searchTime);
+
+		System.out.println("testController");
+		// System.out.println(workList.get(0).getDate());
+		model.addObject("workList", workList);
 		return model;
 	}
 
+	@RequestMapping(value = "/staffWorktimeSearch", method = RequestMethod.POST)
+	public ModelAndView staffWorktimeSearch(@ModelAttribute("staffNum") int staffNum, HttpServletRequest request)
+			throws ParseException {
+		// ModelAndView model = new ModelAndView("redirect:worktimeSearch");
+		ModelAndView model = new ModelAndView("worktimeSearch");
+		// DAO ERROR
+		StaffDefaultDAO staffdefaultDAO =(StaffDefaultDAO)context.getBean("StaffDefaultDAO");
+		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
+		Staff temp = new Staff(staffNum,"",0,null,0);
+		StaffDefault temp2 = staffdefaultDAO.get(temp);
+		ArrayList<WorkTime> workList = new ArrayList<WorkTime>();
+		
+		ArrayList<StaffDefault> staffList = null;
+		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+		staffList = staffDefaultDAO.getList();
+		
+		workList = worktimeDAO.staffSearchworktime(temp2);
+
+		System.out.println("testController");
+		// System.out.println(workList.get(0).getDate());
+		
+		model.addObject("staffList", staffList);
+		model.addObject("workList", workList);
+		return model;
+	}
 }

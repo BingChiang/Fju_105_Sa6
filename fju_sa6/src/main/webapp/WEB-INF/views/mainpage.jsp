@@ -37,25 +37,11 @@
 			</a>
 		</div>
 		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-			<a href="productManage" role="button">
-				<p>產品管理</p>
-			</a>
-		</div>
-		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-			<a href="inventoryManage" role="button">
-				<p>存貨管理</p>
-			</a>
-		</div>
-		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
 			<a href="showOrder" role="button">
 				<p>查看訂單</p>
 			</a>
 		</div>
-		<!-- <div class="col-sm-9 btn-lg btn-primary" id="optionselect">
-			<a href="amendWork" role="button">
-				<p>補打卡</p>
-			</a>
-		</div> -->
+
 	</div>
 	</div>
 	</div>
