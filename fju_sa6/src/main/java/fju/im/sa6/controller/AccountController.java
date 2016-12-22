@@ -265,7 +265,7 @@ public class AccountController {
 		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
 		int month = (int) managerDAO.monthearntotal(date);
 		Product displaytemp = new Product();
-		displaytemp.setProductPrice(250);
+		displaytemp.setProductPrice(month);
 		model.addObject("earn", displaytemp);
 		return model;
 	}

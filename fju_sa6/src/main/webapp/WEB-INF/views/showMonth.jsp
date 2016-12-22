@@ -38,7 +38,9 @@
 				<th>該月盈餘狀況</th>
 			</tr>
 			<tr>
-				<td><c:out value="${earn.productPrice}"/></td>
+				<td><h2>
+						<c:out value="${earn.productPrice}" />
+					</h2></td>
 
 
 			</tr>

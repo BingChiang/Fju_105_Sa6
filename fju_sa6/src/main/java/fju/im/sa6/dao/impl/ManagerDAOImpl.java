@@ -171,18 +171,17 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 	@Override
 	public double monthearntotal(String date) {
-		
 
-		String indicatedate = "'" + date.substring(0,7) + "-01'";
+		String indicatedate = "'" + date.substring(0, 7) + "-01'";
 		System.out.println(indicatedate);
 
 		// TODO Auto-generated method stub
 		double sum = 0;
-		String sql = "SELECT SUM(order_total) as sum_total FROM orderlist  where month(order_date) = month(?)";
+		String sql = "SELECT SUM(order_total) as sum_total FROM orderlist  where month(order_date) = month("+indicatedate+")";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, indicatedate);
+//			smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
 			while (rs.next()) {
 
@@ -213,12 +212,12 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 	public double inquireAllWorktimeforALL(String indicatedate) {
 		double worktimeTotalALL = 0;
-		String sql = "SELECT timestampdiff(hour,worktime.onwork_time,worktime.offwork_time)  as work_hour FROM worktime WHERE month(work_date) = month(?)";
+		String sql = "SELECT timestampdiff(hour,worktime.onwork_time,worktime.offwork_time)  as work_hour FROM worktime WHERE month(work_date) =month("+indicatedate+")";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, indicatedate);
+//			smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
 			while (rs.next()) {
 				double setworktimetotal = (rs.getDouble("work_hour"));
@@ -246,12 +245,12 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		double producttotalcost = 0;
 		String sql = "Select SUM(product_cost) as cost_total " + "FROM orderitem  JOIN product,orderlist  "
 				+ "where orderitem.product_num = product.product_num AND orderitem.orderlist_num =orderlist.orderlist_num "
-				+ "AND month(order_date) = month(?)";
+				+ "AND month(order_date) =  month("+indicatedate+")";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setString(1, indicatedate);
+//			smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
 			while (rs.next()) {
 				double setproducttotalcost = (rs.getDouble("cost_total"));
