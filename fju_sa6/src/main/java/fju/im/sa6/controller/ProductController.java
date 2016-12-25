@@ -144,6 +144,10 @@ public class ProductController {
 		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
 		OrderList temp = new OrderList(orderlistNum, 0, null, null);
 		ArrayList<Orderitem> temp2 = orderListDAO.getorderitem(temp);
+		
+		OrderList orderList = orderListDAO.get(temp);
+		
+		model.addObject("orderList", orderList);
 		model.addObject("order", temp2);
 		return model;
 

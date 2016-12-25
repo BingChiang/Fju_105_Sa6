@@ -24,7 +24,7 @@
 		<div class="col-md-12 form-group">
 			<h2>查看訂單詳情</h2>
 			<hr>
-			<h3></h3>
+			<h3>訂單編號：${orderList.orderlistNum}</h3>
 		</div>
 		<table class="table table-striped">
 			<tr>
@@ -40,6 +40,10 @@
 		</table>
 		<button class="btn btn-dafault" type="button"
 			onClick="javascript:history.back(1)">按此返回上頁</button>
+		<c:if test="${orderList.available==0}">
+			<a class="btn btn-danger" role="button" type="button"
+				href="orderRemove?orderlistNum=${orderList.orderlistNum}">銷退此筆訂單</a>
+		</c:if>
 	</div>
 	</div>
 	</div>

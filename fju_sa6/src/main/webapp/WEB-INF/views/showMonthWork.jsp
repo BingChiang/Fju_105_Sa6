@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>showOrder</title>
+<title>worktime</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/dashboard.css" rel="stylesheet">
 <script src="js/ie-emulation-modes-warning.js"></script>
@@ -22,36 +22,34 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 		style="margin-top: 30px;">
 		<div class="col-md-12">
-			<h2>查看訂單</h2>
+			<h2>查看工作時數</h2>
+			<hr>
+			<form action="showMonthWorkAction" method="post">
+				<input type="month" name="searchTime" class="form-control"
+					style="text-align: center;">
+				<button type="submit" class="btn btn-primary"
+					style="margin-left: 45%">確認</button>
+			</form>
 			<hr>
 			<br>
 		</div>
-		<table class="table table-striped">
-			<tr>
-				<th>訂單編號</th>
-				<th>訂單日期</th>
-				<th>訂單價格</th>
-				<th>訂單狀態</th>
-				<th>查看訂單詳情</th>
-			</tr>
-			<c:forEach items="${orderList}" var="ord">
+		<c:if test="${page == 1}">
+			<table class="table table-striped">
 				<tr>
-					<td>${ord.orderlistNum}</td>
-					<td>${ord.orderDate}</td>
-					<td>${ord.orderTotal}</td>
-					<c:if test="${ord.available==0}">
-					<td>已結帳</td>
-					</c:if>
-					<c:if test="${ord.available==1}">
-					<td style="color:red;">已銷退</td>
-					</c:if>
-					<td><a role="button"
-						href="orderDetail?orderlistNum=${ord.orderlistNum}"
-						class="btn btn-sm btn-primary">查看</a></td>
+					<th>員工編號</th>
+					<th>員工姓名</th>
+					<th>該月工作時數</th>
 				</tr>
-			</c:forEach>
+				<c:forEach items="${staffList}" var="staff">
+					<tr>
+						<td>${staff.staffNum}</td>
+						<td>${staff.staffName}</td>
+						<td>${staff.worktimeTotal}/小時</td>
+					</tr>
+				</c:forEach>
 
-		</table>
+			</table>
+		</c:if>
 	</div>
 	</div>
 	</div>

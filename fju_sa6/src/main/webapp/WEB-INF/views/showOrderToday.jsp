@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>showOrder</title>
+<title>showOrderToday</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/dashboard.css" rel="stylesheet">
 <script src="js/ie-emulation-modes-warning.js"></script>
@@ -22,7 +22,7 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 		style="margin-top: 30px;">
 		<div class="col-md-12">
-			<h2>查看訂單</h2>
+			<h2>本日訂單</h2>
 			<hr>
 			<br>
 		</div>
@@ -31,7 +31,6 @@
 				<th>訂單編號</th>
 				<th>訂單日期</th>
 				<th>訂單價格</th>
-				<th>訂單狀態</th>
 				<th>查看訂單詳情</th>
 			</tr>
 			<c:forEach items="${orderList}" var="ord">
@@ -39,12 +38,6 @@
 					<td>${ord.orderlistNum}</td>
 					<td>${ord.orderDate}</td>
 					<td>${ord.orderTotal}</td>
-					<c:if test="${ord.available==0}">
-					<td>已結帳</td>
-					</c:if>
-					<c:if test="${ord.available==1}">
-					<td style="color:red;">已銷退</td>
-					</c:if>
 					<td><a role="button"
 						href="orderDetail?orderlistNum=${ord.orderlistNum}"
 						class="btn btn-sm btn-primary">查看</a></td>

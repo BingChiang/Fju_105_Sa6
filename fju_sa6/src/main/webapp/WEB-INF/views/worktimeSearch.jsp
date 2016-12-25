@@ -25,6 +25,8 @@
 		<div class="col-md-12">
 			<h2>打卡記錄查詢</h2>
 			<hr>
+			<a class="btn btn-primary" role="button" type="button"
+				href="showMonthWork">查看累積時數</a>
 			<form action="worktimeSearch" method="post">
 				<h4>選日期</h4>
 				<input type="date" name="searchTime" class="form-control"
@@ -35,13 +37,13 @@
 			<hr>
 			<br>
 		</div>
-		
+
 		<div class="col-md-12">
 			<form action="staffWorktimeSearch" method="post">
 				<h4>選員工</h4>
 				<select name="staffNum" class="form-control">
 					<c:forEach items="${staffList}" var="staff">
-					<option value="${staff.staffNum}">${staff.staffName}</option>
+						<option value="${staff.staffNum}">${staff.staffName}</option>
 					</c:forEach>
 				</select>
 				<button type="submit" class="btn btn-primary" name="submit" value=0
@@ -50,26 +52,28 @@
 			<hr>
 			<br>
 		</div>
-		<table class="table table-striped">
-			<tr>
-				<th>員工編號</th>
-				<th>員工姓名</th>
-				<th>工作日期</th>
-				<th>上班時間</th>
-				<th>下班時間</th>
-			</tr>
-			<c:forEach items="${workList}" var="worktime">
+		<c:if test="${page == 1}">
+			<table class="table table-striped">
 				<tr>
-					<td>${worktime.staffNum}</td>
-					<td>${worktime.staffName}</td>
-					<td>${worktime.getWorkDate()}</td>
-					<td>${worktime.getOnWorkTime()}</td>
-					<td>${worktime.getOffWorkTime()}</td>
-
+					<th>員工編號</th>
+					<th>員工姓名</th>
+					<th>工作日期</th>
+					<th>上班時間</th>
+					<th>下班時間</th>
 				</tr>
-			</c:forEach>
+				<c:forEach items="${workList}" var="worktime">
+					<tr>
+						<td>${worktime.staffNum}</td>
+						<td>${worktime.staffName}</td>
+						<td>${worktime.getWorkDate()}</td>
+						<td>${worktime.getOnWorkTime()}</td>
+						<td>${worktime.getOffWorkTime()}</td>
 
-		</table>
+					</tr>
+				</c:forEach>
+
+			</table>
+		</c:if>
 	</div>
 	</div>
 	</div>

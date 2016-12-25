@@ -27,6 +27,11 @@
 			</a>
 		</div>
 		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
+			<a href="showOrder" role="button">
+				<p>訂單管理</p>
+			</a>
+		</div>
+		<div class="col-sm-9 btn-lg btn-primary" id="optionselect">
 			<a href="staffManage" role="button">
 				<p>員工管理</p>
 			</a>

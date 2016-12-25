@@ -12,39 +12,44 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/sa6">Tea Shop</a>
+			<a class="navbar-brand" href="logout">Tea Shop</a>
 		</div>
 	</div>
 </nav>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3 col-md-2 sidebar">
-			<ul class="nav nav-sidebar">
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/mainpage.jsp' ? ' active' : ' ' }"><a
-					href="mainpage">功能總覽 <span class="sr-only">(current)</span></a></li>
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/productSale.jsp' ? ' active' : ' ' }"><a
-					href="productSale?typeNum=1">產品銷售</a></li>
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/showOrder.jsp' ? ' active' : ' ' }"><a
-					href="showOrder">訂單查詢</a></li>
-			</ul>
-			<ul class="nav nav-sidebar">
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li
-					class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/managePage.jsp' ? ' active' : ' ' }"><a
-					href="managePage">管理者功能</a></li>
+			<c:if test="${newaccount.staffName!=null}">
 
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li><a>你好${newaccount.staffName}</a></li>
-			</ul>
-			<ul class="nav nav-sidebar">
-				<li><a href="logout">登出</a></li>
-			</ul>
+				<ul class="nav nav-sidebar">
+					<li
+						class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/mainpage.jsp' ? ' active' : ' ' }"><a
+						href="mainpage">功能總覽 <span class="sr-only">(current)</span></a></li>
+				</ul>
+				<ul class="nav nav-sidebar">
+					<li
+						class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/productSale.jsp' ? ' active' : ' ' }"><a
+						href="productSale?typeNum=1">產品銷售</a></li>
+					<li
+						class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/showOrder.jsp' ? ' active' : ' ' }"><a
+						href="showOrderToday">本日訂單</a></li>
+				</ul>
+				<ul class="nav nav-sidebar">
+				</ul>
+				<c:if test="${newaccount.staffLevel==1}">
+					<ul class="nav nav-sidebar">
+						<li
+							class="${pageContext.request.requestURI eq '/practice/WEB-INF/views/managePage.jsp' ? ' active' : ' ' }"><a
+							href="managePage">管理者功能</a></li>
+
+					</ul>
+				</c:if>
+				<ul class="nav nav-sidebar">
+					<li><a>你好${newaccount.staffName}</a></li>
+				</ul>
+				<ul class="nav nav-sidebar">
+					<li><a href="logout">登出</a></li>
+				</ul>
+			</c:if>
 
 		</div>

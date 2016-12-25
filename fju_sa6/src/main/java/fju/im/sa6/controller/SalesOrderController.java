@@ -178,4 +178,17 @@ public class SalesOrderController {
 
 		return model;
 	}
+	
+	@RequestMapping(value = "/orderRemove", method = RequestMethod.GET)
+	public ModelAndView orderRemove(@ModelAttribute("orderlistNum") int orderlistNum, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("redirect:mainpage");
+		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
+		OrderList temp = new OrderList(orderlistNum, 0, null, null);
+		orderListDAO.orderRemove(temp);
+
+		
+		
+		return model;
+
+	}
 }

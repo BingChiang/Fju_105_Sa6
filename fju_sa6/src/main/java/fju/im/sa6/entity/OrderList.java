@@ -14,6 +14,8 @@ public class OrderList {
 	private Date orderDate;
 
 	private int productPrice;
+	
+	private int available;
 
 	public OrderList(int orderlistNum, int orderTotal, Date orderDate,ArrayList<Product> orderList) {
 		this.orderlistNum = orderlistNum;
@@ -58,5 +60,14 @@ public class OrderList {
 
 	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
+	}
+
+	public void setAvailable(int num){
+		this.available = num;
+
+	}
+	
+	public int getAvailable(){
+		return this.available;
 	}
 }

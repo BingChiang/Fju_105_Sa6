@@ -253,6 +253,7 @@ public class AccountController {
 	public ModelAndView showMonth() {
 		ModelAndView model = new ModelAndView("showMonth");
 
+		model.addObject("page",0);
 		return model;
 	}
 
@@ -267,6 +268,7 @@ public class AccountController {
 		Product displaytemp = new Product();
 		displaytemp.setProductPrice(month);
 		model.addObject("earn", displaytemp);
+		model.addObject("page",1);
 		return model;
 	}
 
@@ -452,6 +454,7 @@ public class AccountController {
 			StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 			staffList = staffDefaultDAO.getList();
 			model.addObject("staffList", staffList);
+			model.addObject("page",0);
 			return model;
 		}
 	}
@@ -465,10 +468,19 @@ public class AccountController {
 		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
 		ArrayList<WorkTime> workList = new ArrayList<WorkTime>();
 		workList = worktimeDAO.searchworktime(searchTime);
+		
+
+		ArrayList<StaffDefault> staffList = null;
+		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
+		staffList = staffDefaultDAO.getList();
 
 		System.out.println("testController");
 		// System.out.println(workList.get(0).getDate());
+		
+		model.addObject("staffList", staffList);
 		model.addObject("workList", workList);
+		model.addObject("page",1);
+
 		return model;
 	}
 
@@ -478,23 +490,50 @@ public class AccountController {
 		// ModelAndView model = new ModelAndView("redirect:worktimeSearch");
 		ModelAndView model = new ModelAndView("worktimeSearch");
 		// DAO ERROR
-		StaffDefaultDAO staffdefaultDAO =(StaffDefaultDAO)context.getBean("StaffDefaultDAO");
+		StaffDefaultDAO staffdefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		WorktimeDAO worktimeDAO = (WorktimeDAO) context.getBean("WorktimeDAO");
-		Staff temp = new Staff(staffNum,"",0,null,0);
+		Staff temp = new Staff(staffNum, "", 0, null, 0);
 		StaffDefault temp2 = staffdefaultDAO.get(temp);
 		ArrayList<WorkTime> workList = new ArrayList<WorkTime>();
-		
+
 		ArrayList<StaffDefault> staffList = null;
 		StaffDefaultDAO staffDefaultDAO = (StaffDefaultDAO) context.getBean("StaffDefaultDAO");
 		staffList = staffDefaultDAO.getList();
-		
+
 		workList = worktimeDAO.staffSearchworktime(temp2);
 
 		System.out.println("testController");
 		// System.out.println(workList.get(0).getDate());
-		
+
 		model.addObject("staffList", staffList);
 		model.addObject("workList", workList);
+		model.addObject("page",1);
 		return model;
 	}
+
+	@RequestMapping(value = "/showMonthWork", method = RequestMethod.GET)
+	public ModelAndView showMonthWork() {
+		ModelAndView model = new ModelAndView("showMonthWork");
+
+//		ArrayList<StaffDefault> temp = new ArrayList<StaffDefault>();
+//
+//		model.addObject("staffList", temp);
+		model.addObject("page",0);
+		return model;
+	}
+
+	@RequestMapping(value = "/showMonthWorkAction", method = RequestMethod.POST)
+	public ModelAndView showMonthWorkAction(@ModelAttribute("searchTime") String date, HttpServletRequest request) {
+		System.out.println("test:" + date);
+
+		ModelAndView model = new ModelAndView("showMonthWork");
+		System.out.println(date);
+		ManagerDAO managerDAO = (ManagerDAO) context.getBean("ManagerDAO");
+		ArrayList<StaffDefault> temp = managerDAO.getWorkList(date);
+
+		model.addObject("staffList", temp);
+		model.addObject("page",1);
+		return model;
+	}
+
 }

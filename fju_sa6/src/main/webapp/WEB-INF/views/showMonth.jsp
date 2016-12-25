@@ -33,19 +33,28 @@
 			<hr>
 			<br>
 		</div>
-		<table class="table table-striped">
-			<tr>
-				<th>該月盈餘狀況</th>
-			</tr>
-			<tr>
-				<td><h2>
-						<c:out value="${earn.productPrice}" />
-					</h2></td>
+		<c:if test="${page==1}">
+			<table class="table table-striped">
+				<tr>
+					<th>該月盈餘狀況</th>
+				</tr>
+				<tr>
+					<c:if test="${earn.productPrice>=0}">
+						<td><h2 style="color:red;">
+								<c:out value="${earn.productPrice}" /> 元
+							</h2></td>
+					</c:if>
+					<c:if test="${earn.productPrice<0}">
+						<td><h2 style="color:green;">
+								<c:out value="${earn.productPrice}" /> 元
+							</h2></td>
+					</c:if>
 
 
-			</tr>
+				</tr>
 
-		</table>
+			</table>
+		</c:if>
 	</div>
 	</div>
 	</div>

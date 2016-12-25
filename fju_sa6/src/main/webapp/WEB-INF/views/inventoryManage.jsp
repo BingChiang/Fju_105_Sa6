@@ -43,11 +43,15 @@
 					<td>${inv.inventoryNum}</td>
 					<td>${inv.inventoryName}</td>
 					<td>${inv.supplierName}</td>
-					<td>${inv.inventoryAmount}</td>
+					<c:if test="${inv.inventoryAmount<inv.reorderPoint}">
+						<td style="color: red;">${inv.inventoryAmount}</td>
+					</c:if>
+					<c:if test="${inv.inventoryAmount>=inv.reorderPoint}">
+						<td>${inv.inventoryAmount}</td>
+					</c:if>
 					<td>${inv.update}</td>
 
-<!-- 					<td></td>
- -->					<td><span style="margin-top: -5px;" class="badge"><a
+					<td><span style="margin-top: -5px;" class="badge"><a
 							class="inline"
 							href="inventoryModify?inventoryNum=${inv.inventoryNum}"><span
 								class="glyphicon glyphicon-pencil" aria-hidden="true"

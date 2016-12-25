@@ -13,13 +13,17 @@ public interface OrderListDAO {
 	
 
 	public ArrayList<OrderList> getorderlist();
+	public ArrayList<OrderList> getTodayorderlist();
 	
 	public ArrayList<Orderitem> getorderitem(OrderList orderList);
 	
+	public OrderList get(OrderList orderList);
 	
 	public int getordertotal(OrderList orderlist);
 	
 	public double gettotalcost(Date date);
+	
+	public void orderRemove(OrderList orderlist);
 
 
 }

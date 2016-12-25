@@ -17,8 +17,11 @@ import javax.sql.DataSource;
 public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 	private DataSource dataSource;
 	private Connection conn = null;
+	private Connection conn2 = null;
 	private ResultSet rs = null;
+	private ResultSet rs2 = null;
 	private PreparedStatement smt = null;
+	private PreparedStatement smt2 = null;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -177,11 +180,12 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 		// TODO Auto-generated method stub
 		double sum = 0;
-		String sql = "SELECT SUM(order_total) as sum_total FROM orderlist  where month(order_date) = month("+indicatedate+")";
+		String sql = "SELECT SUM(order_total) as sum_total FROM orderlist  where available = 0 AND month(order_date) = month("
+				+ indicatedate + ")";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-//			smt.setString(1, indicatedate);
+			// smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
 			while (rs.next()) {
 
@@ -212,12 +216,13 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 
 	public double inquireAllWorktimeforALL(String indicatedate) {
 		double worktimeTotalALL = 0;
-		String sql = "SELECT timestampdiff(hour,worktime.onwork_time,worktime.offwork_time)  as work_hour FROM worktime WHERE month(work_date) =month("+indicatedate+")";
+		String sql = "SELECT timestampdiff(hour,worktime.onwork_time,worktime.offwork_time)  as work_hour FROM worktime WHERE month(work_date) =month("
+				+ indicatedate + ")";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-//			smt.setString(1, indicatedate);
+			// smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
 			while (rs.next()) {
 				double setworktimetotal = (rs.getDouble("work_hour"));
@@ -245,12 +250,12 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 		double producttotalcost = 0;
 		String sql = "Select SUM(product_cost) as cost_total " + "FROM orderitem  JOIN product,orderlist  "
 				+ "where orderitem.product_num = product.product_num AND orderitem.orderlist_num =orderlist.orderlist_num "
-				+ "AND month(order_date) =  month("+indicatedate+")";
+				+ "AND month(order_date) =  month(" + indicatedate + ")";
 		try {
 
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-//			smt.setString(1, indicatedate);
+			// smt.setString(1, indicatedate);
 			rs = smt.executeQuery();
 			while (rs.next()) {
 				double setproducttotalcost = (rs.getDouble("cost_total"));
@@ -280,6 +285,50 @@ public class ManagerDAOImpl extends StaffDefaultDAOImpl implements ManagerDAO {
 	public double inquireAllWorktime(StaffDefault staffDefault) {
 
 		return 0;
+	}
+
+	@Override
+	public ArrayList<StaffDefault> getWorkList(String date) {
+		String indicatedate = "'" + date.substring(0, 7) + "-01'";
+		ArrayList<StaffDefault> arr = new ArrayList<StaffDefault>();
+		String sql = "SELECT * FROM staff";
+		String sql2 = "SELECT SUM(timestampdiff(hour,worktime.onwork_time,worktime.offwork_time)) as worktotal FROM worktime Where month(work_date) =month("
+				+ indicatedate + ") AND staff_num =?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			rs = smt.executeQuery();
+			while (rs.next()) {
+				StaffDefault temp = new Staff(0, null, 0, null, 0);
+				int staffNum = (rs.getInt("staff_num"));
+				temp.setStaffNum(staffNum);
+				temp.setStaffName(rs.getString("staff_name"));
+				conn2 = dataSource.getConnection();
+				smt2 = conn.prepareStatement(sql2);
+				smt2.setInt(1, staffNum);
+				rs2 = smt2.executeQuery();
+				if (rs2.next()) {
+					temp.setWorktimeTotal(rs2.getDouble("worktotal"));
+				}
+				arr.add(temp);
+			}
+			rs2.close();
+			smt2.close();
+			rs.close();
+			smt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		return arr;
 	}
 
 }

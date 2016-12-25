@@ -86,7 +86,9 @@ public class OrderListDAOImpl implements OrderListDAO {
 				int setorderlistNum = (rs.getInt("orderlist_num"));
 				Date setorderdate = (rs.getDate("order_date"));
 				int setordertotal = (rs.getInt("order_total"));
-				arr.add(new OrderList(setorderlistNum, setordertotal, setorderdate, null));
+				OrderList temp = new OrderList(setorderlistNum, setordertotal, setorderdate, null);
+				temp.setAvailable(rs.getInt("available"));
+				arr.add(temp);
 			}
 
 		} catch (SQLException e) {
@@ -103,6 +105,35 @@ public class OrderListDAOImpl implements OrderListDAO {
 		return arr;
 	}
 
+	public ArrayList<OrderList> getTodayorderlist() {
+		// TODO Auto-generated method stub
+		ArrayList<OrderList> arr = new ArrayList<OrderList>();
+		String sql = "SELECT * FROM orderlist where order_date = CURRENT_DATE AND available = 0";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			rs = smt.executeQuery();
+			while (rs.next()) {
+				int setorderlistNum = (rs.getInt("orderlist_num"));
+				Date setorderdate = (rs.getDate("order_date"));
+				int setordertotal = (rs.getInt("order_total"));
+				arr.add(new OrderList(setorderlistNum, setordertotal, setorderdate, null));
+			}
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return arr;
+	}
+	
 	@Override
 	public ArrayList<Orderitem> getorderitem(OrderList orderList) {
 		// TODO Auto-generated method stub
@@ -197,6 +228,57 @@ public class OrderListDAOImpl implements OrderListDAO {
 			}
 		}
 		return totalcost;
+	}
+
+	@Override
+	public OrderList get(OrderList orderList) {
+
+		OrderList temp  = new OrderList(0, 0, null, null);
+		String sql = "SELECT * FROM orderlist WHERE orderlist_num = "+orderList.getOrderlistNum();
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			rs = smt.executeQuery();
+			while (rs.next()) {
+				temp.setOrderlistNum(rs.getInt("orderlist_num"));
+				temp.setOrderDate(rs.getDate("order_date"));
+				temp.setOrderTotal(rs.getInt("order_total"));
+				temp.setAvailable(rs.getInt("available"));
+			}
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return temp;
+	}
+
+	@Override
+	public void orderRemove(OrderList orderlist) {
+		String sql = "UPDATE orderlist SET available = 1 WHERE orderlist_num = "+orderlist.getOrderlistNum();
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 	}
 
 }

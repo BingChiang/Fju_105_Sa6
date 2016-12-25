@@ -86,5 +86,16 @@ public class pageController {
 
 		return model;
 	}
+	
+	@RequestMapping(value = "/showOrderToday", method = RequestMethod.GET)
+	public ModelAndView showOrderToday() {
+		ModelAndView model = new ModelAndView("showOrderToday");
+		OrderListDAO orderListDAO = (OrderListDAO) context.getBean("OrderListDAO");
+		ArrayList<OrderList> orderList = null;
+		orderList = orderListDAO.getTodayorderlist();
+		model.addObject("orderList", orderList);
+
+		return model;
+	}
 
 }
